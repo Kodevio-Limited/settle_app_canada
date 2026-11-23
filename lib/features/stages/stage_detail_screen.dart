@@ -282,9 +282,36 @@ class StageDetailScreen extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('${task.title} (Phase 4)')),
-        );
+        final titleLower = task.title.toLowerCase();
+        if (titleLower.contains('pr card')) {
+          context.push('/task-status');
+        } else if (titleLower.contains('sin') || titleLower.contains('social insurance')) {
+          context.push('/task-sin');
+        } else if (titleLower.contains('lease') || titleLower.contains('tenant') || titleLower.contains('rights')) {
+          context.push('/task-housing');
+        } else if (titleLower.contains('school') || titleLower.contains('register sami')) {
+          context.push('/task-school');
+        } else if (titleLower.contains('licence') || titleLower.contains('exchange')) {
+          context.push('/task-licence');
+        } else if (titleLower.contains('insurance')) {
+          context.push('/task-insurance');
+        } else if (titleLower.contains('doctor') || titleLower.contains('practitioner')) {
+          context.push('/task-doctor');
+        } else if (titleLower.contains('child benefit') || titleLower.contains('ccb')) {
+          context.push('/task-ccb');
+        } else if (titleLower.contains('employment') || titleLower.contains('work')) {
+          context.push('/task-work');
+        } else if (titleLower.contains('library')) {
+          context.push('/task-library');
+        } else if (titleLower.contains('apply to university') || titleLower.contains('college')) {
+          context.push('/task-uni-apply');
+        } else if (titleLower.contains('osap')) {
+          context.push('/task-osap');
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(task.title)),
+          );
+        }
       },
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 12),
@@ -711,46 +738,50 @@ class StageDetailScreen extends StatelessWidget {
 
       case '9':
         return [
-          Container(
-            padding: const EdgeInsets.all(14),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border.all(
-                color: AppColors.primary,
-                style: BorderStyle.solid,
-                width: 1,
-              ),
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: const Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Does Layla's job need a licence?",
-                        style: TextStyle(
-                          fontFamily: AppTypography.fontBody,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.primary,
-                        ),
-                      ),
-                      SizedBox(height: 2),
-                      Text(
-                        'Search any occupation for its licence or certificate',
-                        style: TextStyle(
-                          fontFamily: AppTypography.fontBody,
-                          fontSize: 13,
-                          color: Color(0xFF5A5F6B),
-                        ),
-                      ),
-                    ],
-                  ),
+          InkWell(
+            onTap: () => context.push('/occupation-search'),
+            borderRadius: BorderRadius.circular(16),
+            child: Container(
+              padding: const EdgeInsets.all(14),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(
+                  color: AppColors.primary,
+                  style: BorderStyle.solid,
+                  width: 1,
                 ),
-                Icon(Icons.add, size: 20, color: AppColors.primary),
-              ],
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: const Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Does Layla's job need a licence?",
+                          style: TextStyle(
+                            fontFamily: AppTypography.fontBody,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.primary,
+                          ),
+                        ),
+                        SizedBox(height: 2),
+                        Text(
+                          'Search any occupation for its licence or certificate',
+                          style: TextStyle(
+                            fontFamily: AppTypography.fontBody,
+                            fontSize: 13,
+                            color: Color(0xFF5A5F6B),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Icon(Icons.add, size: 20, color: AppColors.primary),
+                ],
+              ),
             ),
           ),
           const SizedBox(height: 10),
