@@ -26,6 +26,15 @@ class GalleryScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16.0),
         children: [
+          _buildSectionHeader('Phase 7: Trusted Help & Wellbeing (6 Screens)'),
+          _buildTile(context, '7.1 Trusted help (free services directory)', '/help'),
+          _buildTile(context, '7.2 Get help now (emergency & crisis lines)', '/crisis'),
+          _buildTile(context, '7.3 Weekly check-in', '/check-in'),
+          _buildTile(context, '7.4 Community groups near you', '/community-groups'),
+          _buildTile(context, '7.5 How Settle\'s guidance works', '/how-guidance'),
+          _buildTile(context, '7.6 Family conversation guide for teens', '/conversation-guide'),
+
+          const SizedBox(height: 20),
           _buildSectionHeader('Phase 6: Family, Checklists, Reminders & Plan Changes (13 Screens)'),
           _buildTile(context, '6.1 Family overview', '/family'),
           _buildTile(context, '6.2 Family member · adult (Omar)', '/member-adult'),

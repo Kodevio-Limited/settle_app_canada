@@ -46,6 +46,12 @@ import '../../features/plan/life_event_screen.dart';
 import '../../features/plan/plan_change_screen.dart';
 import '../../features/plan/just_today_screen.dart';
 import '../../features/search/search_screen.dart';
+import '../../features/help/help_screen.dart';
+import '../../features/help/crisis_screen.dart';
+import '../../features/help/check_in_screen.dart';
+import '../../features/help/community_groups_screen.dart';
+import '../../features/help/how_guidance_screen.dart';
+import '../../features/help/conversation_guide_screen.dart';
 
 GoRouter createRouter({String initialLocation = '/'}) {
   return GoRouter(
@@ -159,10 +165,7 @@ GoRouter createRouter({String initialLocation = '/'}) {
       GoRoute(
         path: '/how-guidance',
         name: 'howGuidance',
-        builder: (context, state) => Scaffold(
-          appBar: AppBar(title: const Text('How Guidance Works')),
-          body: const Center(child: Text('Support & Guidance (Phase 7)')),
-        ),
+        builder: (context, state) => const HowGuidanceScreen(),
       ),
       GoRoute(
         path: '/edit-profile',
@@ -379,6 +382,44 @@ GoRouter createRouter({String initialLocation = '/'}) {
         builder: (context, state) => const SearchScreen(),
       ),
 
+      // Phase 7: Trusted Help & Wellbeing (6 Screens)
+      GoRoute(
+        path: '/crisis',
+        name: 'crisis',
+        builder: (context, state) => const CrisisScreen(),
+      ),
+      GoRoute(
+        path: '/check-in',
+        name: 'checkIn',
+        builder: (context, state) => const CheckInScreen(),
+      ),
+      GoRoute(
+        path: '/checkin',
+        builder: (context, state) => const CheckInScreen(),
+      ),
+      GoRoute(
+        path: '/community-groups',
+        name: 'communityGroups',
+        builder: (context, state) => const CommunityGroupsScreen(),
+      ),
+      GoRoute(
+        path: '/help/community-groups',
+        builder: (context, state) => const CommunityGroupsScreen(),
+      ),
+      GoRoute(
+        path: '/help/how-guidance',
+        builder: (context, state) => const HowGuidanceScreen(),
+      ),
+      GoRoute(
+        path: '/conversation-guide',
+        name: 'conversationGuide',
+        builder: (context, state) => const ConversationGuideScreen(),
+      ),
+      GoRoute(
+        path: '/help/conversation-guide',
+        builder: (context, state) => const ConversationGuideScreen(),
+      ),
+
       // Navigation aliases for Phase 6 inter-screen links
       GoRoute(
         path: '/occupations/pathway',
@@ -556,10 +597,7 @@ GoRouter createRouter({String initialLocation = '/'}) {
               GoRoute(
                 path: '/help',
                 name: 'help',
-                builder: (context, state) => Scaffold(
-                  appBar: AppBar(title: const Text('Help')),
-                  body: const Center(child: Text('Help & Trusted Support (Phase 7)')),
-                ),
+                builder: (context, state) => const HelpScreen(),
               ),
             ],
           ),
