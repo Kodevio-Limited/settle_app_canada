@@ -28,18 +28,21 @@ class _MainWelcomeScreenState extends ConsumerState<MainWelcomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 12),
-              // App Logo - left aligned
-              Image.asset(
-                'assets/images/07c6b61d7c458b0713169e060e736b9d.png',
-                width: 170,
-                fit: BoxFit.contain,
-                errorBuilder: (_, __, ___) => const Text(
-                  'Settle\nCANADA',
-                  style: TextStyle(
-                    fontFamily: AppTypography.fontHeading,
-                    fontSize: 28,
-                    fontWeight: FontWeight.w800,
-                    color: AppColors.primary,
+              // App Logo - left aligned (long press opens Screen Navigator)
+              GestureDetector(
+                onLongPress: () => context.push('/gallery'),
+                child: Image.asset(
+                  'assets/images/07c6b61d7c458b0713169e060e736b9d.png',
+                  width: 170,
+                  fit: BoxFit.contain,
+                  errorBuilder: (_, __, ___) => const Text(
+                    'Settle\nCANADA',
+                    style: TextStyle(
+                      fontFamily: AppTypography.fontHeading,
+                      fontSize: 28,
+                      fontWeight: FontWeight.w800,
+                      color: AppColors.primary,
+                    ),
                   ),
                 ),
               ),
@@ -114,7 +117,7 @@ class _MainWelcomeScreenState extends ConsumerState<MainWelcomeScreen> {
                 child: TextButton(
                   onPressed: () {
                     ref.read(authProvider.notifier).setGuest();
-                    context.push('/guest-home');
+                    context.go('/home');
                   },
                   child: Text(
                     'Explore without an account',
