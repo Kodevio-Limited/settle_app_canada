@@ -26,6 +26,17 @@ class GalleryScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16.0),
         children: [
+          _buildSectionHeader('Phase 5: Task Actions, Nearby Map & Updates (8 Screens)'),
+          _buildTile(context, '5.1 Nearby locations (map)', '/nearby'),
+          _buildTile(context, '5.2 Location detail', '/location-detail'),
+          _buildTile(context, '5.3 Mark done · who did it', '/done-picker'),
+          _buildTile(context, '5.4 Task done · unlocked next', '/task-done'),
+          _buildTile(context, '5.5 Remind me later', '/snooze'),
+          _buildTile(context, '5.6 Not for me', '/dismiss'),
+          _buildTile(context, '5.7 Report outdated info', '/report-outdated'),
+          _buildTile(context, '5.8 A step changed (content update)', '/content-updated'),
+
+          const SizedBox(height: 20),
           _buildSectionHeader('Phase 4: Full Tasks, Nearby Services & Licensing (14 Screens)'),
           _buildTile(context, '4.1 Task · PR card (completed state)', '/task-status'),
           _buildTile(context, '4.2 Task · SIN (full detail)', '/task-sin'),
