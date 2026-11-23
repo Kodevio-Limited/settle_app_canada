@@ -26,6 +26,22 @@ class GalleryScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16.0),
         children: [
+          _buildSectionHeader('Phase 6: Family, Checklists, Reminders & Plan Changes (13 Screens)'),
+          _buildTile(context, '6.1 Family overview', '/family'),
+          _buildTile(context, '6.2 Family member · adult (Omar)', '/member-adult'),
+          _buildTile(context, '6.3 Family member · child (Nour)', '/member-child'),
+          _buildTile(context, '6.4 Remove a family member modal', '/remove-member'),
+          _buildTile(context, '6.5 What to bring checklist', '/checklist'),
+          _buildTile(context, '6.6 Reminders · upcoming', '/reminders'),
+          _buildTile(context, '6.7 Reminders · calendar', '/calendar'),
+          _buildTile(context, '6.8 Notification settings', '/notification-settings'),
+          _buildTile(context, '6.9 Something changed? Life event picker', '/life-event'),
+          _buildTile(context, '6.10 Plan recalculated', '/plan-change'),
+          _buildTile(context, '6.11 Just today mode', '/just-today'),
+          _buildTile(context, '6.12 Global search', '/search'),
+          _buildTile(context, '6.13 Family member · student (Yasmin)', '/member-student'),
+
+          const SizedBox(height: 20),
           _buildSectionHeader('Phase 5: Task Actions, Nearby Map & Updates (8 Screens)'),
           _buildTile(context, '5.1 Nearby locations (map)', '/nearby'),
           _buildTile(context, '5.2 Location detail', '/location-detail'),

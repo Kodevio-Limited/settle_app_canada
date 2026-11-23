@@ -33,6 +33,19 @@ import '../../features/task_actions/snooze_screen.dart';
 import '../../features/task_actions/dismiss_screen.dart';
 import '../../features/task_actions/report_outdated_screen.dart';
 import '../../features/task_actions/content_updated_screen.dart';
+import '../../features/family/family_screen.dart';
+import '../../features/family/member_adult_screen.dart';
+import '../../features/family/member_child_screen.dart';
+import '../../features/family/member_student_screen.dart';
+import '../../features/family/remove_member_screen.dart';
+import '../../features/checklists/checklist_screen.dart';
+import '../../features/reminders/reminders_screen.dart';
+import '../../features/reminders/calendar_screen.dart';
+import '../../features/reminders/notification_settings_screen.dart';
+import '../../features/plan/life_event_screen.dart';
+import '../../features/plan/plan_change_screen.dart';
+import '../../features/plan/just_today_screen.dart';
+import '../../features/search/search_screen.dart';
 
 GoRouter createRouter({String initialLocation = '/'}) {
   return GoRouter(
@@ -255,6 +268,181 @@ GoRouter createRouter({String initialLocation = '/'}) {
       GoRoute(
         path: '/content-updated',
         builder: (context, state) => const ContentUpdatedScreen(),
+      ),
+
+      // Phase 6: Family, Checklists, Reminders & Plan Changes (13 Screens)
+      GoRoute(
+        path: '/family',
+        name: 'family',
+        builder: (context, state) => const FamilyScreen(),
+      ),
+      GoRoute(
+        path: '/family/member-adult',
+        builder: (context, state) => const MemberAdultScreen(),
+      ),
+      GoRoute(
+        path: '/member-adult',
+        builder: (context, state) => const MemberAdultScreen(),
+      ),
+      GoRoute(
+        path: '/family/member-child',
+        builder: (context, state) => const MemberChildScreen(),
+      ),
+      GoRoute(
+        path: '/member-child',
+        builder: (context, state) => const MemberChildScreen(),
+      ),
+      GoRoute(
+        path: '/family/member-student',
+        builder: (context, state) => const MemberStudentScreen(),
+      ),
+      GoRoute(
+        path: '/member-student',
+        builder: (context, state) => const MemberStudentScreen(),
+      ),
+      GoRoute(
+        path: '/family/remove-member',
+        builder: (context, state) {
+          final name = state.uri.queryParameters['name'] ?? 'Nour';
+          return RemoveMemberScreen(memberName: name);
+        },
+      ),
+      GoRoute(
+        path: '/remove-member',
+        builder: (context, state) {
+          final name = state.uri.queryParameters['name'] ?? 'Nour';
+          return RemoveMemberScreen(memberName: name);
+        },
+      ),
+      GoRoute(
+        path: '/checklist',
+        name: 'checklist',
+        builder: (context, state) => const ChecklistScreen(),
+      ),
+      GoRoute(
+        path: '/checklists',
+        builder: (context, state) => const ChecklistScreen(),
+      ),
+      GoRoute(
+        path: '/reminders',
+        name: 'reminders',
+        builder: (context, state) => const RemindersScreen(),
+      ),
+      GoRoute(
+        path: '/reminders/calendar',
+        builder: (context, state) => const CalendarScreen(),
+      ),
+      GoRoute(
+        path: '/calendar',
+        name: 'calendar',
+        builder: (context, state) => const CalendarScreen(),
+      ),
+      GoRoute(
+        path: '/reminders/settings',
+        builder: (context, state) => const NotificationSettingsScreen(),
+      ),
+      GoRoute(
+        path: '/notification-settings',
+        name: 'notificationSettings',
+        builder: (context, state) => const NotificationSettingsScreen(),
+      ),
+      GoRoute(
+        path: '/life-event',
+        name: 'lifeEvent',
+        builder: (context, state) => const LifeEventScreen(),
+      ),
+      GoRoute(
+        path: '/plan/life-event',
+        builder: (context, state) => const LifeEventScreen(),
+      ),
+      GoRoute(
+        path: '/plan-change',
+        name: 'planChange',
+        builder: (context, state) => const PlanChangeScreen(),
+      ),
+      GoRoute(
+        path: '/plan/plan-change',
+        builder: (context, state) => const PlanChangeScreen(),
+      ),
+      GoRoute(
+        path: '/just-today',
+        name: 'justToday',
+        builder: (context, state) => const JustTodayScreen(),
+      ),
+      GoRoute(
+        path: '/plan/just-today',
+        builder: (context, state) => const JustTodayScreen(),
+      ),
+      GoRoute(
+        path: '/search',
+        name: 'search',
+        builder: (context, state) => const SearchScreen(),
+      ),
+
+      // Navigation aliases for Phase 6 inter-screen links
+      GoRoute(
+        path: '/occupations/pathway',
+        builder: (context, state) => const OccupationPathwayScreen(),
+      ),
+      GoRoute(
+        path: '/tasks/sin',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskSIN'),
+      ),
+      GoRoute(
+        path: '/tasks/licence',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskLicence'),
+      ),
+      GoRoute(
+        path: '/tasks/work',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskWork'),
+      ),
+      GoRoute(
+        path: '/tasks/school',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskSchool'),
+      ),
+      GoRoute(
+        path: '/tasks/immunization',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskSchool'),
+      ),
+      GoRoute(
+        path: '/tasks/esl',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskSchool'),
+      ),
+      GoRoute(
+        path: '/tasks/doctor',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskDoctor'),
+      ),
+      GoRoute(
+        path: '/stages/stage-university',
+        builder: (context, state) => const StageDetailScreen(stageId: '4b'),
+      ),
+      GoRoute(
+        path: '/stages/stage-insurance',
+        builder: (context, state) => const StageDetailScreen(stageId: '6'),
+      ),
+      GoRoute(
+        path: '/task-actions/nearby',
+        builder: (context, state) => const NearbyScreen(),
+      ),
+      GoRoute(
+        path: '/task-actions/location-detail',
+        builder: (context, state) => const LocationDetailScreen(),
+      ),
+      GoRoute(
+        path: '/task-actions/done',
+        builder: (context, state) => const TaskDoneScreen(),
+      ),
+      GoRoute(
+        path: '/onboarding/destination',
+        builder: (context, state) => const OnboardingDestinationScreen(),
+      ),
+      GoRoute(
+        path: '/onboarding/add-child',
+        builder: (context, state) => const AddChildScreen(),
+      ),
+      GoRoute(
+        path: '/onboarding/add-adult',
+        builder: (context, state) => const AddAdultScreen(),
       ),
 
       // Persistent 5-Tab Shell (Phase 3: Home, Journey & 10 Stages)
