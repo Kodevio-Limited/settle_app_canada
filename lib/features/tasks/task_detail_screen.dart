@@ -657,63 +657,67 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
 
                 // Nearby cards
                 ...task.nearbyItems.map((item) {
-                  return Container(
-                    margin: const EdgeInsets.only(bottom: 8),
-                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: const Color(0xFFDEDEE2)),
-                      borderRadius: BorderRadius.circular(14),
-                    ),
-                    child: Row(
-                      children: [
-                        Container(
-                          width: 26,
-                          height: 26,
-                          decoration: const BoxDecoration(
-                            color: Color(0xFF123332),
-                            shape: BoxShape.circle,
-                          ),
-                          child: Center(
-                            child: Text(
-                              item.num,
-                              style: const TextStyle(
-                                fontFamily: 'IBM Plex Sans',
-                                fontSize: 13,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white,
-                              ),
+                  return InkWell(
+                    onTap: () => context.push('/location-detail'),
+                    borderRadius: BorderRadius.circular(14),
+                    child: Container(
+                      margin: const EdgeInsets.only(bottom: 8),
+                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: const Color(0xFFDEDEE2)),
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 26,
+                            height: 26,
+                            decoration: const BoxDecoration(
+                              color: Color(0xFF123332),
+                              shape: BoxShape.circle,
                             ),
-                          ),
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                item.name,
-                                style: const TextStyle(
-                                  fontFamily: 'IBM Plex Sans',
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600,
-                                  color: Color(0xFF123332),
-                                ),
-                              ),
-                              const SizedBox(height: 2),
-                              Text(
-                                item.sub,
+                            child: Center(
+                              child: Text(
+                                item.num,
                                 style: const TextStyle(
                                   fontFamily: 'IBM Plex Sans',
                                   fontSize: 13,
-                                  color: Color(0xFF5A5F6B),
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white,
                                 ),
                               ),
-                            ],
+                            ),
                           ),
-                        ),
-                        const Icon(Icons.chevron_right, size: 20, color: Color(0xFF7A7A83)),
-                      ],
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  item.name,
+                                  style: const TextStyle(
+                                    fontFamily: 'IBM Plex Sans',
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color(0xFF123332),
+                                  ),
+                                ),
+                                const SizedBox(height: 2),
+                                Text(
+                                  item.sub,
+                                  style: const TextStyle(
+                                    fontFamily: 'IBM Plex Sans',
+                                    fontSize: 13,
+                                    color: Color(0xFF5A5F6B),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const Icon(Icons.chevron_right, size: 20, color: Color(0xFF7A7A83)),
+                        ],
+                      ),
                     ),
                   );
                 }),
@@ -722,7 +726,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                   Align(
                     alignment: Alignment.centerLeft,
                     child: TextButton(
-                      onPressed: () => context.push('/map'),
+                      onPressed: () => context.push('/nearby'),
                       style: TextButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 4),
                         minimumSize: Size.zero,
@@ -792,11 +796,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                 SizedBox(
                   height: 54,
                   child: ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        isDone = true;
-                      });
-                    },
+                    onPressed: () => context.push('/done-picker'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF123332),
                       foregroundColor: Colors.white,
@@ -822,7 +822,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                       child: SizedBox(
                         height: 48,
                         child: OutlinedButton(
-                          onPressed: () => _showRemindPicker(context),
+                          onPressed: () => context.push('/snooze'),
                           style: OutlinedButton.styleFrom(
                             side: const BorderSide(color: Color(0xFFC8C8CE)),
                             backgroundColor: Colors.white,
@@ -847,7 +847,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                       child: SizedBox(
                         height: 48,
                         child: OutlinedButton(
-                          onPressed: () => context.pop(),
+                          onPressed: () => context.push('/dismiss'),
                           style: OutlinedButton.styleFrom(
                             side: const BorderSide(color: Color(0xFFC8C8CE)),
                             backgroundColor: Colors.white,
@@ -892,7 +892,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                       ),
                     ),
                     TextButton(
-                      onPressed: () => _reportOutdated(context),
+                      onPressed: () => context.push('/report-outdated'),
                       style: TextButton.styleFrom(
                         padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
                         minimumSize: Size.zero,
@@ -995,15 +995,6 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  void _showRemindPicker(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text("We'll remind you in 3 days."),
-        duration: Duration(seconds: 2),
       ),
     );
   }

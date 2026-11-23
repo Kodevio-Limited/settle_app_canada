@@ -25,6 +25,14 @@ import '../../features/gallery/gallery_screen.dart';
 import '../../features/tasks/task_detail_screen.dart';
 import '../../features/tasks/occupation_search_screen.dart';
 import '../../features/tasks/occupation_pathway_screen.dart';
+import '../../features/task_actions/nearby_screen.dart';
+import '../../features/task_actions/location_detail_screen.dart';
+import '../../features/task_actions/done_picker_screen.dart';
+import '../../features/task_actions/task_done_screen.dart';
+import '../../features/task_actions/snooze_screen.dart';
+import '../../features/task_actions/dismiss_screen.dart';
+import '../../features/task_actions/report_outdated_screen.dart';
+import '../../features/task_actions/content_updated_screen.dart';
 
 GoRouter createRouter({String initialLocation = '/'}) {
   return GoRouter(
@@ -213,6 +221,40 @@ GoRouter createRouter({String initialLocation = '/'}) {
       GoRoute(
         path: '/occupation-pathway',
         builder: (context, state) => const OccupationPathwayScreen(),
+      ),
+
+      // Phase 5: Task Actions, Nearby Map & Content Updates
+      GoRoute(
+        path: '/nearby',
+        builder: (context, state) => const NearbyScreen(),
+      ),
+      GoRoute(
+        path: '/location-detail',
+        builder: (context, state) => const LocationDetailScreen(),
+      ),
+      GoRoute(
+        path: '/done-picker',
+        builder: (context, state) => const DonePickerScreen(),
+      ),
+      GoRoute(
+        path: '/task-done',
+        builder: (context, state) => const TaskDoneScreen(),
+      ),
+      GoRoute(
+        path: '/snooze',
+        builder: (context, state) => const SnoozeScreen(),
+      ),
+      GoRoute(
+        path: '/dismiss',
+        builder: (context, state) => const DismissScreen(),
+      ),
+      GoRoute(
+        path: '/report-outdated',
+        builder: (context, state) => const ReportOutdatedScreen(),
+      ),
+      GoRoute(
+        path: '/content-updated',
+        builder: (context, state) => const ContentUpdatedScreen(),
       ),
 
       // Persistent 5-Tab Shell (Phase 3: Home, Journey & 10 Stages)
