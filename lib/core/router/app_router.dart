@@ -52,6 +52,16 @@ import '../../features/help/check_in_screen.dart';
 import '../../features/help/community_groups_screen.dart';
 import '../../features/help/how_guidance_screen.dart';
 import '../../features/help/conversation_guide_screen.dart';
+import '../../features/profile/settings_screen.dart';
+import '../../features/profile/privacy_data_screen.dart';
+import '../../features/profile/data_export_screen.dart';
+import '../../features/profile/language_access_screen.dart';
+import '../../features/profile/sign_out_confirm_screen.dart';
+import '../../features/profile/deactivate_screen.dart';
+import '../../features/profile/paused_screen.dart';
+import '../../features/profile/welcome_back_screen.dart';
+import '../../features/profile/delete_confirm_screen.dart';
+import '../../features/profile/deleted_screen.dart';
 
 GoRouter createRouter({String initialLocation = '/'}) {
   return GoRouter(
@@ -166,11 +176,6 @@ GoRouter createRouter({String initialLocation = '/'}) {
         path: '/how-guidance',
         name: 'howGuidance',
         builder: (context, state) => const HowGuidanceScreen(),
-      ),
-      GoRoute(
-        path: '/edit-profile',
-        name: 'editProfile',
-        builder: (context, state) => const EditProfileScreen(),
       ),
 
       // Phase 4: Full Tasks, Nearby Services, University Tasks & Licensing
@@ -420,6 +425,58 @@ GoRouter createRouter({String initialLocation = '/'}) {
         builder: (context, state) => const ConversationGuideScreen(),
       ),
 
+      // Phase 8: Account, Privacy, Pause & Deletion (11 Screens)
+      GoRoute(
+        path: '/edit-profile',
+        name: 'editProfile',
+        builder: (context, state) => const EditProfileScreen(),
+      ),
+      GoRoute(
+        path: '/privacy-data',
+        name: 'privacyData',
+        builder: (context, state) => const PrivacyDataScreen(),
+      ),
+      GoRoute(
+        path: '/data-export',
+        name: 'dataExport',
+        builder: (context, state) => const DataExportScreen(),
+      ),
+      GoRoute(
+        path: '/language-access',
+        name: 'languageAccess',
+        builder: (context, state) => const LanguageAccessScreen(),
+      ),
+      GoRoute(
+        path: '/sign-out-confirm',
+        name: 'signOutConfirm',
+        builder: (context, state) => const SignOutConfirmScreen(),
+      ),
+      GoRoute(
+        path: '/deactivate',
+        name: 'deactivate',
+        builder: (context, state) => const DeactivateScreen(),
+      ),
+      GoRoute(
+        path: '/paused',
+        name: 'paused',
+        builder: (context, state) => const PausedScreen(),
+      ),
+      GoRoute(
+        path: '/welcome-back',
+        name: 'welcomeBack',
+        builder: (context, state) => const WelcomeBackScreen(),
+      ),
+      GoRoute(
+        path: '/delete-confirm',
+        name: 'deleteConfirm',
+        builder: (context, state) => const DeleteConfirmScreen(),
+      ),
+      GoRoute(
+        path: '/deleted',
+        name: 'deleted',
+        builder: (context, state) => const DeletedScreen(),
+      ),
+
       // Navigation aliases for Phase 6 inter-screen links
       GoRoute(
         path: '/occupations/pathway',
@@ -608,12 +665,12 @@ GoRouter createRouter({String initialLocation = '/'}) {
               GoRoute(
                 path: '/settings',
                 name: 'settings',
-                builder: (context, state) => const EditProfileScreen(),
+                builder: (context, state) => const SettingsScreen(),
               ),
               GoRoute(
                 path: '/me',
                 name: 'me',
-                builder: (context, state) => const EditProfileScreen(),
+                builder: (context, state) => const SettingsScreen(),
               ),
             ],
           ),

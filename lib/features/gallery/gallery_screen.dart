@@ -26,6 +26,20 @@ class GalleryScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16.0),
         children: [
+          _buildSectionHeader('Phase 8: Account, Privacy, Pause & Deletion (11 Screens)'),
+          _buildTile(context, '8.1 Settings & Account', '/settings'),
+          _buildTile(context, '8.2 Edit Profile', '/edit-profile'),
+          _buildTile(context, '8.3 Privacy & Your Data', '/privacy-data'),
+          _buildTile(context, '8.4 Download Your Data', '/data-export'),
+          _buildTile(context, '8.5 Language & Access', '/language-access'),
+          _buildTile(context, '8.6 Sign Out Confirmation', '/sign-out-confirm'),
+          _buildTile(context, '8.7 Pause or Delete Account', '/deactivate'),
+          _buildTile(context, '8.8 Account Paused', '/paused'),
+          _buildTile(context, '8.9 Welcome Back', '/welcome-back'),
+          _buildTile(context, '8.10 Confirm Account Deletion', '/delete-confirm'),
+          _buildTile(context, '8.11 Account Deleted', '/deleted'),
+
+          const SizedBox(height: 20),
           _buildSectionHeader('Phase 7: Trusted Help & Wellbeing (6 Screens)'),
           _buildTile(context, '7.1 Trusted help (free services directory)', '/help'),
           _buildTile(context, '7.2 Get help now (emergency & crisis lines)', '/crisis'),

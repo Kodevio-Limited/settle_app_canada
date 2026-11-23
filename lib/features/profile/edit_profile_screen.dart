@@ -1,30 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import '../../core/models/user_profile.dart';
 import '../../core/theme/app_colors.dart';
-import '../../core/theme/app_decorations.dart';
 import '../../core/theme/app_typography.dart';
-import '../onboarding/onboarding_provider.dart';
 
-class EditProfileScreen extends ConsumerStatefulWidget {
+class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
 
   @override
-  ConsumerState<EditProfileScreen> createState() => _EditProfileScreenState();
+  State<EditProfileScreen> createState() => _EditProfileScreenState();
 }
 
-class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
-  late TextEditingController _nameController;
+class _EditProfileScreenState extends State<EditProfileScreen> {
+  late final TextEditingController _nameController;
 
   @override
   void initState() {
     super.initState();
-    final self = ref.read(onboardingProvider).members.firstWhere(
-          (m) => m.relationship == 'self',
-          orElse: () => ref.read(onboardingProvider).members.first,
-        );
-    _nameController = TextEditingController(text: self.name);
+    _nameController = TextEditingController(text: 'Layla');
   }
 
   @override
@@ -33,111 +25,179 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
     super.dispose();
   }
 
-  void _save() {
-    final self = ref.read(onboardingProvider).members.firstWhere(
-          (m) => m.relationship == 'self',
-          orElse: () => ref.read(onboardingProvider).members.first,
-        );
-    final updated = HouseholdMember(
-      id: self.id,
-      name: _nameController.text.trim().isEmpty ? self.name : _nameController.text.trim(),
-      relationship: 'self',
-      age: self.age,
-      isStudent: self.isStudent,
-      profession: self.profession,
-    );
-    ref.read(onboardingProvider.notifier).updateMember(updated);
-    context.pop();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bg,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: BackButton(
-          color: AppColors.primary,
-          onPressed: () => context.pop(),
-        ),
-        actions: [
-          TextButton(
-            onPressed: _save,
-            child: const Text('Save', style: AppTypography.body2Bold),
-          ),
-        ],
-      ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Profile', style: AppTypography.h3),
-              const SizedBox(height: AppSpacing.s20),
-              const Text('What should we call you?', style: AppTypography.body2Bold),
-              const SizedBox(height: AppSpacing.s8),
-              TextField(
-                controller: _nameController,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: AppColors.white50,
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                  border: OutlineInputBorder(
-                    borderRadius: AppRadii.border13,
-                    borderSide: const BorderSide(color: AppColors.border),
+              // Header
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Transform.translate(
+                    offset: const Offset(-10, 0),
+                    child: InkWell(
+                      onTap: () {
+                        if (context.canPop()) {
+                          context.pop();
+                        } else {
+                          context.go('/settings');
+                        }
+                      },
+                      borderRadius: BorderRadius.circular(22),
+                      child: const SizedBox(
+                        width: 44,
+                        height: 44,
+                        child: Center(
+                          child: Icon(
+                            Icons.arrow_back_ios_new_rounded,
+                            size: 20,
+                            color: Color(0xFF123332),
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: AppRadii.border13,
-                    borderSide: const BorderSide(color: AppColors.border),
+                  InkWell(
+                    onTap: () {
+                      if (context.canPop()) {
+                        context.pop();
+                      } else {
+                        context.go('/settings');
+                      }
+                    },
+                    child: const Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Text(
+                        'Save',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xFF123332),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 6),
+
+              const Text(
+                'Profile',
+                style: TextStyle(
+                  fontFamily: AppTypography.fontHeading,
+                  fontSize: 28,
+                  fontWeight: FontWeight.w800,
+                  color: Color(0xFF123332),
+                ),
+              ),
+              const SizedBox(height: 16),
+
+              // Name input
+              const Text(
+                'What should we call you?',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: Color(0xFF123332),
+                ),
+              ),
+              const SizedBox(height: 6),
+              Container(
+                height: 52,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: const Color(0xFFC8C8CE)),
+                ),
+                padding: const EdgeInsets.symmetric(horizontal: 14),
+                child: TextField(
+                  controller: _nameController,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Color(0xFF123332),
+                  ),
+                  decoration: const InputDecoration(
+                    border: InputBorder.none,
+                    isDense: true,
+                    contentPadding: EdgeInsets.symmetric(vertical: 16),
                   ),
                 ),
               ),
-              const SizedBox(height: AppSpacing.s20),
-              const Text('Email', style: AppTypography.body2Bold),
-              const SizedBox(height: AppSpacing.s8),
+              const SizedBox(height: 16),
+
+              // Email row
+              const Text(
+                'Email',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: Color(0xFF123332),
+                ),
+              ),
+              const SizedBox(height: 6),
               Container(
                 height: 52,
-                padding: const EdgeInsets.symmetric(horizontal: 14),
                 decoration: BoxDecoration(
                   color: const Color(0xFFEAEAEC),
-                  borderRadius: AppRadii.border13,
+                  borderRadius: BorderRadius.circular(12),
                 ),
+                padding: const EdgeInsets.symmetric(horizontal: 14),
                 alignment: Alignment.centerLeft,
                 child: const Text(
                   'Hidden by Apple (private relay)',
                   style: TextStyle(
-                    fontFamily: AppTypography.fontBody,
                     fontSize: 15,
                     color: Color(0xFF3B4747),
                   ),
                 ),
               ),
-              const SizedBox(height: 6),
+              const SizedBox(height: 4),
               const Text(
                 'Signed in with Apple. Manage it in iPhone Settings → Apple ID.',
-                style: AppTypography.caption2,
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Color(0xFF5A5F6B),
+                ),
               ),
-              const SizedBox(height: AppSpacing.s20),
-              const Text('Sign-in method', style: AppTypography.body2Bold),
-              const SizedBox(height: AppSpacing.s8),
+              const SizedBox(height: 16),
+
+              // Sign-in method
+              const Text(
+                'Sign-in method',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: Color(0xFF123332),
+                ),
+              ),
+              const SizedBox(height: 6),
               Container(
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
-                  color: AppColors.white50,
-                  borderRadius: AppRadii.border13,
-                  border: Border.all(color: AppColors.border),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: const Color(0xFFDEDEE2)),
                 ),
                 child: const Row(
                   children: [
                     Expanded(
-                      child: Text('Apple', style: AppTypography.body2),
+                      child: Text(
+                        'Apple',
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Color(0xFF123332),
+                        ),
+                      ),
                     ),
                     Text(
                       'Connected',
                       style: TextStyle(
-                        fontFamily: AppTypography.fontBody,
                         fontSize: 13,
                         fontWeight: FontWeight.w600,
                         color: Color(0xFF2E6B4F),
@@ -146,27 +206,54 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                   ],
                 ),
               ),
-              const SizedBox(height: AppSpacing.s16),
-              Container(
-                height: 52,
-                padding: const EdgeInsets.symmetric(horizontal: 14),
-                decoration: BoxDecoration(
-                  color: AppColors.white50,
-                  borderRadius: AppRadii.border13,
-                  border: Border.all(color: AppColors.border),
-                ),
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Language', style: AppTypography.body2),
-                    Text('English ›', style: AppTypography.caption1),
-                  ],
+              const SizedBox(height: 16),
+
+              // Language selector
+              InkWell(
+                onTap: () => context.push('/language-access'),
+                borderRadius: BorderRadius.circular(12),
+                child: Container(
+                  height: 52,
+                  padding: const EdgeInsets.symmetric(horizontal: 14),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: const Color(0xFFDEDEE2)),
+                  ),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Language',
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Color(0xFF123332),
+                        ),
+                      ),
+                      Text(
+                        'English ›',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Color(0xFF5A5F6B),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              const SizedBox(height: AppSpacing.s32),
-              const Text(
-                'Your household answers are edited in My plan, not here.',
-                style: AppTypography.caption2,
+
+              const Spacer(),
+
+              // Footer disclaimer
+              const Center(
+                child: Text(
+                  'Your household answers are edited in My plan, not here.',
+                  style: TextStyle(
+                    fontSize: 12,
+                    height: 1.45,
+                    color: Color(0xFF5A5F6B),
+                  ),
+                ),
               ),
             ],
           ),
