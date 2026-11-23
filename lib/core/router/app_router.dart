@@ -16,6 +16,10 @@ import '../../features/onboarding/add_adult_screen.dart';
 import '../../features/onboarding/add_student_screen.dart';
 import '../../features/onboarding/priorities_screen.dart';
 import '../../features/onboarding/plan_ready_screen.dart';
+import '../../features/navigation/bottom_nav_scaffold.dart';
+import '../../features/home/home_screen.dart';
+import '../../features/journey/journey_screen.dart';
+import '../../features/stages/stage_detail_screen.dart';
 import '../../features/profile/edit_profile_screen.dart';
 import '../../features/gallery/gallery_screen.dart';
 
@@ -70,14 +74,6 @@ GoRouter createRouter({String initialLocation = '/'}) {
         builder: (context, state) => Scaffold(
           appBar: AppBar(title: const Text('Guest Mode')),
           body: const Center(child: Text('Exploring without an account (Phase 9)')),
-        ),
-      ),
-      GoRoute(
-        path: '/home',
-        name: 'home',
-        builder: (context, state) => Scaffold(
-          appBar: AppBar(title: const Text('Home')),
-          body: const Center(child: Text('Home (Phase 3)')),
         ),
       ),
       GoRoute(
@@ -148,6 +144,143 @@ GoRouter createRouter({String initialLocation = '/'}) {
         path: '/edit-profile',
         name: 'editProfile',
         builder: (context, state) => const EditProfileScreen(),
+      ),
+
+      // Persistent 5-Tab Shell (Phase 3: Home, Journey & 10 Stages)
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, navigationShell) {
+          return BottomNavScaffold(navigationShell: navigationShell);
+        },
+        branches: [
+          // Branch 0: Home
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/home',
+                name: 'home',
+                builder: (context, state) => const HomeScreen(),
+              ),
+            ],
+          ),
+
+          // Branch 1: Journey & 10 Stages (+ University Stream)
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/journey',
+                name: 'journey',
+                builder: (context, state) => const JourneyScreen(),
+              ),
+              GoRoute(
+                path: '/stages/:id',
+                name: 'stageDetail',
+                builder: (context, state) {
+                  final id = state.pathParameters['id'] ?? '1';
+                  return StageDetailScreen(stageId: id);
+                },
+              ),
+              GoRoute(
+                path: '/stage-status',
+                name: 'stageStatus',
+                builder: (context, state) => const StageDetailScreen(stageId: '1'),
+              ),
+              GoRoute(
+                path: '/stage-paperwork',
+                name: 'stagePaperwork',
+                builder: (context, state) => const StageDetailScreen(stageId: '2'),
+              ),
+              GoRoute(
+                path: '/stage-housing',
+                name: 'stageHousing',
+                builder: (context, state) => const StageDetailScreen(stageId: '3'),
+              ),
+              GoRoute(
+                path: '/stage-schools',
+                name: 'stageSchools',
+                builder: (context, state) => const StageDetailScreen(stageId: '4'),
+              ),
+              GoRoute(
+                path: '/stage-university',
+                name: 'stageUniversity',
+                builder: (context, state) => const StageDetailScreen(stageId: '4b'),
+              ),
+              GoRoute(
+                path: '/stage-car',
+                name: 'stageCar',
+                builder: (context, state) => const StageDetailScreen(stageId: '5'),
+              ),
+              GoRoute(
+                path: '/stage-insurance',
+                name: 'stageInsurance',
+                builder: (context, state) => const StageDetailScreen(stageId: '6'),
+              ),
+              GoRoute(
+                path: '/stage-health',
+                name: 'stageHealth',
+                builder: (context, state) => const StageDetailScreen(stageId: '7'),
+              ),
+              GoRoute(
+                path: '/stage-money',
+                name: 'stageMoney',
+                builder: (context, state) => const StageDetailScreen(stageId: '8'),
+              ),
+              GoRoute(
+                path: '/stage-work',
+                name: 'stageWork',
+                builder: (context, state) => const StageDetailScreen(stageId: '9'),
+              ),
+              GoRoute(
+                path: '/stage-community',
+                name: 'stageCommunity',
+                builder: (context, state) => const StageDetailScreen(stageId: '10'),
+              ),
+            ],
+          ),
+
+          // Branch 2: Explore
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/explore',
+                name: 'explore',
+                builder: (context, state) => Scaffold(
+                  appBar: AppBar(title: const Text('Explore')),
+                  body: const Center(child: Text('Explore (Phase 8)')),
+                ),
+              ),
+            ],
+          ),
+
+          // Branch 3: Help
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/help',
+                name: 'help',
+                builder: (context, state) => Scaffold(
+                  appBar: AppBar(title: const Text('Help')),
+                  body: const Center(child: Text('Help & Trusted Support (Phase 7)')),
+                ),
+              ),
+            ],
+          ),
+
+          // Branch 4: Me / Settings
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/settings',
+                name: 'settings',
+                builder: (context, state) => const EditProfileScreen(),
+              ),
+              GoRoute(
+                path: '/me',
+                name: 'me',
+                builder: (context, state) => const EditProfileScreen(),
+              ),
+            ],
+          ),
+        ],
       ),
     ],
   );
