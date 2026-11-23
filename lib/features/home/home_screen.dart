@@ -174,7 +174,7 @@ class HomeScreen extends ConsumerWidget {
                       title: 'Apply for your SIN',
                       subtitle: 'Layla, Omar, Yasmin · This week · 3 nearby',
                       hasDivider: true,
-                      onTap: () => context.push('/stages/2'),
+                      onTap: () => context.push('/task-sin'),
                     ),
                     _buildActionItem(
                       context,
@@ -183,7 +183,7 @@ class HomeScreen extends ConsumerWidget {
                       title: 'Apply for Ontario health cards',
                       subtitle: 'Everyone · ServiceOntario · 2 nearby',
                       hasDivider: true,
-                      onTap: () => context.push('/stages/2'),
+                      onTap: () => context.push('/task-sin'),
                     ),
                     _buildActionItem(
                       context,
@@ -192,7 +192,7 @@ class HomeScreen extends ConsumerWidget {
                       title: 'Register Sami & Nour for school',
                       subtitle: 'Sami, Nour · Peel school boards',
                       hasDivider: false,
-                      onTap: () => context.push('/stages/4'),
+                      onTap: () => context.push('/task-school'),
                     ),
                   ],
                 ),

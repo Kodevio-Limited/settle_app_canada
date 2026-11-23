@@ -26,6 +26,23 @@ class GalleryScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16.0),
         children: [
+          _buildSectionHeader('Phase 4: Full Tasks, Nearby Services & Licensing (14 Screens)'),
+          _buildTile(context, '4.1 Task · PR card (completed state)', '/task-status'),
+          _buildTile(context, '4.2 Task · SIN (full detail)', '/task-sin'),
+          _buildTile(context, '4.3 Task · Tenant rights before a lease', '/task-housing'),
+          _buildTile(context, '4.4 Task · School registration', '/task-school'),
+          _buildTile(context, '4.5 Task · Driver\'s licence', '/task-licence'),
+          _buildTile(context, '4.6 Task · Auto insurance', '/task-insurance'),
+          _buildTile(context, '4.7 Task · Family doctor', '/task-doctor'),
+          _buildTile(context, '4.8 Task · Canada Child Benefit', '/task-ccb'),
+          _buildTile(context, '4.9 Task · Employment services', '/task-work'),
+          _buildTile(context, '4.10 Task · Library card', '/task-library'),
+          _buildTile(context, '4.11 Task · Apply to university or college', '/task-uni-apply'),
+          _buildTile(context, '4.12 Task · OSAP student aid', '/task-osap'),
+          _buildTile(context, '4.13 Does your job need a licence?', '/occupation-search'),
+          _buildTile(context, '4.14 Licensing pathway · P.Eng. (Omar)', '/occupation-pathway'),
+
+          const SizedBox(height: 20),
           _buildSectionHeader('Phase 3: Home, Journey & All 10 Stages'),
           _buildTile(context, '3.1 Home Screen', '/home'),
           _buildTile(context, '3.2 Journey Screen', '/journey'),

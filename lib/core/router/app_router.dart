@@ -22,6 +22,9 @@ import '../../features/journey/journey_screen.dart';
 import '../../features/stages/stage_detail_screen.dart';
 import '../../features/profile/edit_profile_screen.dart';
 import '../../features/gallery/gallery_screen.dart';
+import '../../features/tasks/task_detail_screen.dart';
+import '../../features/tasks/occupation_search_screen.dart';
+import '../../features/tasks/occupation_pathway_screen.dart';
 
 GoRouter createRouter({String initialLocation = '/'}) {
   return GoRouter(
@@ -144,6 +147,72 @@ GoRouter createRouter({String initialLocation = '/'}) {
         path: '/edit-profile',
         name: 'editProfile',
         builder: (context, state) => const EditProfileScreen(),
+      ),
+
+      // Phase 4: Full Tasks, Nearby Services, University Tasks & Licensing
+      GoRoute(
+        path: '/tasks/:id',
+        name: 'taskDetail',
+        builder: (context, state) {
+          final id = state.pathParameters['id'] ?? 'TaskSIN';
+          return TaskDetailScreen(taskId: id);
+        },
+      ),
+      GoRoute(
+        path: '/task-status',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskStatus'),
+      ),
+      GoRoute(
+        path: '/task-sin',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskSIN'),
+      ),
+      GoRoute(
+        path: '/task-housing',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskHousing'),
+      ),
+      GoRoute(
+        path: '/task-school',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskSchool'),
+      ),
+      GoRoute(
+        path: '/task-licence',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskLicence'),
+      ),
+      GoRoute(
+        path: '/task-insurance',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskInsurance'),
+      ),
+      GoRoute(
+        path: '/task-doctor',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskDoctor'),
+      ),
+      GoRoute(
+        path: '/task-ccb',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskCCB'),
+      ),
+      GoRoute(
+        path: '/task-work',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskWork'),
+      ),
+      GoRoute(
+        path: '/task-library',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskLibrary'),
+      ),
+      GoRoute(
+        path: '/task-uni-apply',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskUniApply'),
+      ),
+      GoRoute(
+        path: '/task-osap',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskOSAP'),
+      ),
+      GoRoute(
+        path: '/occupation-search',
+        builder: (context, state) => const OccupationSearchScreen(),
+      ),
+      GoRoute(
+        path: '/occupation-pathway',
+        builder: (context, state) => const OccupationPathwayScreen(),
       ),
 
       // Persistent 5-Tab Shell (Phase 3: Home, Journey & 10 Stages)
