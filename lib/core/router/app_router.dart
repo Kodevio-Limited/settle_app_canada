@@ -62,6 +62,11 @@ import '../../features/profile/paused_screen.dart';
 import '../../features/profile/welcome_back_screen.dart';
 import '../../features/profile/delete_confirm_screen.dart';
 import '../../features/profile/deleted_screen.dart';
+import '../../features/guest/guest_home_screen.dart';
+import '../../features/guest/integration_map_screen.dart';
+import '../../features/errors/offline_screen.dart';
+import '../../features/errors/location_denied_screen.dart';
+import '../../features/errors/server_error_screen.dart';
 
 GoRouter createRouter({String initialLocation = '/'}) {
   return GoRouter(
@@ -111,10 +116,7 @@ GoRouter createRouter({String initialLocation = '/'}) {
       GoRoute(
         path: '/guest-home',
         name: 'guestHome',
-        builder: (context, state) => Scaffold(
-          appBar: AppBar(title: const Text('Guest Mode')),
-          body: const Center(child: Text('Exploring without an account (Phase 9)')),
-        ),
+        builder: (context, state) => const GuestHomeScreen(),
       ),
       GoRoute(
         path: '/stage',
@@ -475,6 +477,28 @@ GoRouter createRouter({String initialLocation = '/'}) {
         path: '/deleted',
         name: 'deleted',
         builder: (context, state) => const DeletedScreen(),
+      ),
+
+      // Phase 9 & 10: Guest, Offline & Error States + System Data Flow
+      GoRoute(
+        path: '/offline',
+        name: 'offline',
+        builder: (context, state) => const OfflineScreen(),
+      ),
+      GoRoute(
+        path: '/location-denied',
+        name: 'locationDenied',
+        builder: (context, state) => const LocationDeniedScreen(),
+      ),
+      GoRoute(
+        path: '/server-error',
+        name: 'serverError',
+        builder: (context, state) => const ServerErrorScreen(),
+      ),
+      GoRoute(
+        path: '/integration-map',
+        name: 'integrationMap',
+        builder: (context, state) => const IntegrationMapScreen(),
       ),
 
       // Navigation aliases for Phase 6 inter-screen links

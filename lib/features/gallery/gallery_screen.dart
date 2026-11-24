@@ -26,6 +26,14 @@ class GalleryScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16.0),
         children: [
+          _buildSectionHeader('Phase 9 & 10: Guest, Offline, Errors & Integrations (6 Items)'),
+          _buildTile(context, '9.1 Exploring without an account (Guest)', '/guest-home'),
+          _buildTile(context, '9.2 Offline mode', '/offline'),
+          _buildTile(context, '9.3 Location denied', '/location-denied'),
+          _buildTile(context, '9.4 Server error / something went wrong', '/server-error'),
+          _buildTile(context, '10.1 API & integration map', '/integration-map'),
+
+          const SizedBox(height: 20),
           _buildSectionHeader('Phase 8: Account, Privacy, Pause & Deletion (11 Screens)'),
           _buildTile(context, '8.1 Settings & Account', '/settings'),
           _buildTile(context, '8.2 Edit Profile', '/edit-profile'),
