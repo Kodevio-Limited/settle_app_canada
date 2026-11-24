@@ -76,6 +76,9 @@ import '../../features/tasks/all_professions_screen.dart';
 import '../../features/plan/budget_planner_screen.dart';
 import '../../features/family/join_household_screen.dart';
 import '../../features/profile/privacy_policy_screen.dart';
+import '../../features/onboarding/stage_plan_ready_screen.dart';
+import '../../features/home/stage_home_screen.dart';
+import '../../features/journey/journey_approved_screen.dart';
 
 GoRouter createRouter({String initialLocation = '/'}) {
   return GoRouter(
@@ -558,6 +561,102 @@ GoRouter createRouter({String initialLocation = '/'}) {
       ),
 
       
+      
+      // Phase 13: Section 16 Plan & Home Move Stages + Journey Approved
+      GoRoute(
+        path: '/plan-ready/exploring',
+        builder: (context, state) => const StagePlanReadyScreen(variant: StageVariant.exploring),
+      ),
+      GoRoute(
+        path: '/plan-ready/waiting',
+        builder: (context, state) => const StagePlanReadyScreen(variant: StageVariant.waiting),
+      ),
+      GoRoute(
+        path: '/plan-ready/approved',
+        builder: (context, state) => const StagePlanReadyScreen(variant: StageVariant.approved),
+      ),
+      GoRoute(
+        path: '/home-exploring',
+        builder: (context, state) => const StageHomeScreen(variant: StageHomeVariant.exploring),
+      ),
+      GoRoute(
+        path: '/home-waiting',
+        builder: (context, state) => const StageHomeScreen(variant: StageHomeVariant.waiting),
+      ),
+      GoRoute(
+        path: '/home-approved',
+        builder: (context, state) => const StageHomeScreen(variant: StageHomeVariant.approved),
+      ),
+      GoRoute(
+        path: '/home-settled',
+        builder: (context, state) => const StageHomeScreen(variant: StageHomeVariant.settled),
+      ),
+      GoRoute(
+        path: '/journey-approved',
+        builder: (context, state) => const JourneyApprovedScreen(),
+      ),
+      // Phase 13: Section 17 Before You Move Tasks (15 tasks)
+      GoRoute(
+        path: '/tasks/exp-options',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'ExpOptions'),
+      ),
+      GoRoute(
+        path: '/tasks/exp-representative',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'ExpRepresentative'),
+      ),
+      GoRoute(
+        path: '/tasks/exp-cities',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'ExpCities'),
+      ),
+      GoRoute(
+        path: '/tasks/wait-track',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'WaitTrack'),
+      ),
+      GoRoute(
+        path: '/tasks/wait-docs',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'WaitDocs'),
+      ),
+      GoRoute(
+        path: '/tasks/wait-savings',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'WaitSavings'),
+      ),
+      GoRoute(
+        path: '/tasks/wait-wellbeing',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'WaitWellbeing'),
+      ),
+      GoRoute(
+        path: '/tasks/pre-services',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'PreServices'),
+      ),
+      GoRoute(
+        path: '/tasks/pre-travel-docs',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'PreTravelDocs'),
+      ),
+      GoRoute(
+        path: '/tasks/pre-goods',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'PreGoods'),
+      ),
+      GoRoute(
+        path: '/tasks/pre-kids-records',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'PreKidsRecords'),
+      ),
+      GoRoute(
+        path: '/tasks/pre-medications',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'PreMedications'),
+      ),
+      GoRoute(
+        path: '/tasks/pre-temp-housing',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'PreTempHousing'),
+      ),
+      GoRoute(
+        path: '/tasks/pre-arrival-day',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'PreArrivalDay'),
+      ),
+      GoRoute(
+        path: '/tasks/pre-first72',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'PreFirst72'),
+      ),
+
       // Phase 12: Regulated Jobs Index & Gap Screens
       GoRoute(
         path: '/tasks/all-professions',

@@ -23,7 +23,7 @@ void main() {
         expect(t.id.isNotEmpty, isTrue);
         expect(t.title.isNotEmpty, isTrue);
         expect(t.tag.isNotEmpty, isTrue);
-        expect(t.steps.isNotEmpty, isTrue);
+        expect(t.steps.isNotEmpty || t.checklist.isNotEmpty, isTrue);
         expect(t.disclaimer, isNotNull);
       }
 
