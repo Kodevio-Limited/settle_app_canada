@@ -26,6 +26,19 @@ class GalleryScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16.0),
         children: [
+          _buildSectionHeader('Phase 11: Sections 12 & 13 (Province Variants + Partners & Legal Help — 10 Screens)'),
+          _buildTile(context, '12.1 BC · MSP wait period', '/variants/bc-health'),
+          _buildTile(context, '12.2 BC · Cover the wait', '/variants/bc-health-gap'),
+          _buildTile(context, '12.3 BC · ICBC licence + insurance', '/variants/bc-icbc'),
+          _buildTile(context, '12.4 QC · RAMQ (children exempt)', '/variants/qc-health'),
+          _buildTile(context, '12.5 QC · Lease & no deposit', '/variants/qc-lease'),
+          _buildTile(context, '12.6 QC · French-language school', '/variants/qc-school'),
+          _buildTile(context, '12.7 MB · Not covered for your status', '/variants/mb-not-eligible'),
+          _buildTile(context, '13.1 Partner detail (sponsored)', '/partner-detail'),
+          _buildTile(context, '13.2 How we choose partners', '/how-partners'),
+          _buildTile(context, '13.3 Legal help (free + licensed)', '/legal-help'),
+
+          const SizedBox(height: 20),
           _buildSectionHeader('Phase 10: Section 11 (Remaining Tasks Ontario — 24 Screens)'),
           _buildTile(context, '4.15 Task · Landing documents', '/tasks/landingdocs'),
           _buildTile(context, '4.16 Task · Keeping PR status', '/tasks/prbasics'),

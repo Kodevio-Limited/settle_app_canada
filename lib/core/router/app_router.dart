@@ -67,6 +67,9 @@ import '../../features/guest/integration_map_screen.dart';
 import '../../features/errors/offline_screen.dart';
 import '../../features/errors/location_denied_screen.dart';
 import '../../features/errors/server_error_screen.dart';
+import '../../features/partners/how_partners_screen.dart';
+import '../../features/partners/partner_detail_screen.dart';
+import '../../features/partners/legal_help_screen.dart';
 
 GoRouter createRouter({String initialLocation = '/'}) {
   return GoRouter(
@@ -499,6 +502,53 @@ GoRouter createRouter({String initialLocation = '/'}) {
         path: '/integration-map',
         name: 'integrationMap',
         builder: (context, state) => const IntegrationMapScreen(),
+      ),
+
+      // Phase 11: Sections 12 & 13 (Province Variants + Partners & Legal Help)
+      GoRoute(
+        path: '/how-partners',
+        name: 'howPartners',
+        builder: (context, state) => const HowPartnersScreen(),
+      ),
+      GoRoute(
+        path: '/partner-detail',
+        name: 'partnerDetail',
+        builder: (context, state) => const PartnerDetailScreen(),
+      ),
+      GoRoute(
+        path: '/legal-help',
+        name: 'legalHelp',
+        builder: (context, state) => const LegalHelpScreen(),
+      ),
+
+      // Province Variant Routes (BC, QC, MB)
+      GoRoute(
+        path: '/variants/bc-health',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'VarBCHealth'),
+      ),
+      GoRoute(
+        path: '/variants/bc-health-gap',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'VarBCHealthGap'),
+      ),
+      GoRoute(
+        path: '/variants/bc-icbc',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'VarBCICBC'),
+      ),
+      GoRoute(
+        path: '/variants/mb-not-eligible',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'VarMBNotEligible'),
+      ),
+      GoRoute(
+        path: '/variants/qc-health',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'VarQCHealth'),
+      ),
+      GoRoute(
+        path: '/variants/qc-lease',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'VarQCLease'),
+      ),
+      GoRoute(
+        path: '/variants/qc-school',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'VarQCSchool'),
       ),
 
       // Navigation aliases for Phase 6 inter-screen links
