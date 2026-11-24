@@ -71,6 +71,12 @@ import '../../features/partners/how_partners_screen.dart';
 import '../../features/partners/partner_detail_screen.dart';
 import '../../features/partners/legal_help_screen.dart';
 
+import '../../features/tasks/regulated_pathway_detail_screen.dart';
+import '../../features/tasks/all_professions_screen.dart';
+import '../../features/plan/budget_planner_screen.dart';
+import '../../features/family/join_household_screen.dart';
+import '../../features/profile/privacy_policy_screen.dart';
+
 GoRouter createRouter({String initialLocation = '/'}) {
   return GoRouter(
     initialLocation: initialLocation,
@@ -549,6 +555,210 @@ GoRouter createRouter({String initialLocation = '/'}) {
       GoRoute(
         path: '/variants/qc-school',
         builder: (context, state) => const TaskDetailScreen(taskId: 'VarQCSchool'),
+      ),
+
+      
+      // Phase 12: Regulated Jobs Index & Gap Screens
+      GoRoute(
+        path: '/tasks/all-professions',
+        builder: (context, state) => const AllProfessionsScreen(),
+      ),
+      GoRoute(
+        path: '/tasks/engineer-pathway',
+        builder: (context, state) => const OccupationPathwayScreen(),
+      ),
+      GoRoute(
+        path: '/plan/budget-planner',
+        builder: (context, state) => const BudgetPlannerScreen(),
+      ),
+      GoRoute(
+        path: '/family/join-household',
+        builder: (context, state) => const JoinHouseholdScreen(),
+      ),
+      GoRoute(
+        path: '/profile/privacy-policy',
+        builder: (context, state) => const PrivacyPolicyScreen(),
+      ),
+      GoRoute(
+        path: '/tasks/task-car-costs',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskCarCosts'),
+      ),
+      // All 44 regulated pathway detail screens
+      GoRoute(
+        path: '/tasks/pathway-architect',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayArchitect'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-audiologist-slp',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayAudiologistSLP'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-auto-body',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayAutoBody'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-auto-tech',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayAutoTech'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-cpa',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayCPA'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-chiropractor',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayChiropractor'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-crane',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayCrane'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-dental-hygienist',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayDentalHygienist'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-dentist',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayDentist'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-denturist',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayDenturist'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-dietitian',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayDietitian'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-ece',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayECE'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-electrician',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayElectrician'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-geoscientist',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayGeoscientist'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-hairstylist',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayHairstylist'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-insurance',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayInsurance'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-kinesiologist',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayKinesiologist'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-lawyer',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayLawyer'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-mlt',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayMLT'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-mrt',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayMRT'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-massage',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayMassage'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-midwife',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayMidwife'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-mortgage',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayMortgage'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-nurse',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayNurse'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-ot',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayOT'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-optician',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayOptician'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-optometrist',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayOptometrist'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-paralegal',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayParalegal'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-pharmacist',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayPharmacist'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-physician',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayPhysician'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-physio',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayPhysio'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-plumber',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayPlumber'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-psychologist',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayPsychologist'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-psychotherapist',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayPsychotherapist'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-rt',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayRT'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-real-estate',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayRealEstate'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-refrigeration',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayRefrigeration'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-sheet-metal',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwaySheetMetal'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-social-worker',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwaySocialWorker'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-steamfitter',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwaySteamfitter'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-surveyor',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwaySurveyor'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-teacher',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayTeacher'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-truck-coach',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayTruckCoach'),
+      ),
+      GoRoute(
+        path: '/tasks/pathway-vet',
+        builder: (context, state) => const RegulatedPathwayDetailScreen(pathwayId: 'PathwayVet'),
       ),
 
       // Navigation aliases for Phase 6 inter-screen links

@@ -996,6 +996,38 @@ final List<TaskModel> allTasksData = [
     isCompleted: false,
     disclaimer: "Independent guide by Experiaco. Not affiliated with the Government of Canada.",
   ),
+  TaskModel(
+    id: 'TaskCarCosts',
+    tag: "Money & car · Ontario",
+    title: "Plan car costs",
+    forWhom: const [
+      TaskPerson(name: 'Everyone', initial: 'E', bgHex: '#2E6B4F'),
+    ],
+    whyTags: const [],
+    stats: const [
+      TaskStat(value: r'$600–1,200/mo', label: 'Average car cost in Ontario including insurance'),
+      TaskStat(value: '2–3x higher', label: 'First-year insurance without Ontario driving history'),
+    ],
+    steps: const [
+      "Compare transit costs (PRESTO monthly passes) with car costs.",
+      "Get insurance quotes before you choose a car — they vary a lot.",
+      "Check financing offers for newcomers carefully, including interest.",
+      "Add the total to your monthly budget.",
+    ],
+    bringTitle: "What to check",
+    checklist: const [
+      "Insurance quote with letter of experience — From your home country insurer if accepted",
+      "Winter tires estimate — Mandatory discount in Ontario; essential for safety",
+      "Gas and maintenance allowance — Factor into monthly cash flow",
+    ],
+    nearbyTitle: "Offices near you",
+    nearbyItems: const [],
+    hasMap: false,
+    sourceName: "Financial Consumer Agency of Canada",
+    sourceSub: "Buying or leasing a car · Last verified [DATE]",
+    isCompleted: false,
+    disclaimer: "General information, not financial advice.",
+  ),
 ];
 
 TaskModel? getTaskById(String id) {
