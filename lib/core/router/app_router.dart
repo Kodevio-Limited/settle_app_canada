@@ -79,6 +79,7 @@ import '../../features/profile/privacy_policy_screen.dart';
 import '../../features/onboarding/stage_plan_ready_screen.dart';
 import '../../features/home/stage_home_screen.dart';
 import '../../features/journey/journey_approved_screen.dart';
+import '../../features/explore/explore_screen.dart';
 
 GoRouter createRouter({String initialLocation = '/'}) {
   return GoRouter(
@@ -562,6 +563,119 @@ GoRouter createRouter({String initialLocation = '/'}) {
 
       
       
+      // Phase 15: Sections 20 & 23 Explore Tab & Detail Screens (28 screens)
+      GoRoute(
+        path: '/explore/explore',
+        builder: (context, state) => const ExploreScreen(screenId: 'Explore'),
+      ),
+      GoRoute(
+        path: '/explore/explore-canoo',
+        builder: (context, state) => const ExploreScreen(screenId: 'ExploreCanoo'),
+      ),
+      GoRoute(
+        path: '/explore/explore-city',
+        builder: (context, state) => const ExploreScreen(screenId: 'ExploreCity'),
+      ),
+      GoRoute(
+        path: '/explore/explore-events',
+        builder: (context, state) => const ExploreScreen(screenId: 'ExploreEvents'),
+      ),
+      GoRoute(
+        path: '/explore/explore-filters',
+        builder: (context, state) => const ExploreScreen(screenId: 'ExploreFilters'),
+      ),
+      GoRoute(
+        path: '/explore/explore-free-passes',
+        builder: (context, state) => const ExploreScreen(screenId: 'ExploreFreePasses'),
+      ),
+      GoRoute(
+        path: '/explore/explore-offers',
+        builder: (context, state) => const ExploreScreen(screenId: 'ExploreOffers'),
+      ),
+      GoRoute(
+        path: '/explore/explore-place',
+        builder: (context, state) => const ExploreScreen(screenId: 'ExplorePlace'),
+      ),
+      GoRoute(
+        path: '/explore/explore-places',
+        builder: (context, state) => const ExploreScreen(screenId: 'ExplorePlaces'),
+      ),
+      GoRoute(
+        path: '/explore/explore-saved',
+        builder: (context, state) => const ExploreScreen(screenId: 'ExploreSaved'),
+      ),
+      GoRoute(
+        path: '/explore/explore-winter',
+        builder: (context, state) => const ExploreScreen(screenId: 'ExploreWinter'),
+      ),
+      GoRoute(
+        path: '/explore/offer-detail',
+        builder: (context, state) => const ExploreScreen(screenId: 'OfferDetail'),
+      ),
+      GoRoute(
+        path: '/explore/event-skate',
+        builder: (context, state) => const ExploreScreen(screenId: 'EventSkate'),
+      ),
+      GoRoute(
+        path: '/explore/event-welcome',
+        builder: (context, state) => const ExploreScreen(screenId: 'EventWelcome'),
+      ),
+      GoRoute(
+        path: '/explore/event-winter-walk',
+        builder: (context, state) => const ExploreScreen(screenId: 'EventWinterWalk'),
+      ),
+      GoRoute(
+        path: '/explore/offer-bank',
+        builder: (context, state) => const ExploreScreen(screenId: 'OfferBank'),
+      ),
+      GoRoute(
+        path: '/explore/offer-furniture',
+        builder: (context, state) => const ExploreScreen(screenId: 'OfferFurniture'),
+      ),
+      GoRoute(
+        path: '/explore/offer-phone',
+        builder: (context, state) => const ExploreScreen(screenId: 'OfferPhone'),
+      ),
+      GoRoute(
+        path: '/explore/pass-conservation',
+        builder: (context, state) => const ExploreScreen(screenId: 'PassConservation'),
+      ),
+      GoRoute(
+        path: '/explore/pass-ontario-parks',
+        builder: (context, state) => const ExploreScreen(screenId: 'PassOntarioParks'),
+      ),
+      GoRoute(
+        path: '/explore/pass-pama',
+        builder: (context, state) => const ExploreScreen(screenId: 'PassPAMA'),
+      ),
+      GoRoute(
+        path: '/explore/pass-swim-skate',
+        builder: (context, state) => const ExploreScreen(screenId: 'PassSwimSkate'),
+      ),
+      GoRoute(
+        path: '/explore/place-kariya',
+        builder: (context, state) => const ExploreScreen(screenId: 'PlaceKariya'),
+      ),
+      GoRoute(
+        path: '/explore/place-niagara',
+        builder: (context, state) => const ExploreScreen(screenId: 'PlaceNiagara'),
+      ),
+      GoRoute(
+        path: '/explore/place-pama',
+        builder: (context, state) => const ExploreScreen(screenId: 'PlacePAMA'),
+      ),
+      GoRoute(
+        path: '/explore/place-port-credit',
+        builder: (context, state) => const ExploreScreen(screenId: 'PlacePortCredit'),
+      ),
+      GoRoute(
+        path: '/explore/place-rattray',
+        builder: (context, state) => const ExploreScreen(screenId: 'PlaceRattray'),
+      ),
+      GoRoute(
+        path: '/explore/place-riverwood',
+        builder: (context, state) => const ExploreScreen(screenId: 'PlaceRiverwood'),
+      ),
       // Phase 14: Sections 18 & 19 Gap Tasks (34 tasks)
       GoRoute(
         path: '/tasks/task-address-change',
@@ -1248,10 +1362,7 @@ GoRouter createRouter({String initialLocation = '/'}) {
               GoRoute(
                 path: '/explore',
                 name: 'explore',
-                builder: (context, state) => Scaffold(
-                  appBar: AppBar(title: const Text('Explore')),
-                  body: const Center(child: Text('Explore (Phase 8)')),
-                ),
+                builder: (context, state) => const ExploreScreen(screenId: 'Explore'),
               ),
             ],
           ),
