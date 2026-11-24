@@ -524,11 +524,99 @@ GoRouter createRouter({String initialLocation = '/'}) {
       ),
       GoRoute(
         path: '/tasks/immunization',
-        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskSchool'),
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskImmunization'),
       ),
       GoRoute(
         path: '/tasks/esl',
-        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskSchool'),
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskESL'),
+      ),
+      GoRoute(
+        path: '/tasks/aftercare',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskAfterCare'),
+      ),
+      GoRoute(
+        path: '/tasks/bank',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskBank'),
+      ),
+      GoRoute(
+        path: '/tasks/cra',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskCRA'),
+      ),
+      GoRoute(
+        path: '/tasks/campusservices',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskCampusServices'),
+      ),
+      GoRoute(
+        path: '/tasks/credentialassess',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskCredentialAssess'),
+      ),
+      GoRoute(
+        path: '/tasks/credit',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskCredit'),
+      ),
+      GoRoute(
+        path: '/tasks/domestictuition',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskDomesticTuition'),
+      ),
+      GoRoute(
+        path: '/tasks/drivingrecord',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskDrivingRecord'),
+      ),
+      GoRoute(
+        path: '/tasks/englishtest',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskEnglishTest'),
+      ),
+      GoRoute(
+        path: '/tasks/groups',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskGroups'),
+      ),
+      GoRoute(
+        path: '/tasks/healthcard',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskHealthCard'),
+      ),
+      GoRoute(
+        path: '/tasks/healthgap',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskHealthGap'),
+      ),
+      GoRoute(
+        path: '/tasks/kidsdental',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskKidsDental'),
+      ),
+      GoRoute(
+        path: '/tasks/landingdocs',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskLandingDocs'),
+      ),
+      GoRoute(
+        path: '/tasks/lease',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskLease'),
+      ),
+      GoRoute(
+        path: '/tasks/prbasics',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskPRBasics'),
+      ),
+      GoRoute(
+        path: '/tasks/presto',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskPresto'),
+      ),
+      GoRoute(
+        path: '/tasks/roadtest',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskRoadTest'),
+      ),
+      GoRoute(
+        path: '/tasks/scams',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskScams'),
+      ),
+      GoRoute(
+        path: '/tasks/taxreturn',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskTaxReturn'),
+      ),
+      GoRoute(
+        path: '/tasks/tenantinsurance',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskTenantInsurance'),
+      ),
+      GoRoute(
+        path: '/tasks/utilities',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskUtilities'),
       ),
       GoRoute(
         path: '/tasks/doctor',
