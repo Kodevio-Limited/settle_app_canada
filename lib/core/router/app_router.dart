@@ -562,6 +562,143 @@ GoRouter createRouter({String initialLocation = '/'}) {
 
       
       
+      // Phase 14: Sections 18 & 19 Gap Tasks (34 tasks)
+      GoRoute(
+        path: '/tasks/task-address-change',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskAddressChange'),
+      ),
+      GoRoute(
+        path: '/tasks/task-buy-car',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskBuyCar'),
+      ),
+      GoRoute(
+        path: '/tasks/task-car-seats',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskCarSeats'),
+      ),
+      GoRoute(
+        path: '/tasks/task-child-care',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskChildCare'),
+      ),
+      GoRoute(
+        path: '/tasks/task-child-care-subsidy',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskChildCareSubsidy'),
+      ),
+      GoRoute(
+        path: '/tasks/task-early-on',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskEarlyON'),
+      ),
+      GoRoute(
+        path: '/tasks/task-housing-help',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskHousingHelp'),
+      ),
+      GoRoute(
+        path: '/tasks/task-move-in',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskMoveIn'),
+      ),
+      GoRoute(
+        path: '/tasks/task-photo-card',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskPhotoCard'),
+      ),
+      GoRoute(
+        path: '/tasks/task-register-car',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskRegisterCar'),
+      ),
+      GoRoute(
+        path: '/tasks/task-rental-search',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskRentalSearch'),
+      ),
+      GoRoute(
+        path: '/tasks/task-school-bus',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskSchoolBus'),
+      ),
+      GoRoute(
+        path: '/tasks/task-special-ed',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskSpecialEd'),
+      ),
+      GoRoute(
+        path: '/tasks/task-teen-credits',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskTeenCredits'),
+      ),
+      GoRoute(
+        path: '/tasks/task-translations',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskTranslations'),
+      ),
+      GoRoute(
+        path: '/tasks/task-bridging',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskBridging'),
+      ),
+      GoRoute(
+        path: '/tasks/task-business',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskBusiness'),
+      ),
+      GoRoute(
+        path: '/tasks/task-clb',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskCLB'),
+      ),
+      GoRoute(
+        path: '/tasks/task-cra-scams',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskCRAScams'),
+      ),
+      GoRoute(
+        path: '/tasks/task-dental-plan',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskDentalPlan'),
+      ),
+      GoRoute(
+        path: '/tasks/task-gst-credit',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskGSTCredit'),
+      ),
+      GoRoute(
+        path: '/tasks/task-insurance-history',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskInsuranceHistory'),
+      ),
+      GoRoute(
+        path: '/tasks/task-job-scams',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskJobScams'),
+      ),
+      GoRoute(
+        path: '/tasks/task-job-search',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskJobSearch'),
+      ),
+      GoRoute(
+        path: '/tasks/task-mental-health',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskMentalHealth'),
+      ),
+      GoRoute(
+        path: '/tasks/task-otb',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskOTB'),
+      ),
+      GoRoute(
+        path: '/tasks/task-pregnancy',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskPregnancy'),
+      ),
+      GoRoute(
+        path: '/tasks/task-prescriptions',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskPrescriptions'),
+      ),
+      GoRoute(
+        path: '/tasks/task-resume',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskResume'),
+      ),
+      GoRoute(
+        path: '/tasks/task-send-money',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskSendMoney'),
+      ),
+      GoRoute(
+        path: '/tasks/task-where-care',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskWhereCare'),
+      ),
+      GoRoute(
+        path: '/tasks/task-winter-driving',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskWinterDriving'),
+      ),
+      GoRoute(
+        path: '/tasks/task-work-benefits',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskWorkBenefits'),
+      ),
+      GoRoute(
+        path: '/tasks/task-work-rights',
+        builder: (context, state) => const TaskDetailScreen(taskId: 'TaskWorkRights'),
+      ),
       // Phase 13: Section 16 Plan & Home Move Stages + Journey Approved
       GoRoute(
         path: '/plan-ready/exploring',
