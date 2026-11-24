@@ -80,6 +80,7 @@ import '../../features/onboarding/stage_plan_ready_screen.dart';
 import '../../features/home/stage_home_screen.dart';
 import '../../features/journey/journey_approved_screen.dart';
 import '../../features/explore/explore_screen.dart';
+import '../../features/errors/section21_screen.dart';
 
 GoRouter createRouter({String initialLocation = '/'}) {
   return GoRouter(
@@ -563,6 +564,71 @@ GoRouter createRouter({String initialLocation = '/'}) {
 
       
       
+      // Phase 16: Section 21 Last Taps, Empty/Error States, Android & RTL (16 screens)
+      GoRoute(
+        path: '/section21/android-location',
+        builder: (context, state) => const Section21Screen(screenId: 'AndroidLocation'),
+      ),
+      GoRoute(
+        path: '/section21/delete-error',
+        builder: (context, state) => const Section21Screen(screenId: 'DeleteError'),
+      ),
+      GoRoute(
+        path: '/section21/explore-event',
+        builder: (context, state) => const Section21Screen(screenId: 'ExploreEvent'),
+      ),
+      GoRoute(
+        path: '/section21/explore-pass',
+        builder: (context, state) => const Section21Screen(screenId: 'ExplorePass'),
+      ),
+      GoRoute(
+        path: '/section21/explore-saved-empty',
+        builder: (context, state) => const Section21Screen(screenId: 'ExploreSavedEmpty'),
+      ),
+      GoRoute(
+        path: '/section21/export-error',
+        builder: (context, state) => const Section21Screen(screenId: 'ExportError'),
+      ),
+      GoRoute(
+        path: '/section21/family-single',
+        builder: (context, state) => const Section21Screen(screenId: 'FamilySingle'),
+      ),
+      GoRoute(
+        path: '/section21/home-ar',
+        builder: (context, state) => const Section21Screen(screenId: 'HomeAR'),
+      ),
+      GoRoute(
+        path: '/section21/language-restart',
+        builder: (context, state) => const Section21Screen(screenId: 'LanguageRestart'),
+      ),
+      GoRoute(
+        path: '/section21/leave-quickly',
+        builder: (context, state) => const Section21Screen(screenId: 'LeaveQuickly'),
+      ),
+      GoRoute(
+        path: '/section21/search-empty',
+        builder: (context, state) => const Section21Screen(screenId: 'SearchEmpty'),
+      ),
+      GoRoute(
+        path: '/section21/sign-in-error',
+        builder: (context, state) => const Section21Screen(screenId: 'SignInError'),
+      ),
+      GoRoute(
+        path: '/section21/stage-complete',
+        builder: (context, state) => const Section21Screen(screenId: 'StageComplete'),
+      ),
+      GoRoute(
+        path: '/section21/task-more',
+        builder: (context, state) => const Section21Screen(screenId: 'TaskMore'),
+      ),
+      GoRoute(
+        path: '/section21/task-presto-ar',
+        builder: (context, state) => const Section21Screen(screenId: 'TaskPrestoAR'),
+      ),
+      GoRoute(
+        path: '/section21/web-delete-account',
+        builder: (context, state) => const Section21Screen(screenId: 'WebDeleteAccount'),
+      ),
       // Phase 15: Sections 20 & 23 Explore Tab & Detail Screens (28 screens)
       GoRoute(
         path: '/explore/explore',
