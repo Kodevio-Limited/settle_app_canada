@@ -99,5 +99,18 @@ class RulesEngine {
 
     return tasks;
   }
+
+  static String getEffectiveTaskId(String baseTaskId, UserProfile profile) {
+    if (baseTaskId == 'TaskHealthCard' && profile.province == 'BC') {
+      return 'VarBCHealth';
+    }
+    if (baseTaskId == 'TaskLease' && profile.province == 'QC') {
+      return 'VarQCLease';
+    }
+    if (baseTaskId == 'TaskDriver' && profile.province == 'AB') {
+      return 'VarABDriver';
+    }
+    return baseTaskId;
+  }
 }
 
