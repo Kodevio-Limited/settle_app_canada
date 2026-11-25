@@ -26,11 +26,15 @@ class _OccupationPathwayScreenState extends State<OccupationPathwayScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  IconButton(
-                    icon: const Icon(Icons.arrow_back, color: Color(0xFF123332)),
-                    onPressed: () => context.pop(),
-                    padding: EdgeInsets.zero,
-                    constraints: const BoxConstraints(minWidth: 44, minHeight: 44),
+                  BackButton(
+                    color: const Color(0xFF123332),
+                    onPressed: () {
+                      if (context.canPop()) {
+                        context.pop();
+                      } else {
+                        context.go('/occupation-search');
+                      }
+                    },
                   ),
                   IconButton(
                     icon: const Icon(Icons.more_horiz, color: Color(0xFF123332)),

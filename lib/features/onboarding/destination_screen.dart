@@ -16,10 +16,22 @@ class OnboardingDestinationScreen extends ConsumerStatefulWidget {
 
 class _OnboardingDestinationScreenState
     extends ConsumerState<OnboardingDestinationScreen> {
+  static const bool _isDemo = bool.fromEnvironment('DEMO', defaultValue: false);
   String _province = 'Ontario';
-  final _cityController = TextEditingController(text: 'Mississauga (Peel Region)');
-  final _arrivalController = TextEditingController(text: 'September 2026');
+  late final TextEditingController _cityController;
+  late final TextEditingController _arrivalController;
   bool _everyoneTogether = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _cityController = TextEditingController(
+      text: _isDemo ? 'Mississauga (Peel Region)' : '',
+    );
+    _arrivalController = TextEditingController(
+      text: _isDemo ? 'September 2026' : '',
+    );
+  }
 
   @override
   void dispose() {
@@ -36,7 +48,15 @@ class _OnboardingDestinationScreenState
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: BackButton(
-            color: AppColors.primary, onPressed: () => context.pop()),
+          color: AppColors.primary,
+          onPressed: () {
+            if (context.canPop()) {
+              context.pop();
+            } else {
+              context.go('/stage');
+            }
+          },
+        ),
         title: const Text(
           'Step 2 of 5',
           style: TextStyle(
@@ -161,6 +181,12 @@ class _OnboardingDestinationScreenState
                   color: AppColors.primary,
                 ),
                 decoration: InputDecoration(
+                  hintText: 'e.g. Mississauga (Peel Region)',
+                  hintStyle: const TextStyle(
+                    fontFamily: AppTypography.fontBody,
+                    fontSize: 16,
+                    color: Color(0xFF8A8A93),
+                  ),
                   filled: true,
                   fillColor: Colors.white,
                   contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
@@ -205,6 +231,12 @@ class _OnboardingDestinationScreenState
                   color: AppColors.primary,
                 ),
                 decoration: InputDecoration(
+                  hintText: 'e.g. Mississauga (Peel Region)',
+                  hintStyle: const TextStyle(
+                    fontFamily: AppTypography.fontBody,
+                    fontSize: 16,
+                    color: Color(0xFF8A8A93),
+                  ),
                   filled: true,
                   fillColor: Colors.white,
                   contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),

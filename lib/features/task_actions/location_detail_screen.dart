@@ -120,9 +120,15 @@ class LocationDetailScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: IconButton(
-                    icon: const Icon(Icons.arrow_back, color: Color(0xFF123332)),
-                    onPressed: () => context.pop(),
+                  child: BackButton(
+                    color: const Color(0xFF123332),
+                    onPressed: () {
+                      if (context.canPop()) {
+                        context.pop();
+                      } else {
+                        context.go('/nearby');
+                      }
+                    },
                   ),
                 ),
               ),

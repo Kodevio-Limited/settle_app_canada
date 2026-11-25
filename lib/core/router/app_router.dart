@@ -33,6 +33,7 @@ import '../../features/task_actions/snooze_screen.dart';
 import '../../features/task_actions/dismiss_screen.dart';
 import '../../features/task_actions/report_outdated_screen.dart';
 import '../../features/task_actions/content_updated_screen.dart';
+import '../../app/router/pending_routes.dart';
 
 GoRouter createRouter({String initialLocation = '/'}) {
   return GoRouter(
@@ -42,6 +43,10 @@ GoRouter createRouter({String initialLocation = '/'}) {
         path: '/',
         name: 'welcome',
         builder: (context, state) => const MainWelcomeScreen(),
+      ),
+      GoRoute(
+        path: '/main',
+        redirect: (context, state) => '/',
       ),
       GoRoute(
         path: '/sign-up',
@@ -393,6 +398,7 @@ GoRouter createRouter({String initialLocation = '/'}) {
           ),
         ],
       ),
+      ...pendingS10Routes,
     ],
   );
 }
