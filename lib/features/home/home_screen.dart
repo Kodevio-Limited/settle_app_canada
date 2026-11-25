@@ -76,12 +76,7 @@ class HomeScreen extends ConsumerWidget {
                   ),
                   const SizedBox(width: 8),
                   InkWell(
-                    onTap: () {
-                      // Reminders
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Reminders (2 new)')),
-                      );
-                    },
+                    onTap: () => context.push('/reminders'),
                     borderRadius: BorderRadius.circular(22),
                     child: Container(
                       width: 44,
@@ -288,11 +283,7 @@ class HomeScreen extends ConsumerWidget {
                 children: [
                   Expanded(
                     child: InkWell(
-                      onTap: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Near you offices')),
-                        );
-                      },
+                      onTap: () => context.push('/nearby'),
                       borderRadius: BorderRadius.circular(16),
                       child: Container(
                         padding: const EdgeInsets.all(14),
@@ -333,11 +324,7 @@ class HomeScreen extends ConsumerWidget {
                   const SizedBox(width: 10),
                   Expanded(
                     child: InkWell(
-                      onTap: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text("How's this week check-in")),
-                        );
-                      },
+                      onTap: () => context.push('/check-in'),
                       borderRadius: BorderRadius.circular(16),
                       child: Container(
                         padding: const EdgeInsets.all(14),
