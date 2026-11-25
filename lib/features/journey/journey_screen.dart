@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import '../../core/router/navigation_helpers.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_typography.dart';
 import '../onboarding/onboarding_provider.dart';
@@ -407,7 +408,7 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
       return Padding(
         padding: const EdgeInsets.symmetric(vertical: 2),
         child: InkWell(
-          onTap: () => context.push('/stages/$stageId'),
+          onTap: () => context.pushSafe('/stages/$stageId'),
           borderRadius: BorderRadius.circular(14),
           child: Container(
             constraints: const BoxConstraints(minHeight: 56),
@@ -424,7 +425,7 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
     }
 
     return InkWell(
-      onTap: () => context.push('/stages/$stageId'),
+      onTap: () => context.pushSafe('/stages/$stageId'),
       child: Container(
         constraints: BoxConstraints(minHeight: isDone ? 50 : 48),
         padding: const EdgeInsets.symmetric(vertical: 4),

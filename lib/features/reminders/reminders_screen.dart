@@ -110,7 +110,8 @@ class RemindersScreen extends StatelessWidget {
                     ),
                     Expanded(
                       child: InkWell(
-                        onTap: () => context.push('/reminders/calendar'),
+                        onTap: () =>
+                            context.pushReplacement('/reminders/calendar'),
                         borderRadius: BorderRadius.circular(9),
                         child: Container(
                           height: 38,

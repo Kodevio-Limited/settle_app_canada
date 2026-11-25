@@ -72,7 +72,7 @@ class LifeEventScreen extends StatelessWidget {
                     if (context.canPop()) {
                       context.pop();
                     } else {
-                      context.go('/profile');
+                      context.go('/settings');
                     }
                   },
                   borderRadius: BorderRadius.circular(22),

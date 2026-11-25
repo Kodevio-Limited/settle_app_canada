@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../core/router/navigation_helpers.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_typography.dart';
 
@@ -24,7 +25,7 @@ class HowGuidanceScreen extends StatelessWidget {
                     if (context.canPop()) {
                       context.pop();
                     } else {
-                      context.go('/profile');
+                      context.go('/settings');
                     }
                   },
                   borderRadius: BorderRadius.circular(22),
@@ -141,7 +142,7 @@ class HowGuidanceScreen extends StatelessWidget {
                                 ),
                                 WidgetSpan(
                                   child: InkWell(
-                                    onTap: () => context.push('/help'),
+                                    onTap: () => context.pushSafe('/help'),
                                     child: const Text(
                                       'Find qualified help',
                                       style: TextStyle(

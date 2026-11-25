@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../core/router/navigation_helpers.dart';
 
 class GuestHomeScreen extends StatelessWidget {
   const GuestHomeScreen({super.key});
@@ -184,7 +185,7 @@ class GuestHomeScreen extends StatelessWidget {
     bool isBold = false,
   }) {
     return InkWell(
-      onTap: () => context.push(route),
+      onTap: () => context.pushSafe(route),
       child: Container(
         constraints: const BoxConstraints(minHeight: 46),
         padding: const EdgeInsets.symmetric(vertical: 10),

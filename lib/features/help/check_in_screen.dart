@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../core/router/navigation_helpers.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_typography.dart';
 
@@ -171,7 +172,7 @@ class _CheckInScreenState extends State<CheckInScreen> {
               _buildHelpAction(
                 title: 'Talk to a settlement worker',
                 subtitle: 'A real person who helps newcomers every day',
-                onTap: () => context.push('/help'),
+                onTap: () => context.pushSafe('/help'),
               ),
               const SizedBox(height: 8),
               _buildHelpAction(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../core/router/navigation_helpers.dart';
 
 class TaskDoneScreen extends StatelessWidget {
   final String personName;
@@ -142,7 +143,7 @@ class TaskDoneScreen extends StatelessWidget {
                 category: 'PAPERWORK',
                 title: 'Set up your CRA My Account',
                 sub: 'For Layla · online',
-                onTap: () => context.push('/journey'),
+                onTap: () => context.pushSafe('/journey'),
               ),
               const SizedBox(height: 16),
 

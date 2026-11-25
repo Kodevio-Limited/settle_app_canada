@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:settle_app/core/router/navigation_helpers.dart';
 import 'package:settle_app/core/theme/app_colors.dart';
 import 'package:settle_app/features/tasks/models/task_data.dart';
 
@@ -273,7 +274,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                       ),
                       const SizedBox(height: 10),
                       GestureDetector(
-                        onTap: () => context.push('/settings'),
+                        onTap: () => context.pushSafe('/settings'),
                         child: const Text(
                           'Something wrong? Update your answers',
                           style: TextStyle(
@@ -879,7 +880,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                   crossAxisAlignment: WrapCrossAlignment.center,
                   children: [
                     TextButton(
-                      onPressed: () => context.push('/help'),
+                      onPressed: () => context.pushSafe('/help'),
                       style: TextButton.styleFrom(
                         padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
                         minimumSize: Size.zero,

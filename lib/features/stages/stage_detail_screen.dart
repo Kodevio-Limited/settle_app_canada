@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import '../../core/router/navigation_helpers.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_typography.dart';
 import 'models/stage_data.dart';
@@ -66,10 +67,10 @@ class StageDetailScreen extends StatelessWidget {
         leading: BackButton(
           color: AppColors.primary,
           onPressed: () {
-            if (stage.id == '4b') {
-              context.push('/stages/4');
-            } else if (context.canPop()) {
+            if (context.canPop()) {
               context.pop();
+            } else if (stage.id == '4b') {
+              context.go('/stages/4');
             } else {
               context.go('/journey');
             }
@@ -147,7 +148,7 @@ class StageDetailScreen extends StatelessWidget {
                       ),
                       const SizedBox(width: 6),
                       InkWell(
-                        onTap: () => context.push('/stages/4b'),
+                        onTap: () => context.pushSafe('/stages/4b'),
                         borderRadius: BorderRadius.circular(18),
                         child: Container(
                           height: 36,
@@ -418,7 +419,7 @@ class StageDetailScreen extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           InkWell(
-            onTap: () => context.push('/stages/4b'),
+            onTap: () => context.pushSafe('/stages/4b'),
             borderRadius: BorderRadius.circular(16),
             child: Container(
               padding: const EdgeInsets.all(14),

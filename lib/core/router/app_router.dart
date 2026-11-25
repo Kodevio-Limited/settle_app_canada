@@ -83,6 +83,10 @@ GoRouter createRouter({String initialLocation = '/'}) {
         redirect: (context, state) => '/',
       ),
       GoRoute(
+        path: '/profile',
+        redirect: (context, state) => '/settings',
+      ),
+      GoRoute(
         path: '/sign-up',
         name: 'signUp',
         builder: (context, state) => const SignUpScreen(),

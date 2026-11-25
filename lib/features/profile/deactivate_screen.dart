@@ -175,7 +175,7 @@ class DeactivateScreen extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                onTap: () => context.push('/settings'),
+                onTap: () => context.push('/notification-settings'),
                 child: const Padding(
                   padding: EdgeInsets.symmetric(vertical: 8),
                   child: Text(

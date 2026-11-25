@@ -92,7 +92,7 @@ class CalendarScreen extends StatelessWidget {
                   children: [
                     Expanded(
                       child: InkWell(
-                        onTap: () => context.push('/reminders'),
+                        onTap: () => context.pushReplacement('/reminders'),
                         borderRadius: BorderRadius.circular(9),
                         child: Container(
                           height: 38,

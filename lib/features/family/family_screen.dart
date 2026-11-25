@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import '../../core/router/navigation_helpers.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_typography.dart';
 
@@ -34,7 +35,7 @@ class FamilyScreen extends StatelessWidget {
       role: 'You · 9 tasks',
       progressPercent: 33,
       avatarColor: Color(0xFF123332),
-      route: '/profile',
+      route: '/settings',
     ),
     FamilyMemberInfo(
       initial: 'O',
@@ -126,7 +127,7 @@ class FamilyScreen extends StatelessWidget {
                               if (context.canPop()) {
                                 context.pop();
                               } else {
-                                context.go('/profile');
+                                context.go('/settings');
                               }
                             },
                             borderRadius: BorderRadius.circular(22),
@@ -210,7 +211,7 @@ class FamilyScreen extends StatelessWidget {
                             return SizedBox(
                               width: cardWidth,
                               child: InkWell(
-                                onTap: () => context.push(m.route),
+                                onTap: () => context.pushSafe(m.route),
                                 borderRadius: BorderRadius.circular(16),
                                 child: Container(
                                   padding: const EdgeInsets.all(12),
@@ -380,7 +381,7 @@ class FamilyScreen extends StatelessWidget {
                   _buildBottomItem(context, 'Journey', _journeySvg, false, '/journey'),
                   _buildBottomItem(context, 'Explore', _exploreSvg, false, '/explore'),
                   _buildBottomItem(context, 'Help', _helpSvg, false, '/help'),
-                  _buildBottomItem(context, 'Me', _meSvg, true, '/profile'),
+                  _buildBottomItem(context, 'Me', _meSvg, true, '/settings'),
                 ],
               ),
             ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import '../../core/router/navigation_helpers.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_typography.dart';
 
@@ -182,7 +182,7 @@ class GalleryScreen extends StatelessWidget {
           color: Color(0xFF7A7A83),
           size: 20,
         ),
-        onTap: () => context.push(path),
+        onTap: () => context.pushSafe(path),
       ),
     );
   }

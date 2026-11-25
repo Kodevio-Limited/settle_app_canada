@@ -87,7 +87,7 @@ class WelcomeBackScreen extends StatelessWidget {
                 width: double.infinity,
                 height: 54,
                 child: ElevatedButton(
-                  onPressed: () => context.push('/journey'),
+                  onPressed: () => context.push('/life-event'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: primaryDark,
                     foregroundColor: Colors.white,
