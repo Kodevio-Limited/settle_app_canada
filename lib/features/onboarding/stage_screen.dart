@@ -28,7 +28,16 @@ class OnboardingStageScreen extends ConsumerWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: BackButton(color: AppColors.primary, onPressed: () => context.pop()),
+        leading: BackButton(
+          color: AppColors.primary,
+          onPressed: () {
+            if (context.canPop()) {
+              context.pop();
+            } else {
+              context.go('/location-permission');
+            }
+          },
+        ),
         title: const Text(
           'Step 1 of 5',
           style: TextStyle(

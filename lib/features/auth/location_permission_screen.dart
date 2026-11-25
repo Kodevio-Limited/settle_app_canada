@@ -17,11 +17,41 @@ class LocationPermissionScreen extends ConsumerStatefulWidget {
 class _LocationPermissionScreenState
     extends ConsumerState<LocationPermissionScreen> {
   final _postalController = TextEditingController();
+  String? _postalError;
+
+  @override
+  void initState() {
+    super.initState();
+    _postalController.addListener(() {
+      if (_postalError != null) {
+        setState(() => _postalError = null);
+      } else {
+        setState(() {});
+      }
+    });
+  }
 
   @override
   void dispose() {
     _postalController.dispose();
     super.dispose();
+  }
+
+  bool get _isPostalValid {
+    final code = _postalController.text.trim().toUpperCase();
+    return RegExp(r'^[A-Z]\d[A-Z]$').hasMatch(code);
+  }
+
+  void _handleUsePostal() {
+    final postal = _postalController.text.trim().toUpperCase();
+    if (!_isPostalValid) {
+      setState(() {
+        _postalError = 'Enter 3 characters, e.g. L5B';
+      });
+      return;
+    }
+    ref.read(authProvider.notifier).setLocation(false, postal);
+    context.go('/stage');
   }
 
   @override
@@ -33,7 +63,13 @@ class _LocationPermissionScreenState
         elevation: 0,
         leading: BackButton(
           color: AppColors.primary,
-          onPressed: () => context.pop(),
+          onPressed: () {
+            if (context.canPop()) {
+              context.pop();
+            } else {
+              context.go('/notif-permission');
+            }
+          },
         ),
       ),
       body: SafeArea(
@@ -119,53 +155,46 @@ class _LocationPermissionScreenState
                     ),
                     const SizedBox(height: 6),
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
-                          child: SizedBox(
-                            height: 48,
-                            child: TextField(
-                              controller: _postalController,
-                              textCapitalization: TextCapitalization.characters,
-                              maxLength: 3,
-                              style: const TextStyle(
-                                fontFamily: AppTypography.fontBody,
-                                fontSize: 16,
-                                color: AppColors.primary,
+                          child: TextField(
+                            controller: _postalController,
+                            textCapitalization: TextCapitalization.characters,
+                            maxLength: 3,
+                            style: const TextStyle(
+                              fontFamily: AppTypography.fontBody,
+                              fontSize: 16,
+                              color: AppColors.primary,
+                            ),
+                            decoration: InputDecoration(
+                              hintText: 'First 3 characters, e.g. L5B',
+                              hintStyle: const TextStyle(
+                                fontSize: 14,
+                                color: Color(0xFF8A8A93),
                               ),
-                              decoration: InputDecoration(
-                                hintText: 'First 3 characters, e.g. L5B',
-                                hintStyle: const TextStyle(
-                                  fontSize: 14,
-                                  color: Color(0xFF8A8A93),
-                                ),
-                                counterText: '',
-                                filled: true,
-                                fillColor: Colors.white,
-                                contentPadding:
-                                    const EdgeInsets.symmetric(horizontal: 14),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide:
-                                      const BorderSide(color: Color(0xFFC8C8CE)),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide:
-                                      const BorderSide(color: Color(0xFFC8C8CE)),
-                                ),
+                              errorText: _postalError,
+                              counterText: '',
+                              filled: true,
+                              fillColor: Colors.white,
+                              contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 14, vertical: 12),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide:
+                                    const BorderSide(color: Color(0xFFC8C8CE)),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide:
+                                    const BorderSide(color: Color(0xFFC8C8CE)),
                               ),
                             ),
                           ),
                         ),
                         const SizedBox(width: 8),
                         InkWell(
-                          onTap: () {
-                            final postal = _postalController.text.trim();
-                            ref
-                                .read(authProvider.notifier)
-                                .setLocation(false, postal);
-                            context.go('/stage');
-                          },
+                          onTap: _handleUsePostal,
                           borderRadius: BorderRadius.circular(10),
                           child: Container(
                             height: 48,

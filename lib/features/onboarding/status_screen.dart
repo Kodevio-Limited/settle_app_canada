@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -34,7 +33,16 @@ class _OnboardingStatusScreenState extends ConsumerState<OnboardingStatusScreen>
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: BackButton(color: AppColors.primary, onPressed: () => context.pop()),
+        leading: BackButton(
+          color: AppColors.primary,
+          onPressed: () {
+            if (context.canPop()) {
+              context.pop();
+            } else {
+              context.go('/destination');
+            }
+          },
+        ),
         title: const Text(
           'Step 3 of 5 · Optional',
           style: TextStyle(
@@ -157,15 +165,20 @@ class _OnboardingStatusScreenState extends ConsumerState<OnboardingStatusScreen>
                     const TextSpan(
                       text: 'Not sure? Check your own documents, or ask a licensed immigration consultant or lawyer — find them in ',
                     ),
-                    TextSpan(
-                      text: 'Trusted help',
-                      style: const TextStyle(
-                        color: AppColors.primary,
-                        fontWeight: FontWeight.w600,
-                        decoration: TextDecoration.underline,
+                    WidgetSpan(
+                      alignment: PlaceholderAlignment.baseline,
+                      baseline: TextBaseline.alphabetic,
+                      child: GestureDetector(
+                        onTap: () => context.push('/help'),
+                        child: const Text(
+                          'Trusted help',
+                          style: TextStyle(
+                            color: AppColors.primary,
+                            fontWeight: FontWeight.w600,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
                       ),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () => context.push('/how-guidance'),
                     ),
                     const TextSpan(
                       text: '. You can change or remove this anytime.',

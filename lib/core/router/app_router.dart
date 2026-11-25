@@ -46,6 +46,7 @@ import '../../features/plan/life_event_screen.dart';
 import '../../features/plan/plan_change_screen.dart';
 import '../../features/plan/just_today_screen.dart';
 import '../../features/search/search_screen.dart';
+import '../../app/router/pending_routes.dart';
 
 GoRouter createRouter({String initialLocation = '/'}) {
   return GoRouter(
@@ -55,6 +56,10 @@ GoRouter createRouter({String initialLocation = '/'}) {
         path: '/',
         name: 'welcome',
         builder: (context, state) => const MainWelcomeScreen(),
+      ),
+      GoRoute(
+        path: '/main',
+        redirect: (context, state) => '/',
       ),
       GoRoute(
         path: '/sign-up',
@@ -581,6 +586,7 @@ GoRouter createRouter({String initialLocation = '/'}) {
           ),
         ],
       ),
+      ...pendingS10Routes,
     ],
   );
 }
