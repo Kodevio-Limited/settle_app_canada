@@ -344,10 +344,13 @@ class _NearbyScreenState extends State<NearbyScreen> {
     String? tag,
     required VoidCallback onDetailsTap,
   }) {
-    return Container(
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: Colors.white,
+    return InkWell(
+      onTap: onDetailsTap,
+      borderRadius: BorderRadius.circular(16),
+      child: Container(
+        padding: const EdgeInsets.all(14),
+        decoration: BoxDecoration(
+          color: Colors.white,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: const Color(0xFFDEDEE2)),
       ),
@@ -513,8 +516,9 @@ class _NearbyScreenState extends State<NearbyScreen> {
           ),
         ],
       ),
-    );
-  }
+    ),
+  );
+}
 }
 
 class _TrianglePainter extends CustomPainter {
