@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -15,6 +16,23 @@ class SignUpScreen extends ConsumerStatefulWidget {
 
 class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   final _emailController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  bool _isLoading = false;
+  String? _errorMessage;
+
+  @override
+  void initState() {
+    super.initState();
+    _emailController.addListener(() {
+      if (_errorMessage != null) {
+        setState(() {
+          _errorMessage = null;
+        });
+      } else {
+        setState(() {});
+      }
+    });
+  }
 
   @override
   void dispose() {
@@ -22,228 +40,282 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
     super.dispose();
   }
 
+  bool _isValidEmail(String email) {
+    return RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$').hasMatch(email);
+  }
+
+  Future<void> _handleSendCode() async {
+    final email = _emailController.text.trim();
+    if (email.isEmpty) {
+      setState(() {
+        _errorMessage = 'Please enter your email address.';
+      });
+      return;
+    }
+    if (!_isValidEmail(email)) {
+      setState(() {
+        _errorMessage = 'Please enter a valid email address.';
+      });
+      return;
+    }
+
+    setState(() {
+      _isLoading = true;
+      _errorMessage = null;
+    });
+
+    await Future.delayed(const Duration(milliseconds: 300));
+    if (!mounted) return;
+
+    ref.read(authProvider.notifier).setEmail(email);
+    setState(() {
+      _isLoading = false;
+    });
+    context.push('/verify-email');
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.bg,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: BackButton(
-          color: AppColors.primary,
-          onPressed: () => context.pop(),
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        backgroundColor: AppColors.bg,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: BackButton(
+            color: AppColors.primary,
+            onPressed: () {
+              if (context.canPop()) {
+                context.pop();
+              } else {
+                context.go('/');
+              }
+            },
+          ),
         ),
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Create your account',
-                style: TextStyle(
-                  fontFamily: AppTypography.fontHeading,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 30,
-                  letterSpacing: -0.6,
-                  color: AppColors.primary,
-                ),
-              ),
-              const SizedBox(height: 8),
-              const Text(
-                'Save your household plan and get reminders. You can also look around first without an account.',
-                style: TextStyle(
-                  fontFamily: AppTypography.fontBody,
-                  fontSize: 16,
-                  height: 1.45,
-                  color: Color(0xFF3B4747),
-                ),
-              ),
-              const SizedBox(height: 18),
-              // Social Auth Buttons matching SignUp.dc.html
-              InkWell(
-                onTap: () {
-                  ref.read(authProvider.notifier).setEmail('apple.user@example.com');
-                  context.push('/consent');
-                },
-                borderRadius: BorderRadius.circular(12),
-                child: Container(
-                  height: 52,
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  alignment: Alignment.center,
-                  child: const Text(
-                    'Continue with Apple',
+        body: SafeArea(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Create your account',
                     style: TextStyle(
-                      fontFamily: AppTypography.fontBody,
-                      fontSize: 17,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
+                      fontFamily: AppTypography.fontHeading,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 30,
+                      letterSpacing: -0.6,
+                      color: AppColors.primary,
                     ),
                   ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  ref.read(authProvider.notifier).setEmail('google.user@example.com');
-                  context.push('/consent');
-                },
-                borderRadius: BorderRadius.circular(12),
-                child: Container(
-                  height: 52,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: const Color(0xFFC8C8CE)),
-                  ),
-                  alignment: Alignment.center,
-                  child: const Text(
-                    'Continue with Google',
+                  const SizedBox(height: 8),
+                  const Text(
+                    'Save your household plan and get reminders. You can also look around first without an account.',
                     style: TextStyle(
                       fontFamily: AppTypography.fontBody,
-                      fontSize: 17,
+                      fontSize: 16,
+                      height: 1.45,
+                      color: Color(0xFF3B4747),
+                    ),
+                  ),
+                  const SizedBox(height: 18),
+                  // Social Auth Buttons matching SignUp.dc.html
+                  InkWell(
+                    onTap: _isLoading
+                        ? null
+                        : () {
+                            ref.read(authProvider.notifier).setEmail('apple.user@example.com');
+                            context.push('/consent');
+                          },
+                    borderRadius: BorderRadius.circular(12),
+                    child: Container(
+                      height: 52,
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      alignment: Alignment.center,
+                      child: const Text(
+                        'Continue with Apple',
+                        style: TextStyle(
+                          fontFamily: AppTypography.fontBody,
+                          fontSize: 17,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  InkWell(
+                    onTap: _isLoading
+                        ? null
+                        : () {
+                            ref.read(authProvider.notifier).setEmail('google.user@example.com');
+                            context.push('/consent');
+                          },
+                    borderRadius: BorderRadius.circular(12),
+                    child: Container(
+                      height: 52,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: const Color(0xFFC8C8CE)),
+                      ),
+                      alignment: Alignment.center,
+                      child: const Text(
+                        'Continue with Google',
+                        style: TextStyle(
+                          fontFamily: AppTypography.fontBody,
+                          fontSize: 17,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.primary,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 18),
+                  // Divider
+                  const Row(
+                    children: [
+                      Expanded(child: Divider(color: Color(0xFFD6D6DB), height: 1)),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 12.0),
+                        child: Text(
+                          'or with your email',
+                          style: TextStyle(
+                            fontFamily: AppTypography.fontBody,
+                            fontSize: 14,
+                            color: Color(0xFF5A5F6B),
+                          ),
+                        ),
+                      ),
+                      Expanded(child: Divider(color: Color(0xFFD6D6DB), height: 1)),
+                    ],
+                  ),
+                  const SizedBox(height: 18),
+                  // Email input
+                  const Text(
+                    'Email',
+                    style: TextStyle(
+                      fontFamily: AppTypography.fontBody,
+                      fontSize: 14,
                       fontWeight: FontWeight.w600,
                       color: AppColors.primary,
                     ),
                   ),
-                ),
-              ),
-              const SizedBox(height: 18),
-              // Divider with 'or use your email' verbatim
-              const Row(
-                children: [
-                  Expanded(child: Divider(color: Color(0xFFD6D6DB), height: 1)),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 12.0),
-                    child: Text(
-                      'or use your email',
-                      style: TextStyle(
-                        fontFamily: AppTypography.fontBody,
-                        fontSize: 14,
-                        color: Color(0xFF5A5F6B),
-                      ),
-                    ),
-                  ),
-                  Expanded(child: Divider(color: Color(0xFFD6D6DB), height: 1)),
-                ],
-              ),
-              const SizedBox(height: 18),
-              // Email input
-              const Text(
-                'Email',
-                style: TextStyle(
-                  fontFamily: AppTypography.fontBody,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.primary,
-                ),
-              ),
-              const SizedBox(height: 8),
-              TextField(
-                controller: _emailController,
-                keyboardType: TextInputType.emailAddress,
-                style: const TextStyle(
-                  fontFamily: AppTypography.fontBody,
-                  fontSize: 16,
-                  color: AppColors.primary,
-                ),
-                decoration: InputDecoration(
-                  hintText: 'you@example.com',
-                  filled: true,
-                  fillColor: Colors.white,
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(color: Color(0xFFC8C8CE)),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(color: Color(0xFFC8C8CE)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(color: AppColors.primary, width: 2),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 12),
-              SettleButton(
-                label: 'Send me a code',
-                onPressed: () {
-                  final email = _emailController.text.trim();
-                  ref.read(authProvider.notifier).setEmail(
-                        email.isEmpty ? 'layla@example.com' : email,
-                      );
-                  context.push('/verify-email');
-                },
-              ),
-              const SizedBox(height: 20),
-              // Privacy Guarantee Card verbatim
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFE2ECEB),
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                child: const Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Icon(Icons.shield_outlined, color: AppColors.primary, size: 22),
-                    SizedBox(width: 12),
-                    Expanded(
-                      child: Text(
-                        'We will never ask you to upload documents or type in passport, UCI, SIN or application numbers.',
-                        style: TextStyle(
-                          fontFamily: AppTypography.fontBody,
-                          fontSize: 14,
-                          height: 1.45,
-                          color: AppColors.primary,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 28),
-              // Footer Terms verbatim
-              Center(
-                child: Text.rich(
-                  TextSpan(
+                  const SizedBox(height: 8),
+                  TextFormField(
+                    controller: _emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    textInputAction: TextInputAction.done,
+                    autofillHints: const [AutofillHints.email],
+                    onFieldSubmitted: (_) => _handleSendCode(),
                     style: const TextStyle(
                       fontFamily: AppTypography.fontBody,
-                      fontSize: 13,
-                      height: 1.45,
-                      color: Color(0xFF5A5F6B),
+                      fontSize: 16,
+                      color: AppColors.primary,
                     ),
-                    children: const [
-                      TextSpan(text: 'By continuing you agree to the '),
-                      TextSpan(
-                        text: 'Terms',
-                        style: TextStyle(
-                          color: AppColors.primary,
-                          decoration: TextDecoration.underline,
-                        ),
+                    decoration: InputDecoration(
+                      hintText: 'you@example.com',
+                      errorText: _errorMessage,
+                      filled: true,
+                      fillColor: Colors.white,
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: const BorderSide(color: Color(0xFFC8C8CE)),
                       ),
-                      TextSpan(text: ' and '),
-                      TextSpan(
-                        text: 'Privacy Policy',
-                        style: TextStyle(
-                          color: AppColors.primary,
-                          decoration: TextDecoration.underline,
-                        ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: const BorderSide(color: Color(0xFFC8C8CE)),
                       ),
-                      TextSpan(text: '.'),
-                    ],
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: const BorderSide(color: AppColors.primary, width: 2),
+                      ),
+                    ),
                   ),
-                  textAlign: TextAlign.center,
-                ),
+                  const SizedBox(height: 12),
+                  SettleButton(
+                    label: _isLoading ? 'Sending...' : 'Send me a code',
+                    onPressed: _isLoading ? null : _handleSendCode,
+                  ),
+                  const SizedBox(height: 20),
+                  // Privacy Guarantee Card
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFE2ECEB),
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    child: const Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Icon(Icons.shield_outlined, color: AppColors.primary, size: 22),
+                        SizedBox(width: 12),
+                        Expanded(
+                          child: Text(
+                            'We will never ask you to upload documents or type in passport, UCI, SIN or application numbers.',
+                            style: TextStyle(
+                              fontFamily: AppTypography.fontBody,
+                              fontSize: 14,
+                              height: 1.45,
+                              color: AppColors.primary,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 28),
+                  // Footer Terms & Privacy Policy links
+                  Center(
+                    child: Text.rich(
+                      TextSpan(
+                        style: const TextStyle(
+                          fontFamily: AppTypography.fontBody,
+                          fontSize: 13,
+                          height: 1.45,
+                          color: Color(0xFF5A5F6B),
+                        ),
+                        children: [
+                          const TextSpan(text: 'By continuing you agree to the '),
+                          TextSpan(
+                            text: 'Terms',
+                            style: const TextStyle(
+                              color: AppColors.primary,
+                              decoration: TextDecoration.underline,
+                              fontWeight: FontWeight.w600,
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () => context.push('/consent'),
+                          ),
+                          const TextSpan(text: ' and '),
+                          TextSpan(
+                            text: 'Privacy Policy',
+                            style: const TextStyle(
+                              color: AppColors.primary,
+                              decoration: TextDecoration.underline,
+                              fontWeight: FontWeight.w600,
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () => context.push('/consent'),
+                          ),
+                          const TextSpan(text: '.'),
+                        ],
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                ],
               ),
-              const SizedBox(height: 12),
-            ],
+            ),
           ),
         ),
       ),

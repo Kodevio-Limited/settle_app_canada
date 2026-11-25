@@ -67,6 +67,7 @@ import '../../features/guest/integration_map_screen.dart';
 import '../../features/errors/offline_screen.dart';
 import '../../features/errors/location_denied_screen.dart';
 import '../../features/errors/server_error_screen.dart';
+import '../../app/router/pending_routes.dart';
 
 GoRouter createRouter({String initialLocation = '/'}) {
   return GoRouter(
@@ -76,6 +77,10 @@ GoRouter createRouter({String initialLocation = '/'}) {
         path: '/',
         name: 'welcome',
         builder: (context, state) => const MainWelcomeScreen(),
+      ),
+      GoRoute(
+        path: '/main',
+        redirect: (context, state) => '/',
       ),
       GoRoute(
         path: '/sign-up',
@@ -700,6 +705,7 @@ GoRouter createRouter({String initialLocation = '/'}) {
           ),
         ],
       ),
+      ...pendingS10Routes,
     ],
   );
 }

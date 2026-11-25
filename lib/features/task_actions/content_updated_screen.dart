@@ -9,7 +9,7 @@ class ContentUpdatedScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF4F4F5),
       body: SafeArea(
-        child: Padding(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 28),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -17,11 +17,15 @@ class ContentUpdatedScreen extends StatelessWidget {
               // Close button
               Align(
                 alignment: Alignment.centerLeft,
-                child: IconButton(
-                  icon: const Icon(Icons.close, color: Color(0xFF123332)),
-                  onPressed: () => context.pop(),
-                  padding: EdgeInsets.zero,
-                  constraints: const BoxConstraints(minWidth: 44, minHeight: 44),
+                child: BackButton(
+                  color: const Color(0xFF123332),
+                  onPressed: () {
+                    if (context.canPop()) {
+                      context.pop();
+                    } else {
+                      context.go('/home');
+                    }
+                  },
                 ),
               ),
               const SizedBox(height: 8),
@@ -188,7 +192,7 @@ class ContentUpdatedScreen extends StatelessWidget {
                 ),
               ),
 
-              const Spacer(),
+              const SizedBox(height: 24),
 
               // Bottom Actions
               SizedBox(
@@ -217,14 +221,7 @@ class ContentUpdatedScreen extends StatelessWidget {
               Align(
                 alignment: Alignment.center,
                 child: TextButton(
-                  onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Notification settings (Phase 8)'),
-                        duration: Duration(seconds: 2),
-                      ),
-                    );
-                  },
+                  onPressed: () => context.push('/notification-settings'),
                   child: const Text(
                     'Change update alerts',
                     style: TextStyle(

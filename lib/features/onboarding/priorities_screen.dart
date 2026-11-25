@@ -58,7 +58,13 @@ class _OnboardingPrioritiesScreenState
         elevation: 0,
         leading: BackButton(
           color: AppColors.primary,
-          onPressed: () => context.pop(),
+          onPressed: () {
+            if (context.canPop()) {
+              context.pop();
+            } else {
+              context.go('/household');
+            }
+          },
         ),
         title: const Text(
           'Step 5 of 5',

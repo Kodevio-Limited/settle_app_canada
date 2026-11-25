@@ -16,17 +16,20 @@ class AddAdultScreen extends ConsumerStatefulWidget {
 }
 
 class _AddAdultScreenState extends ConsumerState<AddAdultScreen> {
-  final _nameController = TextEditingController(text: 'Omar');
+  static const bool _isDemo = bool.fromEnvironment('DEMO', defaultValue: false);
+  late final TextEditingController _nameController;
   late String _relationship;
   String _arrival = 'With me';
   bool _lookForWork = true;
   bool _plansToDrive = true;
-  final _professionController = TextEditingController(text: 'Civil engineer');
+  late final TextEditingController _professionController;
   bool _sameStatusAsMe = true;
 
   @override
   void initState() {
     super.initState();
+    _nameController = TextEditingController(text: _isDemo ? 'Omar' : '');
+    _professionController = TextEditingController(text: _isDemo ? 'Civil engineer' : '');
     _relationship = widget.initialType;
   }
 
@@ -39,14 +42,23 @@ class _AddAdultScreenState extends ConsumerState<AddAdultScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final name = _nameController.text.trim().isEmpty ? 'adult' : _nameController.text.trim();
+    final name = _nameController.text.trim().isEmpty ? 'Omar' : _nameController.text.trim();
 
     return Scaffold(
       backgroundColor: AppColors.bg,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: BackButton(color: AppColors.primary, onPressed: () => context.pop()),
+        leading: BackButton(
+          color: AppColors.primary,
+          onPressed: () {
+            if (context.canPop()) {
+              context.pop();
+            } else {
+              context.go('/household');
+            }
+          },
+        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -224,7 +236,11 @@ class _AddAdultScreenState extends ConsumerState<AddAdultScreen> {
                           profession: _professionController.text.trim(),
                         ),
                       );
-                  context.pop();
+                  if (context.canPop()) {
+                    context.pop();
+                  } else {
+                    context.go('/household');
+                  }
                 },
               ),
               const SizedBox(height: 16),
