@@ -1,0 +1,272 @@
+number,file,title,section,shows_bottom_tab_bar,state_driven_no_incoming_link
+1.1,Main.dc.html,1.1 Welcome,1,0,0
+1.2,SignUp.dc.html,1.2 Create account,1,0,0
+1.3,VerifyEmail.dc.html,1.3 Verify email,1,0,0
+1.4,SignIn.dc.html,1.4 Sign in (returning),1,0,0
+1.5,Consent.dc.html,1.5 Privacy consent,1,0,0
+1.6,NotifPermission.dc.html,1.6 Reminders permission,1,0,0
+1.7,LocationPermission.dc.html,1.7 Location permission,1,0,0
+2.1,Stage.dc.html,2.1 Onboarding · Stage,2,0,0
+2.2,Destination.dc.html,2.2 Onboarding · Destination,2,0,0
+2.3,Status.dc.html,2.3 Onboarding · Status (optional),2,0,0
+2.4,Household.dc.html,2.4 Onboarding · Household,2,0,0
+2.5,AddChild.dc.html,2.5 Add a child,2,0,0
+2.6,AddAdult.dc.html,2.6 Add an adult,2,0,0
+2.7,Priorities.dc.html,2.7 Onboarding · Priorities,2,0,0
+2.8,PlanReady.dc.html,2.8 Plan ready,2,0,0
+2.9,AddStudent.dc.html,2.9 Add an adult child (student),2,0,0
+3.1,Home.dc.html,3.1 Home · Next 3 actions,3,1,0
+3.2,Journey.dc.html,3.2 Journey · 10 stages,3,1,0
+3.3,StageStatus.dc.html,3.3 Stage 1 · Status & arrival documents,3,1,0
+3.4,StagePaperwork.dc.html,3.4 Stage 2 · Paperwork,3,1,0
+3.5,StageHousing.dc.html,3.5 Stage 3 · Housing,3,1,0
+3.6,StageSchools.dc.html,"3.6 Stage 4 · School, college & university",3,1,0
+3.7,StageCar.dc.html,3.7 Stage 5 · Car & driving,3,1,0
+3.8,StageInsurance.dc.html,3.8 Stage 6 · Insurance,3,1,0
+3.9,StageHealth.dc.html,3.9 Stage 7 · Health care,3,1,0
+3.10,StageMoney.dc.html,3.10 Stage 8 · Money & benefits,3,1,0
+3.11,StageWork.dc.html,3.11 Stage 9 · Work & credentials,3,1,0
+3.12,StageCommunity.dc.html,3.12 Stage 10 · Community & belonging,3,1,0
+3.6b,StageUniversity.dc.html,3.6b Stage 4 · University & college stream,3,1,0
+4.1,TaskStatus.dc.html,4.1 Task · PR card (completed state),4,0,0
+4.2,TaskSIN.dc.html,4.2 Task · SIN (full detail),4,0,0
+4.3,TaskHousing.dc.html,4.3 Task · Tenant rights before a lease,4,0,0
+4.4,TaskSchool.dc.html,4.4 Task · School registration,4,0,0
+4.5,TaskLicence.dc.html,4.5 Task · Driver's licence,4,0,0
+4.6,TaskInsurance.dc.html,4.6 Task · Auto insurance,4,0,0
+4.7,TaskDoctor.dc.html,4.7 Task · Family doctor,4,0,0
+4.8,TaskCCB.dc.html,4.8 Task · Canada Child Benefit,4,0,0
+4.9,TaskWork.dc.html,4.9 Task · Employment services,4,0,0
+4.10,TaskLibrary.dc.html,4.10 Task · Library card,4,0,0
+4.11,TaskUniApply.dc.html,4.11 Task · Apply to university or college,4,0,0
+4.12,TaskOSAP.dc.html,4.12 Task · OSAP student aid,4,0,0
+4.13,OccupationSearch.dc.html,4.13 Does your job need a licence?,4,0,0
+4.14,OccupationPathway.dc.html,4.14 Licensing pathway · P.Eng.,4,0,0
+5.1,Nearby.dc.html,5.1 Nearby locations (map),5,0,0
+5.2,LocationDetail.dc.html,5.2 Location detail,5,0,0
+5.3,DonePicker.dc.html,5.3 Mark done · who did it,5,0,0
+5.4,TaskDone.dc.html,5.4 Task done · unlocked next,5,0,0
+5.5,Snooze.dc.html,5.5 Remind me later,5,0,0
+5.6,Dismiss.dc.html,5.6 Not for me,5,0,0
+5.7,ReportOutdated.dc.html,5.7 Report outdated info,5,0,0
+5.8,ContentUpdated.dc.html,5.8 A step changed (content update),5,0,1
+6.1,Family.dc.html,6.1 Family,6,1,0
+6.2,MemberAdult.dc.html,6.2 Family member · adult,6,0,0
+6.3,MemberChild.dc.html,6.3 Family member · child,6,0,0
+6.4,RemoveMember.dc.html,6.4 Remove a family member,6,0,0
+6.5,Checklist.dc.html,6.5 What to bring (replaces uploads),6,0,0
+6.6,Reminders.dc.html,6.6 Reminders · upcoming,6,0,0
+6.7,Calendar.dc.html,6.7 Reminders · calendar,6,0,0
+6.8,NotificationSettings.dc.html,6.8 Notification settings,6,0,0
+6.9,LifeEvent.dc.html,6.9 Something changed?,6,0,0
+6.10,PlanChange.dc.html,6.10 Plan recalculated,6,0,0
+6.11,JustToday.dc.html,6.11 Just today mode,6,0,0
+6.12,Search.dc.html,6.12 Search,6,0,0
+6.13,MemberStudent.dc.html,6.13 Family member · university student,6,0,0
+7.1,Help.dc.html,7.1 Trusted help,7,1,0
+7.2,CommunityGroups.dc.html,7.2 Community groups,7,0,0
+7.3,CheckIn.dc.html,7.3 Weekly check-in,7,0,0
+7.4,ConversationGuide.dc.html,7.4 Family conversation guide,7,0,0
+7.5,Crisis.dc.html,7.5 Get help now,7,0,0
+7.6,HowGuidance.dc.html,7.6 How our guidance works,7,0,0
+8.1,Settings.dc.html,8.1 Me · Settings,8,1,0
+8.2,EditProfile.dc.html,8.2 Edit profile,8,0,0
+8.3,PrivacyData.dc.html,8.3 Privacy & my data,8,0,0
+8.4,DataExport.dc.html,8.4 Download my data,8,0,0
+8.5,LanguageAccess.dc.html,8.5 Language & accessibility,8,0,0
+8.6,SignOutConfirm.dc.html,8.6 Sign out,8,0,0
+8.7,Deactivate.dc.html,8.7 Pause or delete,8,0,0
+8.8,Paused.dc.html,8.8 Account paused,8,0,0
+8.9,WelcomeBack.dc.html,8.9 Welcome back (after pause),8,0,1
+8.10,DeleteConfirm.dc.html,8.10 Confirm deletion,8,0,0
+8.11,Deleted.dc.html,8.11 Account deleted,8,0,0
+9.1,GuestHome.dc.html,9.1 Exploring without an account,9,0,0
+9.2,Offline.dc.html,9.2 Offline,9,0,0
+9.3,LocationDenied.dc.html,9.3 Location turned off,9,0,0
+9.4,ServerError.dc.html,9.4 Something went wrong,9,0,1
+10.1,IntegrationMap.dc.html,10.1 API & integration map,10,0,1
+10.2,DataFlow.dc.html,10.2 System data flow,10,0,1
+4.15,TaskLandingDocs.dc.html,4.15 Task · Landing documents,11,0,0
+4.16,TaskPRBasics.dc.html,4.16 Task · Keeping PR status,11,0,0
+4.17,TaskHealthCard.dc.html,4.17 Task · Ontario health cards,11,0,0
+4.18,TaskCRA.dc.html,4.18 Task · CRA account (locked),11,0,0
+4.19,TaskPresto.dc.html,4.19 Task · PRESTO card,11,0,0
+4.20,TaskScams.dc.html,4.20 Task · Rental scams,11,0,0
+4.21,TaskLease.dc.html,4.21 Task · Standard lease,11,0,0
+4.22,TaskUtilities.dc.html,"4.22 Task · Hydro, gas & internet",11,0,0
+4.23,TaskTenantInsurance.dc.html,4.23 Task · Tenant insurance,11,0,0
+4.24,TaskImmunization.dc.html,4.24 Task · School vaccines,11,0,0
+4.25,TaskESL.dc.html,4.25 Task · English support,11,0,0
+4.26,TaskAfterCare.dc.html,4.26 Task · Before/after-school care,11,0,0
+4.27,TaskCredentialAssess.dc.html,4.27 Task · Assess past studies,11,0,0
+4.28,TaskEnglishTest.dc.html,4.28 Task · English test,11,0,0
+4.29,TaskDomesticTuition.dc.html,4.29 Task · Domestic tuition,11,0,0
+4.30,TaskCampusServices.dc.html,4.30 Task · Campus services (locked),11,0,0
+4.31,TaskDrivingRecord.dc.html,4.31 Task · Driving record,11,0,0
+4.32,TaskRoadTest.dc.html,4.32 Task · Knowledge or road test,11,0,0
+4.33,TaskHealthGap.dc.html,4.33 Task · Health coverage gaps,11,0,0
+4.34,TaskKidsDental.dc.html,4.34 Task · Kids dental & eyes,11,0,0
+4.35,TaskBank.dc.html,4.35 Task · Bank account (with partners),11,0,0
+4.36,TaskCredit.dc.html,4.36 Task · Build credit,11,0,0
+4.37,TaskTaxReturn.dc.html,4.37 Task · First tax return (new),11,0,0
+4.38,TaskGroups.dc.html,4.38 Task · Find a group,11,0,0
+12.1,VarBCHealth.dc.html,12.1 BC · MSP wait period,12,0,1
+12.2,VarBCHealthGap.dc.html,12.2 BC · Cover the wait,12,0,0
+12.3,VarBCICBC.dc.html,12.3 BC · ICBC licence + insurance,12,0,1
+12.4,VarQCHealth.dc.html,12.4 QC · RAMQ (children exempt),12,0,1
+12.5,VarQCLease.dc.html,12.5 QC · Lease & no deposit,12,0,1
+12.6,VarQCSchool.dc.html,12.6 QC · French-language school,12,0,1
+12.7,VarMBNotEligible.dc.html,12.7 MB · Not covered for your status,12,0,1
+13.1,PartnerDetail.dc.html,13.1 Partner detail (sponsored),13,0,0
+13.2,HowPartners.dc.html,13.2 How we choose partners,13,0,0
+13.3,LegalHelp.dc.html,13.3 Legal help (free + licensed),13,0,0
+4.39,PathwayNurse.dc.html,4.39 Pathway · Registered nurse,14,0,0
+4.40,PathwayPhysician.dc.html,4.40 Pathway · Physician,14,0,0
+4.41,PathwayPharmacist.dc.html,4.41 Pathway · Pharmacist,14,0,0
+4.42,PathwayDentist.dc.html,4.42 Pathway · Dentist,14,0,0
+4.43,PathwayTeacher.dc.html,4.43 Pathway · Teacher (K–12),14,0,0
+4.44,PathwayECE.dc.html,4.44 Pathway · Early childhood educator,14,0,0
+4.45,PathwaySocialWorker.dc.html,4.45 Pathway · Social worker,14,0,0
+4.46,PathwayLawyer.dc.html,4.46 Pathway · Lawyer,14,0,0
+4.47,PathwayCPA.dc.html,4.47 Pathway · Accountant (CPA),14,0,0
+4.48,PathwayElectrician.dc.html,4.48 Pathway · Electrician,14,0,0
+4.49,PathwayPlumber.dc.html,4.49 Pathway · Plumber,14,0,0
+8.12,PrivacyPolicy.dc.html,8.12 Terms & Privacy Policy,15,0,0
+4.50,TaskCarCosts.dc.html,4.50 Task · Plan car costs (optional),15,0,0
+6.14,BudgetPlanner.dc.html,6.14 Budget planner (phase 2),15,0,0
+6.15,JoinHousehold.dc.html,6.15 Join a household (invitee),15,0,0
+16.1,PlanReadyExploring.dc.html,16.1 Plan ready · Exploring,16,0,1
+16.2,HomeExploring.dc.html,16.2 Home · Exploring,16,1,0
+16.3,PlanReadyWaiting.dc.html,16.3 Plan ready · Waiting,16,0,1
+16.4,HomeWaiting.dc.html,16.4 Home · Waiting,16,1,0
+16.5,PlanReadyApproved.dc.html,16.5 Plan ready · Approved,16,0,1
+16.6,HomeApproved.dc.html,16.6 Home · Approved (countdown),16,1,0
+16.7,JourneyApproved.dc.html,16.7 Journey · Before you move,16,1,0
+16.8,HomeSettled.dc.html,16.8 Home · In Canada 3+ months,16,1,1
+16.9,ExpOptions.dc.html,16.9 Task · learn the official ways to immigrate,17,0,0
+16.10,ExpRepresentative.dc.html,16.10 Task · check a consultant or lawyer is licensed,17,0,0
+16.11,ExpCities.dc.html,16.11 Task · compare cities and living costs,17,0,0
+16.12,WaitTrack.dc.html,16.12 Task · check your application status,17,0,0
+16.13,WaitDocs.dc.html,16.13 Task · gather your family's documents,17,0,0
+16.14,WaitSavings.dc.html,16.14 Task · plan money for your first months,17,0,0
+16.15,WaitWellbeing.dc.html,16.15 Task · when waiting feels hard,17,0,0
+16.16,PreServices.dc.html,16.16 Task · sign up for free pre-arrival services,17,0,0
+16.17,PreTravelDocs.dc.html,16.17 Task · get your travel documents ready,17,0,0
+16.18,PreGoods.dc.html,16.18 Task · list what you're bringing,17,0,0
+16.19,PreKidsRecords.dc.html,16.19 Task · get children's school and vaccine records,17,0,0
+16.20,PreMedications.dc.html,16.20 Task · plan your medications,17,0,0
+16.21,PreTempHousing.dc.html,16.21 Task · book a place for your first weeks,17,0,0
+16.22,PreArrivalDay.dc.html,16.22 Task · know what happens at the airport,17,0,0
+16.23,PreFirst72.dc.html,16.23 Task · plan your first 72 hours,17,0,0
+4.51,TaskPhotoCard.dc.html,4.51 Task · get an Ontario Photo Card,18,0,0
+4.52,TaskTranslations.dc.html,4.52 Task · get certified translations,18,0,0
+4.53,TaskAddressChange.dc.html,4.53 Task · update your address everywhere,18,0,0
+4.54,TaskRentalSearch.dc.html,4.54 Task · find and apply for a rental,18,0,0
+4.55,TaskMoveIn.dc.html,4.55 Task · move in and check the unit,18,0,0
+4.56,TaskHousingHelp.dc.html,4.56 Task · get help if rent is too high or you have nowhere to stay,18,0,0
+4.57,TaskChildCare.dc.html,4.57 Task · find licensed child care,18,0,0
+4.58,TaskChildCareSubsidy.dc.html,4.58 Task · apply for a child care subsidy,18,0,0
+4.59,TaskEarlyON.dc.html,4.59 Task · visit a free EarlyON centre,18,0,0
+4.60,TaskSchoolBus.dc.html,4.60 Task · check if your child gets a school bus,18,0,0
+4.61,TaskSpecialEd.dc.html,4.61 Task · get support for learning needs,18,0,0
+4.62,TaskTeenCredits.dc.html,4.62 Task · get credit for past high school,18,0,0
+4.63,TaskBuyCar.dc.html,4.63 Task · buy a used car safely,18,0,0
+4.64,TaskRegisterCar.dc.html,4.64 Task · register your car and get plates,18,0,0
+4.65,TaskCarSeats.dc.html,4.65 Task · use the right car seat,18,0,0
+4.66,TaskWinterDriving.dc.html,4.66 Task · get ready for winter driving,19,0,0
+4.67,TaskInsuranceHistory.dc.html,4.67 Task · bring proof of your insurance history,19,0,0
+4.68,TaskWorkBenefits.dc.html,4.68 Task · understand your workplace benefits,19,0,0
+4.69,TaskWhereCare.dc.html,4.69 Task · know where to go when someone is sick,19,0,0
+4.70,TaskPrescriptions.dc.html,4.70 Task · pay less for prescriptions,19,0,0
+4.71,TaskDentalPlan.dc.html,4.71 Task · apply for the Canadian Dental Care Plan,19,0,0
+4.72,TaskMentalHealth.dc.html,4.72 Task · find free mental health support,19,0,0
+4.73,TaskPregnancy.dc.html,4.73 Task · pregnancy and a new baby,19,0,0
+4.74,TaskGSTCredit.dc.html,4.74 Task · apply for the GST/HST credit,19,0,0
+4.75,TaskOTB.dc.html,4.75 Task · get the Ontario Trillium Benefit,19,0,0
+4.76,TaskCLB.dc.html,4.76 Task · get the Canada Learning Bond,19,0,0
+4.77,TaskSendMoney.dc.html,4.77 Task · send money home safely,19,0,0
+4.78,TaskCRAScams.dc.html,4.78 Task · spot government and money scams,19,0,0
+4.79,TaskResume.dc.html,4.79 Task · make a Canadian-style résumé,19,0,0
+4.80,TaskJobSearch.dc.html,4.80 Task · search for jobs,19,0,0
+4.81,TaskWorkRights.dc.html,4.81 Task · know your rights at work,19,0,0
+4.82,TaskJobScams.dc.html,4.82 Task · spot job scams,19,0,0
+4.83,TaskBridging.dc.html,4.83 Task · join a bridging program or mentorship,19,0,0
+4.84,TaskBusiness.dc.html,4.84 Task · start a business or work for yourself,19,0,0
+20.1,Explore.dc.html,20.1 Explore (tab),20,1,0
+20.2,ExploreFreePasses.dc.html,20.2 Explore · Free passes,20,1,0
+20.3,ExploreCanoo.dc.html,20.3 Explore · Canoo free year,20,1,0
+20.4,ExplorePlaces.dc.html,20.4 Explore · Places list,20,1,0
+20.5,ExplorePlace.dc.html,20.5 Explore · Place detail,20,1,0
+20.6,ExploreEvents.dc.html,20.6 Explore · Events,20,1,0
+20.7,ExploreOffers.dc.html,20.7 Explore · Offers,20,1,0
+20.8,OfferDetail.dc.html,20.8 Explore · Offer / coupon,20,1,0
+20.9,ExploreSaved.dc.html,20.9 Explore · Saved,20,1,0
+20.10,ExploreFilters.dc.html,20.10 Explore · Filters sheet,20,0,0
+20.11,ExploreWinter.dc.html,20.11 Explore · First winter,20,1,0
+20.12,ExploreCity.dc.html,20.12 Explore · Choose city (location off),20,1,0
+21.1,TaskMore.dc.html,21.1 Task · More options (⋯ sheet),21,0,0
+21.2,ExploreEvent.dc.html,21.2 Explore · Event detail,21,1,0
+21.3,ExplorePass.dc.html,21.3 Explore · Library pass detail,21,1,0
+21.4,LeaveQuickly.dc.html,21.4 Crisis · Leave quickly → neutral page,21,0,0
+21.5,LanguageRestart.dc.html,21.5 Settings · Language restart (RTL),21,0,0
+21.6,SignInError.dc.html,21.6 Error · Sign-in failed,21,0,1
+21.7,ExportError.dc.html,21.7 Error · Data export failed,21,0,1
+21.8,DeleteError.dc.html,21.8 Error · Account deletion failed,21,0,1
+21.9,WebDeleteAccount.dc.html,21.9 Web · Delete account (Google Play),21,0,0
+21.10,SearchEmpty.dc.html,"21.10 Empty · Search, no results",21,0,1
+21.11,StageComplete.dc.html,21.11 Empty · Stage complete,21,1,1
+21.12,FamilySingle.dc.html,"21.12 Empty · Family, one adult",21,1,1
+21.13,ExploreSavedEmpty.dc.html,21.13 Empty · Explore saved,21,1,1
+21.14,AndroidLocation.dc.html,21.14 Android · Location permission,21,0,1
+21.15,HomeAR.dc.html,21.15 RTL · Home in Arabic,21,0,0
+21.16,TaskPrestoAR.dc.html,21.16 RTL · Task in Arabic,21,0,1
+22.0,AllProfessions.dc.html,22.0 Work · All regulated jobs (index),22,1,0
+22.1,PathwayDentalHygienist.dc.html,22.1 Pathway · Dental hygienist,22,0,0
+22.2,PathwayPhysio.dc.html,22.2 Pathway · Physiotherapist,22,0,0
+22.3,PathwayOT.dc.html,22.3 Pathway · Occupational therapist,22,0,0
+22.4,PathwayMLT.dc.html,22.4 Pathway · Medical laboratory technologist,22,0,0
+22.5,PathwayMRT.dc.html,22.5 Pathway · Medical radiation technologist,22,0,0
+22.6,PathwayRT.dc.html,22.6 Pathway · Respiratory therapist,22,0,0
+22.7,PathwayMidwife.dc.html,22.7 Pathway · Midwife,22,0,0
+22.8,PathwayDietitian.dc.html,22.8 Pathway · Dietitian,22,0,0
+22.9,PathwayPsychologist.dc.html,22.9 Pathway · Psychologist,22,0,0
+22.10,PathwayPsychotherapist.dc.html,22.10 Pathway · Psychotherapist,22,0,0
+22.11,PathwayOptometrist.dc.html,22.11 Pathway · Optometrist,22,0,0
+22.12,PathwayOptician.dc.html,22.12 Pathway · Optician,22,0,0
+22.13,PathwayChiropractor.dc.html,22.13 Pathway · Chiropractor,22,0,0
+22.14,PathwayMassage.dc.html,22.14 Pathway · Massage therapist,22,0,0
+22.15,PathwayKinesiologist.dc.html,22.15 Pathway · Kinesiologist,22,0,0
+22.16,PathwayAudiologistSLP.dc.html,22.16 Pathway · Audiologist or speech-language pathologist,22,0,0
+22.17,PathwayDenturist.dc.html,22.17 Pathway · Denturist,22,0,0
+22.18,PathwayParalegal.dc.html,22.18 Pathway · Paralegal,22,0,0
+22.19,PathwayArchitect.dc.html,22.19 Pathway · Architect,22,0,0
+22.20,PathwayVet.dc.html,22.20 Pathway · Veterinarian,22,0,0
+22.21,PathwaySurveyor.dc.html,22.21 Pathway · Land surveyor,22,0,0
+22.22,PathwayGeoscientist.dc.html,22.22 Pathway · Geoscientist,22,0,0
+22.23,PathwayRealEstate.dc.html,22.23 Pathway · Real estate agent,22,0,0
+22.24,PathwayInsurance.dc.html,22.24 Pathway · Life insurance agent,22,0,0
+22.25,PathwayMortgage.dc.html,22.25 Pathway · Mortgage agent,22,0,0
+22.26,PathwayRefrigeration.dc.html,22.26 Pathway · Refrigeration and air conditioning mechanic,22,0,0
+22.27,PathwaySheetMetal.dc.html,22.27 Pathway · Sheet metal worker,22,0,0
+22.28,PathwaySteamfitter.dc.html,22.28 Pathway · Steamfitter,22,0,0
+22.29,PathwayAutoTech.dc.html,22.29 Pathway · Automotive service technician,22,0,0
+22.30,PathwayAutoBody.dc.html,22.30 Pathway · Auto body and collision repairer,22,0,0
+22.31,PathwayTruckCoach.dc.html,22.31 Pathway · Truck and coach technician,22,0,0
+22.32,PathwayHairstylist.dc.html,22.32 Pathway · Hairstylist,22,0,0
+22.33,PathwayCrane.dc.html,22.33 Pathway · Mobile crane operator (hoisting engineer),22,0,0
+23.1,PlaceRattray.dc.html,23.1 Place · Rattray Marsh,23,1,0
+23.2,PlacePortCredit.dc.html,23.2 Place · Port Credit waterfront,23,1,0
+23.3,PlaceKariya.dc.html,23.3 Place · Kariya Park,23,1,0
+23.4,PlaceRiverwood.dc.html,23.4 Place · The Riverwood Conservancy,23,1,0
+23.5,PlacePAMA.dc.html,23.5 Place · PAMA,23,1,0
+23.6,PlaceNiagara.dc.html,23.6 Place · Niagara Falls,23,1,0
+23.7,EventSkate.dc.html,23.7 Event · Fun skate,23,1,0
+23.8,EventWelcome.dc.html,23.8 Event · Newcomer welcome,23,1,0
+23.9,EventWinterWalk.dc.html,23.9 Event · Winter walk,23,1,0
+23.10,PassOntarioParks.dc.html,23.10 Pass · Ontario Parks,23,1,0
+23.11,PassConservation.dc.html,23.11 Pass · Conservation parks,23,1,0
+23.12,PassPAMA.dc.html,23.12 Pass · PAMA family,23,1,0
+23.13,PassSwimSkate.dc.html,23.13 Pass · Swim & skate,23,1,0
+23.14,OfferBank.dc.html,23.14 Offer · Newcomer banking,23,1,0
+23.15,OfferPhone.dc.html,23.15 Offer · Phone plan,23,1,0
+23.16,OfferFurniture.dc.html,23.16 Offer · Furniture,23,1,0

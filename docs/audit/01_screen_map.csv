@@ -1,0 +1,272 @@
+Section,Screen number,Screen name,HTML file,Dart file,Route path,PR number and branch,Build level
+S01,1.5,Privacy consent,Consent.dc.html,lib/features/auth/consent_screen.dart,/consent,commit f3ce272 (main) (main),FULL
+S01,1.7,Location permission,LocationPermission.dc.html,lib/features/auth/location_permission_screen.dart,/location-permission,commit f3ce272 (main) (main),FULL
+S01,1.1,Welcome,Main.dc.html,lib/features/auth/main_welcome_screen.dart,/,commit f3ce272 (main) (main),FULL
+S01,1.6,Reminders permission,NotifPermission.dc.html,lib/features/auth/notif_permission_screen.dart,/notif-permission,commit f3ce272 (main) (main),FULL
+S01,1.4,Sign in (returning),SignIn.dc.html,lib/features/auth/sign_in_screen.dart,/sign-in,commit f3ce272 (main) (main),FULL
+S01,1.2,Create account,SignUp.dc.html,lib/features/auth/sign_up_screen.dart,/sign-up,commit f3ce272 (main) (main),FULL
+S01,1.3,Verify email,VerifyEmail.dc.html,lib/features/auth/verify_email_screen.dart,/verify-email,commit f3ce272 (main) (main),FULL
+S02,2.6,Add an adult,AddAdult.dc.html,lib/features/onboarding/add_adult_screen.dart,/add-adult,commit f3ce272 (main) (main),FULL
+S02,2.5,Add a child,AddChild.dc.html,lib/features/onboarding/add_child_screen.dart,/add-child,commit f3ce272 (main) (main),FULL
+S02,2.9,Add an adult child (student),AddStudent.dc.html,lib/features/onboarding/add_student_screen.dart,/add-student,commit f3ce272 (main) (main),FULL
+S02,2.2,Onboarding · Destination,Destination.dc.html,lib/features/onboarding/destination_screen.dart,/destination,commit f3ce272 (main) (main),FULL
+S02,2.4,Onboarding · Household,Household.dc.html,lib/features/onboarding/household_screen.dart,/household,commit f3ce272 (main) (main),FULL
+S02,2.8,Plan ready,PlanReady.dc.html,lib/features/onboarding/plan_ready_screen.dart,/plan-ready,commit f3ce272 (main) (main),FULL
+S02,2.7,Onboarding · Priorities,Priorities.dc.html,lib/features/onboarding/priorities_screen.dart,/priorities,commit f3ce272 (main) (main),FULL
+S02,2.1,Onboarding · Stage,Stage.dc.html,lib/features/onboarding/stage_screen.dart,/stage,commit f3ce272 (main) (main),FULL
+S02,2.3,Onboarding · Status (optional),Status.dc.html,lib/features/onboarding/status_screen.dart,/status,commit f3ce272 (main) (main),FULL
+S03,3.1,Home · Next 3 actions,Home.dc.html,lib/features/home/home_screen.dart,/home,PR #1 (phase-3/section-3-home-journey-stages),FULL
+S03,3.2,Journey · 10 stages,Journey.dc.html,lib/features/journey/journey_screen.dart,/journey,PR #1 (phase-3/section-3-home-journey-stages),FULL
+S03,3.7,Stage 5 · Car & driving,StageCar.dc.html,lib/features/stages/stage_detail_screen.dart,/stage-car,PR #1 (phase-3/section-3-home-journey-stages),TEMPLATE
+S03,3.12,Stage 10 · Community & belonging,StageCommunity.dc.html,lib/features/stages/stage_detail_screen.dart,/stage-community,PR #1 (phase-3/section-3-home-journey-stages),TEMPLATE
+S03,3.9,Stage 7 · Health care,StageHealth.dc.html,lib/features/stages/stage_detail_screen.dart,/stage-health,PR #1 (phase-3/section-3-home-journey-stages),TEMPLATE
+S03,3.5,Stage 3 · Housing,StageHousing.dc.html,lib/features/stages/stage_detail_screen.dart,/stage-housing,PR #1 (phase-3/section-3-home-journey-stages),TEMPLATE
+S03,3.8,Stage 6 · Insurance,StageInsurance.dc.html,lib/features/stages/stage_detail_screen.dart,/stage-insurance,PR #1 (phase-3/section-3-home-journey-stages),TEMPLATE
+S03,3.10,Stage 8 · Money & benefits,StageMoney.dc.html,lib/features/stages/stage_detail_screen.dart,/stage-money,PR #1 (phase-3/section-3-home-journey-stages),TEMPLATE
+S03,3.4,Stage 2 · Paperwork,StagePaperwork.dc.html,lib/features/stages/stage_detail_screen.dart,/stage-paperwork,PR #1 (phase-3/section-3-home-journey-stages),TEMPLATE
+S03,3.6,"Stage 4 · School, college & university",StageSchools.dc.html,lib/features/stages/stage_detail_screen.dart,/stage-schools,PR #1 (phase-3/section-3-home-journey-stages),TEMPLATE
+S03,3.3,Stage 1 · Status & arrival documents,StageStatus.dc.html,lib/features/stages/stage_detail_screen.dart,/stage-status,PR #1 (phase-3/section-3-home-journey-stages),TEMPLATE
+S03,3.6b,Stage 4 · University & college stream,StageUniversity.dc.html,lib/features/stages/stage_detail_screen.dart,/stage-university,PR #1 (phase-3/section-3-home-journey-stages),TEMPLATE
+S03,3.11,Stage 9 · Work & credentials,StageWork.dc.html,lib/features/stages/stage_detail_screen.dart,/stage-work,PR #1 (phase-3/section-3-home-journey-stages),TEMPLATE
+S04,4.14,Licensing pathway · P.Eng.,OccupationPathway.dc.html,lib/features/tasks/task_detail_screen.dart,/occupation-pathway,PR #2 (phase-4/section-4-full-tasks-licensing),TEMPLATE
+S04,4.13,Does your job need a licence?,OccupationSearch.dc.html,lib/features/tasks/task_detail_screen.dart,/occupation-search,PR #2 (phase-4/section-4-full-tasks-licensing),TEMPLATE
+S04,4.8,Task · Canada Child Benefit,TaskCCB.dc.html,lib/features/tasks/task_detail_screen.dart,/task-c-c-b,PR #2 (phase-4/section-4-full-tasks-licensing),TEMPLATE
+S04,4.7,Task · Family doctor,TaskDoctor.dc.html,lib/features/tasks/task_detail_screen.dart,/task-doctor,PR #2 (phase-4/section-4-full-tasks-licensing),TEMPLATE
+S04,4.3,Task · Tenant rights before a lease,TaskHousing.dc.html,lib/features/tasks/task_detail_screen.dart,/task-housing,PR #2 (phase-4/section-4-full-tasks-licensing),TEMPLATE
+S04,4.6,Task · Auto insurance,TaskInsurance.dc.html,lib/features/tasks/task_detail_screen.dart,/task-insurance,PR #2 (phase-4/section-4-full-tasks-licensing),TEMPLATE
+S04,4.10,Task · Library card,TaskLibrary.dc.html,lib/features/tasks/task_detail_screen.dart,/task-library,PR #2 (phase-4/section-4-full-tasks-licensing),TEMPLATE
+S04,4.5,Task · Driver's licence,TaskLicence.dc.html,lib/features/tasks/task_detail_screen.dart,/task-licence,PR #2 (phase-4/section-4-full-tasks-licensing),TEMPLATE
+S04,4.12,Task · OSAP student aid,TaskOSAP.dc.html,lib/features/tasks/task_detail_screen.dart,/task-o-s-a-p,PR #2 (phase-4/section-4-full-tasks-licensing),TEMPLATE
+S04,4.2,Task · SIN (full detail),TaskSIN.dc.html,lib/features/tasks/task_detail_screen.dart,/task-s-i-n,PR #2 (phase-4/section-4-full-tasks-licensing),TEMPLATE
+S04,4.4,Task · School registration,TaskSchool.dc.html,lib/features/tasks/task_detail_screen.dart,/task-school,PR #2 (phase-4/section-4-full-tasks-licensing),TEMPLATE
+S04,4.1,Task · PR card (completed state),TaskStatus.dc.html,lib/features/tasks/task_detail_screen.dart,/task-status,PR #2 (phase-4/section-4-full-tasks-licensing),TEMPLATE
+S04,4.11,Task · Apply to university or college,TaskUniApply.dc.html,lib/features/tasks/task_detail_screen.dart,/task-uni-apply,PR #2 (phase-4/section-4-full-tasks-licensing),TEMPLATE
+S04,4.9,Task · Employment services,TaskWork.dc.html,lib/features/tasks/task_detail_screen.dart,/task-work,PR #2 (phase-4/section-4-full-tasks-licensing),TEMPLATE
+S05,5.8,A step changed (content update),ContentUpdated.dc.html,lib/features/task_actions/content_updated_screen.dart,/content-updated,PR #3 (phase-5/section-5-task-actions-map-updates),FULL
+S05,5.6,Not for me,Dismiss.dc.html,lib/features/task_actions/,/dismiss,PR #3 (phase-5/section-5-task-actions-map-updates),FULL
+S05,5.3,Mark done · who did it,DonePicker.dc.html,lib/features/task_actions/,/done-picker,PR #3 (phase-5/section-5-task-actions-map-updates),FULL
+S05,5.2,Location detail,LocationDetail.dc.html,lib/features/task_actions/,/location-detail,PR #3 (phase-5/section-5-task-actions-map-updates),FULL
+S05,5.1,Nearby locations (map),Nearby.dc.html,lib/features/task_actions/,/nearby,PR #3 (phase-5/section-5-task-actions-map-updates),FULL
+S05,5.7,Report outdated info,ReportOutdated.dc.html,lib/features/task_actions/,/report-outdated,PR #3 (phase-5/section-5-task-actions-map-updates),FULL
+S05,5.5,Remind me later,Snooze.dc.html,lib/features/task_actions/,/snooze,PR #3 (phase-5/section-5-task-actions-map-updates),FULL
+S05,5.4,Task done · unlocked next,TaskDone.dc.html,lib/features/task_actions/,/task-done,PR #3 (phase-5/section-5-task-actions-map-updates),FULL
+S06,6.7,Reminders · calendar,Calendar.dc.html,lib/features/family/,/calendar,PR #4 (phase-6/section-6-family-checklists-reminders),FULL
+S06,6.5,What to bring (replaces uploads),Checklist.dc.html,lib/features/family/,/checklist,PR #4 (phase-6/section-6-family-checklists-reminders),FULL
+S06,6.1,Family,Family.dc.html,lib/features/family/family_screen.dart,/family,PR #4 (phase-6/section-6-family-checklists-reminders),FULL
+S06,6.11,Just today mode,JustToday.dc.html,lib/features/family/,/just-today,PR #4 (phase-6/section-6-family-checklists-reminders),FULL
+S06,6.9,Something changed?,LifeEvent.dc.html,lib/features/family/,/life-event,PR #4 (phase-6/section-6-family-checklists-reminders),FULL
+S06,6.2,Family member · adult,MemberAdult.dc.html,lib/features/family/member_adult_screen.dart,/member-adult,PR #4 (phase-6/section-6-family-checklists-reminders),FULL
+S06,6.3,Family member · child,MemberChild.dc.html,lib/features/family/member_child_screen.dart,/member-child,PR #4 (phase-6/section-6-family-checklists-reminders),FULL
+S06,6.13,Family member · university student,MemberStudent.dc.html,lib/features/family/member_student_screen.dart,/member-student,PR #4 (phase-6/section-6-family-checklists-reminders),FULL
+S06,6.8,Notification settings,NotificationSettings.dc.html,lib/features/family/,/notification-settings,PR #4 (phase-6/section-6-family-checklists-reminders),FULL
+S06,6.10,Plan recalculated,PlanChange.dc.html,lib/features/family/,/plan-change,PR #4 (phase-6/section-6-family-checklists-reminders),FULL
+S06,6.6,Reminders · upcoming,Reminders.dc.html,lib/features/reminders/reminders_screen.dart,/reminders,PR #4 (phase-6/section-6-family-checklists-reminders),FULL
+S06,6.4,Remove a family member,RemoveMember.dc.html,lib/features/family/,/remove-member,PR #4 (phase-6/section-6-family-checklists-reminders),FULL
+S06,6.12,Search,Search.dc.html,lib/features/family/,/search,PR #4 (phase-6/section-6-family-checklists-reminders),FULL
+S07,7.3,Weekly check-in,CheckIn.dc.html,lib/features/help/,/check-in,PR #5 (phase-7/section-7-trusted-help-wellbeing),FULL
+S07,7.2,Community groups,CommunityGroups.dc.html,lib/features/help/,/community-groups,PR #5 (phase-7/section-7-trusted-help-wellbeing),FULL
+S07,7.4,Family conversation guide,ConversationGuide.dc.html,lib/features/help/,/conversation-guide,PR #5 (phase-7/section-7-trusted-help-wellbeing),FULL
+S07,7.5,Get help now,Crisis.dc.html,lib/features/help/,/crisis,PR #5 (phase-7/section-7-trusted-help-wellbeing),FULL
+S07,7.1,Trusted help,Help.dc.html,lib/features/help/help_screen.dart,/help,PR #5 (phase-7/section-7-trusted-help-wellbeing),FULL
+S07,7.6,How our guidance works,HowGuidance.dc.html,lib/features/help/,/how-guidance,PR #5 (phase-7/section-7-trusted-help-wellbeing),FULL
+S08,8.4,Download my data,DataExport.dc.html,lib/features/profile/,/data-export,PR #6 (phase-8/section-8-account-privacy-pause-deletion),FULL
+S08,8.7,Pause or delete,Deactivate.dc.html,lib/features/profile/,/deactivate,PR #6 (phase-8/section-8-account-privacy-pause-deletion),FULL
+S08,8.10,Confirm deletion,DeleteConfirm.dc.html,lib/features/profile/deactivate_screen.dart,/delete-confirm,PR #6 (phase-8/section-8-account-privacy-pause-deletion),FULL
+S08,8.11,Account deleted,Deleted.dc.html,lib/features/profile/,/deleted,PR #6 (phase-8/section-8-account-privacy-pause-deletion),FULL
+S08,8.2,Edit profile,EditProfile.dc.html,lib/features/profile/edit_profile_screen.dart,/edit-profile,PR #6 (phase-8/section-8-account-privacy-pause-deletion),FULL
+S08,8.5,Language & accessibility,LanguageAccess.dc.html,lib/features/profile/,/language-access,PR #6 (phase-8/section-8-account-privacy-pause-deletion),FULL
+S08,8.8,Account paused,Paused.dc.html,lib/features/profile/,/paused,PR #6 (phase-8/section-8-account-privacy-pause-deletion),FULL
+S08,8.3,Privacy & my data,PrivacyData.dc.html,lib/features/profile/,/privacy-data,PR #6 (phase-8/section-8-account-privacy-pause-deletion),FULL
+S08,8.1,Me · Settings,Settings.dc.html,lib/features/profile/,/settings,PR #6 (phase-8/section-8-account-privacy-pause-deletion),FULL
+S08,8.6,Sign out,SignOutConfirm.dc.html,lib/features/profile/,/sign-out-confirm,PR #6 (phase-8/section-8-account-privacy-pause-deletion),FULL
+S08,8.9,Welcome back (after pause),WelcomeBack.dc.html,lib/features/profile/settings_screen.dart,/welcome-back,PR #6 (phase-8/section-8-account-privacy-pause-deletion),FULL
+S09,9.1,Exploring without an account,GuestHome.dc.html,lib/features/guest/guest_home_screen.dart,/guest-home,PR #7 (phase-9/sections-9-10-guest-offline-errors-and-dataflow),FULL
+S09,9.3,Location turned off,LocationDenied.dc.html,lib/features/guest/,/location-denied,PR #7 (phase-9/sections-9-10-guest-offline-errors-and-dataflow),FULL
+S09,9.2,Offline,Offline.dc.html,lib/features/guest/,/offline,PR #7 (phase-9/sections-9-10-guest-offline-errors-and-dataflow),FULL
+S09,9.4,Something went wrong,ServerError.dc.html,lib/features/errors/server_error_screen.dart,/server-error,PR #7 (phase-9/sections-9-10-guest-offline-errors-and-dataflow),FULL
+S10,10.2,System data flow,DataFlow.dc.html,lib/features/dev/data_flow_screen.dart,/data-flow,PR #7 (phase-9/sections-9-10-guest-offline-errors-and-dataflow),FULL
+S10,10.1,API & integration map,IntegrationMap.dc.html,lib/features/dev/integration_map_screen.dart,/integration-map,PR #7 (phase-9/sections-9-10-guest-offline-errors-and-dataflow),FULL
+S11,4.26,Task · Before/after-school care,TaskAfterCare.dc.html,lib/features/tasks/task_detail_screen.dart,/task-after-care,PR #8 (phase-10/section-11-every-remaining-task-ontario),TEMPLATE
+S11,4.35,Task · Bank account (with partners),TaskBank.dc.html,lib/features/tasks/task_detail_screen.dart,/task-bank,PR #8 (phase-10/section-11-every-remaining-task-ontario),TEMPLATE
+S11,4.18,Task · CRA account (locked),TaskCRA.dc.html,lib/features/tasks/task_detail_screen.dart,/task-c-r-a,PR #8 (phase-10/section-11-every-remaining-task-ontario),TEMPLATE
+S11,4.30,Task · Campus services (locked),TaskCampusServices.dc.html,lib/features/tasks/task_detail_screen.dart,/task-campus-services,PR #8 (phase-10/section-11-every-remaining-task-ontario),TEMPLATE
+S11,4.27,Task · Assess past studies,TaskCredentialAssess.dc.html,lib/features/tasks/task_detail_screen.dart,/task-credential-assess,PR #8 (phase-10/section-11-every-remaining-task-ontario),TEMPLATE
+S11,4.36,Task · Build credit,TaskCredit.dc.html,lib/features/tasks/task_detail_screen.dart,/task-credit,PR #8 (phase-10/section-11-every-remaining-task-ontario),TEMPLATE
+S11,4.29,Task · Domestic tuition,TaskDomesticTuition.dc.html,lib/features/tasks/task_detail_screen.dart,/task-domestic-tuition,PR #8 (phase-10/section-11-every-remaining-task-ontario),TEMPLATE
+S11,4.31,Task · Driving record,TaskDrivingRecord.dc.html,lib/features/tasks/task_detail_screen.dart,/task-driving-record,PR #8 (phase-10/section-11-every-remaining-task-ontario),TEMPLATE
+S11,4.25,Task · English support,TaskESL.dc.html,lib/features/tasks/task_detail_screen.dart,/task-e-s-l,PR #8 (phase-10/section-11-every-remaining-task-ontario),TEMPLATE
+S11,4.28,Task · English test,TaskEnglishTest.dc.html,lib/features/tasks/task_detail_screen.dart,/task-english-test,PR #8 (phase-10/section-11-every-remaining-task-ontario),TEMPLATE
+S11,4.38,Task · Find a group,TaskGroups.dc.html,lib/features/tasks/task_detail_screen.dart,/task-groups,PR #8 (phase-10/section-11-every-remaining-task-ontario),TEMPLATE
+S11,4.17,Task · Ontario health cards,TaskHealthCard.dc.html,lib/features/tasks/task_detail_screen.dart,/task-health-card,PR #8 (phase-10/section-11-every-remaining-task-ontario),TEMPLATE
+S11,4.33,Task · Health coverage gaps,TaskHealthGap.dc.html,lib/features/tasks/task_detail_screen.dart,/task-health-gap,PR #8 (phase-10/section-11-every-remaining-task-ontario),TEMPLATE
+S11,4.24,Task · School vaccines,TaskImmunization.dc.html,lib/features/tasks/task_detail_screen.dart,/task-immunization,PR #8 (phase-10/section-11-every-remaining-task-ontario),TEMPLATE
+S11,4.34,Task · Kids dental & eyes,TaskKidsDental.dc.html,lib/features/tasks/task_detail_screen.dart,/task-kids-dental,PR #8 (phase-10/section-11-every-remaining-task-ontario),TEMPLATE
+S11,4.15,Task · Landing documents,TaskLandingDocs.dc.html,lib/features/tasks/task_detail_screen.dart,/task-landing-docs,PR #8 (phase-10/section-11-every-remaining-task-ontario),TEMPLATE
+S11,4.21,Task · Standard lease,TaskLease.dc.html,lib/features/tasks/task_detail_screen.dart,/task-lease,PR #8 (phase-10/section-11-every-remaining-task-ontario),TEMPLATE
+S11,4.16,Task · Keeping PR status,TaskPRBasics.dc.html,lib/features/tasks/task_detail_screen.dart,/task-p-r-basics,PR #8 (phase-10/section-11-every-remaining-task-ontario),TEMPLATE
+S11,4.19,Task · PRESTO card,TaskPresto.dc.html,lib/features/tasks/task_detail_screen.dart,/task-presto,PR #8 (phase-10/section-11-every-remaining-task-ontario),TEMPLATE
+S11,4.32,Task · Knowledge or road test,TaskRoadTest.dc.html,lib/features/tasks/task_detail_screen.dart,/task-road-test,PR #8 (phase-10/section-11-every-remaining-task-ontario),TEMPLATE
+S11,4.20,Task · Rental scams,TaskScams.dc.html,lib/features/tasks/task_detail_screen.dart,/task-scams,PR #8 (phase-10/section-11-every-remaining-task-ontario),TEMPLATE
+S11,4.37,Task · First tax return (new),TaskTaxReturn.dc.html,lib/features/tasks/task_detail_screen.dart,/task-tax-return,PR #8 (phase-10/section-11-every-remaining-task-ontario),TEMPLATE
+S11,4.23,Task · Tenant insurance,TaskTenantInsurance.dc.html,lib/features/tasks/task_detail_screen.dart,/task-tenant-insurance,PR #8 (phase-10/section-11-every-remaining-task-ontario),TEMPLATE
+S11,4.22,"Task · Hydro, gas & internet",TaskUtilities.dc.html,lib/features/tasks/task_detail_screen.dart,/task-utilities,PR #8 (phase-10/section-11-every-remaining-task-ontario),TEMPLATE
+S12,12.1,BC · MSP wait period,VarBCHealth.dc.html,lib/features/tasks/task_detail_screen.dart,/var-b-c-health,PR #9 (phase-11/sections-12-13-province-variants-partners-legal),TEMPLATE
+S12,12.2,BC · Cover the wait,VarBCHealthGap.dc.html,lib/features/tasks/task_detail_screen.dart,/var-b-c-health-gap,PR #9 (phase-11/sections-12-13-province-variants-partners-legal),TEMPLATE
+S12,12.3,BC · ICBC licence + insurance,VarBCICBC.dc.html,lib/features/tasks/task_detail_screen.dart,/var-b-c-i-c-b-c,PR #9 (phase-11/sections-12-13-province-variants-partners-legal),TEMPLATE
+S12,12.7,MB · Not covered for your status,VarMBNotEligible.dc.html,lib/features/tasks/task_detail_screen.dart,/var-m-b-not-eligible,PR #9 (phase-11/sections-12-13-province-variants-partners-legal),TEMPLATE
+S12,12.4,QC · RAMQ (children exempt),VarQCHealth.dc.html,lib/features/tasks/task_detail_screen.dart,/var-q-c-health,PR #9 (phase-11/sections-12-13-province-variants-partners-legal),TEMPLATE
+S12,12.5,QC · Lease & no deposit,VarQCLease.dc.html,lib/features/tasks/task_detail_screen.dart,/var-q-c-lease,PR #9 (phase-11/sections-12-13-province-variants-partners-legal),TEMPLATE
+S12,12.6,QC · French-language school,VarQCSchool.dc.html,lib/features/tasks/task_detail_screen.dart,/var-q-c-school,PR #9 (phase-11/sections-12-13-province-variants-partners-legal),TEMPLATE
+S13,13.2,How we choose partners,HowPartners.dc.html,lib/features/partners/,/how-partners,PR #9 (phase-11/sections-12-13-province-variants-partners-legal),FULL
+S13,13.3,Legal help (free + licensed),LegalHelp.dc.html,lib/features/partners/legal_help_screen.dart,/legal-help,PR #9 (phase-11/sections-12-13-province-variants-partners-legal),FULL
+S13,13.1,Partner detail (sponsored),PartnerDetail.dc.html,lib/features/partners/,/partner-detail,PR #9 (phase-11/sections-12-13-province-variants-partners-legal),FULL
+S14,4.47,Pathway · Accountant (CPA),PathwayCPA.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-c-p-a,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S14,4.42,Pathway · Dentist,PathwayDentist.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-dentist,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S14,4.44,Pathway · Early childhood educator,PathwayECE.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-e-c-e,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S14,4.48,Pathway · Electrician,PathwayElectrician.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-electrician,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S14,4.46,Pathway · Lawyer,PathwayLawyer.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-lawyer,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S14,4.39,Pathway · Registered nurse,PathwayNurse.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-nurse,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S14,4.41,Pathway · Pharmacist,PathwayPharmacist.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-pharmacist,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S14,4.40,Pathway · Physician,PathwayPhysician.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-physician,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S14,4.49,Pathway · Plumber,PathwayPlumber.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-plumber,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S14,4.45,Pathway · Social worker,PathwaySocialWorker.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-social-worker,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S14,4.43,Pathway · Teacher (K–12),PathwayTeacher.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-teacher,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S15,6.14,Budget planner (phase 2),BudgetPlanner.dc.html,lib/features/plan/budget_planner_screen.dart,/budget-planner,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),FULL
+S15,6.15,Join a household (invitee),JoinHousehold.dc.html,lib/features/family/join_household_screen.dart,/join-household,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),FULL
+S15,8.12,Terms & Privacy Policy,PrivacyPolicy.dc.html,lib/features/profile/privacy_policy_screen.dart,/privacy-policy,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),FULL
+S15,4.50,Task · Plan car costs (optional),TaskCarCosts.dc.html,lib/features/tasks/task_detail_screen.dart,/task-car-costs,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S16,16.6,Home · Approved (countdown),HomeApproved.dc.html,lib/features/home/stage_home_screen.dart,/home-approved,PR #11 (phase-13/sections-16-17-plan-home-move-stages-and-before-you-move-tasks),FULL
+S16,16.2,Home · Exploring,HomeExploring.dc.html,lib/features/home/stage_home_screen.dart,/home-exploring,PR #11 (phase-13/sections-16-17-plan-home-move-stages-and-before-you-move-tasks),FULL
+S16,16.8,Home · In Canada 3+ months,HomeSettled.dc.html,lib/features/home/stage_home_screen.dart,/home-settled,PR #11 (phase-13/sections-16-17-plan-home-move-stages-and-before-you-move-tasks),FULL
+S16,16.4,Home · Waiting,HomeWaiting.dc.html,lib/features/home/stage_home_screen.dart,/home-waiting,PR #11 (phase-13/sections-16-17-plan-home-move-stages-and-before-you-move-tasks),FULL
+S16,16.7,Journey · Before you move,JourneyApproved.dc.html,lib/features/journey/journey_approved_screen.dart,/journey-approved,PR #11 (phase-13/sections-16-17-plan-home-move-stages-and-before-you-move-tasks),FULL
+S16,16.5,Plan ready · Approved,PlanReadyApproved.dc.html,lib/features/onboarding/stage_plan_ready_screen.dart,/plan-ready-approved,PR #11 (phase-13/sections-16-17-plan-home-move-stages-and-before-you-move-tasks),FULL
+S16,16.1,Plan ready · Exploring,PlanReadyExploring.dc.html,lib/features/onboarding/stage_plan_ready_screen.dart,/plan-ready-exploring,PR #11 (phase-13/sections-16-17-plan-home-move-stages-and-before-you-move-tasks),FULL
+S16,16.3,Plan ready · Waiting,PlanReadyWaiting.dc.html,lib/features/onboarding/stage_plan_ready_screen.dart,/plan-ready-waiting,PR #11 (phase-13/sections-16-17-plan-home-move-stages-and-before-you-move-tasks),FULL
+S17,16.11,Task · compare cities and living costs,ExpCities.dc.html,lib/features/tasks/task_detail_screen.dart,/exp-cities,PR #11 (phase-13/sections-16-17-plan-home-move-stages-and-before-you-move-tasks),TEMPLATE
+S17,16.9,Task · learn the official ways to immigrate,ExpOptions.dc.html,lib/features/tasks/task_detail_screen.dart,/exp-options,PR #11 (phase-13/sections-16-17-plan-home-move-stages-and-before-you-move-tasks),TEMPLATE
+S17,16.10,Task · check a consultant or lawyer is licensed,ExpRepresentative.dc.html,lib/features/tasks/task_detail_screen.dart,/exp-representative,PR #11 (phase-13/sections-16-17-plan-home-move-stages-and-before-you-move-tasks),TEMPLATE
+S17,16.22,Task · know what happens at the airport,PreArrivalDay.dc.html,lib/features/tasks/task_detail_screen.dart,/pre-arrival-day,PR #11 (phase-13/sections-16-17-plan-home-move-stages-and-before-you-move-tasks),TEMPLATE
+S17,16.23,Task · plan your first 72 hours,PreFirst72.dc.html,lib/features/tasks/task_detail_screen.dart,/pre-first72,PR #11 (phase-13/sections-16-17-plan-home-move-stages-and-before-you-move-tasks),TEMPLATE
+S17,16.18,Task · list what you're bringing,PreGoods.dc.html,lib/features/tasks/task_detail_screen.dart,/pre-goods,PR #11 (phase-13/sections-16-17-plan-home-move-stages-and-before-you-move-tasks),TEMPLATE
+S17,16.19,Task · get children's school and vaccine records,PreKidsRecords.dc.html,lib/features/tasks/task_detail_screen.dart,/pre-kids-records,PR #11 (phase-13/sections-16-17-plan-home-move-stages-and-before-you-move-tasks),TEMPLATE
+S17,16.20,Task · plan your medications,PreMedications.dc.html,lib/features/tasks/task_detail_screen.dart,/pre-medications,PR #11 (phase-13/sections-16-17-plan-home-move-stages-and-before-you-move-tasks),TEMPLATE
+S17,16.16,Task · sign up for free pre-arrival services,PreServices.dc.html,lib/features/tasks/task_detail_screen.dart,/pre-services,PR #11 (phase-13/sections-16-17-plan-home-move-stages-and-before-you-move-tasks),TEMPLATE
+S17,16.21,Task · book a place for your first weeks,PreTempHousing.dc.html,lib/features/tasks/task_detail_screen.dart,/pre-temp-housing,PR #11 (phase-13/sections-16-17-plan-home-move-stages-and-before-you-move-tasks),TEMPLATE
+S17,16.17,Task · get your travel documents ready,PreTravelDocs.dc.html,lib/features/tasks/task_detail_screen.dart,/pre-travel-docs,PR #11 (phase-13/sections-16-17-plan-home-move-stages-and-before-you-move-tasks),TEMPLATE
+S17,16.13,Task · gather your family's documents,WaitDocs.dc.html,lib/features/tasks/task_detail_screen.dart,/wait-docs,PR #11 (phase-13/sections-16-17-plan-home-move-stages-and-before-you-move-tasks),TEMPLATE
+S17,16.14,Task · plan money for your first months,WaitSavings.dc.html,lib/features/tasks/task_detail_screen.dart,/wait-savings,PR #11 (phase-13/sections-16-17-plan-home-move-stages-and-before-you-move-tasks),TEMPLATE
+S17,16.12,Task · check your application status,WaitTrack.dc.html,lib/features/tasks/task_detail_screen.dart,/wait-track,PR #11 (phase-13/sections-16-17-plan-home-move-stages-and-before-you-move-tasks),TEMPLATE
+S17,16.15,Task · when waiting feels hard,WaitWellbeing.dc.html,lib/features/tasks/task_detail_screen.dart,/wait-wellbeing,PR #11 (phase-13/sections-16-17-plan-home-move-stages-and-before-you-move-tasks),TEMPLATE
+S18,4.53,Task · update your address everywhere,TaskAddressChange.dc.html,lib/features/tasks/task_detail_screen.dart,/task-address-change,PR #12 (phase-14/sections-18-19-all-34-gap-tasks),TEMPLATE
+S18,4.63,Task · buy a used car safely,TaskBuyCar.dc.html,lib/features/tasks/task_detail_screen.dart,/task-buy-car,PR #12 (phase-14/sections-18-19-all-34-gap-tasks),TEMPLATE
+S18,4.65,Task · use the right car seat,TaskCarSeats.dc.html,lib/features/tasks/task_detail_screen.dart,/task-car-seats,PR #12 (phase-14/sections-18-19-all-34-gap-tasks),TEMPLATE
+S18,4.57,Task · find licensed child care,TaskChildCare.dc.html,lib/features/tasks/task_detail_screen.dart,/task-child-care,PR #12 (phase-14/sections-18-19-all-34-gap-tasks),TEMPLATE
+S18,4.58,Task · apply for a child care subsidy,TaskChildCareSubsidy.dc.html,lib/features/tasks/task_detail_screen.dart,/task-child-care-subsidy,PR #12 (phase-14/sections-18-19-all-34-gap-tasks),TEMPLATE
+S18,4.59,Task · visit a free EarlyON centre,TaskEarlyON.dc.html,lib/features/tasks/task_detail_screen.dart,/task-early-o-n,PR #12 (phase-14/sections-18-19-all-34-gap-tasks),TEMPLATE
+S18,4.56,Task · get help if rent is too high or you have nowhere to stay,TaskHousingHelp.dc.html,lib/features/tasks/task_detail_screen.dart,/task-housing-help,PR #12 (phase-14/sections-18-19-all-34-gap-tasks),TEMPLATE
+S18,4.55,Task · move in and check the unit,TaskMoveIn.dc.html,lib/features/tasks/task_detail_screen.dart,/task-move-in,PR #12 (phase-14/sections-18-19-all-34-gap-tasks),TEMPLATE
+S18,4.51,Task · get an Ontario Photo Card,TaskPhotoCard.dc.html,lib/features/tasks/task_detail_screen.dart,/task-photo-card,PR #12 (phase-14/sections-18-19-all-34-gap-tasks),TEMPLATE
+S18,4.64,Task · register your car and get plates,TaskRegisterCar.dc.html,lib/features/tasks/task_detail_screen.dart,/task-register-car,PR #12 (phase-14/sections-18-19-all-34-gap-tasks),TEMPLATE
+S18,4.54,Task · find and apply for a rental,TaskRentalSearch.dc.html,lib/features/tasks/task_detail_screen.dart,/task-rental-search,PR #12 (phase-14/sections-18-19-all-34-gap-tasks),TEMPLATE
+S18,4.60,Task · check if your child gets a school bus,TaskSchoolBus.dc.html,lib/features/tasks/task_detail_screen.dart,/task-school-bus,PR #12 (phase-14/sections-18-19-all-34-gap-tasks),TEMPLATE
+S18,4.61,Task · get support for learning needs,TaskSpecialEd.dc.html,lib/features/tasks/task_detail_screen.dart,/task-special-ed,PR #12 (phase-14/sections-18-19-all-34-gap-tasks),TEMPLATE
+S18,4.62,Task · get credit for past high school,TaskTeenCredits.dc.html,lib/features/tasks/task_detail_screen.dart,/task-teen-credits,PR #12 (phase-14/sections-18-19-all-34-gap-tasks),TEMPLATE
+S18,4.52,Task · get certified translations,TaskTranslations.dc.html,lib/features/tasks/task_detail_screen.dart,/task-translations,PR #12 (phase-14/sections-18-19-all-34-gap-tasks),TEMPLATE
+S19,4.83,Task · join a bridging program or mentorship,TaskBridging.dc.html,lib/features/tasks/task_detail_screen.dart,/task-bridging,PR #12 (phase-14/sections-18-19-all-34-gap-tasks),TEMPLATE
+S19,4.84,Task · start a business or work for yourself,TaskBusiness.dc.html,lib/features/tasks/task_detail_screen.dart,/task-business,PR #12 (phase-14/sections-18-19-all-34-gap-tasks),TEMPLATE
+S19,4.76,Task · get the Canada Learning Bond,TaskCLB.dc.html,lib/features/tasks/task_detail_screen.dart,/task-c-l-b,PR #12 (phase-14/sections-18-19-all-34-gap-tasks),TEMPLATE
+S19,4.78,Task · spot government and money scams,TaskCRAScams.dc.html,lib/features/tasks/task_detail_screen.dart,/task-c-r-a-scams,PR #12 (phase-14/sections-18-19-all-34-gap-tasks),TEMPLATE
+S19,4.71,Task · apply for the Canadian Dental Care Plan,TaskDentalPlan.dc.html,lib/features/tasks/task_detail_screen.dart,/task-dental-plan,PR #12 (phase-14/sections-18-19-all-34-gap-tasks),TEMPLATE
+S19,4.74,Task · apply for the GST/HST credit,TaskGSTCredit.dc.html,lib/features/tasks/task_detail_screen.dart,/task-g-s-t-credit,PR #12 (phase-14/sections-18-19-all-34-gap-tasks),TEMPLATE
+S19,4.67,Task · bring proof of your insurance history,TaskInsuranceHistory.dc.html,lib/features/tasks/task_detail_screen.dart,/task-insurance-history,PR #12 (phase-14/sections-18-19-all-34-gap-tasks),TEMPLATE
+S19,4.82,Task · spot job scams,TaskJobScams.dc.html,lib/features/tasks/task_detail_screen.dart,/task-job-scams,PR #12 (phase-14/sections-18-19-all-34-gap-tasks),TEMPLATE
+S19,4.80,Task · search for jobs,TaskJobSearch.dc.html,lib/features/tasks/task_detail_screen.dart,/task-job-search,PR #12 (phase-14/sections-18-19-all-34-gap-tasks),TEMPLATE
+S19,4.72,Task · find free mental health support,TaskMentalHealth.dc.html,lib/features/tasks/task_detail_screen.dart,/task-mental-health,PR #12 (phase-14/sections-18-19-all-34-gap-tasks),TEMPLATE
+S19,4.75,Task · get the Ontario Trillium Benefit,TaskOTB.dc.html,lib/features/tasks/task_detail_screen.dart,/task-o-t-b,PR #12 (phase-14/sections-18-19-all-34-gap-tasks),TEMPLATE
+S19,4.73,Task · pregnancy and a new baby,TaskPregnancy.dc.html,lib/features/tasks/task_detail_screen.dart,/task-pregnancy,PR #12 (phase-14/sections-18-19-all-34-gap-tasks),TEMPLATE
+S19,4.70,Task · pay less for prescriptions,TaskPrescriptions.dc.html,lib/features/tasks/task_detail_screen.dart,/task-prescriptions,PR #12 (phase-14/sections-18-19-all-34-gap-tasks),TEMPLATE
+S19,4.79,Task · make a Canadian-style résumé,TaskResume.dc.html,lib/features/tasks/task_detail_screen.dart,/task-resume,PR #12 (phase-14/sections-18-19-all-34-gap-tasks),TEMPLATE
+S19,4.77,Task · send money home safely,TaskSendMoney.dc.html,lib/features/tasks/task_detail_screen.dart,/task-send-money,PR #12 (phase-14/sections-18-19-all-34-gap-tasks),TEMPLATE
+S19,4.69,Task · know where to go when someone is sick,TaskWhereCare.dc.html,lib/features/tasks/task_detail_screen.dart,/task-where-care,PR #12 (phase-14/sections-18-19-all-34-gap-tasks),TEMPLATE
+S19,4.66,Task · get ready for winter driving,TaskWinterDriving.dc.html,lib/features/tasks/task_detail_screen.dart,/task-winter-driving,PR #12 (phase-14/sections-18-19-all-34-gap-tasks),TEMPLATE
+S19,4.68,Task · understand your workplace benefits,TaskWorkBenefits.dc.html,lib/features/tasks/task_detail_screen.dart,/task-work-benefits,PR #12 (phase-14/sections-18-19-all-34-gap-tasks),TEMPLATE
+S19,4.81,Task · know your rights at work,TaskWorkRights.dc.html,lib/features/tasks/task_detail_screen.dart,/task-work-rights,PR #12 (phase-14/sections-18-19-all-34-gap-tasks),TEMPLATE
+S20,20.1,Explore (tab),Explore.dc.html,lib/features/explore/explore_screen.dart,/explore,PR #13 (phase-15/sections-20-23-explore-tab-and-all-details),TEMPLATE
+S20,20.3,Explore · Canoo free year,ExploreCanoo.dc.html,lib/features/explore/explore_screen.dart,/explore-canoo,PR #13 (phase-15/sections-20-23-explore-tab-and-all-details),TEMPLATE
+S20,20.12,Explore · Choose city (location off),ExploreCity.dc.html,lib/features/explore/explore_screen.dart,/explore-city,PR #13 (phase-15/sections-20-23-explore-tab-and-all-details),TEMPLATE
+S20,20.6,Explore · Events,ExploreEvents.dc.html,lib/features/explore/explore_screen.dart,/explore-events,PR #13 (phase-15/sections-20-23-explore-tab-and-all-details),TEMPLATE
+S20,20.10,Explore · Filters sheet,ExploreFilters.dc.html,lib/features/explore/explore_screen.dart,/explore-filters,PR #13 (phase-15/sections-20-23-explore-tab-and-all-details),TEMPLATE
+S20,20.2,Explore · Free passes,ExploreFreePasses.dc.html,lib/features/explore/explore_screen.dart,/explore-free-passes,PR #13 (phase-15/sections-20-23-explore-tab-and-all-details),TEMPLATE
+S20,20.7,Explore · Offers,ExploreOffers.dc.html,lib/features/explore/explore_screen.dart,/explore-offers,PR #13 (phase-15/sections-20-23-explore-tab-and-all-details),TEMPLATE
+S20,20.5,Explore · Place detail,ExplorePlace.dc.html,lib/features/explore/explore_screen.dart,/explore-place,PR #13 (phase-15/sections-20-23-explore-tab-and-all-details),TEMPLATE
+S20,20.4,Explore · Places list,ExplorePlaces.dc.html,lib/features/explore/explore_screen.dart,/explore-places,PR #13 (phase-15/sections-20-23-explore-tab-and-all-details),TEMPLATE
+S20,20.9,Explore · Saved,ExploreSaved.dc.html,lib/features/explore/explore_screen.dart,/explore-saved,PR #13 (phase-15/sections-20-23-explore-tab-and-all-details),TEMPLATE
+S20,20.11,Explore · First winter,ExploreWinter.dc.html,lib/features/explore/explore_screen.dart,/explore-winter,PR #13 (phase-15/sections-20-23-explore-tab-and-all-details),TEMPLATE
+S20,20.8,Explore · Offer / coupon,OfferDetail.dc.html,lib/features/explore/explore_screen.dart,/offer-detail,PR #13 (phase-15/sections-20-23-explore-tab-and-all-details),TEMPLATE
+S21,21.14,Android · Location permission,AndroidLocation.dc.html,lib/features/errors/section21_screen.dart,/android-location,PR #14 (phase-16/section-21-last-taps-empty-error-android-rtl),TEMPLATE
+S21,21.8,Error · Account deletion failed,DeleteError.dc.html,lib/features/errors/section21_screen.dart,/delete-error,PR #14 (phase-16/section-21-last-taps-empty-error-android-rtl),TEMPLATE
+S21,21.2,Explore · Event detail,ExploreEvent.dc.html,lib/features/errors/section21_screen.dart,/explore-event,PR #14 (phase-16/section-21-last-taps-empty-error-android-rtl),TEMPLATE
+S21,21.3,Explore · Library pass detail,ExplorePass.dc.html,lib/features/errors/section21_screen.dart,/explore-pass,PR #14 (phase-16/section-21-last-taps-empty-error-android-rtl),TEMPLATE
+S21,21.13,Empty · Explore saved,ExploreSavedEmpty.dc.html,lib/features/errors/section21_screen.dart,/explore-saved-empty,PR #14 (phase-16/section-21-last-taps-empty-error-android-rtl),TEMPLATE
+S21,21.7,Error · Data export failed,ExportError.dc.html,lib/features/errors/section21_screen.dart,/export-error,PR #14 (phase-16/section-21-last-taps-empty-error-android-rtl),TEMPLATE
+S21,21.12,"Empty · Family, one adult",FamilySingle.dc.html,lib/features/errors/section21_screen.dart,/family-single,PR #14 (phase-16/section-21-last-taps-empty-error-android-rtl),TEMPLATE
+S21,21.15,RTL · Home in Arabic,HomeAR.dc.html,lib/features/errors/section21_screen.dart,/home-a-r,PR #14 (phase-16/section-21-last-taps-empty-error-android-rtl),TEMPLATE
+S21,21.5,Settings · Language restart (RTL),LanguageRestart.dc.html,lib/features/errors/section21_screen.dart,/language-restart,PR #14 (phase-16/section-21-last-taps-empty-error-android-rtl),TEMPLATE
+S21,21.4,Crisis · Leave quickly → neutral page,LeaveQuickly.dc.html,lib/features/errors/section21_screen.dart,/leave-quickly,PR #14 (phase-16/section-21-last-taps-empty-error-android-rtl),TEMPLATE
+S21,21.10,"Empty · Search, no results",SearchEmpty.dc.html,lib/features/errors/section21_screen.dart,/search-empty,PR #14 (phase-16/section-21-last-taps-empty-error-android-rtl),TEMPLATE
+S21,21.6,Error · Sign-in failed,SignInError.dc.html,lib/features/errors/section21_screen.dart,/sign-in-error,PR #14 (phase-16/section-21-last-taps-empty-error-android-rtl),TEMPLATE
+S21,21.11,Empty · Stage complete,StageComplete.dc.html,lib/features/errors/section21_screen.dart,/stage-complete,PR #14 (phase-16/section-21-last-taps-empty-error-android-rtl),TEMPLATE
+S21,21.1,Task · More options (⋯ sheet),TaskMore.dc.html,lib/features/errors/section21_screen.dart,/task-more,PR #14 (phase-16/section-21-last-taps-empty-error-android-rtl),TEMPLATE
+S21,21.16,RTL · Task in Arabic,TaskPrestoAR.dc.html,lib/features/errors/section21_screen.dart,/task-presto-a-r,PR #14 (phase-16/section-21-last-taps-empty-error-android-rtl),TEMPLATE
+S21,21.9,Web · Delete account (Google Play),WebDeleteAccount.dc.html,lib/features/errors/section21_screen.dart,/web-delete-account,PR #14 (phase-16/section-21-last-taps-empty-error-android-rtl),TEMPLATE
+S22,22.0,Work · All regulated jobs (index),AllProfessions.dc.html,lib/features/tasks/all_professions_screen.dart,/all-professions,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),FULL
+S22,22.19,Pathway · Architect,PathwayArchitect.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-architect,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S22,22.16,Pathway · Audiologist or speech-language pathologist,PathwayAudiologistSLP.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-audiologist-s-l-p,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S22,22.30,Pathway · Auto body and collision repairer,PathwayAutoBody.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-auto-body,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S22,22.29,Pathway · Automotive service technician,PathwayAutoTech.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-auto-tech,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S22,22.13,Pathway · Chiropractor,PathwayChiropractor.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-chiropractor,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S22,22.33,Pathway · Mobile crane operator (hoisting engineer),PathwayCrane.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-crane,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S22,22.1,Pathway · Dental hygienist,PathwayDentalHygienist.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-dental-hygienist,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S22,22.17,Pathway · Denturist,PathwayDenturist.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-denturist,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S22,22.8,Pathway · Dietitian,PathwayDietitian.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-dietitian,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S22,22.22,Pathway · Geoscientist,PathwayGeoscientist.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-geoscientist,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S22,22.32,Pathway · Hairstylist,PathwayHairstylist.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-hairstylist,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S22,22.24,Pathway · Life insurance agent,PathwayInsurance.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-insurance,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S22,22.15,Pathway · Kinesiologist,PathwayKinesiologist.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-kinesiologist,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S22,22.4,Pathway · Medical laboratory technologist,PathwayMLT.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-m-l-t,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S22,22.5,Pathway · Medical radiation technologist,PathwayMRT.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-m-r-t,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S22,22.14,Pathway · Massage therapist,PathwayMassage.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-massage,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S22,22.7,Pathway · Midwife,PathwayMidwife.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-midwife,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S22,22.25,Pathway · Mortgage agent,PathwayMortgage.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-mortgage,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S22,22.3,Pathway · Occupational therapist,PathwayOT.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-o-t,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S22,22.12,Pathway · Optician,PathwayOptician.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-optician,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S22,22.11,Pathway · Optometrist,PathwayOptometrist.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-optometrist,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S22,22.18,Pathway · Paralegal,PathwayParalegal.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-paralegal,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S22,22.2,Pathway · Physiotherapist,PathwayPhysio.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-physio,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S22,22.9,Pathway · Psychologist,PathwayPsychologist.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-psychologist,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S22,22.10,Pathway · Psychotherapist,PathwayPsychotherapist.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-psychotherapist,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S22,22.6,Pathway · Respiratory therapist,PathwayRT.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-r-t,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S22,22.23,Pathway · Real estate agent,PathwayRealEstate.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-real-estate,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S22,22.26,Pathway · Refrigeration and air conditioning mechanic,PathwayRefrigeration.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-refrigeration,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S22,22.27,Pathway · Sheet metal worker,PathwaySheetMetal.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-sheet-metal,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S22,22.28,Pathway · Steamfitter,PathwaySteamfitter.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-steamfitter,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S22,22.21,Pathway · Land surveyor,PathwaySurveyor.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-surveyor,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S22,22.31,Pathway · Truck and coach technician,PathwayTruckCoach.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-truck-coach,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S22,22.20,Pathway · Veterinarian,PathwayVet.dc.html,lib/features/tasks/regulated_pathway_detail_screen.dart,/pathway-vet,PR #10 (phase-12/sections-14-15-22-licensing-pathways-and-gap-screens),TEMPLATE
+S23,23.7,Event · Fun skate,EventSkate.dc.html,lib/features/explore/explore_screen.dart,/event-skate,PR #13 (phase-15/sections-20-23-explore-tab-and-all-details),TEMPLATE
+S23,23.8,Event · Newcomer welcome,EventWelcome.dc.html,lib/features/explore/explore_screen.dart,/event-welcome,PR #13 (phase-15/sections-20-23-explore-tab-and-all-details),TEMPLATE
+S23,23.9,Event · Winter walk,EventWinterWalk.dc.html,lib/features/explore/explore_screen.dart,/event-winter-walk,PR #13 (phase-15/sections-20-23-explore-tab-and-all-details),TEMPLATE
+S23,23.14,Offer · Newcomer banking,OfferBank.dc.html,lib/features/explore/explore_screen.dart,/offer-bank,PR #13 (phase-15/sections-20-23-explore-tab-and-all-details),TEMPLATE
+S23,23.16,Offer · Furniture,OfferFurniture.dc.html,lib/features/explore/explore_screen.dart,/offer-furniture,PR #13 (phase-15/sections-20-23-explore-tab-and-all-details),TEMPLATE
+S23,23.15,Offer · Phone plan,OfferPhone.dc.html,lib/features/explore/explore_screen.dart,/offer-phone,PR #13 (phase-15/sections-20-23-explore-tab-and-all-details),TEMPLATE
+S23,23.11,Pass · Conservation parks,PassConservation.dc.html,lib/features/explore/explore_screen.dart,/pass-conservation,PR #13 (phase-15/sections-20-23-explore-tab-and-all-details),TEMPLATE
+S23,23.10,Pass · Ontario Parks,PassOntarioParks.dc.html,lib/features/explore/explore_screen.dart,/pass-ontario-parks,PR #13 (phase-15/sections-20-23-explore-tab-and-all-details),TEMPLATE
+S23,23.12,Pass · PAMA family,PassPAMA.dc.html,lib/features/explore/explore_screen.dart,/pass-p-a-m-a,PR #13 (phase-15/sections-20-23-explore-tab-and-all-details),TEMPLATE
+S23,23.13,Pass · Swim & skate,PassSwimSkate.dc.html,lib/features/explore/explore_screen.dart,/pass-swim-skate,PR #13 (phase-15/sections-20-23-explore-tab-and-all-details),TEMPLATE
+S23,23.3,Place · Kariya Park,PlaceKariya.dc.html,lib/features/explore/explore_screen.dart,/place-kariya,PR #13 (phase-15/sections-20-23-explore-tab-and-all-details),TEMPLATE
+S23,23.6,Place · Niagara Falls,PlaceNiagara.dc.html,lib/features/explore/explore_screen.dart,/place-niagara,PR #13 (phase-15/sections-20-23-explore-tab-and-all-details),TEMPLATE
+S23,23.5,Place · PAMA,PlacePAMA.dc.html,lib/features/explore/explore_screen.dart,/place-p-a-m-a,PR #13 (phase-15/sections-20-23-explore-tab-and-all-details),TEMPLATE
+S23,23.2,Place · Port Credit waterfront,PlacePortCredit.dc.html,lib/features/explore/explore_screen.dart,/place-port-credit,PR #13 (phase-15/sections-20-23-explore-tab-and-all-details),TEMPLATE
+S23,23.1,Place · Rattray Marsh,PlaceRattray.dc.html,lib/features/explore/explore_screen.dart,/place-rattray,PR #13 (phase-15/sections-20-23-explore-tab-and-all-details),TEMPLATE
+S23,23.4,Place · The Riverwood Conservancy,PlaceRiverwood.dc.html,lib/features/explore/explore_screen.dart,/place-riverwood,PR #13 (phase-15/sections-20-23-explore-tab-and-all-details),TEMPLATE
