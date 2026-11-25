@@ -15,11 +15,18 @@ class AddStudentScreen extends ConsumerStatefulWidget {
 }
 
 class _AddStudentScreenState extends ConsumerState<AddStudentScreen> {
-  final _nameController = TextEditingController(text: 'Yasmin');
+  static const bool _isDemo = bool.fromEnvironment('DEMO', defaultValue: false);
+  late final TextEditingController _nameController;
   String _ageGroup = '18–21';
   String _studyLevel = 'University';
   String _admitStatus = 'Not yet';
   bool _sameStatusAsMe = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _nameController = TextEditingController(text: _isDemo ? 'Yasmin' : '');
+  }
 
   @override
   void dispose() {
@@ -29,14 +36,23 @@ class _AddStudentScreenState extends ConsumerState<AddStudentScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final name = _nameController.text.trim().isEmpty ? 'adult child' : _nameController.text.trim();
+    final name = _nameController.text.trim().isEmpty ? 'Yasmin' : _nameController.text.trim();
 
     return Scaffold(
       backgroundColor: AppColors.bg,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: BackButton(color: AppColors.primary, onPressed: () => context.pop()),
+        leading: BackButton(
+          color: AppColors.primary,
+          onPressed: () {
+            if (context.canPop()) {
+              context.pop();
+            } else {
+              context.go('/household');
+            }
+          },
+        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -194,7 +210,11 @@ class _AddStudentScreenState extends ConsumerState<AddStudentScreen> {
                           isStudent: _studyLevel != 'Not studying',
                         ),
                       );
-                  context.pop();
+                  if (context.canPop()) {
+                    context.pop();
+                  } else {
+                    context.go('/household');
+                  }
                 },
               ),
               const SizedBox(height: 16),
