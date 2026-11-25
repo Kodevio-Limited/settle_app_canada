@@ -60,39 +60,28 @@ class StageDetailScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.bg,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: BackButton(
+          color: AppColors.primary,
+          onPressed: () {
+            if (stage.id == '4b') {
+              context.push('/stages/4');
+            } else if (context.canPop()) {
+              context.pop();
+            } else {
+              context.go('/journey');
+            }
+          },
+        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Back Button
-              Align(
-                alignment: Alignment.centerLeft,
-                child: InkWell(
-                  onTap: () {
-                    if (stage.id == '4b') {
-                      context.push('/stages/4');
-                    } else if (context.canPop()) {
-                      context.pop();
-                    } else {
-                      context.go('/journey');
-                    }
-                  },
-                  borderRadius: BorderRadius.circular(22),
-                  child: Container(
-                    width: 44,
-                    height: 44,
-                    alignment: Alignment.centerLeft,
-                    child: const Icon(
-                      Icons.chevron_left,
-                      size: 28,
-                      color: AppColors.primary,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 2),
 
               // Stage Tag
               Text(

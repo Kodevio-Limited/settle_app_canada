@@ -35,11 +35,15 @@ class _NearbyScreenState extends State<NearbyScreen> {
               // Header
               Row(
                 children: [
-                  IconButton(
-                    icon: const Icon(Icons.arrow_back, color: Color(0xFF123332)),
-                    onPressed: () => context.pop(),
-                    padding: EdgeInsets.zero,
-                    constraints: const BoxConstraints(minWidth: 44, minHeight: 44),
+                  BackButton(
+                    color: const Color(0xFF123332),
+                    onPressed: () {
+                      if (context.canPop()) {
+                        context.pop();
+                      } else {
+                        context.go('/home');
+                      }
+                    },
                   ),
                   const SizedBox(width: 6),
                   Expanded(
@@ -340,10 +344,13 @@ class _NearbyScreenState extends State<NearbyScreen> {
     String? tag,
     required VoidCallback onDetailsTap,
   }) {
-    return Container(
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: Colors.white,
+    return InkWell(
+      onTap: onDetailsTap,
+      borderRadius: BorderRadius.circular(16),
+      child: Container(
+        padding: const EdgeInsets.all(14),
+        decoration: BoxDecoration(
+          color: Colors.white,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: const Color(0xFFDEDEE2)),
       ),
@@ -509,8 +516,9 @@ class _NearbyScreenState extends State<NearbyScreen> {
           ),
         ],
       ),
-    );
-  }
+    ),
+  );
+}
 }
 
 class _TrianglePainter extends CustomPainter {

@@ -54,11 +54,15 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  IconButton(
-                    icon: const Icon(Icons.arrow_back, color: Color(0xFF123332)),
-                    onPressed: () => context.pop(),
-                    padding: EdgeInsets.zero,
-                    constraints: const BoxConstraints(minWidth: 44, minHeight: 44),
+                  BackButton(
+                    color: const Color(0xFF123332),
+                    onPressed: () {
+                      if (context.canPop()) {
+                        context.pop();
+                      } else {
+                        context.go('/journey');
+                      }
+                    },
                   ),
                   IconButton(
                     icon: const Icon(Icons.more_horiz, color: Color(0xFF123332)),
@@ -269,7 +273,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                       ),
                       const SizedBox(height: 10),
                       GestureDetector(
-                        onTap: () => context.push('/household-summary'),
+                        onTap: () => context.push('/settings'),
                         child: const Text(
                           'Something wrong? Update your answers',
                           style: TextStyle(
@@ -425,7 +429,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                         ),
                         if (task.checklist.isNotEmpty)
                           GestureDetector(
-                            onTap: () => context.push('/checklists'),
+                            onTap: () => context.push('/checklist'),
                             child: const Text(
                               'All checklists',
                               style: TextStyle(

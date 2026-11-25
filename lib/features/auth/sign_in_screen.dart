@@ -15,11 +15,50 @@ class SignInScreen extends ConsumerStatefulWidget {
 
 class _SignInScreenState extends ConsumerState<SignInScreen> {
   final _emailController = TextEditingController();
+  bool _isLoading = false;
+  String? _errorMessage;
+
+  @override
+  void initState() {
+    super.initState();
+    _emailController.addListener(() {
+      if (_errorMessage != null) {
+        setState(() => _errorMessage = null);
+      } else {
+        setState(() {});
+      }
+    });
+  }
 
   @override
   void dispose() {
     _emailController.dispose();
     super.dispose();
+  }
+
+  bool get _isEmailValid {
+    final email = _emailController.text.trim();
+    return RegExp(r'^[^@]+@[^@]+\.[^@]+$').hasMatch(email);
+  }
+
+  void _handleSendCode() {
+    final email = _emailController.text.trim();
+    if (!_isEmailValid) {
+      setState(() {
+        _errorMessage = 'Please enter a valid email address';
+      });
+      return;
+    }
+
+    setState(() => _isLoading = true);
+    ref.read(authProvider.notifier).setEmail(email);
+
+    Future.delayed(const Duration(milliseconds: 300), () {
+      if (mounted) {
+        setState(() => _isLoading = false);
+        context.push('/verify-email');
+      }
+    });
   }
 
   @override
@@ -31,7 +70,13 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
         elevation: 0,
         leading: BackButton(
           color: AppColors.primary,
-          onPressed: () => context.pop(),
+          onPressed: () {
+            if (context.canPop()) {
+              context.pop();
+            } else {
+              context.go('/main');
+            }
+          },
         ),
       ),
       body: SafeArea(
@@ -63,10 +108,13 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
               const SizedBox(height: 18),
               // Social Auth Buttons matching SignIn.dc.html
               InkWell(
-                onTap: () {
-                  ref.read(authProvider.notifier).verifyAndSignIn();
-                  context.go('/home');
-                },
+                onTap: _isLoading
+                    ? null
+                    : () {
+                        setState(() => _isLoading = true);
+                        ref.read(authProvider.notifier).verifyAndSignIn();
+                        context.go('/home');
+                      },
                 borderRadius: BorderRadius.circular(12),
                 child: Container(
                   height: 52,
@@ -76,7 +124,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                   ),
                   alignment: Alignment.center,
                   child: const Text(
-                    'Continue with Apple',
+                    'Sign in with Apple',
                     style: TextStyle(
                       fontFamily: AppTypography.fontBody,
                       fontSize: 17,
@@ -88,10 +136,13 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
               ),
               const SizedBox(height: 10),
               InkWell(
-                onTap: () {
-                  ref.read(authProvider.notifier).verifyAndSignIn();
-                  context.go('/home');
-                },
+                onTap: _isLoading
+                    ? null
+                    : () {
+                        setState(() => _isLoading = true);
+                        ref.read(authProvider.notifier).verifyAndSignIn();
+                        context.go('/home');
+                      },
                 borderRadius: BorderRadius.circular(12),
                 child: Container(
                   height: 52,
@@ -102,7 +153,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                   ),
                   alignment: Alignment.center,
                   child: const Text(
-                    'Continue with Google',
+                    'Sign in with Google',
                     style: TextStyle(
                       fontFamily: AppTypography.fontBody,
                       fontSize: 17,
@@ -153,9 +204,11 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                 ),
                 decoration: InputDecoration(
                   hintText: 'you@example.com',
+                  errorText: _errorMessage,
                   filled: true,
                   fillColor: Colors.white,
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                     borderSide: const BorderSide(color: Color(0xFFC8C8CE)),
@@ -166,20 +219,16 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(color: AppColors.primary, width: 2),
+                    borderSide:
+                        const BorderSide(color: AppColors.primary, width: 2),
                   ),
                 ),
               ),
               const SizedBox(height: 12),
               SettleButton(
                 label: 'Send me a code',
-                onPressed: () {
-                  final email = _emailController.text.trim();
-                  ref.read(authProvider.notifier).setEmail(
-                        email.isEmpty ? 'layla@example.com' : email,
-                      );
-                  context.push('/verify-email');
-                },
+                isLoading: _isLoading,
+                onPressed: _emailController.text.trim().isEmpty ? null : _handleSendCode,
               ),
               const SizedBox(height: 14),
               const Text(
@@ -195,7 +244,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                 child: TextButton(
                   onPressed: () => context.push('/how-guidance'),
                   child: const Text(
-                    "Can't get into your email?",
+                    "Can't get into your email? Contact support",
                     style: TextStyle(
                       fontFamily: AppTypography.fontBody,
                       fontSize: 15,

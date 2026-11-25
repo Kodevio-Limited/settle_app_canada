@@ -62,6 +62,7 @@ import '../../features/profile/paused_screen.dart';
 import '../../features/profile/welcome_back_screen.dart';
 import '../../features/profile/delete_confirm_screen.dart';
 import '../../features/profile/deleted_screen.dart';
+import '../../app/router/pending_routes.dart';
 
 GoRouter createRouter({String initialLocation = '/'}) {
   return GoRouter(
@@ -71,6 +72,10 @@ GoRouter createRouter({String initialLocation = '/'}) {
         path: '/',
         name: 'welcome',
         builder: (context, state) => const MainWelcomeScreen(),
+      ),
+      GoRoute(
+        path: '/main',
+        redirect: (context, state) => '/',
       ),
       GoRoute(
         path: '/sign-up',
@@ -676,6 +681,7 @@ GoRouter createRouter({String initialLocation = '/'}) {
           ),
         ],
       ),
+      ...pendingS10Routes,
     ],
   );
 }

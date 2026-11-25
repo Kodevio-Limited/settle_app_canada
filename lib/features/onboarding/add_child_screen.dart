@@ -15,11 +15,18 @@ class AddChildScreen extends ConsumerStatefulWidget {
 }
 
 class _AddChildScreenState extends ConsumerState<AddChildScreen> {
-  final _nameController = TextEditingController(text: 'Nour');
+  static const bool _isDemo = bool.fromEnvironment('DEMO', defaultValue: false);
+  late final TextEditingController _nameController;
   String _ageGroup = '12–14';
   String _needs = 'School';
   String _schoolRecordsReady = 'Some';
   String _englishSupport = 'Not sure';
+
+  @override
+  void initState() {
+    super.initState();
+    _nameController = TextEditingController(text: _isDemo ? 'Nour' : '');
+  }
 
   @override
   void dispose() {
@@ -29,14 +36,23 @@ class _AddChildScreenState extends ConsumerState<AddChildScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final name = _nameController.text.trim().isEmpty ? 'child' : _nameController.text.trim();
+    final name = _nameController.text.trim().isEmpty ? 'Nour' : _nameController.text.trim();
 
     return Scaffold(
       backgroundColor: AppColors.bg,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: BackButton(color: AppColors.primary, onPressed: () => context.pop()),
+        leading: BackButton(
+          color: AppColors.primary,
+          onPressed: () {
+            if (context.canPop()) {
+              context.pop();
+            } else {
+              context.go('/household');
+            }
+          },
+        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -193,7 +209,11 @@ class _AddChildScreenState extends ConsumerState<AddChildScreen> {
                                               : 16,
                         ),
                       );
-                  context.pop();
+                  if (context.canPop()) {
+                    context.pop();
+                  } else {
+                    context.go('/household');
+                  }
                 },
               ),
               const SizedBox(height: 16),

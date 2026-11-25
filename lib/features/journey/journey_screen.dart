@@ -91,11 +91,7 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
                   ),
                   const SizedBox(width: 8),
                   InkWell(
-                    onTap: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Search tasks')),
-                      );
-                    },
+                    onTap: () => context.push('/search'),
                     borderRadius: BorderRadius.circular(22),
                     child: Container(
                       width: 44,
