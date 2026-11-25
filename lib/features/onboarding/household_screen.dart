@@ -46,7 +46,16 @@ class OnboardingHouseholdScreen extends ConsumerWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: BackButton(color: AppColors.primary, onPressed: () => context.pop()),
+        leading: BackButton(
+          color: AppColors.primary,
+          onPressed: () {
+            if (context.canPop()) {
+              context.pop();
+            } else {
+              context.go('/status');
+            }
+          },
+        ),
         title: const Text(
           'Step 4 of 5',
           style: TextStyle(
@@ -223,6 +232,11 @@ class OnboardingHouseholdScreen extends ConsumerWidget {
                     context,
                     '+ Parent or other',
                     () => context.push('/add-adult?type=Parent'),
+                  ),
+                  _actionChip(
+                    context,
+                    '+ Adult child',
+                    () => context.push('/add-student'),
                   ),
                 ],
               ),

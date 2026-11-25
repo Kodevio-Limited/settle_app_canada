@@ -117,7 +117,7 @@ class _MainWelcomeScreenState extends ConsumerState<MainWelcomeScreen> {
                 child: TextButton(
                   onPressed: () {
                     ref.read(authProvider.notifier).setGuest();
-                    context.go('/home');
+                    context.push('/guest-home');
                   },
                   child: Text(
                     'Explore without an account',

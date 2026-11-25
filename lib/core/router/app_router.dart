@@ -52,6 +52,7 @@ import '../../features/help/check_in_screen.dart';
 import '../../features/help/community_groups_screen.dart';
 import '../../features/help/how_guidance_screen.dart';
 import '../../features/help/conversation_guide_screen.dart';
+import '../../app/router/pending_routes.dart';
 
 GoRouter createRouter({String initialLocation = '/'}) {
   return GoRouter(
@@ -61,6 +62,10 @@ GoRouter createRouter({String initialLocation = '/'}) {
         path: '/',
         name: 'welcome',
         builder: (context, state) => const MainWelcomeScreen(),
+      ),
+      GoRoute(
+        path: '/main',
+        redirect: (context, state) => '/',
       ),
       GoRoute(
         path: '/sign-up',
@@ -619,6 +624,7 @@ GoRouter createRouter({String initialLocation = '/'}) {
           ),
         ],
       ),
+      ...pendingS10Routes,
     ],
   );
 }

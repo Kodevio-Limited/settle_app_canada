@@ -44,13 +44,15 @@ class _ReportOutdatedScreenState extends State<ReportOutdatedScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    'Report outdated info',
-                    style: TextStyle(
-                      fontFamily: 'Bricolage Grotesque',
-                      fontSize: 24,
-                      fontWeight: FontWeight.w800,
-                      color: Color(0xFF123332),
+                  const Expanded(
+                    child: Text(
+                      'Report outdated info',
+                      style: TextStyle(
+                        fontFamily: 'Bricolage Grotesque',
+                        fontSize: 24,
+                        fontWeight: FontWeight.w800,
+                        color: Color(0xFF123332),
+                      ),
                     ),
                   ),
                   IconButton(
