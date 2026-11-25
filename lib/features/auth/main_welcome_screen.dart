@@ -6,6 +6,7 @@ import '../../core/theme/app_decorations.dart';
 import '../../core/theme/app_typography.dart';
 import '../../core/widgets/settle_button.dart';
 import '../auth/auth_provider.dart';
+import '../debug/debug_menu.dart';
 
 class MainWelcomeScreen extends ConsumerStatefulWidget {
   const MainWelcomeScreen({super.key});
@@ -28,9 +29,9 @@ class _MainWelcomeScreenState extends ConsumerState<MainWelcomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 12),
-              // App Logo - left aligned (long press opens Screen Navigator)
+              // App Logo - left aligned (long press opens Debug Presets)
               GestureDetector(
-                onLongPress: () => context.push('/gallery'),
+                onLongPress: () => DebugMenuSheet.show(context),
                 child: Image.asset(
                   'assets/images/07c6b61d7c458b0713169e060e736b9d.png',
                   width: 170,
