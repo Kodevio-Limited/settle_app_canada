@@ -32,7 +32,7 @@ void main() {
     expect(bellFinder, findsOneWidget);
     await tester.tap(bellFinder);
     await tester.pumpAndSettle();
-    expect(find.textContaining('reminders'), findsWidgets);
+    expect(find.textContaining('Reminders'), findsWidgets);
 
     // Home -> All tasks -> Journey
     await tester.pumpWidget(createTestApp('/home'));
@@ -112,7 +112,7 @@ void main() {
     expect(searchFinder, findsOneWidget);
     await tester.tap(searchFinder);
     await tester.pumpAndSettle();
-    expect(find.textContaining('search'), findsWidgets);
+    expect(find.textContaining('Search'), findsWidgets);
 
     // Journey -> Stage 1 (Status) -> StageDetailScreen
     await tester.pumpWidget(createTestApp('/journey'));

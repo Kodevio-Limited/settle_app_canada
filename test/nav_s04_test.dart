@@ -44,7 +44,7 @@ void main() {
     await tester.ensureVisible(find.text('All checklists'));
     await tester.tap(find.text('All checklists'));
     await tester.pumpAndSettle();
-    expect(find.textContaining('checklist'), findsWidgets);
+    expect(find.textContaining('What to bring'), findsWidgets);
 
     // TaskSIN -> See all on the map -> Nearby
     await tester.pumpWidget(createTestApp('/task-sin'));

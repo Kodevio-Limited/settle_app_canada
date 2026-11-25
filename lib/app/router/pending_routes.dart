@@ -1,10 +1,5 @@
-// GENERATED FILE - Pending routes for screens not yet implemented in earlier branches.
-// Contains target routes for S06+ referenced by navigation edges.
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../core/theme/app_colors.dart';
-import '../../core/theme/app_typography.dart';
 
 class PendingRouteScreen extends StatelessWidget {
   final String title;
@@ -19,60 +14,36 @@ class PendingRouteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.bg,
       appBar: AppBar(
-        leading: const BackButton(color: AppColors.primary),
-        title: Text(
-          title,
-          style: const TextStyle(
-            fontFamily: AppTypography.fontHeading,
-            fontWeight: FontWeight.w700,
-            fontSize: 18,
-            color: AppColors.primary,
-          ),
+        title: Text(title),
+        leading: BackButton(
+          onPressed: () {
+            if (context.canPop()) {
+              context.pop();
+            } else {
+              context.go('/home');
+            }
+          },
         ),
-        backgroundColor: Colors.white,
-        elevation: 0,
       ),
-      body: SafeArea(
+      body: Center(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(Icons.construction, size: 48, color: AppColors.primary),
+              const Icon(Icons.construction, size: 48, color: Colors.orange),
               const SizedBox(height: 16),
               Text(
                 title,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontFamily: AppTypography.fontHeading,
-                  fontSize: 22,
-                  fontWeight: FontWeight.w800,
-                  color: AppColors.primary,
-                ),
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
               Text(
-                'This screen is implemented in a later phase. Route: $routePath',
+                'Route: $routePath',
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontFamily: AppTypography.fontBody,
-                  fontSize: 14,
-                  color: Color(0xFF5A5F6B),
-                ),
-              ),
-              const SizedBox(height: 24),
-              ElevatedButton(
-                onPressed: () => context.pop(),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
-                  foregroundColor: Colors.white,
-                  minimumSize: const Size.fromHeight(48),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-                ),
-                child: const Text('Back'),
+                style: const TextStyle(color: Colors.grey),
               ),
             ],
           ),
@@ -82,7 +53,7 @@ class PendingRouteScreen extends StatelessWidget {
   }
 }
 
-final List<GoRoute> pendingS10Routes = [
+final List<RouteBase> pendingS10Routes = [
   GoRoute(
     path: '/all-professions',
     name: 'allprofessions',
@@ -100,27 +71,11 @@ final List<GoRoute> pendingS10Routes = [
     ),
   ),
   GoRoute(
-    path: '/calendar',
-    name: 'calendar',
-    builder: (context, state) => PendingRouteScreen(
-      title: "6.7 Reminders \u00b7 calendar",
-      routePath: '/calendar',
-    ),
-  ),
-  GoRoute(
     path: '/check-in',
     name: 'checkin',
     builder: (context, state) => PendingRouteScreen(
       title: "7.3 Weekly check-in",
       routePath: '/check-in',
-    ),
-  ),
-  GoRoute(
-    path: '/checklist',
-    name: 'checklist',
-    builder: (context, state) => PendingRouteScreen(
-      title: "6.5 What to bring (replaces uploads)",
-      routePath: '/checklist',
     ),
   ),
   GoRoute(
@@ -324,14 +279,6 @@ final List<GoRoute> pendingS10Routes = [
     ),
   ),
   GoRoute(
-    path: '/family',
-    name: 'family',
-    builder: (context, state) => PendingRouteScreen(
-      title: "6.1 Family",
-      routePath: '/family',
-    ),
-  ),
-  GoRoute(
     path: '/home-a-r',
     name: 'homear',
     builder: (context, state) => PendingRouteScreen(
@@ -388,14 +335,6 @@ final List<GoRoute> pendingS10Routes = [
     ),
   ),
   GoRoute(
-    path: '/just-today',
-    name: 'justtoday',
-    builder: (context, state) => PendingRouteScreen(
-      title: "6.11 Just today mode",
-      routePath: '/just-today',
-    ),
-  ),
-  GoRoute(
     path: '/language-access',
     name: 'languageaccess',
     builder: (context, state) => PendingRouteScreen(
@@ -428,51 +367,11 @@ final List<GoRoute> pendingS10Routes = [
     ),
   ),
   GoRoute(
-    path: '/life-event',
-    name: 'lifeevent',
-    builder: (context, state) => PendingRouteScreen(
-      title: "6.9 Something changed?",
-      routePath: '/life-event',
-    ),
-  ),
-  GoRoute(
     path: '/location-denied',
     name: 'locationdenied',
     builder: (context, state) => PendingRouteScreen(
       title: "9.3 Location turned off",
       routePath: '/location-denied',
-    ),
-  ),
-  GoRoute(
-    path: '/member-adult',
-    name: 'memberadult',
-    builder: (context, state) => PendingRouteScreen(
-      title: "6.2 Family member \u00b7 adult",
-      routePath: '/member-adult',
-    ),
-  ),
-  GoRoute(
-    path: '/member-child',
-    name: 'memberchild',
-    builder: (context, state) => PendingRouteScreen(
-      title: "6.3 Family member \u00b7 child",
-      routePath: '/member-child',
-    ),
-  ),
-  GoRoute(
-    path: '/member-student',
-    name: 'memberstudent',
-    builder: (context, state) => PendingRouteScreen(
-      title: "6.13 Family member \u00b7 university student",
-      routePath: '/member-student',
-    ),
-  ),
-  GoRoute(
-    path: '/notification-settings',
-    name: 'notificationsettings',
-    builder: (context, state) => PendingRouteScreen(
-      title: "6.8 Notification settings",
-      routePath: '/notification-settings',
     ),
   ),
   GoRoute(
@@ -964,14 +863,6 @@ final List<GoRoute> pendingS10Routes = [
     ),
   ),
   GoRoute(
-    path: '/plan-change',
-    name: 'planchange',
-    builder: (context, state) => PendingRouteScreen(
-      title: "6.10 Plan recalculated",
-      routePath: '/plan-change',
-    ),
-  ),
-  GoRoute(
     path: '/pre-arrival-day',
     name: 'prearrivalday',
     builder: (context, state) => PendingRouteScreen(
@@ -1041,30 +932,6 @@ final List<GoRoute> pendingS10Routes = [
     builder: (context, state) => PendingRouteScreen(
       title: "8.3 Privacy & my data",
       routePath: '/privacy-data',
-    ),
-  ),
-  GoRoute(
-    path: '/reminders',
-    name: 'reminders',
-    builder: (context, state) => PendingRouteScreen(
-      title: "6.6 Reminders \u00b7 upcoming",
-      routePath: '/reminders',
-    ),
-  ),
-  GoRoute(
-    path: '/remove-member',
-    name: 'removemember',
-    builder: (context, state) => PendingRouteScreen(
-      title: "6.4 Remove a family member",
-      routePath: '/remove-member',
-    ),
-  ),
-  GoRoute(
-    path: '/search',
-    name: 'search',
-    builder: (context, state) => PendingRouteScreen(
-      title: "6.12 Search",
-      routePath: '/search',
     ),
   ),
   GoRoute(

@@ -100,7 +100,7 @@ void main() {
     await tester.ensureVisible(find.text('Change update alerts'));
     await tester.tap(find.text('Change update alerts'));
     await tester.pumpAndSettle();
-    expect(find.textContaining('Notification settings'), findsWidgets);
+    expect(find.textContaining('Reminders & alerts'), findsWidgets);
 
     // ContentUpdated -> BackButton -> Home
     await tester.pumpWidget(createTestApp('/content-updated'));
