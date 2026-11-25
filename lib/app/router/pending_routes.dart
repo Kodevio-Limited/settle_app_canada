@@ -71,38 +71,6 @@ final List<RouteBase> pendingS10Routes = [
     ),
   ),
   GoRoute(
-    path: '/check-in',
-    name: 'checkin',
-    builder: (context, state) => PendingRouteScreen(
-      title: "7.3 Weekly check-in",
-      routePath: '/check-in',
-    ),
-  ),
-  GoRoute(
-    path: '/community-groups',
-    name: 'communitygroups',
-    builder: (context, state) => PendingRouteScreen(
-      title: "7.2 Community groups",
-      routePath: '/community-groups',
-    ),
-  ),
-  GoRoute(
-    path: '/conversation-guide',
-    name: 'conversationguide',
-    builder: (context, state) => PendingRouteScreen(
-      title: "7.4 Family conversation guide",
-      routePath: '/conversation-guide',
-    ),
-  ),
-  GoRoute(
-    path: '/crisis',
-    name: 'crisis',
-    builder: (context, state) => PendingRouteScreen(
-      title: "7.5 Get help now",
-      routePath: '/crisis',
-    ),
-  ),
-  GoRoute(
     path: '/data-export',
     name: 'dataexport',
     builder: (context, state) => PendingRouteScreen(

@@ -104,7 +104,7 @@ void main() {
     expect(find.text('Trusted help'), findsOneWidget);
     await tester.tap(find.text('Trusted help'));
     await tester.pumpAndSettle();
-    expect(find.text('Help & Trusted Support (Phase 7)'), findsOneWidget);
+    expect(find.textContaining('Trusted help'), findsOneWidget);
 
     // Continue -> /household
     await tester.pumpWidget(createTestApp('/status'));

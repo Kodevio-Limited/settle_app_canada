@@ -171,7 +171,7 @@ void main() {
     expect(find.text("Can't get into your email? Contact support"), findsOneWidget);
     await tester.tap(find.text("Can't get into your email? Contact support"));
     await tester.pumpAndSettle();
-    expect(find.textContaining('How Guidance Works'), findsOneWidget);
+    expect(find.textContaining('guidance works'), findsOneWidget);
 
     // New here? Create an account -> /sign-up
     await tester.pumpWidget(createTestApp('/sign-in'));

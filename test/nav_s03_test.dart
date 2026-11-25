@@ -56,7 +56,7 @@ void main() {
     expect(find.text("How's this week?"), findsOneWidget);
     await tester.tap(find.text("How's this week?"));
     await tester.pumpAndSettle();
-    expect(find.textContaining('check-in'), findsWidgets);
+    expect(find.textContaining('manageable does settling feel'), findsWidgets);
 
     // Home -> Action item -> TaskSIN
     await tester.pumpWidget(createTestApp('/home'));
