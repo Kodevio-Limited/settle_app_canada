@@ -52,7 +52,7 @@ void main() {
     expect(find.text('Explore without an account'), findsOneWidget);
     await tester.tap(find.text('Explore without an account'));
     await tester.pumpAndSettle();
-    expect(find.textContaining('Guest'), findsOneWidget);
+    expect(find.textContaining("You're exploring"), findsOneWidget);
   });
 
   testWidgets('S01: 1.2 SignUp -> Social auth & terms navigate to Consent', (tester) async {

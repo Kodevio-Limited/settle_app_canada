@@ -295,14 +295,6 @@ final List<RouteBase> pendingS10Routes = [
     ),
   ),
   GoRoute(
-    path: '/location-denied',
-    name: 'locationdenied',
-    builder: (context, state) => PendingRouteScreen(
-      title: "9.3 Location turned off",
-      routePath: '/location-denied',
-    ),
-  ),
-  GoRoute(
     path: '/offer-bank',
     name: 'offerbank',
     builder: (context, state) => PendingRouteScreen(
@@ -332,14 +324,6 @@ final List<RouteBase> pendingS10Routes = [
     builder: (context, state) => PendingRouteScreen(
       title: "23.15 Offer \u00b7 Phone plan",
       routePath: '/offer-phone',
-    ),
-  ),
-  GoRoute(
-    path: '/offline',
-    name: 'offline',
-    builder: (context, state) => PendingRouteScreen(
-      title: "9.2 Offline",
-      routePath: '/offline',
     ),
   ),
   GoRoute(
