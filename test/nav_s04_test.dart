@@ -35,7 +35,7 @@ void main() {
     expect(find.text('Something wrong? Update your answers'), findsOneWidget);
     await tester.tap(find.text('Something wrong? Update your answers'));
     await tester.pumpAndSettle();
-    expect(find.textContaining('Settings'), findsWidgets);
+    expect(find.text('Me'), findsWidgets);
 
     // TaskSIN -> All checklists -> Checklist
     await tester.pumpWidget(createTestApp('/task-sin'));

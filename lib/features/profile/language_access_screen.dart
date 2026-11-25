@@ -52,13 +52,15 @@ class _LanguageAccessScreenState extends State<LanguageAccessScreen> {
                       ),
                     ),
                   ),
-                  const Text(
-                    'Language & accessibility',
-                    style: TextStyle(
-                      fontFamily: AppTypography.fontHeading,
-                      fontSize: 24,
-                      fontWeight: FontWeight.w800,
-                      color: Color(0xFF123332),
+                  const Expanded(
+                    child: Text(
+                      'Language & accessibility',
+                      style: TextStyle(
+                        fontFamily: AppTypography.fontHeading,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w800,
+                        color: Color(0xFF123332),
+                      ),
                     ),
                   ),
                 ],

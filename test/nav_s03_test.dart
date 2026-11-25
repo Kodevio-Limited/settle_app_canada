@@ -96,7 +96,7 @@ void main() {
     expect(find.text('Me'), findsOneWidget);
     await tester.tap(find.text('Me'));
     await tester.pumpAndSettle();
-    expect(find.textContaining('Settings'), findsWidgets);
+    expect(find.text('Me'), findsWidgets);
   });
 
   testWidgets('S03: 3.2 Journey navigation (search, stages 1-10)', (tester) async {

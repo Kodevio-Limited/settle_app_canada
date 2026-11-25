@@ -71,38 +71,6 @@ final List<RouteBase> pendingS10Routes = [
     ),
   ),
   GoRoute(
-    path: '/data-export',
-    name: 'dataexport',
-    builder: (context, state) => PendingRouteScreen(
-      title: "8.4 Download my data",
-      routePath: '/data-export',
-    ),
-  ),
-  GoRoute(
-    path: '/deactivate',
-    name: 'deactivate',
-    builder: (context, state) => PendingRouteScreen(
-      title: "8.7 Pause or delete",
-      routePath: '/deactivate',
-    ),
-  ),
-  GoRoute(
-    path: '/delete-confirm',
-    name: 'deleteconfirm',
-    builder: (context, state) => PendingRouteScreen(
-      title: "8.10 Confirm deletion",
-      routePath: '/delete-confirm',
-    ),
-  ),
-  GoRoute(
-    path: '/deleted',
-    name: 'deleted',
-    builder: (context, state) => PendingRouteScreen(
-      title: "8.11 Account deleted",
-      routePath: '/deleted',
-    ),
-  ),
-  GoRoute(
     path: '/event-skate',
     name: 'eventskate',
     builder: (context, state) => PendingRouteScreen(
@@ -300,14 +268,6 @@ final List<RouteBase> pendingS10Routes = [
     builder: (context, state) => PendingRouteScreen(
       title: "16.7 Journey \u00b7 Before you move",
       routePath: '/journey-approved',
-    ),
-  ),
-  GoRoute(
-    path: '/language-access',
-    name: 'languageaccess',
-    builder: (context, state) => PendingRouteScreen(
-      title: "8.5 Language & accessibility",
-      routePath: '/language-access',
     ),
   ),
   GoRoute(
@@ -775,14 +735,6 @@ final List<RouteBase> pendingS10Routes = [
     ),
   ),
   GoRoute(
-    path: '/paused',
-    name: 'paused',
-    builder: (context, state) => PendingRouteScreen(
-      title: "8.8 Account paused",
-      routePath: '/paused',
-    ),
-  ),
-  GoRoute(
     path: '/place-kariya',
     name: 'placekariya',
     builder: (context, state) => PendingRouteScreen(
@@ -892,22 +844,6 @@ final List<RouteBase> pendingS10Routes = [
     builder: (context, state) => PendingRouteScreen(
       title: "16.17 Task \u00b7 get your travel documents ready",
       routePath: '/pre-travel-docs',
-    ),
-  ),
-  GoRoute(
-    path: '/privacy-data',
-    name: 'privacydata',
-    builder: (context, state) => PendingRouteScreen(
-      title: "8.3 Privacy & my data",
-      routePath: '/privacy-data',
-    ),
-  ),
-  GoRoute(
-    path: '/sign-out-confirm',
-    name: 'signoutconfirm',
-    builder: (context, state) => PendingRouteScreen(
-      title: "8.6 Sign out",
-      routePath: '/sign-out-confirm',
     ),
   ),
   GoRoute(
