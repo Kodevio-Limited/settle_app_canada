@@ -1,80 +1,63 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../core/theme/app_colors.dart';
+import '../../core/theme/app_typography.dart';
+import '../../core/widgets/figma_onboarding_widgets.dart';
+
 class OfflineScreen extends StatelessWidget {
   const OfflineScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    const primaryDark = Color(0xFF123332);
-    const borderCard = Color(0xFFDEDEE2);
-    const textMuted = Color(0xFF3B4747);
-    const crisisRed = Color(0xFF8E1C21);
-
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F4F5),
+      backgroundColor: AppColors.bg,
       body: SafeArea(
         child: Column(
           children: [
-            // Status bar
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-              color: const Color(0xFF3B4747),
-              child: const Row(
+              color: AppColors.dark400,
+              child: Row(
                 children: [
-                  Icon(Icons.wifi_off_rounded, color: Colors.white, size: 20),
-                  SizedBox(width: 10),
+                  const Icon(Icons.wifi_off_rounded, color: AppColors.white50, size: 20),
+                  const SizedBox(width: 10),
                   Expanded(
                     child: Text(
-                      'You\'re offline. Your plan and checklists still work. Last synced 10:24 am.',
-                      style: TextStyle(
-                        fontFamily: 'IBM Plex Sans',
-                        fontSize: 14,
+                      "You're offline. Your plan and checklists still work. Last synced 10:24 am.",
+                      style: AppTypography.body2.copyWith(
                         height: 1.35,
-                        color: Colors.white,
+                        color: AppColors.white50,
                       ),
                     ),
                   ),
                 ],
               ),
             ),
-
             Expanded(
               child: SingleChildScrollView(
                 padding: const EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       'Good morning, Layla',
-                      style: TextStyle(
-                        fontFamily: 'Bricolage Grotesque',
-                        fontWeight: FontWeight.w800,
-                        fontSize: 28,
-                        letterSpacing: -0.6,
-                        color: primaryDark,
+                      style: AppTypography.h4.copyWith(
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.primary,
                       ),
                     ),
                     const SizedBox(height: 14),
-
-                    // Next 3 actions card
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(18),
-                        border: Border.all(color: borderCard),
-                      ),
+                    FigmaSurfaceCard(
                       padding: const EdgeInsets.fromLTRB(16, 14, 16, 4),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             'Your next 3 actions',
-                            style: TextStyle(
-                              fontFamily: 'IBM Plex Sans',
+                            style: AppTypography.body2Bold.copyWith(
                               fontSize: 17,
-                              fontWeight: FontWeight.w600,
-                              color: primaryDark,
+                              color: AppColors.primary,
                             ),
                           ),
                           const SizedBox(height: 6),
@@ -103,43 +86,34 @@ class OfflineScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 14),
-
-                    // Needs a connection card
                     Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: const Color(0xFFEAEAEC),
+                        color: AppColors.dark50,
                         borderRadius: BorderRadius.circular(16),
                       ),
                       padding: const EdgeInsets.all(14),
-                      child: const Column(
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             'Needs a connection',
-                            style: TextStyle(
-                              fontFamily: 'IBM Plex Sans',
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                              color: primaryDark,
+                            style: AppTypography.body2Bold.copyWith(
+                              color: AppColors.primary,
                             ),
                           ),
-                          SizedBox(height: 6),
+                          const SizedBox(height: 6),
                           Text(
                             'Maps, opening hours and official pages. Nearby lists show your last saved results.',
-                            style: TextStyle(
-                              fontFamily: 'IBM Plex Sans',
-                              fontSize: 14,
+                            style: AppTypography.body2.copyWith(
                               height: 1.45,
-                              color: textMuted,
+                              color: AppColors.dark300,
                             ),
                           ),
                         ],
                       ),
                     ),
                     const SizedBox(height: 16),
-
-                    // Crisis banner
                     InkWell(
                       onTap: () => context.push('/crisis'),
                       borderRadius: BorderRadius.circular(14),
@@ -147,49 +121,25 @@ class OfflineScreen extends StatelessWidget {
                         width: double.infinity,
                         padding: const EdgeInsets.all(14),
                         decoration: BoxDecoration(
-                          color: crisisRed,
+                          color: AppColors.red,
                           borderRadius: BorderRadius.circular(14),
                         ),
-                        child: const Text(
+                        child: Text(
                           'Crisis lines work offline — tap to see them',
-                          style: TextStyle(
-                            fontFamily: 'IBM Plex Sans',
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white,
+                          style: AppTypography.body2Bold.copyWith(
+                            color: AppColors.white50,
                           ),
                         ),
                       ),
                     ),
                     const SizedBox(height: 10),
-
-                    // Try again button
-                    SizedBox(
-                      width: double.infinity,
-                      height: 48,
-                      child: OutlinedButton(
-                        onPressed: () {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Checking connection...')),
-                          );
-                        },
-                        style: OutlinedButton.styleFrom(
-                          side: const BorderSide(color: primaryDark),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          backgroundColor: Colors.white,
-                          foregroundColor: primaryDark,
-                        ),
-                        child: const Text(
-                          'Try again',
-                          style: TextStyle(
-                            fontFamily: 'IBM Plex Sans',
-                            fontWeight: FontWeight.w600,
-                            fontSize: 15,
-                          ),
-                        ),
-                      ),
+                    FigmaSoftOutlineButton(
+                      label: 'Try again',
+                      onPressed: () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Checking connection...')),
+                        );
+                      },
                     ),
                   ],
                 ),
@@ -211,10 +161,11 @@ class OfflineScreen extends StatelessWidget {
     return InkWell(
       onTap: () => context.push(route),
       child: Container(
+        constraints: const BoxConstraints(minHeight: 48),
         padding: const EdgeInsets.symmetric(vertical: 12),
         decoration: BoxDecoration(
           border: showBorder
-              ? const Border(bottom: BorderSide(color: Color(0xFFEAEAEC)))
+              ? const Border(bottom: BorderSide(color: AppColors.divider))
               : null,
         ),
         child: Row(
@@ -224,7 +175,7 @@ class OfflineScreen extends StatelessWidget {
               height: 26,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                border: Border.all(color: const Color(0xFFABABB3), width: 2),
+                border: Border.all(color: AppColors.dark100, width: 2),
               ),
             ),
             const SizedBox(width: 12),
@@ -234,19 +185,14 @@ class OfflineScreen extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: const TextStyle(
-                      fontFamily: 'IBM Plex Sans',
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF123332),
+                    style: AppTypography.body2Bold.copyWith(
+                      color: AppColors.primary,
                     ),
                   ),
                   Text(
                     subtitle,
-                    style: const TextStyle(
-                      fontFamily: 'IBM Plex Sans',
-                      fontSize: 13,
-                      color: Color(0xFF5A5F6B),
+                    style: AppTypography.caption1.copyWith(
+                      color: AppColors.dark200,
                     ),
                   ),
                 ],

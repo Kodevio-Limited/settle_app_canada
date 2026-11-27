@@ -1,44 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../core/theme/app_colors.dart';
+import '../../core/theme/app_typography.dart';
+import '../../core/widgets/figma_onboarding_widgets.dart';
+import '../../core/widgets/settle_button.dart';
+
 class WelcomeBackScreen extends StatelessWidget {
   const WelcomeBackScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    const primaryDark = Color(0xFF123332);
-    const textMuted = Color(0xFF3B4747);
-    const badgeRed = Color(0xFFA82227);
-    const borderCard = Color(0xFFDEDEE2);
-
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F4F5),
+      backgroundColor: AppColors.bg,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 40, 20, 32),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'PAUSED FOR 3 MONTHS',
-                style: TextStyle(
-                  fontFamily: 'IBM Plex Sans',
-                  fontSize: 12,
+                style: AppTypography.caption2.copyWith(
                   fontWeight: FontWeight.w600,
                   letterSpacing: 0.6,
-                  color: badgeRed,
+                  color: AppColors.red,
                 ),
               ),
               const SizedBox(height: 8),
-              const Text(
+              Text(
                 'Welcome back, Layla',
-                style: TextStyle(
-                  fontFamily: 'Bricolage Grotesque',
-                  fontWeight: FontWeight.w800,
-                  fontSize: 34,
-                  height: 1.05,
-                  letterSpacing: -0.8,
-                  color: primaryDark,
+                style: AppTypography.h4.copyWith(
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.primary,
                 ),
               ),
               const SizedBox(height: 6),
@@ -47,88 +41,43 @@ class WelcomeBackScreen extends StatelessWidget {
                 child: Text(
                   'أهلاً بعودتك',
                   textDirection: TextDirection.rtl,
-                  style: TextStyle(
-                    fontFamily: 'IBM Plex Sans Arabic',
+                  style: AppTypography.body2.copyWith(
+                    fontFamily: AppTypography.fontArabic,
                     fontSize: 18,
-                    color: textMuted,
+                    color: AppColors.dark300,
                   ),
                 ),
               ),
               const SizedBox(height: 12),
-              const Text(
+              Text(
                 'A lot can change in three months. Before you jump back in:',
-                style: TextStyle(
-                  fontFamily: 'IBM Plex Sans',
-                  fontSize: 16,
+                style: AppTypography.body2.copyWith(
                   height: 1.5,
-                  color: textMuted,
+                  color: AppColors.dark300,
                 ),
               ),
               const SizedBox(height: 18),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: borderCard),
-                ),
+              FigmaSurfaceCard(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
                 child: Column(
                   children: [
                     _buildStatRow('Steps updated while you were away', '3'),
-                    const Divider(color: Color(0xFFEEEEF0), height: 20),
+                    const Divider(color: AppColors.divider, height: 20),
                     _buildStatRow('Tasks still open', '33'),
-                    const Divider(color: Color(0xFFEEEEF0), height: 20),
-                    _buildStatRow('Reminders', 'Off', valColor: const Color(0xFF5A5F6B)),
+                    const Divider(color: AppColors.divider, height: 20),
+                    _buildStatRow('Reminders', 'Off', valColor: AppColors.dark200),
                   ],
                 ),
               ),
               const Spacer(),
-              SizedBox(
-                width: double.infinity,
-                height: 54,
-                child: ElevatedButton(
-                  onPressed: () => context.push('/life-event'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: primaryDark,
-                    foregroundColor: Colors.white,
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14),
-                    ),
-                  ),
-                  child: const Text(
-                    'Check my answers first',
-                    style: TextStyle(
-                      fontFamily: 'IBM Plex Sans',
-                      fontWeight: FontWeight.w600,
-                      fontSize: 17,
-                    ),
-                  ),
-                ),
+              SettleButton(
+                label: 'Check my answers first',
+                onPressed: () => context.push('/life-event'),
               ),
               const SizedBox(height: 10),
-              SizedBox(
-                width: double.infinity,
-                height: 50,
-                child: OutlinedButton(
-                  onPressed: () => context.go('/home'),
-                  style: OutlinedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    side: const BorderSide(color: Color(0xFFC8C8CE)),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14),
-                    ),
-                    foregroundColor: primaryDark,
-                  ),
-                  child: const Text(
-                    'Resume where I left off',
-                    style: TextStyle(
-                      fontFamily: 'IBM Plex Sans',
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
+              FigmaSoftOutlineButton(
+                label: 'Resume where I left off',
+                onPressed: () => context.go('/home'),
               ),
             ],
           ),
@@ -144,20 +93,15 @@ class WelcomeBackScreen extends StatelessWidget {
         Expanded(
           child: Text(
             label,
-            style: const TextStyle(
-              fontFamily: 'IBM Plex Sans',
-              fontSize: 15,
-              color: Color(0xFF123332),
+            style: AppTypography.body2.copyWith(
+              color: AppColors.primary,
             ),
           ),
         ),
         Text(
           value,
-          style: TextStyle(
-            fontFamily: 'IBM Plex Sans',
-            fontSize: 15,
-            fontWeight: FontWeight.bold,
-            color: valColor ?? const Color(0xFF123332),
+          style: AppTypography.body2Bold.copyWith(
+            color: valColor ?? AppColors.primary,
           ),
         ),
       ],

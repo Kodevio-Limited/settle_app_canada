@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_typography.dart';
+import '../../core/widgets/figma_onboarding_widgets.dart';
 
 class PrivacyDataScreen extends StatefulWidget {
   const PrivacyDataScreen({super.key});
@@ -19,276 +21,211 @@ class _PrivacyDataScreenState extends State<PrivacyDataScreen> {
     return Scaffold(
       backgroundColor: AppColors.bg,
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Header
-              Row(
-                children: [
-                  Transform.translate(
-                    offset: const Offset(-10, 0),
-                    child: InkWell(
-                      onTap: () {
-                        if (context.canPop()) {
-                          context.pop();
-                        } else {
-                          context.go('/settings');
-                        }
-                      },
-                      borderRadius: BorderRadius.circular(22),
-                      child: const SizedBox(
-                        width: 44,
-                        height: 44,
-                        child: Center(
-                          child: Icon(
-                            Icons.arrow_back_ios_new_rounded,
-                            size: 20,
-                            color: Color(0xFF123332),
-                          ),
+        child: Column(
+          children: [
+            FigmaSubPageHeader(
+              title: 'Privacy & my data',
+              onBack: () {
+                if (context.canPop()) {
+                  context.pop();
+                } else {
+                  context.go('/settings');
+                }
+              },
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 4, bottom: 6),
+                      child: Text(
+                        'WHAT WE KEEP',
+                        style: AppTypography.caption1.copyWith(
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 0.5,
+                          color: AppColors.dark200,
                         ),
                       ),
                     ),
-                  ),
-                  const Text(
-                    'Privacy & my data',
-                    style: TextStyle(
-                      fontFamily: AppTypography.fontHeading,
-                      fontSize: 26,
-                      fontWeight: FontWeight.w800,
-                      color: Color(0xFF123332),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 14),
-
-              // WHAT WE KEEP
-              const Padding(
-                padding: EdgeInsets.only(left: 4, bottom: 6),
-                child: Text(
-                  'WHAT WE KEEP',
-                  style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 0.5,
-                    color: Color(0xFF5A5F6B),
-                  ),
-                ),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: const Color(0xFFDEDEE2)),
-                ),
-                padding: const EdgeInsets.symmetric(horizontal: 14),
-                child: Column(
-                  children: [
-                    _buildDataRow('Email for sign-in', showBorder: true),
-                    _buildDataRow(
-                      'City, stage, arrival month',
-                      actionLabel: 'Edit',
-                      onActionTap: () => context.push('/onboarding/destination'),
-                      showBorder: true,
-                    ),
-                    _buildDataRow(
-                      'Status category',
-                      actionLabel: 'Remove',
-                      onActionTap: () => context.push('/status'),
-                      showBorder: true,
-                    ),
-                    _buildDataRow(
-                      'Family nicknames & age ranges',
-                      actionLabel: 'Edit',
-                      onActionTap: () => context.push('/family'),
-                      showBorder: true,
-                    ),
-                    _buildDataRow('Task ticks & reminders', showBorder: false),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 14),
-
-              // NEVER COLLECTED (Banner)
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFF7E4E5),
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Never collected',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                        color: Color(0xFF7A1A1E),
-                      ),
-                    ),
-                    SizedBox(height: 4),
-                    Text(
-                      'Documents or photos · passport, UCI, SIN or file numbers · birthdates · medical records · precise location',
-                      style: TextStyle(
-                        fontSize: 13,
-                        height: 1.5,
-                        color: Color(0xFF5C1518),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 14),
-
-              // Toggle Switches
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: const Color(0xFFDEDEE2)),
-                ),
-                padding: const EdgeInsets.symmetric(horizontal: 14),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
-                      child: Row(
+                    FigmaSurfaceCard(
+                      padding: const EdgeInsets.symmetric(horizontal: 14),
+                      child: Column(
                         children: [
-                          const Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Nearby services',
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    color: Color(0xFF123332),
-                                  ),
-                                ),
-                                SizedBox(height: 2),
-                                Text(
-                                  'Approximate, only while app is open',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Color(0xFF5A5F6B),
-                                  ),
-                                ),
-                              ],
+                          _buildDataRow('Email for sign-in', showBorder: true),
+                          _buildDataRow(
+                            'City, stage, arrival month',
+                            actionLabel: 'Edit',
+                            onActionTap: () =>
+                                context.push('/onboarding/destination'),
+                            showBorder: true,
+                          ),
+                          _buildDataRow(
+                            'Status category',
+                            actionLabel: 'Remove',
+                            onActionTap: () => context.push('/status'),
+                            showBorder: true,
+                          ),
+                          _buildDataRow(
+                            'Family nicknames & age ranges',
+                            actionLabel: 'Edit',
+                            onActionTap: () => context.push('/family'),
+                            showBorder: true,
+                          ),
+                          _buildDataRow('Task ticks & reminders',
+                              showBorder: false),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 14),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 14,
+                        vertical: 12,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColors.alertSurface,
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Never collected',
+                            style: AppTypography.body2Bold.copyWith(
+                              color: AppColors.red,
                             ),
                           ),
-                          Switch(
-                            value: _nearbyServices,
-                            activeColor: const Color(0xFF2E6B4F),
-                            onChanged: (val) => setState(() => _nearbyServices = val),
+                          const SizedBox(height: 4),
+                          Text(
+                            'Documents or photos · passport, UCI, SIN or file numbers · birthdates · medical records · precise location',
+                            style: AppTypography.caption1.copyWith(
+                              height: 1.5,
+                              color: AppColors.red,
+                            ),
                           ),
                         ],
                       ),
                     ),
-                    const Divider(height: 1, color: Color(0xFFEAEAEC)),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
-                      child: Row(
+                    const SizedBox(height: 14),
+                    FigmaSurfaceCard(
+                      padding: const EdgeInsets.symmetric(horizontal: 14),
+                      child: Column(
                         children: [
-                          const Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8),
+                            child: Row(
                               children: [
-                                Text(
-                                  'Anonymous usage stats',
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    color: Color(0xFF123332),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Nearby services',
+                                        style: AppTypography.body2.copyWith(
+                                          color: AppColors.primary,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 2),
+                                      Text(
+                                        'Approximate, only while app is open',
+                                        style: AppTypography.caption1.copyWith(
+                                          color: AppColors.dark200,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                SizedBox(height: 2),
-                                Text(
-                                  'No tracking, no ads, ever',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Color(0xFF5A5F6B),
-                                  ),
+                                Switch(
+                                  value: _nearbyServices,
+                                  activeColor: AppColors.success,
+                                  onChanged: (val) =>
+                                      setState(() => _nearbyServices = val),
                                 ),
                               ],
                             ),
                           ),
-                          Switch(
-                            value: _anonymousStats,
-                            activeColor: const Color(0xFF2E6B4F),
-                            onChanged: (val) => setState(() => _anonymousStats = val),
+                          const Divider(height: 1, color: AppColors.divider),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Anonymous usage stats',
+                                        style: AppTypography.body2.copyWith(
+                                          color: AppColors.primary,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 2),
+                                      Text(
+                                        'No tracking, no ads, ever',
+                                        style: AppTypography.caption1.copyWith(
+                                          color: AppColors.dark200,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Switch(
+                                  value: _anonymousStats,
+                                  activeColor: AppColors.success,
+                                  onChanged: (val) =>
+                                      setState(() => _anonymousStats = val),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
                     ),
+                    const SizedBox(height: 16),
+                    FigmaSoftOutlineButton(
+                      label: 'Download a copy of my data',
+                      onPressed: () => context.push('/data-export'),
+                    ),
+                    const SizedBox(height: 14),
+                    Wrap(
+                      children: [
+                        Text(
+                          'Stored in Canada [confirm with hosting provider]. ',
+                          style: AppTypography.caption1.copyWith(
+                            color: AppColors.dark200,
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () => context.push('/deactivate'),
+                          child: Text(
+                            'Delete my account',
+                            style: AppTypography.caption1.copyWith(
+                              color: AppColors.primary,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 6),
+                    InkWell(
+                      onTap: () {},
+                      child: Text(
+                        'No app? Delete on the web',
+                        style: AppTypography.body2Bold.copyWith(
+                          color: AppColors.primary,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
                   ],
                 ),
               ),
-              const SizedBox(height: 16),
-
-              // Download button
-              InkWell(
-                onTap: () => context.push('/data-export'),
-                borderRadius: BorderRadius.circular(14),
-                child: Container(
-                  height: 50,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(14),
-                    border: Border.all(color: const Color(0xFF123332)),
-                  ),
-                  alignment: Alignment.center,
-                  child: const Text(
-                    'Download a copy of my data',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF123332),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 14),
-
-              // Footer Note with links
-              Wrap(
-                children: [
-                  const Text(
-                    'Stored in Canada [confirm with hosting provider]. ',
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Color(0xFF5A5F6B),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () => context.push('/deactivate'),
-                    child: const Text(
-                      'Delete my account',
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Color(0xFF123332),
-                        decoration: TextDecoration.underline,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 6),
-              InkWell(
-                onTap: () {},
-                child: const Text(
-                  'No app? Delete on the web',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xFF123332),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -305,7 +242,7 @@ class _PrivacyDataScreenState extends State<PrivacyDataScreen> {
       padding: const EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
         border: showBorder
-            ? const Border(bottom: BorderSide(color: Color(0xFFEAEAEC)))
+            ? const Border(bottom: BorderSide(color: AppColors.divider))
             : null,
       ),
       child: Row(
@@ -314,9 +251,8 @@ class _PrivacyDataScreenState extends State<PrivacyDataScreen> {
           Expanded(
             child: Text(
               label,
-              style: const TextStyle(
-                fontSize: 15,
-                color: Color(0xFF123332),
+              style: AppTypography.body2.copyWith(
+                color: AppColors.primary,
               ),
             ),
           ),
@@ -327,10 +263,8 @@ class _PrivacyDataScreenState extends State<PrivacyDataScreen> {
                 padding: const EdgeInsets.symmetric(vertical: 4),
                 child: Text(
                   actionLabel,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xFF123332),
+                  style: AppTypography.body2Bold.copyWith(
+                    color: AppColors.primary,
                   ),
                 ),
               ),

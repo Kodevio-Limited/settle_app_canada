@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_typography.dart';
+import '../../core/widgets/figma_onboarding_widgets.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -20,138 +22,110 @@ class SettingsScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       'Me',
-                      style: TextStyle(
-                        fontFamily: AppTypography.fontHeading,
-                        fontSize: 28,
-                        fontWeight: FontWeight.w800,
-                        color: Color(0xFF123332),
-                        letterSpacing: -0.6,
+                      style: AppTypography.h4.copyWith(
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.primary,
                       ),
                     ),
                     const SizedBox(height: 14),
-
-                    // User Profile Card
-                    InkWell(
+                    FigmaSurfaceCard(
                       onTap: () => context.push('/edit-profile'),
-                      borderRadius: BorderRadius.circular(16),
-                      child: Container(
-                        padding: const EdgeInsets.all(14),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(16),
-                          border: Border.all(color: const Color(0xFFDEDEE2)),
-                        ),
-                        child: Row(
-                          children: [
-                            Container(
-                              width: 52,
-                              height: 52,
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Color(0xFF123332),
+                      padding: const EdgeInsets.all(14),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 52,
+                            height: 52,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: AppColors.primary,
+                            ),
+                            alignment: Alignment.center,
+                            child: Text(
+                              'L',
+                              style: AppTypography.h5.copyWith(
+                                color: AppColors.white50,
+                                fontWeight: FontWeight.w600,
                               ),
-                              alignment: Alignment.center,
-                              child: const Text(
-                                'L',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const SizedBox(width: 14),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Layla',
+                                  style: AppTypography.body2Bold.copyWith(
+                                    fontSize: 17,
+                                    color: AppColors.primary,
+                                  ),
                                 ),
-                              ),
-                            ),
-                            const SizedBox(width: 14),
-                            const Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Layla',
-                                    style: TextStyle(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w700,
-                                      color: Color(0xFF123332),
-                                    ),
+                                const SizedBox(height: 2),
+                                Text(
+                                  'Signed in with Apple · private relay email',
+                                  style: AppTypography.caption1.copyWith(
+                                    color: AppColors.dark200,
                                   ),
-                                  SizedBox(height: 2),
-                                  Text(
-                                    'Signed in with Apple · private relay email',
-                                    style: TextStyle(
-                                      fontSize: 13,
-                                      color: Color(0xFF5A5F6B),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                     const SizedBox(height: 12),
-
-                    // My Family Card
                     InkWell(
                       onTap: () => context.push('/family'),
                       borderRadius: BorderRadius.circular(16),
                       child: Container(
                         padding: const EdgeInsets.all(14),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFE2ECEB),
+                          color: AppColors.softTeal,
                           borderRadius: BorderRadius.circular(16),
                         ),
-                        child: const Row(
+                        child: Row(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.people_alt_outlined,
                               size: 24,
-                              color: Color(0xFF123332),
+                              color: AppColors.primary,
                             ),
-                            SizedBox(width: 12),
+                            const SizedBox(width: 12),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
                                     'My family',
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w700,
-                                      color: Color(0xFF123332),
+                                    style: AppTypography.body2Bold.copyWith(
+                                      color: AppColors.primary,
                                     ),
                                   ),
-                                  SizedBox(height: 2),
+                                  const SizedBox(height: 2),
                                   Text(
                                     "5 people · each person's tasks and progress",
-                                    style: TextStyle(
-                                      fontSize: 13,
-                                      color: Color(0xFF3B4747),
+                                    style: AppTypography.caption1.copyWith(
+                                      color: AppColors.dark300,
                                     ),
                                   ),
                                 ],
                               ),
                             ),
-                            Icon(
+                            const Icon(
                               Icons.chevron_right_rounded,
                               size: 20,
-                              color: Color(0xFF7A7A83),
+                              color: AppColors.dark200,
                             ),
                           ],
                         ),
                       ),
                     ),
                     const SizedBox(height: 18),
-
-                    // Section: MY PLAN
                     _buildSectionHeader('My plan'),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(color: const Color(0xFFDEDEE2)),
-                      ),
+                    FigmaSurfaceCard(
                       padding: const EdgeInsets.symmetric(horizontal: 14),
                       child: Column(
                         children: [
@@ -177,15 +151,8 @@ class SettingsScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 18),
-
-                    // Section: APP
                     _buildSectionHeader('App'),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(color: const Color(0xFFDEDEE2)),
-                      ),
+                    FigmaSurfaceCard(
                       padding: const EdgeInsets.symmetric(horizontal: 14),
                       child: Column(
                         children: [
@@ -211,15 +178,8 @@ class SettingsScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 18),
-
-                    // Section: ABOUT
                     _buildSectionHeader('About'),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(color: const Color(0xFFDEDEE2)),
-                      ),
+                    FigmaSurfaceCard(
                       padding: const EdgeInsets.symmetric(horizontal: 14),
                       child: Column(
                         children: [
@@ -239,8 +199,6 @@ class SettingsScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 18),
-
-                    // Bottom Links: Sign Out & Pause/Delete
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 4),
                       child: Row(
@@ -248,28 +206,24 @@ class SettingsScreen extends StatelessWidget {
                         children: [
                           InkWell(
                             onTap: () => context.push('/sign-out-confirm'),
-                            child: const Padding(
-                              padding: EdgeInsets.symmetric(vertical: 10),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 10),
                               child: Text(
                                 'Sign out',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600,
-                                  color: Color(0xFF123332),
+                                style: AppTypography.body2Bold.copyWith(
+                                  color: AppColors.primary,
                                 ),
                               ),
                             ),
                           ),
                           InkWell(
                             onTap: () => context.push('/deactivate'),
-                            child: const Padding(
-                              padding: EdgeInsets.symmetric(vertical: 10),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 10),
                               child: Text(
                                 'Pause or delete account',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600,
-                                  color: Color(0xFFA3261C),
+                                style: AppTypography.body2Bold.copyWith(
+                                  color: AppColors.error,
                                 ),
                               ),
                             ),
@@ -293,11 +247,10 @@ class SettingsScreen extends StatelessWidget {
       padding: const EdgeInsets.only(left: 4, bottom: 6),
       child: Text(
         title.toUpperCase(),
-        style: const TextStyle(
-          fontSize: 13,
+        style: AppTypography.caption1.copyWith(
           fontWeight: FontWeight.w600,
           letterSpacing: 0.5,
-          color: Color(0xFF5A5F6B),
+          color: AppColors.dark200,
         ),
       ),
     );
@@ -316,7 +269,7 @@ class SettingsScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 12),
         decoration: BoxDecoration(
           border: showBorder
-              ? const Border(bottom: BorderSide(color: Color(0xFFEAEAEC)))
+              ? const Border(bottom: BorderSide(color: AppColors.divider))
               : null,
         ),
         child: Row(
@@ -325,17 +278,15 @@ class SettingsScreen extends StatelessWidget {
             Expanded(
               child: Text(
                 label,
-                style: const TextStyle(
-                  fontSize: 15,
-                  color: Color(0xFF123332),
+                style: AppTypography.body2.copyWith(
+                  color: AppColors.primary,
                 ),
               ),
             ),
             Text(
               trailingText,
-              style: const TextStyle(
-                fontSize: 14,
-                color: Color(0xFF5A5F6B),
+              style: AppTypography.body2.copyWith(
+                color: AppColors.dark200,
               ),
             ),
           ],

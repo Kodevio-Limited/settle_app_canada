@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../core/theme/app_colors.dart';
+import '../../core/theme/app_typography.dart';
+import '../../core/widgets/figma_onboarding_widgets.dart';
+import '../../core/widgets/settle_button.dart';
+
 class PausedScreen extends StatelessWidget {
   const PausedScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    const primaryDark = Color(0xFF123332);
-    const textMuted = Color(0xFF3B4747);
-    const cardBg = Color(0xFFE2ECEB);
-    const dangerColor = Color(0xFFA3261C);
-
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F4F5),
+      backgroundColor: AppColors.bg,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(24, 60, 24, 32),
@@ -23,7 +23,7 @@ class PausedScreen extends StatelessWidget {
                 width: 72,
                 height: 72,
                 decoration: const BoxDecoration(
-                  color: cardBg,
+                  color: AppColors.softTeal,
                   shape: BoxShape.circle,
                 ),
                 alignment: Alignment.center,
@@ -34,7 +34,7 @@ class PausedScreen extends StatelessWidget {
                       width: 5,
                       height: 22,
                       decoration: BoxDecoration(
-                        color: primaryDark,
+                        color: AppColors.primary,
                         borderRadius: BorderRadius.circular(2),
                       ),
                     ),
@@ -43,7 +43,7 @@ class PausedScreen extends StatelessWidget {
                       width: 5,
                       height: 22,
                       decoration: BoxDecoration(
-                        color: primaryDark,
+                        color: AppColors.primary,
                         borderRadius: BorderRadius.circular(2),
                       ),
                     ),
@@ -51,79 +51,44 @@ class PausedScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              const Text(
+              Text(
                 'Your account is paused',
-                style: TextStyle(
-                  fontFamily: 'Bricolage Grotesque',
-                  fontWeight: FontWeight.w800,
-                  fontSize: 32,
-                  height: 1.1,
-                  letterSpacing: -0.7,
-                  color: primaryDark,
+                style: AppTypography.h4.copyWith(
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.primary,
                 ),
               ),
               const SizedBox(height: 16),
-              const Text(
+              Text(
                 'Reminders are off and your plan is hidden. Everything is saved — sign in anytime to pick up where you left off.',
-                style: TextStyle(
-                  fontFamily: 'IBM Plex Sans',
-                  fontSize: 16,
+                style: AppTypography.body2.copyWith(
                   height: 1.5,
-                  color: textMuted,
+                  color: AppColors.dark300,
                 ),
               ),
               const SizedBox(height: 16),
-              Container(
-                decoration: BoxDecoration(
-                  color: cardBg,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-                child: const Text(
-                  '[How long paused accounts are kept, and when we\'ll check in before deleting — wording from privacy counsel.]',
-                  style: TextStyle(
-                    fontFamily: 'IBM Plex Sans',
-                    fontSize: 13,
+              FigmaNoticeBanner(
+                child: Text(
+                  "[How long paused accounts are kept, and when we'll check in before deleting — wording from privacy counsel.]",
+                  style: AppTypography.caption1.copyWith(
                     height: 1.45,
-                    color: primaryDark,
+                    color: AppColors.primary,
                   ),
                 ),
               ),
               const Spacer(),
-              SizedBox(
-                width: double.infinity,
-                height: 54,
-                child: ElevatedButton(
-                  onPressed: () => context.go('/home'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: primaryDark,
-                    foregroundColor: Colors.white,
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14),
-                    ),
-                  ),
-                  child: const Text(
-                    'Done',
-                    style: TextStyle(
-                      fontFamily: 'IBM Plex Sans',
-                      fontWeight: FontWeight.w600,
-                      fontSize: 17,
-                    ),
-                  ),
-                ),
+              SettleButton(
+                label: 'Done',
+                onPressed: () => context.go('/home'),
               ),
               const SizedBox(height: 8),
               Center(
                 child: TextButton(
                   onPressed: () => context.push('/delete-confirm'),
-                  child: const Text(
+                  child: Text(
                     'Delete my account instead',
-                    style: TextStyle(
-                      fontFamily: 'IBM Plex Sans',
-                      fontWeight: FontWeight.w500,
-                      fontSize: 15,
-                      color: dangerColor,
+                    style: AppTypography.body2Bold.copyWith(
+                      color: AppColors.error,
                     ),
                   ),
                 ),
