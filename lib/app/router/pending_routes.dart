@@ -55,14 +55,6 @@ class PendingRouteScreen extends StatelessWidget {
 
 final List<RouteBase> pendingS10Routes = [
   GoRoute(
-    path: '/all-professions',
-    name: 'allprofessions',
-    builder: (context, state) => PendingRouteScreen(
-      title: "22.0 Work \u00b7 All regulated jobs (index)",
-      routePath: '/all-professions',
-    ),
-  ),
-  GoRoute(
     path: '/budget-planner',
     name: 'budgetplanner',
     builder: (context, state) => PendingRouteScreen(
@@ -247,14 +239,6 @@ final List<RouteBase> pendingS10Routes = [
     ),
   ),
   GoRoute(
-    path: '/how-partners',
-    name: 'howpartners',
-    builder: (context, state) => PendingRouteScreen(
-      title: "13.2 How we choose partners",
-      routePath: '/how-partners',
-    ),
-  ),
-  GoRoute(
     path: '/join-household',
     name: 'joinhousehold',
     builder: (context, state) => PendingRouteScreen(
@@ -284,14 +268,6 @@ final List<RouteBase> pendingS10Routes = [
     builder: (context, state) => PendingRouteScreen(
       title: "21.4 Crisis \u00b7 Leave quickly \u2192 neutral page",
       routePath: '/leave-quickly',
-    ),
-  ),
-  GoRoute(
-    path: '/legal-help',
-    name: 'legalhelp',
-    builder: (context, state) => PendingRouteScreen(
-      title: "13.3 Legal help (free + licensed)",
-      routePath: '/legal-help',
     ),
   ),
   GoRoute(
@@ -327,14 +303,6 @@ final List<RouteBase> pendingS10Routes = [
     ),
   ),
   GoRoute(
-    path: '/partner-detail',
-    name: 'partnerdetail',
-    builder: (context, state) => PendingRouteScreen(
-      title: "13.1 Partner detail (sponsored)",
-      routePath: '/partner-detail',
-    ),
-  ),
-  GoRoute(
     path: '/pass-conservation',
     name: 'passconservation',
     builder: (context, state) => PendingRouteScreen(
@@ -367,38 +335,6 @@ final List<RouteBase> pendingS10Routes = [
     ),
   ),
   GoRoute(
-    path: '/pathway-architect',
-    name: 'pathwayarchitect',
-    builder: (context, state) => PendingRouteScreen(
-      title: "22.19 Pathway \u00b7 Architect",
-      routePath: '/pathway-architect',
-    ),
-  ),
-  GoRoute(
-    path: '/pathway-audiologist-s-l-p',
-    name: 'pathwayaudiologistslp',
-    builder: (context, state) => PendingRouteScreen(
-      title: "22.16 Pathway \u00b7 Audiologist or speech-language pathologist",
-      routePath: '/pathway-audiologist-s-l-p',
-    ),
-  ),
-  GoRoute(
-    path: '/pathway-auto-body',
-    name: 'pathwayautobody',
-    builder: (context, state) => PendingRouteScreen(
-      title: "22.30 Pathway \u00b7 Auto body and collision repairer",
-      routePath: '/pathway-auto-body',
-    ),
-  ),
-  GoRoute(
-    path: '/pathway-auto-tech',
-    name: 'pathwayautotech',
-    builder: (context, state) => PendingRouteScreen(
-      title: "22.29 Pathway \u00b7 Automotive service technician",
-      routePath: '/pathway-auto-tech',
-    ),
-  ),
-  GoRoute(
     path: '/pathway-c-p-a',
     name: 'pathwaycpa',
     builder: (context, state) => PendingRouteScreen(
@@ -407,51 +343,11 @@ final List<RouteBase> pendingS10Routes = [
     ),
   ),
   GoRoute(
-    path: '/pathway-chiropractor',
-    name: 'pathwaychiropractor',
-    builder: (context, state) => PendingRouteScreen(
-      title: "22.13 Pathway \u00b7 Chiropractor",
-      routePath: '/pathway-chiropractor',
-    ),
-  ),
-  GoRoute(
-    path: '/pathway-crane',
-    name: 'pathwaycrane',
-    builder: (context, state) => PendingRouteScreen(
-      title: "22.33 Pathway \u00b7 Mobile crane operator (hoisting engineer)",
-      routePath: '/pathway-crane',
-    ),
-  ),
-  GoRoute(
-    path: '/pathway-dental-hygienist',
-    name: 'pathwaydentalhygienist',
-    builder: (context, state) => PendingRouteScreen(
-      title: "22.1 Pathway \u00b7 Dental hygienist",
-      routePath: '/pathway-dental-hygienist',
-    ),
-  ),
-  GoRoute(
     path: '/pathway-dentist',
     name: 'pathwaydentist',
     builder: (context, state) => PendingRouteScreen(
       title: "4.42 Pathway \u00b7 Dentist",
       routePath: '/pathway-dentist',
-    ),
-  ),
-  GoRoute(
-    path: '/pathway-denturist',
-    name: 'pathwaydenturist',
-    builder: (context, state) => PendingRouteScreen(
-      title: "22.17 Pathway \u00b7 Denturist",
-      routePath: '/pathway-denturist',
-    ),
-  ),
-  GoRoute(
-    path: '/pathway-dietitian',
-    name: 'pathwaydietitian',
-    builder: (context, state) => PendingRouteScreen(
-      title: "22.8 Pathway \u00b7 Dietitian",
-      routePath: '/pathway-dietitian',
     ),
   ),
   GoRoute(
@@ -471,38 +367,6 @@ final List<RouteBase> pendingS10Routes = [
     ),
   ),
   GoRoute(
-    path: '/pathway-geoscientist',
-    name: 'pathwaygeoscientist',
-    builder: (context, state) => PendingRouteScreen(
-      title: "22.22 Pathway \u00b7 Geoscientist",
-      routePath: '/pathway-geoscientist',
-    ),
-  ),
-  GoRoute(
-    path: '/pathway-hairstylist',
-    name: 'pathwayhairstylist',
-    builder: (context, state) => PendingRouteScreen(
-      title: "22.32 Pathway \u00b7 Hairstylist",
-      routePath: '/pathway-hairstylist',
-    ),
-  ),
-  GoRoute(
-    path: '/pathway-insurance',
-    name: 'pathwayinsurance',
-    builder: (context, state) => PendingRouteScreen(
-      title: "22.24 Pathway \u00b7 Life insurance agent",
-      routePath: '/pathway-insurance',
-    ),
-  ),
-  GoRoute(
-    path: '/pathway-kinesiologist',
-    name: 'pathwaykinesiologist',
-    builder: (context, state) => PendingRouteScreen(
-      title: "22.15 Pathway \u00b7 Kinesiologist",
-      routePath: '/pathway-kinesiologist',
-    ),
-  ),
-  GoRoute(
     path: '/pathway-lawyer',
     name: 'pathwaylawyer',
     builder: (context, state) => PendingRouteScreen(
@@ -511,83 +375,11 @@ final List<RouteBase> pendingS10Routes = [
     ),
   ),
   GoRoute(
-    path: '/pathway-m-l-t',
-    name: 'pathwaymlt',
-    builder: (context, state) => PendingRouteScreen(
-      title: "22.4 Pathway \u00b7 Medical laboratory technologist",
-      routePath: '/pathway-m-l-t',
-    ),
-  ),
-  GoRoute(
-    path: '/pathway-m-r-t',
-    name: 'pathwaymrt',
-    builder: (context, state) => PendingRouteScreen(
-      title: "22.5 Pathway \u00b7 Medical radiation technologist",
-      routePath: '/pathway-m-r-t',
-    ),
-  ),
-  GoRoute(
-    path: '/pathway-massage',
-    name: 'pathwaymassage',
-    builder: (context, state) => PendingRouteScreen(
-      title: "22.14 Pathway \u00b7 Massage therapist",
-      routePath: '/pathway-massage',
-    ),
-  ),
-  GoRoute(
-    path: '/pathway-midwife',
-    name: 'pathwaymidwife',
-    builder: (context, state) => PendingRouteScreen(
-      title: "22.7 Pathway \u00b7 Midwife",
-      routePath: '/pathway-midwife',
-    ),
-  ),
-  GoRoute(
-    path: '/pathway-mortgage',
-    name: 'pathwaymortgage',
-    builder: (context, state) => PendingRouteScreen(
-      title: "22.25 Pathway \u00b7 Mortgage agent",
-      routePath: '/pathway-mortgage',
-    ),
-  ),
-  GoRoute(
     path: '/pathway-nurse',
     name: 'pathwaynurse',
     builder: (context, state) => PendingRouteScreen(
       title: "4.39 Pathway \u00b7 Registered nurse",
       routePath: '/pathway-nurse',
-    ),
-  ),
-  GoRoute(
-    path: '/pathway-o-t',
-    name: 'pathwayot',
-    builder: (context, state) => PendingRouteScreen(
-      title: "22.3 Pathway \u00b7 Occupational therapist",
-      routePath: '/pathway-o-t',
-    ),
-  ),
-  GoRoute(
-    path: '/pathway-optician',
-    name: 'pathwayoptician',
-    builder: (context, state) => PendingRouteScreen(
-      title: "22.12 Pathway \u00b7 Optician",
-      routePath: '/pathway-optician',
-    ),
-  ),
-  GoRoute(
-    path: '/pathway-optometrist',
-    name: 'pathwayoptometrist',
-    builder: (context, state) => PendingRouteScreen(
-      title: "22.11 Pathway \u00b7 Optometrist",
-      routePath: '/pathway-optometrist',
-    ),
-  ),
-  GoRoute(
-    path: '/pathway-paralegal',
-    name: 'pathwayparalegal',
-    builder: (context, state) => PendingRouteScreen(
-      title: "22.18 Pathway \u00b7 Paralegal",
-      routePath: '/pathway-paralegal',
     ),
   ),
   GoRoute(
@@ -607,67 +399,11 @@ final List<RouteBase> pendingS10Routes = [
     ),
   ),
   GoRoute(
-    path: '/pathway-physio',
-    name: 'pathwayphysio',
-    builder: (context, state) => PendingRouteScreen(
-      title: "22.2 Pathway \u00b7 Physiotherapist",
-      routePath: '/pathway-physio',
-    ),
-  ),
-  GoRoute(
     path: '/pathway-plumber',
     name: 'pathwayplumber',
     builder: (context, state) => PendingRouteScreen(
       title: "4.49 Pathway \u00b7 Plumber",
       routePath: '/pathway-plumber',
-    ),
-  ),
-  GoRoute(
-    path: '/pathway-psychologist',
-    name: 'pathwaypsychologist',
-    builder: (context, state) => PendingRouteScreen(
-      title: "22.9 Pathway \u00b7 Psychologist",
-      routePath: '/pathway-psychologist',
-    ),
-  ),
-  GoRoute(
-    path: '/pathway-psychotherapist',
-    name: 'pathwaypsychotherapist',
-    builder: (context, state) => PendingRouteScreen(
-      title: "22.10 Pathway \u00b7 Psychotherapist",
-      routePath: '/pathway-psychotherapist',
-    ),
-  ),
-  GoRoute(
-    path: '/pathway-r-t',
-    name: 'pathwayrt',
-    builder: (context, state) => PendingRouteScreen(
-      title: "22.6 Pathway \u00b7 Respiratory therapist",
-      routePath: '/pathway-r-t',
-    ),
-  ),
-  GoRoute(
-    path: '/pathway-real-estate',
-    name: 'pathwayrealestate',
-    builder: (context, state) => PendingRouteScreen(
-      title: "22.23 Pathway \u00b7 Real estate agent",
-      routePath: '/pathway-real-estate',
-    ),
-  ),
-  GoRoute(
-    path: '/pathway-refrigeration',
-    name: 'pathwayrefrigeration',
-    builder: (context, state) => PendingRouteScreen(
-      title: "22.26 Pathway \u00b7 Refrigeration and air conditioning mechanic",
-      routePath: '/pathway-refrigeration',
-    ),
-  ),
-  GoRoute(
-    path: '/pathway-sheet-metal',
-    name: 'pathwaysheetmetal',
-    builder: (context, state) => PendingRouteScreen(
-      title: "22.27 Pathway \u00b7 Sheet metal worker",
-      routePath: '/pathway-sheet-metal',
     ),
   ),
   GoRoute(
@@ -679,43 +415,11 @@ final List<RouteBase> pendingS10Routes = [
     ),
   ),
   GoRoute(
-    path: '/pathway-steamfitter',
-    name: 'pathwaysteamfitter',
-    builder: (context, state) => PendingRouteScreen(
-      title: "22.28 Pathway \u00b7 Steamfitter",
-      routePath: '/pathway-steamfitter',
-    ),
-  ),
-  GoRoute(
-    path: '/pathway-surveyor',
-    name: 'pathwaysurveyor',
-    builder: (context, state) => PendingRouteScreen(
-      title: "22.21 Pathway \u00b7 Land surveyor",
-      routePath: '/pathway-surveyor',
-    ),
-  ),
-  GoRoute(
     path: '/pathway-teacher',
     name: 'pathwayteacher',
     builder: (context, state) => PendingRouteScreen(
       title: "4.43 Pathway \u00b7 Teacher (K\u201312)",
       routePath: '/pathway-teacher',
-    ),
-  ),
-  GoRoute(
-    path: '/pathway-truck-coach',
-    name: 'pathwaytruckcoach',
-    builder: (context, state) => PendingRouteScreen(
-      title: "22.31 Pathway \u00b7 Truck and coach technician",
-      routePath: '/pathway-truck-coach',
-    ),
-  ),
-  GoRoute(
-    path: '/pathway-vet',
-    name: 'pathwayvet',
-    builder: (context, state) => PendingRouteScreen(
-      title: "22.20 Pathway \u00b7 Veterinarian",
-      routePath: '/pathway-vet',
     ),
   ),
   GoRoute(
@@ -1308,62 +1012,6 @@ final List<RouteBase> pendingS10Routes = [
     builder: (context, state) => PendingRouteScreen(
       title: "4.81 Task \u00b7 know your rights at work",
       routePath: '/task-work-rights',
-    ),
-  ),
-  GoRoute(
-    path: '/var-b-c-health',
-    name: 'varbchealth',
-    builder: (context, state) => PendingRouteScreen(
-      title: "12.1 BC \u00b7 MSP wait period",
-      routePath: '/var-b-c-health',
-    ),
-  ),
-  GoRoute(
-    path: '/var-b-c-health-gap',
-    name: 'varbchealthgap',
-    builder: (context, state) => PendingRouteScreen(
-      title: "12.2 BC \u00b7 Cover the wait",
-      routePath: '/var-b-c-health-gap',
-    ),
-  ),
-  GoRoute(
-    path: '/var-b-c-i-c-b-c',
-    name: 'varbcicbc',
-    builder: (context, state) => PendingRouteScreen(
-      title: "12.3 BC \u00b7 ICBC licence + insurance",
-      routePath: '/var-b-c-i-c-b-c',
-    ),
-  ),
-  GoRoute(
-    path: '/var-m-b-not-eligible',
-    name: 'varmbnoteligible',
-    builder: (context, state) => PendingRouteScreen(
-      title: "12.7 MB \u00b7 Not covered for your status",
-      routePath: '/var-m-b-not-eligible',
-    ),
-  ),
-  GoRoute(
-    path: '/var-q-c-health',
-    name: 'varqchealth',
-    builder: (context, state) => PendingRouteScreen(
-      title: "12.4 QC \u00b7 RAMQ (children exempt)",
-      routePath: '/var-q-c-health',
-    ),
-  ),
-  GoRoute(
-    path: '/var-q-c-lease',
-    name: 'varqclease',
-    builder: (context, state) => PendingRouteScreen(
-      title: "12.5 QC \u00b7 Lease & no deposit",
-      routePath: '/var-q-c-lease',
-    ),
-  ),
-  GoRoute(
-    path: '/var-q-c-school',
-    name: 'varqcschool',
-    builder: (context, state) => PendingRouteScreen(
-      title: "12.6 QC \u00b7 French-language school",
-      routePath: '/var-q-c-school',
     ),
   ),
   GoRoute(
