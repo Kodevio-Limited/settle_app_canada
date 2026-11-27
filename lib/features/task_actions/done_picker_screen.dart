@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../core/theme/app_colors.dart';
+import '../../core/theme/app_typography.dart';
+import '../../core/widgets/figma_onboarding_widgets.dart';
+import '../../core/widgets/settle_button.dart';
 
 class DonePickerScreen extends StatefulWidget {
   final String taskTitle;
@@ -28,115 +32,100 @@ class _DonePickerScreenState extends State<DonePickerScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFF4A4D55),
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Container(
+        child: Align(
+          alignment: Alignment.bottomCenter,
+          child: SingleChildScrollView(
+            child: Container(
               decoration: const BoxDecoration(
-                color: Color(0xFFF4F4F5),
-                borderRadius: BorderRadius.vertical(top: Radius.circular(22)),
+                color: AppColors.bg,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
               ),
-              padding: const EdgeInsets.fromLTRB(20, 10, 20, 32),
+              padding: const EdgeInsets.fromLTRB(20, 12, 20, 28),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  // Handle
-                  Align(
-                    alignment: Alignment.center,
-                    child: Container(
-                      width: 40,
-                      height: 5,
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFC8C8CE),
-                        borderRadius: BorderRadius.circular(3),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 12),
+                  const FigmaSheetHandle(),
+                  const SizedBox(height: 14),
 
-                  // Header with Close Button
+                  // Header
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
-                        'Who has done this?',
-                        style: TextStyle(
-                          fontFamily: 'Bricolage Grotesque',
-                          fontSize: 24,
-                          fontWeight: FontWeight.w800,
-                          color: Color(0xFF123332),
+                      const SizedBox(width: 40),
+                      const Expanded(
+                        child: Text(
+                          'Who has done this?',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: AppTypography.fontHeading,
+                            fontSize: 23,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.mainFont,
+                          ),
                         ),
                       ),
                       IconButton(
-                        icon: const Icon(Icons.close, size: 22, color: Color(0xFF123332)),
+                        icon: const Icon(
+                          Icons.close_rounded,
+                          size: 22,
+                          color: AppColors.mainFont,
+                        ),
                         onPressed: () => context.pop(),
                         padding: EdgeInsets.zero,
-                        constraints: const BoxConstraints(minWidth: 44, minHeight: 44),
+                        constraints: const BoxConstraints(
+                          minWidth: 40,
+                          minHeight: 40,
+                        ),
                       ),
                     ],
                   ),
                   Text(
                     widget.taskTitle,
+                    textAlign: TextAlign.center,
                     style: const TextStyle(
-                      fontFamily: 'IBM Plex Sans',
-                      fontSize: 14,
-                      color: Color(0xFF3B4747),
+                      fontFamily: AppTypography.fontBody,
+                      fontSize: 13.5,
+                      color: AppColors.dark300,
                     ),
                   ),
-                  const SizedBox(height: 14),
+                  const SizedBox(height: 18),
 
-                  // People Fieldset
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: const Color(0xFFDEDEE2)),
-                    ),
-                    padding: const EdgeInsets.symmetric(horizontal: 14),
-                    child: Column(
-                      children: [
-                        _buildPersonRow('Layla', 'L', const Color(0xFF123332), true),
-                        _buildPersonRow('Omar', 'O', const Color(0xFF2E6B4F), true),
-                        _buildPersonRow('Yasmin', 'Y', const Color(0xFF4A6FA5), false),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 14),
+                  // People pill tiles
+                  _buildPersonRow('Layla', 'L', AppColors.primary),
+                  const SizedBox(height: 10),
+                  _buildPersonRow('Omar', 'O', AppColors.secondary),
+                  const SizedBox(height: 10),
+                  _buildPersonRow('Yasmin', 'Y', const Color(0xFF4A6FA5)),
+                  const SizedBox(height: 16),
 
                   // When Dropdown
-                  const Text(
-                    'When',
-                    style: TextStyle(
-                      fontFamily: 'IBM Plex Sans',
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF123332),
-                    ),
-                  ),
+                  const FigmaInputLabel('When'),
                   const SizedBox(height: 6),
                   Container(
-                    height: 50,
-                    padding: const EdgeInsets.symmetric(horizontal: 14),
+                    height: 54,
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: const Color(0xFFC8C8CE)),
+                      color: AppColors.dark50,
+                      borderRadius: BorderRadius.circular(55),
                     ),
                     child: DropdownButtonHideUnderline(
                       child: DropdownButton<String>(
                         value: _selectedWhen,
                         isExpanded: true,
-                        icon: const Icon(Icons.keyboard_arrow_down, color: Color(0xFF123332)),
+                        icon: const Icon(
+                          Icons.keyboard_arrow_down_rounded,
+                          color: AppColors.dark300,
+                        ),
                         items: _whenOptions.map((opt) {
                           return DropdownMenuItem<String>(
                             value: opt,
                             child: Text(
                               opt,
                               style: const TextStyle(
-                                fontFamily: 'IBM Plex Sans',
-                                fontSize: 16,
-                                color: Color(0xFF123332),
+                                fontFamily: AppTypography.fontBody,
+                                fontSize: 15.5,
+                                color: AppColors.mainFont,
                               ),
                             ),
                           );
@@ -153,58 +142,31 @@ class _DonePickerScreenState extends State<DonePickerScreen> {
                   ),
                   const SizedBox(height: 14),
 
-                  // Info box
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFE2ECEB),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: const Text(
-                      'This only updates your checklist. Nothing is sent to Service Canada or anyone else.',
-                      style: TextStyle(
-                        fontFamily: 'IBM Plex Sans',
-                        fontSize: 13,
-                        height: 1.45,
-                        color: Color(0xFF123332),
-                      ),
+                  const Text(
+                    'This only updates your checklist. Nothing is sent to Service Canada or anyone else.',
+                    style: TextStyle(
+                      fontFamily: AppTypography.fontBody,
+                      fontSize: 12.5,
+                      height: 1.45,
+                      color: AppColors.dark200,
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 20),
 
-                  // Save Button
-                  SizedBox(
-                    height: 54,
-                    child: ElevatedButton(
-                      onPressed: () => context.push('/task-done'),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF123332),
-                        foregroundColor: Colors.white,
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(14),
-                        ),
-                      ),
-                      child: const Text(
-                        'Save',
-                        style: TextStyle(
-                          fontFamily: 'IBM Plex Sans',
-                          fontSize: 17,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
+                  SettleButton(
+                    label: 'Save',
+                    onPressed: () => context.push('/task-done'),
                   ),
                 ],
               ),
             ),
-          ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildPersonRow(String name, String initial, Color bg, bool hasBorder) {
+  Widget _buildPersonRow(String name, String initial, Color bg) {
     final isChecked = _selectedPeople.contains(name);
     return InkWell(
       onTap: () {
@@ -216,12 +178,14 @@ class _DonePickerScreenState extends State<DonePickerScreen> {
           }
         });
       },
+      borderRadius: BorderRadius.circular(55),
       child: Container(
-        constraints: const BoxConstraints(minHeight: 56),
+        height: 56,
+        padding: const EdgeInsets.symmetric(horizontal: 14),
         decoration: BoxDecoration(
-          border: hasBorder
-              ? const Border(bottom: BorderSide(color: Color(0xFFEAEAEC)))
-              : null,
+          color: AppColors.white500,
+          borderRadius: BorderRadius.circular(55),
+          boxShadow: isChecked ? kFigmaSelectedGlow : null,
         ),
         child: Row(
           children: [
@@ -241,28 +205,27 @@ class _DonePickerScreenState extends State<DonePickerScreen> {
             Expanded(
               child: Text(
                 name,
-                style: const TextStyle(
-                  fontFamily: 'IBM Plex Sans',
-                  fontSize: 16,
-                  color: Color(0xFF123332),
+                style: TextStyle(
+                  fontFamily: AppTypography.fontBody,
+                  fontSize: 15.5,
+                  fontWeight: isChecked ? FontWeight.w600 : FontWeight.w500,
+                  color: AppColors.mainFont,
                 ),
               ),
             ),
-            Checkbox(
-              value: isChecked,
-              activeColor: const Color(0xFF2E6B4F),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(4),
+            Container(
+              width: 24,
+              height: 24,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: isChecked ? AppColors.primary : Colors.transparent,
+                border: isChecked
+                    ? null
+                    : Border.all(color: AppColors.dark100, width: 1.5),
               ),
-              onChanged: (val) {
-                setState(() {
-                  if (val == true) {
-                    _selectedPeople.add(name);
-                  } else {
-                    _selectedPeople.remove(name);
-                  }
-                });
-              },
+              child: isChecked
+                  ? const Icon(Icons.check, size: 15, color: Colors.white)
+                  : null,
             ),
           ],
         ),

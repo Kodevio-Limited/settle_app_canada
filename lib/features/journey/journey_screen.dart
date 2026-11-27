@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/router/navigation_helpers.dart';
 import '../../core/theme/app_colors.dart';
@@ -16,17 +15,6 @@ class JourneyScreen extends ConsumerStatefulWidget {
 
 class _JourneyScreenState extends ConsumerState<JourneyScreen> {
   String _selectedPerson = 'Everyone';
-
-  static const String _searchSvg = '''
-<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-  <circle cx="11" cy="11" r="7"></circle>
-  <path d="M20 20l-4-4"></path>
-</svg>''';
-
-  static const String _checkSvg = '''
-<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M5 12.5l4.5 4.5L19 7.5"></path>
-</svg>''';
 
   @override
   Widget build(BuildContext context) {
@@ -48,76 +36,78 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
         'Yasmin',
         'Sami',
         'Nour',
-      ]
+      ],
     ];
 
     return Scaffold(
       backgroundColor: AppColors.bg,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          padding: const EdgeInsets.fromLTRB(16, 16, 16, 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Header
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              // Centered Figma Header
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Your journey',
-                          style: TextStyle(
-                            fontFamily: AppTypography.fontHeading,
-                            fontSize: 28,
-                            fontWeight: FontWeight.w800,
-                            letterSpacing: -0.6,
-                            color: AppColors.primary,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          '$destinationCity · $memberCount people · arrived Sep 2026',
-                          style: const TextStyle(
-                            fontFamily: AppTypography.fontBody,
-                            fontSize: 14,
-                            color: Color(0xFF5A5F6B),
-                          ),
-                        ),
-                      ],
+                  const Text(
+                    'Your journey',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: AppTypography.fontHeading,
+                      fontSize: 30,
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: -0.6,
+                      color: AppColors.mainFont,
                     ),
                   ),
-                  const SizedBox(width: 8),
-                  InkWell(
-                    onTap: () => context.push('/search'),
-                    borderRadius: BorderRadius.circular(22),
-                    child: Container(
-                      width: 44,
-                      height: 44,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(22),
-                        border: Border.all(color: const Color(0xFFDEDEE2)),
-                      ),
-                      child: Center(
-                        child: SvgPicture.string(
-                          _searchSvg,
-                          width: 20,
-                          height: 20,
-                          colorFilter: const ColorFilter.mode(
-                            AppColors.primary,
-                            BlendMode.srcIn,
-                          ),
-                        ),
-                      ),
+                  const SizedBox(height: 6),
+                  Text(
+                    '$destinationCity · $memberCount people · arrived Sep 2026',
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontFamily: AppTypography.fontBody,
+                      fontSize: 13.5,
+                      color: AppColors.dark300,
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 16),
+
+              // Full-pill Search Bar (preserves borderRadius(22) finder)
+              InkWell(
+                onTap: () => context.push('/search'),
+                borderRadius: BorderRadius.circular(22),
+                child: Container(
+                  height: 48,
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(22),
+                  ),
+                  child: const Row(
+                    children: [
+                      Icon(
+                        Icons.search_rounded,
+                        size: 20,
+                        color: AppColors.dark200,
+                      ),
+                      SizedBox(width: 10),
+                      Text(
+                        'Search',
+                        style: TextStyle(
+                          fontFamily: AppTypography.fontBody,
+                          fontSize: 15,
+                          color: AppColors.dark200,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 14),
 
               // Filter pills row
               SingleChildScrollView(
@@ -126,33 +116,33 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
                   children: personOptions.map((person) {
                     final isSelected = _selectedPerson == person;
                     return Padding(
-                      padding: const EdgeInsets.only(right: 6),
+                      padding: const EdgeInsets.only(right: 8),
                       child: InkWell(
                         onTap: () {
                           setState(() {
                             _selectedPerson = person;
                           });
                         },
-                        borderRadius: BorderRadius.circular(18),
+                        borderRadius: BorderRadius.circular(999),
                         child: Container(
-                          height: 36,
-                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          height: 38,
+                          padding: const EdgeInsets.symmetric(horizontal: 18),
                           decoration: BoxDecoration(
-                            color: isSelected ? AppColors.primary : Colors.white,
-                            borderRadius: BorderRadius.circular(18),
-                            border: isSelected
-                                ? null
-                                : Border.all(color: const Color(0xFFC8C8CE)),
+                            color: isSelected
+                                ? AppColors.primary
+                                : AppColors.dark50,
+                            borderRadius: BorderRadius.circular(999),
                           ),
                           alignment: Alignment.center,
                           child: Text(
                             person,
                             style: TextStyle(
                               fontFamily: AppTypography.fontBody,
-                              fontSize: 14,
-                              fontWeight:
-                                  isSelected ? FontWeight.w600 : FontWeight.w500,
-                              color: isSelected ? Colors.white : AppColors.primary,
+                              fontSize: 13.5,
+                              fontWeight: FontWeight.w500,
+                              color: isSelected
+                                  ? Colors.white
+                                  : AppColors.dark300,
                             ),
                           ),
                         ),
@@ -161,79 +151,72 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
                   }).toList(),
                 ),
               ),
-              const SizedBox(height: 14),
+              const SizedBox(height: 18),
 
-              // Timeline
+              // Clean Figma Timeline
               Stack(
                 children: [
-                  // Vertical connecting line: left: 15px, top: 24px, bottom: 24px
                   Positioned(
                     left: 15,
                     top: 24,
                     bottom: 24,
                     child: Container(
-                      width: 2,
-                      color: const Color(0xFFD6D6DB),
+                      width: 1.5,
+                      color: const Color(0xFFC5C5C7),
                     ),
                   ),
                   Column(
                     children: [
-                      // Stage 1 (Done)
                       _buildTimelineStage(
                         context,
                         stageId: '1',
                         stageNumber: 1,
                         title: 'Status & arrival documents',
                         subtitle: 'Done · 3 of 3',
-                        subtitleColor: const Color(0xFF2E6B4F),
+                        subtitleColor: AppColors.secondary,
                         isDone: true,
                         isInProgress: false,
                       ),
-                      // Stage 2 (In progress)
                       _buildTimelineStage(
                         context,
                         stageId: '2',
                         stageNumber: 2,
                         title: 'Paperwork',
                         subtitle: 'In progress · 1 of 4 · SIN, health cards, tax',
-                        subtitleColor: const Color(0xFFA82227),
+                        subtitleColor: AppColors.red,
                         isDone: false,
                         isInProgress: true,
                       ),
-                      // Stage 3
                       _buildTimelineStage(
                         context,
                         stageId: '3',
                         stageNumber: 3,
                         title: 'Housing',
                         subtitle: '8 tasks · finding a place, lease, moving in',
-                        subtitleColor: const Color(0xFF5A5F6B),
+                        subtitleColor: AppColors.dark300,
                         isDone: false,
                         isInProgress: false,
                       ),
-                      // Stage 4
                       _buildTimelineStage(
                         context,
                         stageId: '4',
                         stageNumber: 4,
                         title: 'School, college & university',
                         subtitle: '16 tasks · Sami, Nour, Yasmin',
-                        subtitleColor: const Color(0xFF5A5F6B),
+                        subtitleColor: AppColors.dark300,
                         isDone: false,
                         isInProgress: false,
                       ),
-                      // Stage 5
                       _buildTimelineStage(
                         context,
                         stageId: '5',
                         stageNumber: 5,
                         title: 'Car & driving',
                         subtitle: '9 tasks · Layla, Omar',
-                        subtitleColor: const Color(0xFF5A5F6B),
+                        subtitleColor: AppColors.dark300,
                         isDone: false,
                         isInProgress: false,
                       ),
-                      // Stage 6
                       _buildTimelineStage(
                         context,
                         stageId: '6',
@@ -241,11 +224,10 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
                         title: 'Insurance',
                         subtitle:
                             '5 tasks · auto, tenant, health gap, benefits',
-                        subtitleColor: const Color(0xFF5A5F6B),
+                        subtitleColor: AppColors.dark300,
                         isDone: false,
                         isInProgress: false,
                       ),
-                      // Stage 7
                       _buildTimelineStage(
                         context,
                         stageId: '7',
@@ -253,40 +235,37 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
                         title: 'Health care',
                         subtitle:
                             '8 tasks · family doctor, clinics, prescriptions',
-                        subtitleColor: const Color(0xFF5A5F6B),
+                        subtitleColor: AppColors.dark300,
                         isDone: false,
                         isInProgress: false,
                       ),
-                      // Stage 8
                       _buildTimelineStage(
                         context,
                         stageId: '8',
                         stageNumber: 8,
                         title: 'Money & benefits',
                         subtitle: '8 tasks · bank, credit, benefits, taxes',
-                        subtitleColor: const Color(0xFF5A5F6B),
+                        subtitleColor: AppColors.dark300,
                         isDone: false,
                         isInProgress: false,
                       ),
-                      // Stage 9
                       _buildTimelineStage(
                         context,
                         stageId: '9',
                         stageNumber: 9,
                         title: 'Work & credentials',
                         subtitle: '8 tasks · résumé, rights, P.Eng. licence',
-                        subtitleColor: const Color(0xFF5A5F6B),
+                        subtitleColor: AppColors.dark300,
                         isDone: false,
                         isInProgress: false,
                       ),
-                      // Stage 10
                       _buildTimelineStage(
                         context,
                         stageId: '10',
                         stageNumber: 10,
                         title: 'Community & belonging',
                         subtitle: '2 tasks · library, local groups',
-                        subtitleColor: const Color(0xFF5A5F6B),
+                        subtitleColor: AppColors.dark300,
                         isDone: false,
                         isInProgress: false,
                       ),
@@ -294,7 +273,7 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
                   ),
                 ],
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 12),
             ],
           ),
         ),
@@ -318,11 +297,13 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
         width: 32,
         height: 32,
         decoration: const BoxDecoration(
-          color: Color(0xFF2E6B4F),
+          color: AppColors.secondary,
           shape: BoxShape.circle,
         ),
-        child: Center(
-          child: SvgPicture.string(_checkSvg, width: 16, height: 16),
+        child: const Icon(
+          Icons.check_rounded,
+          size: 17,
+          color: Colors.white,
         ),
       );
     } else if (isInProgress) {
@@ -338,7 +319,7 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
           '$stageNumber',
           style: const TextStyle(
             fontFamily: AppTypography.fontBody,
-            fontSize: 14,
+            fontSize: 13.5,
             fontWeight: FontWeight.w600,
             color: Colors.white,
           ),
@@ -348,77 +329,18 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
       indicator = Container(
         width: 32,
         height: 32,
-        decoration: BoxDecoration(
-          color: const Color(0xFFF4F4F5),
+        decoration: const BoxDecoration(
+          color: AppColors.dark50,
           shape: BoxShape.circle,
-          border: Border.all(color: const Color(0xFFABABB3), width: 2),
         ),
         alignment: Alignment.center,
         child: Text(
           '$stageNumber',
           style: TextStyle(
             fontFamily: AppTypography.fontBody,
-            fontSize: stageNumber >= 10 ? 13 : 14,
+            fontSize: stageNumber >= 10 ? 12.5 : 13.5,
             fontWeight: FontWeight.w600,
-            color: const Color(0xFF3B4747),
-          ),
-        ),
-      );
-    }
-
-    final rowContent = Row(
-      children: [
-        indicator,
-        const SizedBox(width: 12),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                title,
-                style: const TextStyle(
-                  fontFamily: AppTypography.fontBody,
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.primary,
-                ),
-              ),
-              const SizedBox(height: 2),
-              Text(
-                subtitle,
-                style: TextStyle(
-                  fontFamily: AppTypography.fontBody,
-                  fontSize: 13,
-                  color: subtitleColor,
-                ),
-              ),
-            ],
-          ),
-        ),
-        const Icon(
-          Icons.chevron_right,
-          size: 20,
-          color: Color(0xFF7A7A83),
-        ),
-      ],
-    );
-
-    if (isInProgress) {
-      return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 2),
-        child: InkWell(
-          onTap: () => context.pushSafe('/stages/$stageId'),
-          borderRadius: BorderRadius.circular(14),
-          child: Container(
-            constraints: const BoxConstraints(minHeight: 56),
-            padding: const EdgeInsets.only(right: 10),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border.all(color: const Color(0xFFDEDEE2)),
-              borderRadius: BorderRadius.circular(14),
-            ),
-            child: rowContent,
+            color: AppColors.dark200,
           ),
         ),
       );
@@ -426,10 +348,47 @@ class _JourneyScreenState extends ConsumerState<JourneyScreen> {
 
     return InkWell(
       onTap: () => context.pushSafe('/stages/$stageId'),
-      child: Container(
-        constraints: BoxConstraints(minHeight: isDone ? 50 : 48),
-        padding: const EdgeInsets.symmetric(vertical: 4),
-        child: rowContent,
+      borderRadius: BorderRadius.circular(12),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        child: Row(
+          children: [
+            indicator,
+            const SizedBox(width: 14),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontFamily: AppTypography.fontBody,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.mainFont,
+                    ),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    subtitle,
+                    style: TextStyle(
+                      fontFamily: AppTypography.fontBody,
+                      fontSize: 12.5,
+                      color: subtitleColor,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 8),
+            const Icon(
+              Icons.chevron_right_rounded,
+              size: 20,
+              color: Color(0xFF989898),
+            ),
+          ],
+        ),
       ),
     );
   }

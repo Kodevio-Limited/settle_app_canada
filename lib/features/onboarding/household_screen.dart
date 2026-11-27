@@ -1,10 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/models/user_profile.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_typography.dart';
+import '../../core/widgets/figma_onboarding_widgets.dart';
 import '../../core/widgets/settle_button.dart';
 import 'onboarding_provider.dart';
 
@@ -43,267 +45,207 @@ class OnboardingHouseholdScreen extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: AppColors.bg,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: BackButton(
-          color: AppColors.primary,
-          onPressed: () {
-            if (context.canPop()) {
-              context.pop();
-            } else {
-              context.go('/status');
-            }
-          },
-        ),
-        title: const Text(
-          'Step 4 of 5',
-          style: TextStyle(
-            fontFamily: AppTypography.fontBody,
-            fontSize: 14,
-            fontWeight: FontWeight.w600,
-            color: Color(0xFF5A5F6B),
-          ),
-        ),
-        centerTitle: true,
-        actions: [
-          TextButton(
-            onPressed: () => context.push('/priorities'),
-            child: const Text('Skip', style: AppTypography.body2Bold),
-          ),
-        ],
-      ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Progress bar
-              Container(
-                height: 6,
-                decoration: BoxDecoration(
-                  color: const Color(0xFFDEDEE2),
-                  borderRadius: BorderRadius.circular(3),
-                ),
-                child: FractionallySizedBox(
-                  alignment: Alignment.centerLeft,
-                  widthFactor: 0.8,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.primary,
-                      borderRadius: BorderRadius.circular(3),
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 14.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    FigmaOnboardingHeader(
+                      stepLabel: 'Step 4 of 5',
+                      progress: 0.8,
+                      onBack: () {
+                        if (context.canPop()) {
+                          context.pop();
+                        } else {
+                          context.go('/status');
+                        }
+                      },
+                      onSkip: () => context.push('/priorities'),
                     ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 14),
-              const Text(
-                "Who's settling with you?",
-                style: TextStyle(
-                  fontFamily: AppTypography.fontHeading,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 28,
-                  height: 1.1,
-                  letterSpacing: -0.6,
-                  color: AppColors.primary,
-                ),
-              ),
-              const SizedBox(height: 6),
-              const Text(
-                "Each person gets their own tasks, so nobody's steps get lost.",
-                style: TextStyle(
-                  fontFamily: AppTypography.fontBody,
-                  fontSize: 15,
-                  height: 1.45,
-                  color: Color(0xFF3B4747),
-                ),
-              ),
-              const SizedBox(height: 18),
-              // Members list
-              ...state.members.map((member) {
-                final isSelf = member.relationship == 'self';
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-                    decoration: BoxDecoration(
-                      color: AppColors.white50,
-                      borderRadius: BorderRadius.circular(14),
-                      border: Border.all(color: const Color(0xFFDEDEE2)),
+                    const SizedBox(height: 28),
+                    const Text(
+                      "Who's settling with you?",
+                      style: TextStyle(
+                        fontFamily: AppTypography.fontHeading,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 28,
+                        height: 1.3,
+                        color: AppColors.mainFont,
+                      ),
                     ),
-                    child: Row(
-                      children: [
-                        Container(
-                          width: 40,
-                          height: 40,
-                          decoration: const BoxDecoration(
-                            color: Color(0xFFEAF2F1),
-                            shape: BoxShape.circle,
+                    const SizedBox(height: 10),
+                    const Text(
+                      "Each person gets their own tasks, so nobody's steps get lost.",
+                      style: TextStyle(
+                        fontFamily: AppTypography.fontHeading,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16,
+                        height: 1.4,
+                        color: AppColors.dark300,
+                      ),
+                    ),
+                    const SizedBox(height: 22),
+                    ...state.members.map((member) {
+                      final isSelf = member.relationship == 'self';
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 12.0),
+                        child: Container(
+                          constraints: const BoxConstraints(minHeight: 74),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 18, vertical: 14),
+                          decoration: BoxDecoration(
+                            color: AppColors.white500,
+                            borderRadius: BorderRadius.circular(11),
+                            border: isSelf
+                                ? Border.all(color: AppColors.primary, width: 1.0)
+                                : null,
+                            boxShadow: isSelf ? kFigmaSelectedGlow : null,
                           ),
-                          alignment: Alignment.center,
-                          child: Text(
-                            member.name.isNotEmpty ? member.name[0] : '?',
-                            style: const TextStyle(
-                              fontFamily: AppTypography.fontBody,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
-                              color: AppColors.primary,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          child: Row(
                             children: [
-                              Row(
-                                children: [
-                                  Text(
-                                    member.name,
-                                    style: const TextStyle(
-                                      fontFamily: AppTypography.fontBody,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700,
-                                      color: AppColors.primary,
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Flexible(
+                                          child: Text(
+                                            member.name,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: const TextStyle(
+                                              fontFamily: AppTypography.fontBody,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w600,
+                                              color: AppColors.primary,
+                                            ),
+                                          ),
+                                        ),
+                                        if (isSelf)
+                                          const Text(
+                                            ' (you)',
+                                            style: TextStyle(
+                                              fontFamily: AppTypography.fontBody,
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w400,
+                                              color: AppColors.primary,
+                                            ),
+                                          ),
+                                      ],
                                     ),
-                                  ),
-                                  if (isSelf)
-                                    const Text(
-                                      ' (you)',
-                                      style: TextStyle(
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      _subtitleFor(member),
+                                      style: const TextStyle(
                                         fontFamily: AppTypography.fontBody,
                                         fontSize: 13,
-                                        color: Color(0xFF5A5F6B),
+                                        color: AppColors.dark300,
                                       ),
                                     ),
-                                ],
+                                  ],
+                                ),
                               ),
-                              const SizedBox(height: 2),
-                              Text(
-                                _subtitleFor(member),
-                                style: const TextStyle(
-                                  fontFamily: AppTypography.fontBody,
-                                  fontSize: 13,
-                                  color: Color(0xFF5A5F6B),
+                              InkWell(
+                                onTap: () => _onEdit(context, member),
+                                borderRadius: BorderRadius.circular(8),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 6),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      SvgPicture.asset(
+                                        'assets/icons/edit_square.svg',
+                                        width: 20,
+                                        height: 20,
+                                      ),
+                                      const SizedBox(width: 6),
+                                      const Text(
+                                        'Edit',
+                                        style: TextStyle(
+                                          fontFamily: AppTypography.fontBody,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                          color: AppColors.primary,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ],
                           ),
                         ),
-                        InkWell(
-                          onTap: () => _onEdit(context, member),
-                          borderRadius: BorderRadius.circular(6),
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-                            child: Text(
-                              'Edit',
-                              style: TextStyle(
-                                fontFamily: AppTypography.fontBody,
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500,
-                                color: AppColors.primary,
-                              ),
-                            ),
-                          ),
+                      );
+                    }),
+                    const SizedBox(height: 10),
+                    Wrap(
+                      spacing: 10,
+                      runSpacing: 10,
+                      children: [
+                        FigmaDashedActionPill(
+                          label: '+ Child',
+                          onTap: () => context.push('/add-child'),
+                        ),
+                        FigmaDashedActionPill(
+                          label: '+ Partner',
+                          onTap: () => context.push('/add-adult?type=Partner or spouse'),
+                        ),
+                        FigmaDashedActionPill(
+                          label: '+ Parent or other',
+                          onTap: () => context.push('/add-adult?type=Parent'),
+                        ),
+                        FigmaDashedActionPill(
+                          label: '+ Adult child',
+                          onTap: () => context.push('/add-student'),
                         ),
                       ],
                     ),
-                  ),
-                );
-              }),
-              const SizedBox(height: 12),
-              // Add Member Buttons
-              Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: [
-                  _actionChip(
-                    context,
-                    '+ Partner',
-                    () => context.push('/add-adult?type=Partner or spouse'),
-                  ),
-                  _actionChip(
-                    context,
-                    '+ Child',
-                    () => context.push('/add-child'),
-                  ),
-                  _actionChip(
-                    context,
-                    '+ Parent or other',
-                    () => context.push('/add-adult?type=Parent'),
-                  ),
-                  _actionChip(
-                    context,
-                    '+ Adult child',
-                    () => context.push('/add-student'),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              // Preserved pre-continue text from Household.dc.html
-              Text.rich(
-                TextSpan(
-                  style: const TextStyle(
-                    fontFamily: AppTypography.fontBody,
-                    fontSize: 13,
-                    height: 1.45,
-                    color: Color(0xFF5A5F6B),
-                  ),
-                  children: [
-                    const TextSpan(
-                      text: 'We only ask a nickname and an age range — never a birthdate. ',
-                    ),
-                    TextSpan(
-                      text: '+ Adult child',
-                      style: const TextStyle(
-                        color: AppColors.primary,
-                        fontWeight: FontWeight.w600,
-                        decoration: TextDecoration.underline,
+                    const SizedBox(height: 16),
+                    Text.rich(
+                      TextSpan(
+                        style: const TextStyle(
+                          fontFamily: AppTypography.fontBody,
+                          fontSize: 13,
+                          height: 1.45,
+                          color: AppColors.dark300,
+                        ),
+                        children: [
+                          const TextSpan(
+                            text:
+                                'We only ask a nickname and an age range — never a birthdate. ',
+                          ),
+                          TextSpan(
+                            text: '+ Adult child',
+                            style: const TextStyle(
+                              color: AppColors.primary,
+                              fontWeight: FontWeight.w600,
+                              decoration: TextDecoration.underline,
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () => context.push('/add-student'),
+                          ),
+                        ],
                       ),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () => context.push('/add-student'),
                     ),
+                    const SizedBox(height: 12),
                   ],
                 ),
               ),
-              const SizedBox(height: 24),
-              SettleButton(
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(18, 8, 18, 16),
+              child: SettleButton(
                 label: 'Continue',
                 onPressed: () => context.push('/priorities'),
               ),
-              const SizedBox(height: 16),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _actionChip(BuildContext context, String label, VoidCallback onTap) {
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(22),
-      child: Container(
-        height: 44,
-        padding: const EdgeInsets.symmetric(horizontal: 14),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(22),
-          border: Border.all(
-            color: AppColors.primary,
-            style: BorderStyle.solid,
-          ),
-          color: Colors.transparent,
-        ),
-        child: Text(
-          label,
-          style: const TextStyle(
-            fontFamily: AppTypography.fontBody,
-            fontSize: 15,
-            fontWeight: FontWeight.w600,
-            color: AppColors.primary,
-          ),
+            ),
+          ],
         ),
       ),
     );

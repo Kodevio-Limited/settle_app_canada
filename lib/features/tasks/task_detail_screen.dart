@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:settle_app/core/router/navigation_helpers.dart';
-import 'package:settle_app/core/theme/app_colors.dart';
-import 'package:settle_app/features/tasks/models/task_data.dart';
+import '../../core/router/navigation_helpers.dart';
+import '../../core/theme/app_colors.dart';
+import '../../core/theme/app_typography.dart';
+import '../../core/widgets/figma_onboarding_widgets.dart';
+import '../../core/widgets/settle_button.dart';
+import 'models/task_data.dart';
 
 class TaskDetailScreen extends StatefulWidget {
   final String taskId;
@@ -28,7 +31,6 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
     super.initState();
     task = widget.initialTask ?? getTaskById(widget.taskId) ?? allTasksData.first;
     isDone = task.isCompleted;
-    // Default first checklist item checked if present in spec (e.g. SIN / Licence)
     checkedItems = (task.id == 'TaskSIN' || task.id == 'TaskLicence') ? {0} : {};
   }
 
@@ -44,19 +46,18 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F4F5),
+      backgroundColor: AppColors.bg,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Header navigation
+              // Figma Top Action Row
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  BackButton(
-                    color: const Color(0xFF123332),
+                  FigmaCircleBackButton(
                     onPressed: () {
                       if (context.canPop()) {
                         context.pop();
@@ -65,23 +66,25 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                       }
                     },
                   ),
-                  IconButton(
-                    icon: const Icon(Icons.more_horiz, color: Color(0xFF123332)),
+                  FigmaCircleActionButton(
+                    icon: const Icon(
+                      Icons.more_horiz_rounded,
+                      size: 22,
+                      color: AppColors.mainFont,
+                    ),
+                    tooltip: 'More options',
                     onPressed: () => _showMoreOptions(context),
-                    padding: EdgeInsets.zero,
-                    constraints: const BoxConstraints(minWidth: 44, minHeight: 44),
                   ),
                 ],
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 16),
 
               // Completed banner if done
               if (isDone) ...[
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFE3EFE8),
-                    borderRadius: BorderRadius.circular(14),
+                FigmaNoticeBanner(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 12,
                   ),
                   child: Row(
                     children: [
@@ -89,20 +92,24 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                         width: 26,
                         height: 26,
                         decoration: const BoxDecoration(
-                          color: Color(0xFF2E6B4F),
+                          color: AppColors.secondary,
                           shape: BoxShape.circle,
                         ),
-                        child: const Icon(Icons.check, size: 16, color: Colors.white),
+                        child: const Icon(
+                          Icons.check_rounded,
+                          size: 16,
+                          color: Colors.white,
+                        ),
                       ),
                       const SizedBox(width: 10),
                       Expanded(
                         child: Text(
                           task.completedText ?? 'Done for everyone · Sep 20',
                           style: const TextStyle(
-                            fontFamily: 'IBM Plex Sans',
-                            fontSize: 14,
+                            fontFamily: AppTypography.fontBody,
+                            fontSize: 13.5,
                             fontWeight: FontWeight.w600,
-                            color: Color(0xFF1F4A36),
+                            color: AppColors.primary,
                           ),
                         ),
                       ),
@@ -113,17 +120,20 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                           });
                         },
                         style: TextButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 4,
+                          ),
                           minimumSize: Size.zero,
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         ),
                         child: const Text(
                           'Undo',
                           style: TextStyle(
-                            fontFamily: 'IBM Plex Sans',
-                            fontSize: 14,
+                            fontFamily: AppTypography.fontBody,
+                            fontSize: 13.5,
                             fontWeight: FontWeight.w600,
-                            color: Color(0xFF123332),
+                            color: AppColors.primary,
                           ),
                         ),
                       ),
@@ -133,155 +143,147 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                 const SizedBox(height: 16),
               ],
 
-              // Tag & Title
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    task.tag.toUpperCase(),
-                    style: TextStyle(
-                      fontFamily: 'IBM Plex Sans',
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 0.6,
-                      color: isDone ? const Color(0xFF2E6B4F) : const Color(0xFFA82227),
-                    ),
-                  ),
-                  const SizedBox(height: 6),
-                  Text(
-                    task.title,
-                    style: const TextStyle(
-                      fontFamily: 'Bricolage Grotesque',
-                      fontSize: 30,
-                      fontWeight: FontWeight.w800,
-                      letterSpacing: -0.6,
-                      height: 1.1,
-                      color: Color(0xFF123332),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
+              // Eyebrow, Title & For-whom chips
+              Text(
+                task.tag.toUpperCase(),
+                style: TextStyle(
+                  fontFamily: AppTypography.fontBody,
+                  fontSize: 11.5,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 0.6,
+                  color: isDone ? AppColors.secondary : AppColors.red,
+                ),
+              ),
+              const SizedBox(height: 6),
+              Text(
+                task.title,
+                style: const TextStyle(
+                  fontFamily: AppTypography.fontHeading,
+                  fontSize: 28,
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: -0.6,
+                  height: 1.12,
+                  color: AppColors.mainFont,
+                ),
+              ),
+              const SizedBox(height: 12),
 
-                  // For whom block
-                  if (task.forWhom.isNotEmpty) ...[
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const Text(
-                          'For ',
-                          style: TextStyle(
-                            fontFamily: 'IBM Plex Sans',
-                            fontSize: 14,
-                            color: Color(0xFF3B4747),
-                          ),
-                        ),
-                        Wrap(
-                          spacing: 6,
-                          children: task.forWhom.map((person) {
-                            return Container(
-                              height: 30,
-                              padding: const EdgeInsets.only(left: 4, right: 10),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(15),
-                                border: Border.all(color: const Color(0xFFDEDEE2)),
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  CircleAvatar(
-                                    radius: 11,
-                                    backgroundColor: _parseColor(person.bgHex),
-                                    child: Text(
-                                      person.initial,
-                                      style: const TextStyle(
-                                        fontSize: 11,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 6),
-                                  Text(
-                                    person.name,
-                                    style: const TextStyle(
-                                      fontFamily: 'IBM Plex Sans',
-                                      fontSize: 14,
-                                      color: Color(0xFF123332),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          }).toList(),
-                        ),
-                      ],
-                    ),
-                  ] else if (task.forWhomNote != null) ...[
-                    Text(
-                      task.forWhomNote!,
-                      style: const TextStyle(
-                        fontFamily: 'IBM Plex Sans',
-                        fontSize: 14,
-                        color: Color(0xFF3B4747),
+              if (task.forWhom.isNotEmpty) ...[
+                Wrap(
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  spacing: 6,
+                  runSpacing: 6,
+                  children: [
+                    const Text(
+                      'For ',
+                      style: TextStyle(
+                        fontFamily: AppTypography.fontBody,
+                        fontSize: 13.5,
+                        color: AppColors.dark300,
                       ),
                     ),
+                    ...task.forWhom.map((person) {
+                      return Container(
+                        height: 30,
+                        padding: const EdgeInsets.only(left: 4, right: 12),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(999),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            CircleAvatar(
+                              radius: 11,
+                              backgroundColor: _parseColor(person.bgHex),
+                              child: Text(
+                                person.initial,
+                                style: const TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 6),
+                            Text(
+                              person.name,
+                              style: const TextStyle(
+                                fontFamily: AppTypography.fontBody,
+                                fontSize: 13.5,
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.mainFont,
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }),
                   ],
-                ],
-              ),
+                ),
+              ] else if (task.forWhomNote != null) ...[
+                Text(
+                  task.forWhomNote!,
+                  style: const TextStyle(
+                    fontFamily: AppTypography.fontBody,
+                    fontSize: 14,
+                    color: AppColors.dark300,
+                  ),
+                ),
+              ],
               const SizedBox(height: 16),
 
-              // Why you're seeing this box
+              // Why you're seeing this box (Muted cool teal)
               if (task.whyTags.isNotEmpty) ...[
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFE2ECEB),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
+                FigmaNoticeBanner(
+                  padding: const EdgeInsets.all(16),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
                         "Why you're seeing this",
                         style: TextStyle(
-                          fontFamily: 'IBM Plex Sans',
+                          fontFamily: AppTypography.fontBody,
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
-                          color: Color(0xFF123332),
+                          color: AppColors.primary,
                         ),
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 10),
                       Wrap(
-                        spacing: 6,
-                        runSpacing: 6,
+                        spacing: 8,
+                        runSpacing: 8,
                         children: task.whyTags.map((tagText) {
                           return Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 6,
+                            ),
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(999),
                             ),
                             child: Text(
                               tagText,
                               style: const TextStyle(
-                                fontFamily: 'IBM Plex Sans',
-                                fontSize: 13,
-                                color: Color(0xFF123332),
+                                fontFamily: AppTypography.fontBody,
+                                fontSize: 12.5,
+                                color: AppColors.mainFont,
                               ),
                             ),
                           );
                         }).toList(),
                       ),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 12),
                       GestureDetector(
                         onTap: () => context.pushSafe('/settings'),
                         child: const Text(
                           'Something wrong? Update your answers',
                           style: TextStyle(
-                            fontFamily: 'IBM Plex Sans',
+                            fontFamily: AppTypography.fontBody,
                             fontSize: 13,
                             fontWeight: FontWeight.w500,
-                            color: Color(0xFF123332),
+                            color: AppColors.primary,
                             decoration: TextDecoration.underline,
                           ),
                         ),
@@ -289,10 +291,10 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 14),
               ],
 
-              // 4-Stat Grid / 2-Stat Grid
+              // Stat Grid (borderless white tiles)
               if (task.stats.isNotEmpty) ...[
                 GridView.builder(
                   shrinkWrap: true,
@@ -301,17 +303,16 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                     crossAxisCount: 2,
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
-                    childAspectRatio: 2.3,
+                    childAspectRatio: 2.0,
                   ),
                   itemCount: task.stats.length,
                   itemBuilder: (context, idx) {
                     final stat = task.stats[idx];
-                    return Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: const Color(0xFFDEDEE2)),
-                        borderRadius: BorderRadius.circular(14),
+                    return FigmaSurfaceCard(
+                      radius: 14,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 14,
+                        vertical: 12,
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -320,19 +321,19 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                           Text(
                             stat.label,
                             style: const TextStyle(
-                              fontFamily: 'IBM Plex Sans',
+                              fontFamily: AppTypography.fontBody,
                               fontSize: 12,
-                              color: Color(0xFF5A5F6B),
+                              color: AppColors.dark300,
                             ),
                           ),
-                          const SizedBox(height: 2),
+                          const SizedBox(height: 4),
                           Text(
                             stat.value,
                             style: const TextStyle(
-                              fontFamily: 'IBM Plex Sans',
+                              fontFamily: AppTypography.fontBody,
                               fontSize: 15,
                               fontWeight: FontWeight.w600,
-                              color: Color(0xFF123332),
+                              color: AppColors.mainFont,
                             ),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
@@ -350,34 +351,34 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                 const Text(
                   'Steps',
                   style: TextStyle(
-                    fontFamily: 'IBM Plex Sans',
-                    fontSize: 18,
+                    fontFamily: AppTypography.fontHeading,
+                    fontSize: 19,
                     fontWeight: FontWeight.w600,
-                    color: Color(0xFF123332),
+                    color: AppColors.mainFont,
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 12),
                 Column(
                   children: List.generate(task.steps.length, (idx) {
                     final stepNumber = idx + 1;
                     return Padding(
-                      padding: const EdgeInsets.only(bottom: 12.0),
+                      padding: const EdgeInsets.only(bottom: 12),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            width: 24,
-                            height: 24,
-                            margin: const EdgeInsets.only(top: 2),
-                            decoration: BoxDecoration(
-                              color: isDone ? const Color(0xFF2E6B4F) : const Color(0xFF123332),
+                            width: 28,
+                            height: 28,
+                            margin: const EdgeInsets.only(top: 1),
+                            decoration: const BoxDecoration(
+                              color: AppColors.secondary,
                               shape: BoxShape.circle,
                             ),
                             child: Center(
                               child: Text(
                                 '$stepNumber',
                                 style: const TextStyle(
-                                  fontFamily: 'IBM Plex Sans',
+                                  fontFamily: AppTypography.fontBody,
                                   fontSize: 13,
                                   fontWeight: FontWeight.w600,
                                   color: Colors.white,
@@ -390,10 +391,10 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                             child: Text(
                               task.steps[idx],
                               style: const TextStyle(
-                                fontFamily: 'IBM Plex Sans',
-                                fontSize: 15,
+                                fontFamily: AppTypography.fontBody,
+                                fontSize: 14.5,
                                 height: 1.45,
-                                color: Color(0xFF123332),
+                                color: AppColors.mainFont,
                               ),
                             ),
                           ),
@@ -402,30 +403,28 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                     );
                   }),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 14),
               ],
 
               // What to bring / Have ready Section
-              Container(
+              FigmaSurfaceCard(
+                radius: 16,
                 padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(color: const Color(0xFFDEDEE2)),
-                  borderRadius: BorderRadius.circular(16),
-                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          task.bringTitle,
-                          style: const TextStyle(
-                            fontFamily: 'IBM Plex Sans',
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                            color: Color(0xFF123332),
+                        Expanded(
+                          child: Text(
+                            task.bringTitle,
+                            style: const TextStyle(
+                              fontFamily: AppTypography.fontHeading,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.mainFont,
+                            ),
                           ),
                         ),
                         if (task.checklist.isNotEmpty)
@@ -434,17 +433,17 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                             child: const Text(
                               'All checklists',
                               style: TextStyle(
-                                fontFamily: 'IBM Plex Sans',
-                                fontSize: 14,
+                                fontFamily: AppTypography.fontBody,
+                                fontSize: 13.5,
                                 fontWeight: FontWeight.w500,
-                                color: Color(0xFF123332),
+                                color: AppColors.primary,
                                 decoration: TextDecoration.underline,
                               ),
                             ),
                           ),
                       ],
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 10),
                     if (task.checklist.isNotEmpty) ...[
                       ...List.generate(task.checklist.length, (idx) {
                         final isChecked = checkedItems.contains(idx);
@@ -458,8 +457,9 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                               }
                             });
                           },
+                          borderRadius: BorderRadius.circular(8),
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 6.0),
+                            padding: const EdgeInsets.symmetric(vertical: 6),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
@@ -468,9 +468,9 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                                   height: 22,
                                   child: Checkbox(
                                     value: isChecked,
-                                    activeColor: const Color(0xFF2E6B4F),
+                                    activeColor: AppColors.secondary,
                                     shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(4),
+                                      borderRadius: BorderRadius.circular(5),
                                     ),
                                     onChanged: (val) {
                                       setState(() {
@@ -488,9 +488,9 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                                   child: Text(
                                     task.checklist[idx],
                                     style: const TextStyle(
-                                      fontFamily: 'IBM Plex Sans',
-                                      fontSize: 15,
-                                      color: Color(0xFF123332),
+                                      fontFamily: AppTypography.fontBody,
+                                      fontSize: 14.5,
+                                      color: AppColors.mainFont,
                                     ),
                                   ),
                                 ),
@@ -504,28 +504,31 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                       Text(
                         task.bringNote!,
                         style: const TextStyle(
-                          fontFamily: 'IBM Plex Sans',
+                          fontFamily: AppTypography.fontBody,
                           fontSize: 14,
                           height: 1.45,
-                          color: Color(0xFF3B4747),
+                          color: AppColors.dark300,
                         ),
                       ),
                     ],
                     if (task.checklistFootnote != null) ...[
                       const SizedBox(height: 10),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 10,
+                        ),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFF4F4F5),
+                          color: AppColors.bg,
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Text(
                           task.checklistFootnote!,
                           style: const TextStyle(
-                            fontFamily: 'IBM Plex Sans',
-                            fontSize: 13,
+                            fontFamily: AppTypography.fontBody,
+                            fontSize: 12.5,
                             height: 1.4,
-                            color: Color(0xFF3B4747),
+                            color: AppColors.dark300,
                           ),
                         ),
                       ),
@@ -540,10 +543,10 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                 Text(
                   task.nearbyTitle,
                   style: const TextStyle(
-                    fontFamily: 'IBM Plex Sans',
-                    fontSize: 18,
+                    fontFamily: AppTypography.fontHeading,
+                    fontSize: 19,
                     fontWeight: FontWeight.w600,
-                    color: Color(0xFF123332),
+                    color: AppColors.mainFont,
                   ),
                 ),
                 const SizedBox(height: 10),
@@ -551,146 +554,74 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                   Text(
                     task.nearbyNote!,
                     style: const TextStyle(
-                      fontFamily: 'IBM Plex Sans',
+                      fontFamily: AppTypography.fontBody,
                       fontSize: 14,
                       height: 1.45,
-                      color: Color(0xFF3B4747),
+                      color: AppColors.dark300,
                     ),
                   ),
                   const SizedBox(height: 10),
                 ],
 
-                // Map SVG representation for TaskSIN
                 if (task.hasMap) ...[
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(14),
-                    child: Container(
-                      height: 150,
-                      color: const Color(0xFFE9E9EC),
+                    borderRadius: BorderRadius.circular(16),
+                    child: SizedBox(
+                      height: 156,
                       child: Stack(
+                        fit: StackFit.expand,
                         children: [
-                          Positioned(
-                            right: 0,
-                            top: 0,
-                            bottom: 0,
-                            width: 100,
-                            child: Container(color: const Color(0xFFCFE0EA)),
-                          ),
-                          Positioned(
-                            left: 28,
-                            bottom: 18,
-                            width: 72,
-                            height: 40,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: const Color(0xFFD9E6D2),
-                                borderRadius: BorderRadius.circular(6),
-                              ),
+                          Image.asset(
+                            'assets/images/map_preview.png',
+                            fit: BoxFit.cover,
+                            errorBuilder: (_, __, ___) => Container(
+                              color: const Color(0xFFE9E9EC),
                             ),
                           ),
-                          // Road markings
                           Positioned(
-                            left: 0,
-                            right: 0,
-                            top: 60,
-                            height: 6,
-                            child: Container(color: Colors.white),
-                          ),
-                          Positioned(
-                            left: 0,
-                            right: 58,
-                            top: 118,
-                            height: 6,
-                            child: Container(color: Colors.white),
-                          ),
-                          Positioned(
-                            left: 120,
-                            top: 0,
-                            bottom: 0,
-                            width: 6,
-                            child: Container(color: Colors.white),
-                          ),
-                          Positioned(
-                            left: 212,
-                            top: 0,
-                            bottom: 0,
-                            width: 6,
-                            child: Container(color: Colors.white),
-                          ),
-                          // Blue location dot
-                          Positioned(
-                            left: 135,
-                            top: 71,
-                            child: Container(
-                              width: 30,
-                              height: 30,
-                              decoration: BoxDecoration(
-                                color: const Color(0xFF2F6FB5).withValues(alpha: 0.2),
-                                shape: BoxShape.circle,
-                              ),
-                              child: Center(
-                                child: Container(
-                                  width: 14,
-                                  height: 14,
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xFF2F6FB5),
-                                    shape: BoxShape.circle,
-                                    border: Border.all(color: Colors.white, width: 2.5),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          // Pin 1
-                          Positioned(
-                            right: 120,
-                            top: 24,
+                            right: 110,
+                            top: 26,
                             child: _buildMapPin('1'),
                           ),
-                          // Pin 2
                           Positioned(
-                            left: 62,
-                            top: 50,
+                            left: 64,
+                            top: 52,
                             child: _buildMapPin('2'),
                           ),
                         ],
                       ),
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 12),
                 ],
 
-                // Nearby cards
                 ...task.nearbyItems.map((item) {
-                  return InkWell(
-                    onTap: () => context.push('/location-detail'),
-                    borderRadius: BorderRadius.circular(14),
-                    child: Container(
-                      margin: const EdgeInsets.only(bottom: 8),
-                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: const Color(0xFFDEDEE2)),
-                        borderRadius: BorderRadius.circular(14),
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: FigmaSurfaceCard(
+                      radius: 16,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 14,
+                        vertical: 14,
                       ),
+                      onTap: () => context.push('/location-detail'),
                       child: Row(
                         children: [
                           Container(
-                            width: 26,
-                            height: 26,
-                            decoration: const BoxDecoration(
-                              color: Color(0xFF123332),
-                              shape: BoxShape.circle,
+                            width: 38,
+                            height: 38,
+                            decoration: BoxDecoration(
+                              color: AppColors.dark50,
+                              borderRadius: BorderRadius.circular(10),
                             ),
-                            child: Center(
-                              child: Text(
-                                item.num,
-                                style: const TextStyle(
-                                  fontFamily: 'IBM Plex Sans',
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white,
-                                ),
+                            alignment: Alignment.center,
+                            child: Text(
+                              item.num,
+                              style: const TextStyle(
+                                fontFamily: AppTypography.fontBody,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.primary,
                               ),
                             ),
                           ),
@@ -702,25 +633,29 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                                 Text(
                                   item.name,
                                   style: const TextStyle(
-                                    fontFamily: 'IBM Plex Sans',
+                                    fontFamily: AppTypography.fontBody,
                                     fontSize: 15,
                                     fontWeight: FontWeight.w600,
-                                    color: Color(0xFF123332),
+                                    color: AppColors.mainFont,
                                   ),
                                 ),
                                 const SizedBox(height: 2),
                                 Text(
                                   item.sub,
                                   style: const TextStyle(
-                                    fontFamily: 'IBM Plex Sans',
+                                    fontFamily: AppTypography.fontBody,
                                     fontSize: 13,
-                                    color: Color(0xFF5A5F6B),
+                                    color: AppColors.dark300,
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                          const Icon(Icons.chevron_right, size: 20, color: Color(0xFF7A7A83)),
+                          const Icon(
+                            Icons.chevron_right_rounded,
+                            size: 20,
+                            color: AppColors.dark200,
+                          ),
                         ],
                       ),
                     ),
@@ -740,10 +675,10 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                       child: const Text(
                         'See all on the map',
                         style: TextStyle(
-                          fontFamily: 'IBM Plex Sans',
-                          fontSize: 15,
+                          fontFamily: AppTypography.fontBody,
+                          fontSize: 14.5,
                           fontWeight: FontWeight.w600,
-                          color: Color(0xFF123332),
+                          color: AppColors.primary,
                         ),
                       ),
                     ),
@@ -754,16 +689,17 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
 
               // Official source card
               if (task.sourceName.isNotEmpty) ...[
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: const Color(0xFFDEDEE2)),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
+                FigmaSurfaceCard(
+                  radius: 16,
+                  padding: const EdgeInsets.all(14),
                   child: Row(
                     children: [
-                      const Icon(Icons.open_in_new, size: 22, color: Color(0xFF123332)),
+                      const FigmaIconTile(
+                        icon: Icons.open_in_new_rounded,
+                        iconColor: AppColors.primary,
+                        backgroundColor: AppColors.dark50,
+                        size: 42,
+                      ),
                       const SizedBox(width: 12),
                       Expanded(
                         child: Column(
@@ -772,19 +708,19 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                             Text(
                               task.sourceName,
                               style: const TextStyle(
-                                fontFamily: 'IBM Plex Sans',
+                                fontFamily: AppTypography.fontBody,
                                 fontSize: 15,
                                 fontWeight: FontWeight.w600,
-                                color: Color(0xFF123332),
+                                color: AppColors.mainFont,
                               ),
                             ),
                             const SizedBox(height: 2),
                             Text(
                               task.sourceSub,
                               style: const TextStyle(
-                                fontFamily: 'IBM Plex Sans',
+                                fontFamily: AppTypography.fontBody,
                                 fontSize: 13,
-                                color: Color(0xFF5A5F6B),
+                                color: AppColors.dark300,
                               ),
                             ),
                           ],
@@ -798,27 +734,9 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
 
               // Action buttons (if not done)
               if (!isDone) ...[
-                SizedBox(
-                  height: 54,
-                  child: ElevatedButton(
-                    onPressed: () => context.push('/done-picker'),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF123332),
-                      foregroundColor: Colors.white,
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(14),
-                      ),
-                    ),
-                    child: const Text(
-                      'Mark as done',
-                      style: TextStyle(
-                        fontFamily: 'IBM Plex Sans',
-                        fontSize: 17,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
+                SettleButton(
+                  label: 'Mark as done',
+                  onPressed: () => context.push('/done-picker'),
                 ),
                 const SizedBox(height: 10),
                 Row(
@@ -829,19 +747,22 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                         child: OutlinedButton(
                           onPressed: () => context.push('/snooze'),
                           style: OutlinedButton.styleFrom(
-                            side: const BorderSide(color: Color(0xFFC8C8CE)),
-                            backgroundColor: Colors.white,
+                            side: const BorderSide(color: AppColors.dark100),
+                            backgroundColor: AppColors.dark50,
+                            foregroundColor: AppColors.mainFont,
+                            elevation: 0,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(30),
                             ),
                           ),
                           child: const Text(
                             'Remind me later',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                              fontFamily: 'IBM Plex Sans',
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xFF123332),
+                              fontFamily: AppTypography.fontBody,
+                              fontSize: 13.5,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                         ),
@@ -854,19 +775,22 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                         child: OutlinedButton(
                           onPressed: () => context.push('/dismiss'),
                           style: OutlinedButton.styleFrom(
-                            side: const BorderSide(color: Color(0xFFC8C8CE)),
-                            backgroundColor: Colors.white,
+                            side: const BorderSide(color: AppColors.dark100),
+                            backgroundColor: AppColors.dark50,
+                            foregroundColor: AppColors.mainFont,
+                            elevation: 0,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(30),
                             ),
                           ),
                           child: const Text(
                             'Not for me',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                              fontFamily: 'IBM Plex Sans',
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xFF123332),
+                              fontFamily: AppTypography.fontBody,
+                              fontSize: 13.5,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                         ),
@@ -874,7 +798,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 12),
                 Wrap(
                   alignment: WrapAlignment.spaceBetween,
                   crossAxisAlignment: WrapCrossAlignment.center,
@@ -882,34 +806,40 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                     TextButton(
                       onPressed: () => context.pushSafe('/help'),
                       style: TextButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 4,
+                          vertical: 4,
+                        ),
                         minimumSize: Size.zero,
                         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       ),
                       child: const Text(
                         'Ask a settlement worker',
                         style: TextStyle(
-                          fontFamily: 'IBM Plex Sans',
-                          fontSize: 14,
+                          fontFamily: AppTypography.fontBody,
+                          fontSize: 13.5,
                           fontWeight: FontWeight.w500,
-                          color: Color(0xFF123332),
+                          color: AppColors.primary,
                         ),
                       ),
                     ),
                     TextButton(
                       onPressed: () => context.push('/report-outdated'),
                       style: TextButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 4,
+                          vertical: 4,
+                        ),
                         minimumSize: Size.zero,
                         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       ),
                       child: const Text(
                         'Report outdated info',
                         style: TextStyle(
-                          fontFamily: 'IBM Plex Sans',
-                          fontSize: 14,
+                          fontFamily: AppTypography.fontBody,
+                          fontSize: 13.5,
                           fontWeight: FontWeight.w500,
-                          color: Color(0xFF123332),
+                          color: AppColors.primary,
                         ),
                       ),
                     ),
@@ -922,13 +852,13 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
               Text(
                 task.disclaimer,
                 style: const TextStyle(
-                  fontFamily: 'IBM Plex Sans',
+                  fontFamily: AppTypography.fontBody,
                   fontSize: 12,
                   height: 1.45,
-                  color: Color(0xFF5A5F6B),
+                  color: AppColors.dark300,
                 ),
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 20),
             ],
           ),
         ),
@@ -941,17 +871,17 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-          width: 24,
-          height: 24,
+          width: 26,
+          height: 26,
           decoration: const BoxDecoration(
-            color: Color(0xFF123332),
+            color: AppColors.primary,
             shape: BoxShape.circle,
           ),
           child: Center(
             child: Text(
               num,
               style: const TextStyle(
-                fontFamily: 'IBM Plex Sans',
+                fontFamily: AppTypography.fontBody,
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
                 color: Colors.white,
@@ -961,7 +891,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
         ),
         CustomPaint(
           size: const Size(8, 6),
-          painter: _TrianglePainter(color: const Color(0xFF123332)),
+          painter: _TrianglePainter(color: AppColors.primary),
         ),
       ],
     );
@@ -970,32 +900,76 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
   void _showMoreOptions(BuildContext context) {
     showModalBottomSheet(
       context: context,
+      backgroundColor: Colors.white,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
       builder: (ctx) => SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16.0),
+          padding: const EdgeInsets.fromLTRB(20, 12, 20, 16),
           child: Column(
             mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              const FigmaSheetHandle(),
+              const SizedBox(height: 14),
+              Text(
+                task.title,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontFamily: AppTypography.fontHeading,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.mainFont,
+                ),
+              ),
+              const SizedBox(height: 12),
               ListTile(
-                leading: const Icon(Icons.share_outlined, color: Color(0xFF123332)),
+                contentPadding: EdgeInsets.zero,
+                leading: const Icon(
+                  Icons.share_outlined,
+                  color: AppColors.primary,
+                ),
                 title: const Text('Share this step'),
+                trailing: const Icon(
+                  Icons.chevron_right_rounded,
+                  color: AppColors.dark200,
+                ),
                 onTap: () => Navigator.pop(ctx),
               ),
               ListTile(
-                leading: const Icon(Icons.bookmark_outline, color: Color(0xFF123332)),
+                contentPadding: EdgeInsets.zero,
+                leading: const Icon(
+                  Icons.bookmark_outline_rounded,
+                  color: AppColors.primary,
+                ),
                 title: const Text('Bookmark for later'),
+                trailing: const Icon(
+                  Icons.chevron_right_rounded,
+                  color: AppColors.dark200,
+                ),
                 onTap: () => Navigator.pop(ctx),
               ),
               ListTile(
-                leading: const Icon(Icons.flag_outlined, color: Color(0xFFA82227)),
+                contentPadding: EdgeInsets.zero,
+                leading: const Icon(
+                  Icons.flag_outlined,
+                  color: AppColors.red,
+                ),
                 title: const Text('Report an issue'),
+                trailing: const Icon(
+                  Icons.chevron_right_rounded,
+                  color: AppColors.dark200,
+                ),
                 onTap: () {
                   Navigator.pop(ctx);
                   _reportOutdated(context);
                 },
+              ),
+              const SizedBox(height: 12),
+              FigmaSoftOutlineButton(
+                label: 'Cancel',
+                onPressed: () => Navigator.pop(ctx),
               ),
             ],
           ),

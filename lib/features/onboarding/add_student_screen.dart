@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../core/models/user_profile.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_typography.dart';
+import '../../core/widgets/figma_onboarding_widgets.dart';
 import '../../core/widgets/settle_button.dart';
 import 'onboarding_provider.dart';
 
@@ -36,218 +37,166 @@ class _AddStudentScreenState extends ConsumerState<AddStudentScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final name = _nameController.text.trim().isEmpty ? 'Yasmin' : _nameController.text.trim();
+    final name =
+        _nameController.text.trim().isEmpty ? 'Yasmin' : _nameController.text.trim();
 
-    return Scaffold(
-      backgroundColor: AppColors.bg,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: BackButton(
-          color: AppColors.primary,
-          onPressed: () {
-            if (context.canPop()) {
-              context.pop();
-            } else {
-              context.go('/household');
-            }
-          },
-        ),
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        backgroundColor: AppColors.bg,
+        body: SafeArea(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Add an adult child',
-                style: TextStyle(
-                  fontFamily: AppTypography.fontHeading,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 24,
-                  color: AppColors.primary,
-                ),
-              ),
-              const SizedBox(height: 14),
-              // Name or nickname
-              const Text(
-                'Name or nickname',
-                style: TextStyle(
-                  fontFamily: AppTypography.fontBody,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.primary,
-                ),
-              ),
-              const SizedBox(height: 6),
-              TextField(
-                controller: _nameController,
-                onChanged: (_) => setState(() {}),
-                decoration: InputDecoration(
-                  hintText: 'e.g. Yasmin',
-                  filled: true,
-                  fillColor: AppColors.white50,
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(color: Color(0xFFC8C8CE)),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(color: Color(0xFFC8C8CE)),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 14),
-              // Age range
-              const Text(
-                'Age range',
-                style: TextStyle(
-                  fontFamily: AppTypography.fontBody,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.primary,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Row(
-                children: ['18–21', '22–25', '26+'].map((ag) {
-                  final isSel = _ageGroup == ag;
-                  return Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 6.0),
-                      child: _filterChip(ag, isSel, () => setState(() => _ageGroup = ag)),
-                    ),
-                  );
-                }).toList(),
-              ),
-              const SizedBox(height: 14),
-              // Studying in Canada?
-              const Text(
-                'Studying in Canada?',
-                style: TextStyle(
-                  fontFamily: AppTypography.fontBody,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.primary,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: ['University', 'College', 'Not sure yet', 'Not studying'].map((ed) {
-                  final isSel = _studyLevel == ed;
-                  return _filterChip(ed, isSel, () => setState(() => _studyLevel = ed));
-                }).toList(),
-              ),
-              const SizedBox(height: 14),
-              // Where are they with applying?
-              const Text(
-                'Where are they with applying?',
-                style: TextStyle(
-                  fontFamily: AppTypography.fontBody,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.primary,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Row(
-                children: ['Accepted', 'Applying', 'Not yet'].map((as) {
-                  final isSel = _admitStatus == as;
-                  return Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 6.0),
-                      child: _filterChip(as, isSel, () => setState(() => _admitStatus = as)),
-                    ),
-                  );
-                }).toList(),
-              ),
-              const SizedBox(height: 14),
-              // Same status as me checkbox
-              InkWell(
-                onTap: () => setState(() => _sameStatusAsMe = !_sameStatusAsMe),
-                child: Row(
-                  children: [
-                    Checkbox(
-                      value: _sameStatusAsMe,
-                      activeColor: AppColors.primary,
-                      onChanged: (v) => setState(() => _sameStatusAsMe = v ?? true),
-                    ),
-                    const Text(
-                      'Same status as me',
-                      style: TextStyle(
-                        fontFamily: AppTypography.fontBody,
-                        fontSize: 15,
-                        color: AppColors.primary,
+              Expanded(
+                child: SingleChildScrollView(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 18.0, vertical: 14.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const FigmaSheetHandle(),
+                      const SizedBox(height: 10),
+                      Row(
+                        children: [
+                          FigmaCircleBackButton(
+                            onPressed: () {
+                              if (context.canPop()) {
+                                context.pop();
+                              } else {
+                                context.go('/household');
+                              }
+                            },
+                          ),
+                          const Expanded(
+                            child: Text(
+                              'Add an adult child',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontFamily: AppTypography.fontHeading,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 23,
+                                color: AppColors.mainFont,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 50),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 6),
-              const Text(
-                'On their own study permit? Their path is different — they should create their own Settle account.',
-                style: TextStyle(
-                  fontFamily: AppTypography.fontBody,
-                  fontSize: 12,
-                  height: 1.45,
-                  color: Color(0xFF5A5F6B),
-                ),
-              ),
-              const SizedBox(height: 24),
-              SettleButton(
-                label: 'Add $name',
-                onPressed: () {
-                  ref.read(onboardingProvider.notifier).addMember(
-                        HouseholdMember(
-                          id: 'student_${DateTime.now().millisecondsSinceEpoch}',
-                          name: name,
-                          relationship: 'adultChild',
-                          age: _ageGroup == '18–21' ? 20 : _ageGroup == '22–25' ? 23 : 27,
-                          isStudent: _studyLevel != 'Not studying',
+                      const SizedBox(height: 22),
+                      const FigmaInputLabel('Name or nickname', fontSize: 16),
+                      const SizedBox(height: 8),
+                      TextField(
+                        controller: _nameController,
+                        onChanged: (_) => setState(() {}),
+                        style: const TextStyle(
+                          fontFamily: AppTypography.fontBody,
+                          fontSize: 16,
+                          color: AppColors.mainFont,
                         ),
-                      );
-                  if (context.canPop()) {
-                    context.pop();
-                  } else {
-                    context.go('/household');
-                  }
-                },
+                        decoration: figmaPillInputDecoration(hintText: 'e.g. Yasmin'),
+                      ),
+                      const SizedBox(height: 18),
+                      const FigmaInputLabel('Age range', fontSize: 16),
+                      const SizedBox(height: 10),
+                      Row(
+                        children: ['18–21', '22–25', '26+'].map((ag) {
+                          final isLast = ag == '26+';
+                          return Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.only(right: isLast ? 0 : 10),
+                              child: FigmaChoiceChip(
+                                label: ag,
+                                isSelected: _ageGroup == ag,
+                                onTap: () => setState(() => _ageGroup = ag),
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                      const SizedBox(height: 18),
+                      const FigmaInputLabel('Studying in Canada?', fontSize: 16),
+                      const SizedBox(height: 10),
+                      Wrap(
+                        spacing: 10,
+                        runSpacing: 10,
+                        children:
+                            ['University', 'College', 'Not sure yet', 'Not studying']
+                                .map((ed) {
+                          return FigmaChoiceChip(
+                            label: ed,
+                            isSelected: _studyLevel == ed,
+                            onTap: () => setState(() => _studyLevel = ed),
+                          );
+                        }).toList(),
+                      ),
+                      const SizedBox(height: 18),
+                      const FigmaInputLabel('Where are they with applying?',
+                          fontSize: 16),
+                      const SizedBox(height: 10),
+                      Row(
+                        children: ['Accepted', 'Applying', 'Not yet'].map((as) {
+                          final isLast = as == 'Not yet';
+                          return Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.only(right: isLast ? 0 : 10),
+                              child: FigmaChoiceChip(
+                                label: as,
+                                isSelected: _admitStatus == as,
+                                onTap: () => setState(() => _admitStatus = as),
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                      const SizedBox(height: 16),
+                      FigmaCheckRow(
+                        label: 'Same status as me',
+                        value: _sameStatusAsMe,
+                        onTap: () =>
+                            setState(() => _sameStatusAsMe = !_sameStatusAsMe),
+                      ),
+                      const SizedBox(height: 6),
+                      const Text(
+                        'On their own study permit? Their path is different — they should create their own Settle account.',
+                        style: TextStyle(
+                          fontFamily: AppTypography.fontBody,
+                          fontSize: 12.5,
+                          height: 1.45,
+                          color: AppColors.dark300,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                    ],
+                  ),
+                ),
               ),
-              const SizedBox(height: 16),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(18, 8, 18, 16),
+                child: SettleButton(
+                  label: 'Add $name',
+                  onPressed: () {
+                    ref.read(onboardingProvider.notifier).addMember(
+                          HouseholdMember(
+                            id: 'student_${DateTime.now().millisecondsSinceEpoch}',
+                            name: name,
+                            relationship: 'adultChild',
+                            age: _ageGroup == '18–21'
+                                ? 20
+                                : _ageGroup == '22–25'
+                                    ? 23
+                                    : 27,
+                            isStudent: _studyLevel != 'Not studying',
+                          ),
+                        );
+                    if (context.canPop()) {
+                      context.pop();
+                    } else {
+                      context.go('/household');
+                    }
+                  },
+                ),
+              ),
             ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _filterChip(String label, bool isSel, VoidCallback onTap) {
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(12),
-      child: Container(
-        height: 44,
-        padding: const EdgeInsets.symmetric(horizontal: 12),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: isSel ? const Color(0xFFE2ECEB) : Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: isSel ? AppColors.primary : const Color(0xFFC8C8CE),
-            width: isSel ? 2.0 : 1.0,
-          ),
-        ),
-        child: Text(
-          label,
-          style: TextStyle(
-            fontFamily: AppTypography.fontBody,
-            fontSize: 14,
-            fontWeight: isSel ? FontWeight.w600 : FontWeight.w500,
-            color: AppColors.primary,
           ),
         ),
       ),

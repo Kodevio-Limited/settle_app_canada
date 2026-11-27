@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../core/models/user_profile.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_typography.dart';
+import '../../core/widgets/figma_onboarding_widgets.dart';
 import '../../core/widgets/settle_button.dart';
 import 'onboarding_provider.dart';
 
@@ -36,217 +37,183 @@ class _AddChildScreenState extends ConsumerState<AddChildScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final name = _nameController.text.trim().isEmpty ? 'Nour' : _nameController.text.trim();
+    final name =
+        _nameController.text.trim().isEmpty ? 'Nour' : _nameController.text.trim();
 
-    return Scaffold(
-      backgroundColor: AppColors.bg,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: BackButton(
-          color: AppColors.primary,
-          onPressed: () {
-            if (context.canPop()) {
-              context.pop();
-            } else {
-              context.go('/household');
-            }
-          },
-        ),
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        backgroundColor: AppColors.bg,
+        body: SafeArea(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Add a child',
-                style: TextStyle(
-                  fontFamily: AppTypography.fontHeading,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 24,
-                  color: AppColors.primary,
-                ),
-              ),
-              const SizedBox(height: 14),
-              // Nickname
-              const Text(
-                'Nickname',
-                style: TextStyle(
-                  fontFamily: AppTypography.fontBody,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.primary,
-                ),
-              ),
-              const SizedBox(height: 6),
-              TextField(
-                controller: _nameController,
-                onChanged: (_) => setState(() {}),
-                decoration: InputDecoration(
-                  hintText: 'e.g. Nour',
-                  filled: true,
-                  fillColor: AppColors.white50,
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(color: Color(0xFFC8C8CE)),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(color: Color(0xFFC8C8CE)),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 14),
-              // Filter heading 1: Age range
-              const Text(
-                'Age range',
-                style: TextStyle(
-                  fontFamily: AppTypography.fontBody,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.primary,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: ['Under 4', '4–5', '6–9', '10–11', '12–14', '15–17'].map((ag) {
-                  final isSel = _ageGroup == ag;
-                  return _filterChip(ag, isSel, () => setState(() => _ageGroup = ag));
-                }).toList(),
-              ),
-              const SizedBox(height: 14),
-              // Filter heading 2: Needs
-              const Text(
-                'Needs',
-                style: TextStyle(
-                  fontFamily: AppTypography.fontBody,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.primary,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Wrap(
-                spacing: 8,
-                children: ['School', 'Childcare', 'Neither'].map((nd) {
-                  final isSel = _needs == nd;
-                  return _filterChip(nd, isSel, () => setState(() => _needs = nd));
-                }).toList(),
-              ),
-              const SizedBox(height: 14),
-              // Filter heading 3: Are school records ready?
-              const Text(
-                'Are school records ready?',
-                style: TextStyle(
-                  fontFamily: AppTypography.fontBody,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.primary,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Wrap(
-                spacing: 8,
-                children: ['Yes', 'Some', 'Not yet'].map((rec) {
-                  final isSel = _schoolRecordsReady == rec;
-                  return _filterChip(rec, isSel, () => setState(() => _schoolRecordsReady = rec));
-                }).toList(),
-              ),
-              const SizedBox(height: 14),
-              // Filter heading 4: Might English support help?
-              const Text(
-                'Might English support help?',
-                style: TextStyle(
-                  fontFamily: AppTypography.fontBody,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.primary,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Wrap(
-                spacing: 8,
-                children: ['Yes', 'No', 'Not sure'].map((es) {
-                  final isSel = _englishSupport == es;
-                  return _filterChip(es, isSel, () => setState(() => _englishSupport = es));
-                }).toList(),
-              ),
-              const SizedBox(height: 16),
-              // Explanatory note
-              const Text(
-                'No birthdate, no medical details. Just enough to show the right school steps.',
-                style: TextStyle(
-                  fontFamily: AppTypography.fontBody,
-                  fontSize: 12,
-                  height: 1.45,
-                  color: Color(0xFF5A5F6B),
-                ),
-              ),
-              const SizedBox(height: 24),
-              SettleButton(
-                label: 'Add $name',
-                onPressed: () {
-                  ref.read(onboardingProvider.notifier).addMember(
-                        HouseholdMember(
-                          id: 'child_${DateTime.now().millisecondsSinceEpoch}',
-                          name: name,
-                          relationship: 'child',
-                          age: _ageGroup == 'Under 4'
-                              ? 3
-                              : _ageGroup == '4–5'
-                                  ? 5
-                                  : _ageGroup == '6–9'
-                                      ? 8
-                                      : _ageGroup == '10–11'
-                                          ? 11
-                                          : _ageGroup == '12–14'
-                                              ? 13
-                                              : 16,
+              Expanded(
+                child: SingleChildScrollView(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 18.0, vertical: 14.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const FigmaSheetHandle(),
+                      const SizedBox(height: 10),
+                      Row(
+                        children: [
+                          FigmaCircleBackButton(
+                            onPressed: () {
+                              if (context.canPop()) {
+                                context.pop();
+                              } else {
+                                context.go('/household');
+                              }
+                            },
+                          ),
+                          const Expanded(
+                            child: Text(
+                              'Add a child',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontFamily: AppTypography.fontHeading,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 23,
+                                color: AppColors.mainFont,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 50),
+                        ],
+                      ),
+                      const SizedBox(height: 22),
+                      const FigmaInputLabel('Nickname', fontSize: 16),
+                      const SizedBox(height: 8),
+                      TextField(
+                        controller: _nameController,
+                        onChanged: (_) => setState(() {}),
+                        style: const TextStyle(
+                          fontFamily: AppTypography.fontBody,
+                          fontSize: 16,
+                          color: AppColors.mainFont,
                         ),
-                      );
-                  if (context.canPop()) {
-                    context.pop();
-                  } else {
-                    context.go('/household');
-                  }
-                },
+                        decoration: figmaPillInputDecoration(hintText: 'e.g. Nour'),
+                      ),
+                      const SizedBox(height: 18),
+                      const FigmaInputLabel('Age range', fontSize: 16),
+                      const SizedBox(height: 10),
+                      Wrap(
+                        spacing: 10,
+                        runSpacing: 10,
+                        children:
+                            ['Under 4', '4–5', '6–9', '10–11', '12–14', '15–17']
+                                .map((ag) {
+                          return FigmaChoiceChip(
+                            label: ag,
+                            isSelected: _ageGroup == ag,
+                            onTap: () => setState(() => _ageGroup = ag),
+                          );
+                        }).toList(),
+                      ),
+                      const SizedBox(height: 18),
+                      const FigmaInputLabel('Needs', fontSize: 16),
+                      const SizedBox(height: 10),
+                      Row(
+                        children: ['School', 'Childcare', 'Neither'].map((nd) {
+                          final isLast = nd == 'Neither';
+                          return Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.only(right: isLast ? 0 : 10),
+                              child: FigmaChoiceChip(
+                                label: nd,
+                                isSelected: _needs == nd,
+                                onTap: () => setState(() => _needs = nd),
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                      const SizedBox(height: 18),
+                      const FigmaInputLabel('Are school records ready?', fontSize: 16),
+                      const SizedBox(height: 10),
+                      Row(
+                        children: ['Yes', 'Some', 'Not yet'].map((rec) {
+                          final isLast = rec == 'Not yet';
+                          return Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.only(right: isLast ? 0 : 10),
+                              child: FigmaChoiceChip(
+                                label: rec,
+                                isSelected: _schoolRecordsReady == rec,
+                                onTap: () =>
+                                    setState(() => _schoolRecordsReady = rec),
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                      const SizedBox(height: 18),
+                      const FigmaInputLabel('Might English support help?',
+                          fontSize: 16),
+                      const SizedBox(height: 10),
+                      Row(
+                        children: ['Yes', 'No', 'Not sure'].map((es) {
+                          final isLast = es == 'Not sure';
+                          return Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.only(right: isLast ? 0 : 10),
+                              child: FigmaChoiceChip(
+                                label: es,
+                                isSelected: _englishSupport == es,
+                                onTap: () => setState(() => _englishSupport = es),
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                      const SizedBox(height: 16),
+                      const Text(
+                        'No birthdate, no medical details. Just enough to show the right school steps.',
+                        style: TextStyle(
+                          fontFamily: AppTypography.fontBody,
+                          fontSize: 12.5,
+                          height: 1.45,
+                          color: AppColors.dark300,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                    ],
+                  ),
+                ),
               ),
-              const SizedBox(height: 16),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(18, 8, 18, 16),
+                child: SettleButton(
+                  label: 'Add $name',
+                  onPressed: () {
+                    ref.read(onboardingProvider.notifier).addMember(
+                          HouseholdMember(
+                            id: 'child_${DateTime.now().millisecondsSinceEpoch}',
+                            name: name,
+                            relationship: 'child',
+                            age: _ageGroup == 'Under 4'
+                                ? 3
+                                : _ageGroup == '4–5'
+                                    ? 5
+                                    : _ageGroup == '6–9'
+                                        ? 8
+                                        : _ageGroup == '10–11'
+                                            ? 11
+                                            : _ageGroup == '12–14'
+                                                ? 13
+                                                : 16,
+                          ),
+                        );
+                    if (context.canPop()) {
+                      context.pop();
+                    } else {
+                      context.go('/household');
+                    }
+                  },
+                ),
+              ),
             ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _filterChip(String label, bool isSel, VoidCallback onTap) {
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(12),
-      child: Container(
-        height: 44,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: isSel ? const Color(0xFFE2ECEB) : Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: isSel ? AppColors.primary : const Color(0xFFC8C8CE),
-            width: isSel ? 2.0 : 1.0,
-          ),
-        ),
-        child: Text(
-          label,
-          style: TextStyle(
-            fontFamily: AppTypography.fontBody,
-            fontSize: 15,
-            fontWeight: isSel ? FontWeight.w600 : FontWeight.w500,
-            color: AppColors.primary,
           ),
         ),
       ),

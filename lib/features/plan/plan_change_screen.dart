@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_typography.dart';
+import '../../core/widgets/figma_onboarding_widgets.dart';
+import '../../core/widgets/settle_button.dart';
 
 class PlanChangeScreen extends StatelessWidget {
   const PlanChangeScreen({super.key});
@@ -12,77 +14,87 @@ class PlanChangeScreen extends StatelessWidget {
       backgroundColor: AppColors.bg,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Eyebrow
+              Align(
+                alignment: Alignment.centerLeft,
+                child: FigmaCircleBackButton(
+                  onPressed: () {
+                    if (context.canPop()) {
+                      context.pop();
+                    } else {
+                      context.go('/home');
+                    }
+                  },
+                ),
+              ),
+              const SizedBox(height: 16),
+
               const Text(
                 'YOUR PLAN CHANGED',
                 style: TextStyle(
-                  fontSize: 12,
+                  fontFamily: AppTypography.fontBody,
+                  fontSize: 11.5,
                   fontWeight: FontWeight.w600,
                   letterSpacing: 0.6,
-                  color: Color(0xFFA82227),
+                  color: AppColors.red,
                 ),
               ),
               const SizedBox(height: 6),
 
-              // Title
-              Text(
+              const Text(
                 'You moved from Mississauga to Brampton',
-                style: const TextStyle(
+                style: TextStyle(
                   fontFamily: AppTypography.fontHeading,
                   fontSize: 28,
-                  fontWeight: FontWeight.w800,
-                  height: 1.1,
+                  fontWeight: FontWeight.w500,
+                  height: 1.12,
                   letterSpacing: -0.6,
-                  color: Color(0xFF123332),
+                  color: AppColors.mainFont,
                 ),
               ),
-              const SizedBox(height: 6),
+              const SizedBox(height: 8),
 
-              // Subtitle
               const Text(
                 "Here's what we updated, and why.",
                 style: TextStyle(
-                  fontSize: 15,
+                  fontFamily: AppTypography.fontBody,
+                  fontSize: 14.5,
                   height: 1.45,
-                  color: Color(0xFF3B4747),
+                  color: AppColors.dark300,
                 ),
               ),
-              const SizedBox(height: 18),
+              const SizedBox(height: 20),
 
               // + 3 added Section
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: const Color(0xFFDEDEE2)),
-                ),
+              FigmaSurfaceCard(
+                radius: 16,
+                padding: const EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
                       '+ 3 added',
                       style: TextStyle(
+                        fontFamily: AppTypography.fontBody,
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
-                        color: Color(0xFF2E6B4F),
+                        color: Color(0xFF248A3D),
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 12),
                     _buildTaskItem(
                       'Update your address with the CRA',
                       'Benefits and tax mail go to your new home',
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 12),
                     _buildTaskItem(
                       'Update address on health cards & licence',
                       'Ontario asks for address changes to be reported',
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 12),
                     _buildTaskItem(
                       'Get a Brampton Library card',
                       'Your new local library',
@@ -90,128 +102,88 @@ class PlanChangeScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 14),
 
               // - 1 removed Section
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: const Color(0xFFDEDEE2)),
-                ),
+              const FigmaSurfaceCard(
+                radius: 16,
+                padding: EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     Text(
                       '− 1 removed',
                       style: TextStyle(
+                        fontFamily: AppTypography.fontBody,
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
-                        color: Color(0xFFA3261C),
+                        color: AppColors.red,
                       ),
                     ),
-                    SizedBox(height: 8),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Get a Mississauga Library card',
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w700,
-                            decoration: TextDecoration.lineThrough,
-                            color: Color(0xFF5A5F6B),
-                          ),
-                        ),
-                        SizedBox(height: 2),
-                        Text(
-                          'No longer your local library',
-                          style: TextStyle(
-                            fontSize: 13,
-                            color: Color(0xFF5A5F6B),
-                          ),
-                        ),
-                      ],
+                    SizedBox(height: 10),
+                    Text(
+                      'Get a Mississauga Library card',
+                      style: TextStyle(
+                        fontFamily: AppTypography.fontBody,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        decoration: TextDecoration.lineThrough,
+                        color: AppColors.mainFont,
+                      ),
+                    ),
+                    SizedBox(height: 2),
+                    Text(
+                      'No longer your local library',
+                      style: TextStyle(
+                        fontFamily: AppTypography.fontBody,
+                        fontSize: 13,
+                        color: AppColors.dark300,
+                      ),
                     ),
                   ],
                 ),
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 14),
 
               // Unchanged Section
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFE2ECEB),
-                  borderRadius: BorderRadius.circular(16),
-                ),
+              const FigmaNoticeBanner(
+                padding: EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     Text(
                       'Unchanged',
                       style: TextStyle(
+                        fontFamily: AppTypography.fontBody,
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
-                        color: Color(0xFF123332),
+                        color: AppColors.primary,
                       ),
                     ),
                     SizedBox(height: 4),
                     Text(
                       'School steps stay the same — both cities are in Peel Region. Nearby offices now show around Brampton.',
                       style: TextStyle(
-                        fontSize: 14,
+                        fontFamily: AppTypography.fontBody,
+                        fontSize: 13.5,
                         height: 1.45,
-                        color: Color(0xFF123332),
+                        color: AppColors.mainFont,
                       ),
                     ),
                   ],
                 ),
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 28),
 
-              // Action buttons
-              InkWell(
-                onTap: () => context.go('/home'),
-                borderRadius: BorderRadius.circular(14),
-                child: Container(
-                  height: 54,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF123332),
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                  alignment: Alignment.center,
-                  child: const Text(
-                    'Looks right',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 17,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
+              SettleButton(
+                label: 'Looks right',
+                onPressed: () => context.go('/home'),
               ),
-              const SizedBox(height: 8),
-
-              Center(
-                child: InkWell(
-                  onTap: () => context.push('/onboarding/destination'),
-                  child: const Padding(
-                    padding: EdgeInsets.all(10),
-                    child: Text(
-                      "Something's wrong — edit my answers",
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xFF123332),
-                      ),
-                    ),
-                  ),
-                ),
+              const SizedBox(height: 10),
+              FigmaSoftOutlineButton(
+                label: "Something's wrong — edit my answers",
+                onPressed: () => context.push('/onboarding/destination'),
               ),
-              const SizedBox(height: 16),
             ],
           ),
         ),
@@ -226,17 +198,19 @@ class PlanChangeScreen extends StatelessWidget {
         Text(
           title,
           style: const TextStyle(
+            fontFamily: AppTypography.fontBody,
             fontSize: 15,
-            fontWeight: FontWeight.w700,
-            color: Color(0xFF123332),
+            fontWeight: FontWeight.w600,
+            color: AppColors.mainFont,
           ),
         ),
         const SizedBox(height: 2),
         Text(
           subtitle,
           style: const TextStyle(
+            fontFamily: AppTypography.fontBody,
             fontSize: 13,
-            color: Color(0xFF5A5F6B),
+            color: AppColors.dark300,
           ),
         ),
       ],

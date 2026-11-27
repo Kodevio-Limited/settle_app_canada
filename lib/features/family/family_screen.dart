@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../core/router/navigation_helpers.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_typography.dart';
+import '../../core/widgets/figma_onboarding_widgets.dart';
 
 class FamilyMemberInfo {
   final String initial;
@@ -11,6 +12,7 @@ class FamilyMemberInfo {
   final String role;
   final int progressPercent;
   final Color avatarColor;
+  final String? avatarAsset;
   final String route;
   final bool hasBorder;
 
@@ -20,6 +22,7 @@ class FamilyMemberInfo {
     required this.role,
     required this.progressPercent,
     required this.avatarColor,
+    this.avatarAsset,
     required this.route,
     this.hasBorder = false,
   });
@@ -35,6 +38,7 @@ class FamilyScreen extends StatelessWidget {
       role: 'You · 9 tasks',
       progressPercent: 33,
       avatarColor: Color(0xFF123332),
+      avatarAsset: 'assets/images/avatar_layla.png',
       route: '/settings',
     ),
     FamilyMemberInfo(
@@ -43,6 +47,7 @@ class FamilyScreen extends StatelessWidget {
       role: 'Partner · 10 tasks',
       progressPercent: 20,
       avatarColor: Color(0xFF2E6B4F),
+      avatarAsset: 'assets/images/avatar_omar.png',
       route: '/family/member-adult',
     ),
     FamilyMemberInfo(
@@ -97,10 +102,10 @@ class FamilyScreen extends StatelessWidget {
   <path d="M5.6 5.6l3.9 3.9M14.5 14.5l3.9 3.9M18.4 5.6l-3.9 3.9M9.5 14.5l-3.9 3.9"></path>
 </svg>''';
 
-  static const String _meSvg = '''
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  static const String _meFilledSvg = '''
+<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
   <circle cx="12" cy="8" r="4"></circle>
-  <path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"></path>
+  <path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8Z"></path>
 </svg>''';
 
   @override
@@ -115,98 +120,47 @@ class FamilyScreen extends StatelessWidget {
               child: SingleChildScrollView(
                 padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    // Back button to Settings/Me
-                    Row(
-                      children: [
-                        Transform.translate(
-                          offset: const Offset(-10, 0),
-                          child: InkWell(
-                            onTap: () {
-                              if (context.canPop()) {
-                                context.pop();
-                              } else {
-                                context.go('/settings');
-                              }
-                            },
-                            borderRadius: BorderRadius.circular(22),
-                            child: const SizedBox(
-                              width: 44,
-                              height: 44,
-                              child: Center(
-                                child: Icon(
-                                  Icons.arrow_back_ios_new_rounded,
-                                  size: 20,
-                                  color: Color(0xFF123332),
-                                ),
-                              ),
-                            ),
-                          ),
+                    // Figma Top Header with Back and Add button
+                    FigmaSubPageHeader(
+                      title: 'Family',
+                      onBack: () {
+                        if (context.canPop()) {
+                          context.pop();
+                        } else {
+                          context.go('/settings');
+                        }
+                      },
+                      trailing: FigmaCircleActionButton(
+                        icon: const Icon(
+                          Icons.add_rounded,
+                          size: 22,
+                          color: AppColors.primary,
                         ),
-                      ],
+                        tooltip: 'Add family member',
+                        onPressed: () => context.push('/onboarding/add-adult'),
+                      ),
                     ),
-
-                    // Header row
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text(
-                                'Family',
-                                style: TextStyle(
-                                  fontFamily: AppTypography.fontHeading,
-                                  fontSize: 28,
-                                  fontWeight: FontWeight.w800,
-                                  color: Color(0xFF123332),
-                                  letterSpacing: -0.6,
-                                ),
-                              ),
-                              SizedBox(height: 4),
-                              Text(
-                                "5 people · everyone's steps in one place",
-                                style: TextStyle(
-                                  fontFamily: AppTypography.fontBody,
-                                  fontSize: 14,
-                                  color: Color(0xFF5A5F6B),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () => context.push('/onboarding/add-adult'),
-                          borderRadius: BorderRadius.circular(22),
-                          child: Container(
-                            width: 44,
-                            height: 44,
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Color(0xFF123332),
-                            ),
-                            child: const Center(
-                              child: Icon(
-                                Icons.add,
-                                size: 22,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                    const SizedBox(height: 6),
+                    const Text(
+                      "5 people · everyone's steps in one place",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: AppTypography.fontBody,
+                        fontSize: 13.5,
+                        color: AppColors.dark300,
+                      ),
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 18),
 
                     // 3-column members grid
                     LayoutBuilder(
                       builder: (context, constraints) {
-                        final cardWidth = (constraints.maxWidth - 16) / 3;
+                        final cardWidth = (constraints.maxWidth - 20) / 3;
                         return Wrap(
-                          spacing: 8,
-                          runSpacing: 8,
+                          spacing: 10,
+                          runSpacing: 10,
                           children: members.map((m) {
                             return SizedBox(
                               width: cardWidth,
@@ -218,60 +172,78 @@ class FamilyScreen extends StatelessWidget {
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(16),
-                                    border: Border.all(
-                                      color: m.hasBorder
-                                          ? const Color(0xFF123332)
-                                          : const Color(0xFFDEDEE2),
-                                      width: m.hasBorder ? 2 : 1,
-                                    ),
+                                    border: m.hasBorder
+                                        ? Border.all(
+                                            color: AppColors.primary,
+                                            width: 1.5,
+                                          )
+                                        : null,
                                   ),
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Container(
-                                        width: 38,
-                                        height: 38,
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: m.avatarColor,
-                                        ),
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                          m.initial,
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 16,
+                                      if (m.avatarAsset != null)
+                                        Container(
+                                          width: 44,
+                                          height: 44,
+                                          decoration: const BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: AppColors.dark50,
+                                          ),
+                                          clipBehavior: Clip.antiAlias,
+                                          child: Image.asset(
+                                            m.avatarAsset!,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        )
+                                      else
+                                        Container(
+                                          width: 44,
+                                          height: 44,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: m.avatarColor,
+                                          ),
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            m.initial,
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 17,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      const SizedBox(height: 6),
+                                      const SizedBox(height: 10),
                                       Text(
                                         m.name,
                                         style: const TextStyle(
+                                          fontFamily: AppTypography.fontBody,
                                           fontSize: 15,
-                                          fontWeight: FontWeight.w700,
-                                          color: Color(0xFF123332),
+                                          fontWeight: FontWeight.w600,
+                                          color: AppColors.mainFont,
                                         ),
                                       ),
                                       const SizedBox(height: 2),
                                       Text(
                                         m.role,
                                         style: const TextStyle(
-                                          fontSize: 12,
-                                          color: Color(0xFF5A5F6B),
+                                          fontFamily: AppTypography.fontBody,
+                                          fontSize: 11.5,
+                                          color: AppColors.dark300,
                                         ),
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                       ),
-                                      const SizedBox(height: 6),
-                                      // Progress bar
+                                      const SizedBox(height: 10),
+                                      // Crisp Progress bar
                                       Container(
-                                        height: 5,
+                                        height: 6,
                                         width: double.infinity,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(3),
-                                          color: const Color(0xFFDEDEE2),
+                                          borderRadius:
+                                              BorderRadius.circular(999),
+                                          color: AppColors.dark50,
                                         ),
                                         child: FractionallySizedBox(
                                           alignment: Alignment.centerLeft,
@@ -280,8 +252,9 @@ class FamilyScreen extends StatelessWidget {
                                               : 0.0,
                                           child: Container(
                                             decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(3),
-                                              color: const Color(0xFF2E6B4F),
+                                              borderRadius:
+                                                  BorderRadius.circular(999),
+                                              color: const Color(0xFF28C740),
                                             ),
                                           ),
                                         ),
@@ -295,42 +268,50 @@ class FamilyScreen extends StatelessWidget {
                         );
                       },
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 20),
 
-                    // Shared household tasks section
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(color: const Color(0xFFDEDEE2)),
+                    // Shared household tasks header & card
+                    const Text(
+                      'Shared household tasks · 6',
+                      style: TextStyle(
+                        fontFamily: AppTypography.fontHeading,
+                        fontSize: 17,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.mainFont,
                       ),
+                    ),
+                    const SizedBox(height: 10),
+                    FigmaSurfaceCard(
+                      radius: 16,
+                      padding: const EdgeInsets.all(16),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            'Shared household tasks · 6',
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xFF123332),
-                            ),
+                          _buildSharedTaskRow(
+                            'Ontario health cards',
+                            'Everyone',
                           ),
                           const SizedBox(height: 10),
-                          _buildSharedTaskRow('Ontario health cards', 'Everyone'),
-                          const SizedBox(height: 8),
-                          _buildSharedTaskRow('Sign a lease & know tenant rights', 'Layla, Omar'),
-                          const SizedBox(height: 8),
-                          _buildSharedTaskRow('Set up utilities & internet', 'Household'),
+                          _buildSharedTaskRow(
+                            'Sign a lease & know tenant rights',
+                            'Layla, Omar',
+                          ),
                           const SizedBox(height: 10),
+                          _buildSharedTaskRow(
+                            'Set up utilities & internet',
+                            'Household',
+                          ),
+                          const SizedBox(height: 14),
                           InkWell(
                             onTap: () => context.go('/journey'),
                             child: const Text(
                               'See all shared tasks',
                               style: TextStyle(
+                                fontFamily: AppTypography.fontBody,
                                 fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xFF123332),
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.primary,
+                                decoration: TextDecoration.underline,
                               ),
                             ),
                           ),
@@ -339,19 +320,25 @@ class FamilyScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 14),
 
-                    // Notice box
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFE2ECEB),
-                        borderRadius: BorderRadius.circular(14),
+                    FigmaDashedWideButton(
+                      label: 'Add New member',
+                      leadingIcon: Icons.add_rounded,
+                      onTap: () => context.push('/onboarding/add-adult'),
+                    ),
+                    const SizedBox(height: 14),
+
+                    const FigmaNoticeBanner(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 14,
+                        vertical: 12,
                       ),
-                      child: const Text(
+                      child: Text(
                         "Only you see this household. Other adults can have their own private account — nobody needs anyone else's permission to use the app.",
                         style: TextStyle(
+                          fontFamily: AppTypography.fontBody,
                           fontSize: 13,
                           height: 1.45,
-                          color: Color(0xFF123332),
+                          color: AppColors.primary,
                         ),
                       ),
                     ),
@@ -360,28 +347,53 @@ class FamilyScreen extends StatelessWidget {
               ),
             ),
 
-            // Bottom nav bar
+            // Bottom nav bar matching BottomNavScaffold Figma spec
             Container(
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 color: Colors.white,
-                border: Border(
-                  top: BorderSide(color: Color(0xFFDEDEE2), width: 1),
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(20),
                 ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.05),
+                    blurRadius: 12,
+                    offset: const Offset(0, -2),
+                  ),
+                ],
               ),
               padding: EdgeInsets.only(
-                top: 6,
+                top: 8,
                 bottom: MediaQuery.paddingOf(context).bottom > 0
                     ? MediaQuery.paddingOf(context).bottom + 4
-                    : 16,
+                    : 14,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   _buildBottomItem(context, 'Home', _homeSvg, false, '/home'),
-                  _buildBottomItem(context, 'Journey', _journeySvg, false, '/journey'),
-                  _buildBottomItem(context, 'Explore', _exploreSvg, false, '/explore'),
+                  _buildBottomItem(
+                    context,
+                    'Journey',
+                    _journeySvg,
+                    false,
+                    '/journey',
+                  ),
+                  _buildBottomItem(
+                    context,
+                    'Explore',
+                    _exploreSvg,
+                    false,
+                    '/explore',
+                  ),
                   _buildBottomItem(context, 'Help', _helpSvg, false, '/help'),
-                  _buildBottomItem(context, 'Me', _meSvg, true, '/settings'),
+                  _buildBottomItem(
+                    context,
+                    'Me',
+                    _meFilledSvg,
+                    true,
+                    '/settings',
+                  ),
                 ],
               ),
             ),
@@ -399,16 +411,19 @@ class FamilyScreen extends StatelessWidget {
           child: Text(
             title,
             style: const TextStyle(
+              fontFamily: AppTypography.fontBody,
               fontSize: 14,
-              color: Color(0xFF123332),
+              color: AppColors.mainFont,
             ),
           ),
         ),
+        const SizedBox(width: 8),
         Text(
           assigned,
           style: const TextStyle(
-            fontSize: 14,
-            color: Color(0xFF5A5F6B),
+            fontFamily: AppTypography.fontBody,
+            fontSize: 13,
+            color: AppColors.dark200,
           ),
         ),
       ],
@@ -422,12 +437,12 @@ class FamilyScreen extends StatelessWidget {
     bool isActive,
     String route,
   ) {
-    final color = isActive ? const Color(0xFF123332) : const Color(0xFF5A5F6B);
+    final color = isActive ? AppColors.primary : AppColors.dark200;
     return InkWell(
       onTap: () => context.go(route),
-      borderRadius: BorderRadius.circular(8),
+      borderRadius: BorderRadius.circular(12),
       child: Container(
-        constraints: const BoxConstraints(minWidth: 54, minHeight: 48),
+        constraints: const BoxConstraints(minWidth: 54, minHeight: 46),
         padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -439,7 +454,7 @@ class FamilyScreen extends StatelessWidget {
               height: 22,
               colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
             ),
-            const SizedBox(height: 2),
+            const SizedBox(height: 3),
             Text(
               label,
               style: TextStyle(

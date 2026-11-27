@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../core/theme/app_colors.dart';
+import '../../core/theme/app_typography.dart';
+import '../../core/widgets/figma_onboarding_widgets.dart';
 
 class OccupationPathwayScreen extends StatefulWidget {
   const OccupationPathwayScreen({super.key});
@@ -15,10 +18,10 @@ class _OccupationPathwayScreenState extends State<OccupationPathwayScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F4F5),
+      backgroundColor: AppColors.bg,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -26,8 +29,7 @@ class _OccupationPathwayScreenState extends State<OccupationPathwayScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  BackButton(
-                    color: const Color(0xFF123332),
+                  FigmaCircleBackButton(
                     onPressed: () {
                       if (context.canPop()) {
                         context.pop();
@@ -36,147 +38,145 @@ class _OccupationPathwayScreenState extends State<OccupationPathwayScreen> {
                       }
                     },
                   ),
-                  IconButton(
-                    icon: const Icon(Icons.more_horiz, color: Color(0xFF123332)),
+                  FigmaCircleActionButton(
+                    icon: const Icon(
+                      Icons.more_horiz_rounded,
+                      size: 22,
+                      color: AppColors.mainFont,
+                    ),
+                    tooltip: 'More options',
                     onPressed: () => _showMoreOptions(context),
-                    padding: EdgeInsets.zero,
-                    constraints: const BoxConstraints(minWidth: 44, minHeight: 44),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8),
-
-              // Title block
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'LICENSING PATHWAY · ONTARIO',
-                    style: TextStyle(
-                      fontFamily: 'IBM Plex Sans',
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 0.6,
-                      color: Color(0xFFA82227),
-                    ),
-                  ),
-                  const SizedBox(height: 6),
-                  const Text(
-                    'Becoming a Professional Engineer (P.Eng.)',
-                    style: TextStyle(
-                      fontFamily: 'Bricolage Grotesque',
-                      fontSize: 30,
-                      fontWeight: FontWeight.w800,
-                      letterSpacing: -0.6,
-                      height: 1.08,
-                      color: Color(0xFF123332),
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Wrap(
-                    crossAxisAlignment: WrapCrossAlignment.center,
-                    spacing: 6,
-                    children: [
-                      const Text(
-                        'For',
-                        style: TextStyle(
-                          fontFamily: 'IBM Plex Sans',
-                          fontSize: 14,
-                          color: Color(0xFF3B4747),
-                        ),
-                      ),
-                      Container(
-                        height: 30,
-                        padding: const EdgeInsets.only(left: 4, right: 10),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15),
-                          border: Border.all(color: const Color(0xFFDEDEE2)),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: const [
-                            CircleAvatar(
-                              radius: 11,
-                              backgroundColor: Color(0xFF2E6B4F),
-                              child: Text(
-                                'O',
-                                style: TextStyle(
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                            SizedBox(width: 6),
-                            Text(
-                              'Omar',
-                              style: TextStyle(
-                                fontFamily: 'IBM Plex Sans',
-                                fontSize: 14,
-                                color: Color(0xFF123332),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const Text(
-                        '· Regulator: Professional Engineers Ontario (PEO)',
-                        style: TextStyle(
-                          fontFamily: 'IBM Plex Sans',
-                          fontSize: 13,
-                          color: Color(0xFF3B4747),
-                        ),
-                      ),
-                    ],
                   ),
                 ],
               ),
               const SizedBox(height: 16),
 
-              // Certificates you'll need
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: const Color(0xFFDEDEE2)),
+              // Title block
+              const Text(
+                'LICENSING PATHWAY · ONTARIO',
+                style: TextStyle(
+                  fontFamily: AppTypography.fontBody,
+                  fontSize: 11.5,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 0.6,
+                  color: AppColors.red,
                 ),
+              ),
+              const SizedBox(height: 6),
+              const Text(
+                'Becoming a Professional Engineer (P.Eng.)',
+                style: TextStyle(
+                  fontFamily: AppTypography.fontHeading,
+                  fontSize: 28,
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: -0.6,
+                  height: 1.12,
+                  color: AppColors.mainFont,
+                ),
+              ),
+              const SizedBox(height: 10),
+              Wrap(
+                crossAxisAlignment: WrapCrossAlignment.center,
+                spacing: 8,
+                runSpacing: 6,
+                children: [
+                  const Text(
+                    'For',
+                    style: TextStyle(
+                      fontFamily: AppTypography.fontBody,
+                      fontSize: 14,
+                      color: AppColors.dark300,
+                    ),
+                  ),
+                  Container(
+                    height: 30,
+                    padding: const EdgeInsets.only(left: 4, right: 12),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(999),
+                    ),
+                    child: const Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        CircleAvatar(
+                          radius: 11,
+                          backgroundColor: AppColors.secondary,
+                          child: Text(
+                            'O',
+                            style: TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 6),
+                        Text(
+                          'Omar',
+                          style: TextStyle(
+                            fontFamily: AppTypography.fontBody,
+                            fontSize: 13.5,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.mainFont,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Text(
+                    '· Regulator: Professional Engineers Ontario (PEO)',
+                    style: TextStyle(
+                      fontFamily: AppTypography.fontBody,
+                      fontSize: 13,
+                      color: AppColors.dark300,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 18),
+
+              // Certificates you'll need
+              FigmaSurfaceCard(
+                radius: 16,
+                padding: const EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
                       "Certificates you'll need",
                       style: TextStyle(
-                        fontFamily: 'IBM Plex Sans',
+                        fontFamily: AppTypography.fontHeading,
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
-                        color: Color(0xFF123332),
+                        color: AppColors.mainFont,
                       ),
                     ),
                     const SizedBox(height: 12),
                     _buildCertRow(
                       badge: 'Goal',
-                      badgeBg: const Color(0xFFF7E4E5),
-                      badgeTextColor: const Color(0xFF7A1A1E),
+                      badgeBg: const Color(0xFFEBD4D6),
+                      badgeTextColor: AppColors.red,
                       title: 'P.Eng. licence',
-                      desc: 'Issued by PEO. Needed to practise or call yourself an engineer.',
+                      desc:
+                          'Issued by PEO. Needed to practise or call yourself an engineer.',
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 12),
                     _buildCertRow(
                       badge: 'Required',
-                      badgeBg: const Color(0xFFE2ECEB),
-                      badgeTextColor: const Color(0xFF123332),
+                      badgeBg: AppColors.softTeal,
+                      badgeTextColor: AppColors.primary,
                       title: 'Course-by-course degree assessment',
-                      desc: 'From World Education Services (WES), for degrees from outside Canada.',
+                      desc:
+                          'From World Education Services (WES), for degrees from outside Canada.',
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 12),
                     _buildCertRow(
                       badge: 'Optional',
-                      badgeBg: const Color(0xFFEAEAEC),
-                      badgeTextColor: const Color(0xFF3B4747),
+                      badgeBg: AppColors.dark50,
+                      badgeTextColor: AppColors.dark300,
                       title: 'Engineering Intern (EIT) status',
-                      desc: 'While you build experience. [Confirm details with PEO]',
+                      desc:
+                          'While you build experience. [Confirm details with PEO]',
                     ),
                   ],
                 ),
@@ -187,67 +187,73 @@ class _OccupationPathwayScreenState extends State<OccupationPathwayScreen> {
               const Text(
                 'Your pathway',
                 style: TextStyle(
-                  fontFamily: 'IBM Plex Sans',
-                  fontSize: 18,
+                  fontFamily: AppTypography.fontHeading,
+                  fontSize: 19,
                   fontWeight: FontWeight.w600,
-                  color: Color(0xFF123332),
+                  color: AppColors.mainFont,
                 ),
               ),
               const SizedBox(height: 12),
               _buildTimeline(),
-              const SizedBox(height: 20),
+              const SizedBox(height: 16),
 
               // Working while you get licensed
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFE2ECEB),
-                  borderRadius: BorderRadius.circular(16),
-                ),
+              const FigmaNoticeBanner(
+                padding: EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     Text(
                       'Working while you get licensed',
                       style: TextStyle(
-                        fontFamily: 'IBM Plex Sans',
-                        fontSize: 16,
+                        fontFamily: AppTypography.fontHeading,
+                        fontSize: 17,
                         fontWeight: FontWeight.w600,
-                        color: Color(0xFF123332),
+                        color: AppColors.primary,
                       ),
                     ),
                     SizedBox(height: 8),
-                    _BulletItem(text: "Work under a licensed engineer's supervision"),
-                    _BulletItem(text: 'Join a bridging program for internationally trained engineers'),
-                    _BulletItem(text: 'Related roles, e.g. technologist — voluntary C.E.T. certification through OACETT'),
+                    _BulletItem(
+                      text: "Work under a licensed engineer's supervision",
+                    ),
+                    _BulletItem(
+                      text:
+                          'Join a bridging program for internationally trained engineers',
+                    ),
+                    _BulletItem(
+                      text:
+                          'Related roles, e.g. technologist — voluntary C.E.T. certification through OACETT',
+                    ),
                   ],
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 16),
 
               // Have ready section
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: const Color(0xFFDEDEE2)),
-                ),
+              FigmaSurfaceCard(
+                radius: 16,
+                padding: const EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
                       'Have ready',
                       style: TextStyle(
-                        fontFamily: 'IBM Plex Sans',
+                        fontFamily: AppTypography.fontHeading,
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
-                        color: Color(0xFF123332),
+                        color: AppColors.mainFont,
                       ),
                     ),
                     const SizedBox(height: 10),
-                    _buildCheckboxRow(0, 'Degree and transcripts (sent by your university)'),
-                    _buildCheckboxRow(1, 'Work history with supervisor contacts'),
+                    _buildCheckboxRow(
+                      0,
+                      'Degree and transcripts (sent by your university)',
+                    ),
+                    _buildCheckboxRow(
+                      1,
+                      'Work history with supervisor contacts',
+                    ),
                     _buildCheckboxRow(2, 'Government photo ID'),
                   ],
                 ),
@@ -258,10 +264,10 @@ class _OccupationPathwayScreenState extends State<OccupationPathwayScreen> {
               const Text(
                 'Help near you',
                 style: TextStyle(
-                  fontFamily: 'IBM Plex Sans',
-                  fontSize: 18,
+                  fontFamily: AppTypography.fontHeading,
+                  fontSize: 19,
                   fontWeight: FontWeight.w600,
-                  color: Color(0xFF123332),
+                  color: AppColors.mainFont,
                 ),
               ),
               const SizedBox(height: 10),
@@ -270,26 +276,27 @@ class _OccupationPathwayScreenState extends State<OccupationPathwayScreen> {
                 title: 'Bridging program for engineers · [provider]',
                 sub: '[distance] · funded by Ontario',
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 10),
               _buildHelpCard(
                 num: '2',
                 title: 'Employment Ontario centre · [name]',
                 sub: '1.9 km · Open now',
                 hasOpenNow: true,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 14),
 
               // Official source card
-              Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(color: const Color(0xFFDEDEE2)),
-                  borderRadius: BorderRadius.circular(16),
-                ),
+              const FigmaSurfaceCard(
+                radius: 16,
+                padding: EdgeInsets.all(14),
                 child: Row(
-                  children: const [
-                    Icon(Icons.open_in_new, size: 22, color: Color(0xFF123332)),
+                  children: [
+                    FigmaIconTile(
+                      icon: Icons.open_in_new_rounded,
+                      iconColor: AppColors.primary,
+                      backgroundColor: AppColors.dark50,
+                      size: 42,
+                    ),
                     SizedBox(width: 12),
                     Expanded(
                       child: Column(
@@ -298,19 +305,19 @@ class _OccupationPathwayScreenState extends State<OccupationPathwayScreen> {
                           Text(
                             'Official source · PEO',
                             style: TextStyle(
-                              fontFamily: 'IBM Plex Sans',
+                              fontFamily: AppTypography.fontBody,
                               fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF123332),
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.mainFont,
                             ),
                           ),
                           SizedBox(height: 2),
                           Text(
                             'Application requirements · verified [DATE]',
                             style: TextStyle(
-                              fontFamily: 'IBM Plex Sans',
+                              fontFamily: AppTypography.fontBody,
                               fontSize: 13,
-                              color: Color(0xFF5A5F6B),
+                              color: AppColors.dark300,
                             ),
                           ),
                         ],
@@ -319,7 +326,7 @@ class _OccupationPathwayScreenState extends State<OccupationPathwayScreen> {
                   ],
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 18),
 
               // Bottom Actions
               Row(
@@ -340,18 +347,20 @@ class _OccupationPathwayScreenState extends State<OccupationPathwayScreen> {
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF123332),
+                          backgroundColor: AppColors.primary,
                           foregroundColor: Colors.white,
                           elevation: 0,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(30),
                           ),
                         ),
                         child: Text(
                           'Step $_activeStep done',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
-                            fontFamily: 'IBM Plex Sans',
-                            fontSize: 15,
+                            fontFamily: AppTypography.fontBody,
+                            fontSize: 14.5,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -372,19 +381,22 @@ class _OccupationPathwayScreenState extends State<OccupationPathwayScreen> {
                           );
                         },
                         style: OutlinedButton.styleFrom(
-                          side: const BorderSide(color: Color(0xFFC8C8CE)),
-                          backgroundColor: Colors.white,
+                          side: const BorderSide(color: AppColors.dark100),
+                          backgroundColor: AppColors.dark50,
+                          foregroundColor: AppColors.mainFont,
+                          elevation: 0,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(30),
                           ),
                         ),
                         child: const Text(
                           'Remind me later',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                           style: TextStyle(
-                            fontFamily: 'IBM Plex Sans',
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                            color: Color(0xFF123332),
+                            fontFamily: AppTypography.fontBody,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                       ),
@@ -398,13 +410,13 @@ class _OccupationPathwayScreenState extends State<OccupationPathwayScreen> {
               const Text(
                 "A summary of PEO's rules to help you plan — not advice. PEO decides every application.",
                 style: TextStyle(
-                  fontFamily: 'IBM Plex Sans',
+                  fontFamily: AppTypography.fontBody,
                   fontSize: 12,
                   height: 1.45,
-                  color: Color(0xFF5A5F6B),
+                  color: AppColors.dark300,
                 ),
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 20),
             ],
           ),
         ),
@@ -423,17 +435,17 @@ class _OccupationPathwayScreenState extends State<OccupationPathwayScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          width: 64,
-          padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 8),
+          width: 68,
+          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
           decoration: BoxDecoration(
             color: badgeBg,
-            borderRadius: BorderRadius.circular(6),
+            borderRadius: BorderRadius.circular(999),
           ),
           alignment: Alignment.center,
           child: Text(
             badge,
             style: TextStyle(
-              fontFamily: 'IBM Plex Sans',
+              fontFamily: AppTypography.fontBody,
               fontSize: 11,
               fontWeight: FontWeight.w600,
               color: badgeTextColor,
@@ -448,19 +460,20 @@ class _OccupationPathwayScreenState extends State<OccupationPathwayScreen> {
               Text(
                 title,
                 style: const TextStyle(
-                  fontFamily: 'IBM Plex Sans',
+                  fontFamily: AppTypography.fontBody,
                   fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF123332),
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.mainFont,
                 ),
               ),
               const SizedBox(height: 2),
               Text(
                 desc,
                 style: const TextStyle(
-                  fontFamily: 'IBM Plex Sans',
+                  fontFamily: AppTypography.fontBody,
                   fontSize: 13,
-                  color: Color(0xFF3B4747),
+                  height: 1.4,
+                  color: AppColors.dark300,
                 ),
               ),
             ],
@@ -506,40 +519,38 @@ class _OccupationPathwayScreenState extends State<OccupationPathwayScreen> {
 
     return Stack(
       children: [
-        // Connecting line
         Positioned(
-          left: 13,
+          left: 14,
           top: 14,
           bottom: 14,
           child: Container(
-            width: 2,
-            color: const Color(0xFFD6D6DB),
+            width: 1.5,
+            color: const Color(0xFFC5C5C7),
           ),
         ),
         Column(
           children: steps.map((s) {
             final isActive = s.number == _activeStep;
             return Padding(
-              padding: const EdgeInsets.only(bottom: 12.0),
+              padding: const EdgeInsets.only(bottom: 12),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    width: 28,
-                    height: 28,
+                    width: 30,
+                    height: 30,
                     decoration: BoxDecoration(
-                      color: isActive ? const Color(0xFFCA292E) : const Color(0xFFF4F4F5),
+                      color: isActive ? AppColors.red : AppColors.dark50,
                       shape: BoxShape.circle,
-                      border: isActive ? null : Border.all(color: const Color(0xFFABABB3), width: 2),
                     ),
                     child: Center(
                       child: Text(
                         '${s.number}',
                         style: TextStyle(
-                          fontFamily: 'IBM Plex Sans',
+                          fontFamily: AppTypography.fontBody,
                           fontSize: 13,
                           fontWeight: FontWeight.w600,
-                          color: isActive ? Colors.white : const Color(0xFF3B4747),
+                          color: isActive ? Colors.white : AppColors.dark300,
                         ),
                       ),
                     ),
@@ -548,13 +559,19 @@ class _OccupationPathwayScreenState extends State<OccupationPathwayScreen> {
                   Expanded(
                     child: Container(
                       padding: isActive
-                          ? const EdgeInsets.symmetric(horizontal: 12, vertical: 10)
+                          ? const EdgeInsets.symmetric(
+                              horizontal: 14,
+                              vertical: 12,
+                            )
                           : const EdgeInsets.symmetric(vertical: 4),
                       decoration: isActive
                           ? BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.circular(12),
-                              border: Border.all(color: const Color(0xFFCA292E), width: 2),
+                              borderRadius: BorderRadius.circular(14),
+                              border: Border.all(
+                                color: AppColors.red,
+                                width: 1.5,
+                              ),
                             )
                           : null,
                       child: Column(
@@ -563,19 +580,20 @@ class _OccupationPathwayScreenState extends State<OccupationPathwayScreen> {
                           Text(
                             s.title,
                             style: const TextStyle(
-                              fontFamily: 'IBM Plex Sans',
+                              fontFamily: AppTypography.fontBody,
                               fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF123332),
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.mainFont,
                             ),
                           ),
                           const SizedBox(height: 2),
                           Text(
                             s.desc,
                             style: const TextStyle(
-                              fontFamily: 'IBM Plex Sans',
+                              fontFamily: AppTypography.fontBody,
                               fontSize: 13,
-                              color: Color(0xFF3B4747),
+                              height: 1.4,
+                              color: AppColors.dark300,
                             ),
                           ),
                         ],
@@ -603,8 +621,9 @@ class _OccupationPathwayScreenState extends State<OccupationPathwayScreen> {
           }
         });
       },
+      borderRadius: BorderRadius.circular(8),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 6.0),
+        padding: const EdgeInsets.symmetric(vertical: 6),
         child: Row(
           children: [
             SizedBox(
@@ -612,9 +631,9 @@ class _OccupationPathwayScreenState extends State<OccupationPathwayScreen> {
               height: 22,
               child: Checkbox(
                 value: isChecked,
-                activeColor: const Color(0xFF2E6B4F),
+                activeColor: AppColors.secondary,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(4),
+                  borderRadius: BorderRadius.circular(5),
                 ),
                 onChanged: (val) {
                   setState(() {
@@ -632,9 +651,9 @@ class _OccupationPathwayScreenState extends State<OccupationPathwayScreen> {
               child: Text(
                 title,
                 style: const TextStyle(
-                  fontFamily: 'IBM Plex Sans',
-                  fontSize: 15,
-                  color: Color(0xFF123332),
+                  fontFamily: AppTypography.fontBody,
+                  fontSize: 14.5,
+                  color: AppColors.mainFont,
                 ),
               ),
             ),
@@ -650,27 +669,23 @@ class _OccupationPathwayScreenState extends State<OccupationPathwayScreen> {
     required String sub,
     bool hasOpenNow = false,
   }) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: const Color(0xFFDEDEE2)),
-        borderRadius: BorderRadius.circular(14),
-      ),
+    return FigmaSurfaceCard(
+      radius: 16,
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
       child: Row(
         children: [
           Container(
-            width: 26,
-            height: 26,
+            width: 30,
+            height: 30,
             decoration: const BoxDecoration(
-              color: Color(0xFF123332),
+              color: AppColors.secondary,
               shape: BoxShape.circle,
             ),
             child: Center(
               child: Text(
                 num,
                 style: const TextStyle(
-                  fontFamily: 'IBM Plex Sans',
+                  fontFamily: AppTypography.fontBody,
                   fontSize: 13,
                   fontWeight: FontWeight.w600,
                   color: Colors.white,
@@ -686,10 +701,10 @@ class _OccupationPathwayScreenState extends State<OccupationPathwayScreen> {
                 Text(
                   title,
                   style: const TextStyle(
-                    fontFamily: 'IBM Plex Sans',
+                    fontFamily: AppTypography.fontBody,
                     fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF123332),
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.mainFont,
                   ),
                 ),
                 const SizedBox(height: 2),
@@ -701,31 +716,35 @@ class _OccupationPathwayScreenState extends State<OccupationPathwayScreen> {
                         TextSpan(
                           text: 'Open now',
                           style: TextStyle(
-                            color: Color(0xFF2E6B4F),
-                            fontWeight: FontWeight.w500,
+                            color: AppColors.secondary,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                       ],
                     ),
                     style: TextStyle(
-                      fontFamily: 'IBM Plex Sans',
+                      fontFamily: AppTypography.fontBody,
                       fontSize: 13,
-                      color: Color(0xFF5A5F6B),
+                      color: AppColors.dark300,
                     ),
                   )
                 else
                   Text(
                     sub,
                     style: const TextStyle(
-                      fontFamily: 'IBM Plex Sans',
+                      fontFamily: AppTypography.fontBody,
                       fontSize: 13,
-                      color: Color(0xFF5A5F6B),
+                      color: AppColors.dark300,
                     ),
                   ),
               ],
             ),
           ),
-          const Icon(Icons.chevron_right, size: 18, color: Color(0xFF7A7A83)),
+          const Icon(
+            Icons.chevron_right_rounded,
+            size: 20,
+            color: AppColors.dark200,
+          ),
         ],
       ),
     );
@@ -734,29 +753,73 @@ class _OccupationPathwayScreenState extends State<OccupationPathwayScreen> {
   void _showMoreOptions(BuildContext context) {
     showModalBottomSheet(
       context: context,
+      backgroundColor: Colors.white,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
       builder: (ctx) => SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16.0),
+          padding: const EdgeInsets.fromLTRB(20, 12, 20, 16),
           child: Column(
             mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              const FigmaSheetHandle(),
+              const SizedBox(height: 14),
+              const Text(
+                'P.Eng. Licensing Pathway',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: AppTypography.fontHeading,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.mainFont,
+                ),
+              ),
+              const SizedBox(height: 12),
               ListTile(
-                leading: const Icon(Icons.share_outlined, color: Color(0xFF123332)),
+                contentPadding: EdgeInsets.zero,
+                leading: const Icon(
+                  Icons.share_outlined,
+                  color: AppColors.primary,
+                ),
                 title: const Text('Share this pathway'),
+                trailing: const Icon(
+                  Icons.chevron_right_rounded,
+                  color: AppColors.dark200,
+                ),
                 onTap: () => Navigator.pop(ctx),
               ),
               ListTile(
-                leading: const Icon(Icons.bookmark_outline, color: Color(0xFF123332)),
+                contentPadding: EdgeInsets.zero,
+                leading: const Icon(
+                  Icons.bookmark_outline_rounded,
+                  color: AppColors.primary,
+                ),
                 title: const Text('Bookmark for later'),
+                trailing: const Icon(
+                  Icons.chevron_right_rounded,
+                  color: AppColors.dark200,
+                ),
                 onTap: () => Navigator.pop(ctx),
               ),
               ListTile(
-                leading: const Icon(Icons.flag_outlined, color: Color(0xFFA82227)),
+                contentPadding: EdgeInsets.zero,
+                leading: const Icon(
+                  Icons.flag_outlined,
+                  color: AppColors.red,
+                ),
                 title: const Text('Report an issue'),
+                trailing: const Icon(
+                  Icons.chevron_right_rounded,
+                  color: AppColors.dark200,
+                ),
                 onTap: () => Navigator.pop(ctx),
+              ),
+              const SizedBox(height: 12),
+              FigmaSoftOutlineButton(
+                label: 'Cancel',
+                onPressed: () => Navigator.pop(ctx),
               ),
             ],
           ),
@@ -780,19 +843,22 @@ class _BulletItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 3.0),
+      padding: const EdgeInsets.symmetric(vertical: 3),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('• ', style: TextStyle(fontSize: 16, color: Color(0xFF123332))),
+          const Text(
+            '• ',
+            style: TextStyle(fontSize: 16, color: AppColors.primary),
+          ),
           Expanded(
             child: Text(
               text,
               style: const TextStyle(
-                fontFamily: 'IBM Plex Sans',
-                fontSize: 14,
+                fontFamily: AppTypography.fontBody,
+                fontSize: 13.5,
                 height: 1.5,
-                color: Color(0xFF123332),
+                color: AppColors.primary,
               ),
             ),
           ),

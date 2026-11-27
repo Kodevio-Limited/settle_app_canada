@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../core/theme/app_colors.dart';
+import '../../core/theme/app_typography.dart';
+import '../../core/widgets/figma_onboarding_widgets.dart';
 
 class LocationDetailScreen extends StatelessWidget {
   final String title;
@@ -16,62 +19,26 @@ class LocationDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F4F5),
+      backgroundColor: AppColors.bg,
       body: Column(
         children: [
-          // Hero Map Banner with back button
+          // Hero Map Banner with Floating Figma Back Button
           Stack(
             children: [
-              Container(
-                height: 210,
+              SizedBox(
+                height: 220,
                 width: double.infinity,
-                color: const Color(0xFFE9E9EC),
                 child: Stack(
+                  fit: StackFit.expand,
                   children: [
-                    Positioned(
-                      right: 0,
-                      top: 0,
-                      bottom: 0,
-                      width: 100,
-                      child: Container(color: const Color(0xFFCFE0EA)),
-                    ),
-                    Positioned(
-                      left: 40,
-                      bottom: 30,
-                      width: 90,
-                      height: 50,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFD9E6D2),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
+                    Image.asset(
+                      'assets/images/map_preview.png',
+                      fit: BoxFit.cover,
+                      errorBuilder: (_, __, ___) => Container(
+                        color: const Color(0xFFE9E9EC),
                       ),
                     ),
-                    Positioned(
-                      left: 0,
-                      right: 0,
-                      top: 100,
-                      height: 9,
-                      child: Container(color: Colors.white),
-                    ),
-                    Positioned(
-                      left: 130,
-                      top: 0,
-                      bottom: 0,
-                      width: 9,
-                      child: Container(color: Colors.white),
-                    ),
-                    Positioned(
-                      left: 236,
-                      top: 0,
-                      bottom: 0,
-                      width: 9,
-                      child: Container(color: Colors.white),
-                    ),
-                    // Center Location Pin
-                    Positioned(
-                      left: 175,
-                      top: 60,
+                    Center(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -79,7 +46,7 @@ class LocationDetailScreen extends StatelessWidget {
                             width: 40,
                             height: 40,
                             decoration: const BoxDecoration(
-                              color: Color(0xFF123332),
+                              color: AppColors.primary,
                               shape: BoxShape.circle,
                             ),
                             child: Center(
@@ -95,7 +62,7 @@ class LocationDetailScreen extends StatelessWidget {
                           ),
                           CustomPaint(
                             size: const Size(12, 10),
-                            painter: _TrianglePainter(color: const Color(0xFF123332)),
+                            painter: _TrianglePainter(color: AppColors.primary),
                           ),
                         ],
                       ),
@@ -103,32 +70,33 @@ class LocationDetailScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Positioned(
-                left: 16,
-                top: 50,
-                child: Container(
-                  width: 44,
-                  height: 44,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.12),
-                        blurRadius: 8,
-                        offset: const Offset(0, 2),
-                      ),
-                    ],
-                  ),
-                  child: BackButton(
-                    color: const Color(0xFF123332),
-                    onPressed: () {
-                      if (context.canPop()) {
-                        context.pop();
-                      } else {
-                        context.go('/nearby');
-                      }
-                    },
+              SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 16, top: 8),
+                  child: Container(
+                    width: 48,
+                    height: 48,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withValues(alpha: 0.10),
+                          blurRadius: 10,
+                          offset: const Offset(0, 3),
+                        ),
+                      ],
+                    ),
+                    child: BackButton(
+                      color: AppColors.mainFont,
+                      onPressed: () {
+                        if (context.canPop()) {
+                          context.pop();
+                        } else {
+                          context.go('/nearby');
+                        }
+                      },
+                    ),
                   ),
                 ),
               ),
@@ -138,42 +106,44 @@ class LocationDetailScreen extends StatelessWidget {
           // Main Content
           Expanded(
             child: SingleChildScrollView(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  // Tag, Title, Subtitle
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 5,
+                      ),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFE2ECEB),
-                        borderRadius: BorderRadius.circular(8),
+                        color: AppColors.dark50,
+                        borderRadius: BorderRadius.circular(999),
                       ),
                       child: Text(
                         categoryTag,
                         style: const TextStyle(
-                          fontFamily: 'IBM Plex Sans',
+                          fontFamily: AppTypography.fontBody,
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
-                          color: Color(0xFF123332),
+                          color: AppColors.primary,
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(height: 6),
+                  const SizedBox(height: 8),
                   Text(
                     title,
                     style: const TextStyle(
-                      fontFamily: 'Bricolage Grotesque',
-                      fontSize: 24,
-                      fontWeight: FontWeight.w800,
+                      fontFamily: AppTypography.fontHeading,
+                      fontSize: 25,
+                      fontWeight: FontWeight.w500,
                       height: 1.15,
-                      color: Color(0xFF123332),
+                      color: AppColors.mainFont,
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  const SizedBox(height: 6),
                   Text.rich(
                     TextSpan(
                       children: [
@@ -181,36 +151,39 @@ class LocationDetailScreen extends StatelessWidget {
                         const TextSpan(
                           text: 'Open now',
                           style: TextStyle(
-                            color: Color(0xFF2E6B4F),
+                            color: AppColors.secondary,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
                       ],
                     ),
                     style: const TextStyle(
-                      fontFamily: 'IBM Plex Sans',
+                      fontFamily: AppTypography.fontBody,
                       fontSize: 14,
-                      color: Color(0xFF3B4747),
+                      color: AppColors.dark300,
                     ),
                   ),
-                  const SizedBox(height: 14),
+                  const SizedBox(height: 16),
 
                   // 3-Button Action Grid
                   Row(
                     children: [
                       Expanded(
                         child: _buildActionBtn(
-                          icon: Icons.navigation_outlined,
+                          icon: Icons.near_me_outlined,
                           label: 'Directions',
                           isPrimary: true,
                           onTap: () {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Starting turn-by-turn navigation...')),
+                              const SnackBar(
+                                content:
+                                    Text('Starting turn-by-turn navigation...'),
+                              ),
                             );
                           },
                         ),
                       ),
-                      const SizedBox(width: 8),
+                      const SizedBox(width: 10),
                       Expanded(
                         child: _buildActionBtn(
                           icon: Icons.phone_outlined,
@@ -218,20 +191,25 @@ class LocationDetailScreen extends StatelessWidget {
                           isPrimary: false,
                           onTap: () {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Calling (905) 555-0199...')),
+                              const SnackBar(
+                                content: Text('Calling (905) 555-0199...'),
+                              ),
                             );
                           },
                         ),
                       ),
-                      const SizedBox(width: 8),
+                      const SizedBox(width: 10),
                       Expanded(
                         child: _buildActionBtn(
-                          icon: Icons.open_in_new,
+                          icon: Icons.open_in_new_rounded,
                           label: 'Official page',
                           isPrimary: false,
                           onTap: () {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Opening official Service Canada directory...')),
+                              const SnackBar(
+                                content: Text(
+                                    'Opening official Service Canada directory...'),
+                              ),
                             );
                           },
                         ),
@@ -240,16 +218,12 @@ class LocationDetailScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
 
-                  // Definition / Details card
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: const Color(0xFFDEDEE2)),
-                    ),
-                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+                  // Borderless Details Card
+                  const FigmaSurfaceCard(
+                    radius: 16,
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                     child: Column(
-                      children: const [
+                      children: [
                         _DetailRow(
                           label: 'Address',
                           value: '[Street address, Mississauga ON]',
@@ -267,97 +241,82 @@ class LocationDetailScreen extends StatelessWidget {
                         ),
                         _DetailRow(
                           label: 'Services',
-                          value: 'SIN, pensions, employment insurance and more',
+                          value:
+                              'SIN, pensions, employment insurance and more',
                           hasBorder: false,
                         ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 18),
 
                   // Your tasks here
                   const Text(
                     'Your tasks here',
                     style: TextStyle(
-                      fontFamily: 'IBM Plex Sans',
-                      fontSize: 15,
+                      fontFamily: AppTypography.fontHeading,
+                      fontSize: 18,
                       fontWeight: FontWeight.w600,
-                      color: Color(0xFF123332),
+                      color: AppColors.mainFont,
                     ),
                   ),
-                  const SizedBox(height: 8),
-                  InkWell(
+                  const SizedBox(height: 10),
+                  FigmaSurfaceCard(
+                    radius: 16,
+                    padding: const EdgeInsets.all(14),
                     onTap: () => context.push('/task-sin'),
-                    borderRadius: BorderRadius.circular(14),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFF7E4E5),
-                        borderRadius: BorderRadius.circular(14),
-                      ),
-                      child: Row(
-                        children: const [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Apply for your SIN',
-                                  style: TextStyle(
-                                    fontFamily: 'IBM Plex Sans',
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xFF123332),
-                                  ),
+                    child: const Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Apply for your SIN',
+                                style: TextStyle(
+                                  fontFamily: AppTypography.fontBody,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColors.mainFont,
                                 ),
-                                SizedBox(height: 2),
-                                Text(
-                                  'Layla, Omar · 1 of 3 items ready to bring',
-                                  style: TextStyle(
-                                    fontFamily: 'IBM Plex Sans',
-                                    fontSize: 13,
-                                    color: Color(0xFF5C1518),
-                                  ),
+                              ),
+                              SizedBox(height: 2),
+                              Text(
+                                'Layla, Omar · 1 of 3 items ready to bring',
+                                style: TextStyle(
+                                  fontFamily: AppTypography.fontBody,
+                                  fontSize: 13,
+                                  color: AppColors.dark300,
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                          Icon(Icons.chevron_right, size: 20, color: Color(0xFFA82227)),
-                        ],
-                      ),
+                        ),
+                        Icon(
+                          Icons.chevron_right_rounded,
+                          size: 20,
+                          color: AppColors.dark200,
+                        ),
+                      ],
                     ),
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 20),
 
-                  // Footer info
-                  Wrap(
-                    alignment: WrapAlignment.spaceBetween,
-                    crossAxisAlignment: WrapCrossAlignment.center,
-                    children: [
-                      const Text(
-                        'Verified [DATE] · Service Canada directory',
-                        style: TextStyle(
-                          fontFamily: 'IBM Plex Sans',
-                          fontSize: 12,
-                          color: Color(0xFF5A5F6B),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () => context.push('/report-outdated'),
-                        child: const Text(
-                          'Report a problem',
-                          style: TextStyle(
-                            fontFamily: 'IBM Plex Sans',
-                            fontSize: 13,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFF123332),
-                            decoration: TextDecoration.underline,
-                          ),
-                        ),
-                      ),
-                    ],
+                  FigmaSoftOutlineButton(
+                    label: 'Report a problem',
+                    onPressed: () => context.push('/report-outdated'),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 12),
+
+                  const Text(
+                    'Verified [DATE] · Service Canada directory',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: AppTypography.fontBody,
+                      fontSize: 12,
+                      color: AppColors.dark300,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -377,11 +336,10 @@ class LocationDetailScreen extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(14),
       child: Container(
-        height: 64,
+        height: 68,
         decoration: BoxDecoration(
-          color: isPrimary ? const Color(0xFF123332) : Colors.white,
+          color: isPrimary ? AppColors.primary : Colors.white,
           borderRadius: BorderRadius.circular(14),
-          border: isPrimary ? null : Border.all(color: const Color(0xFFDEDEE2)),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -389,16 +347,18 @@ class LocationDetailScreen extends StatelessWidget {
             Icon(
               icon,
               size: 20,
-              color: isPrimary ? Colors.white : const Color(0xFF123332),
+              color: isPrimary ? Colors.white : AppColors.primary,
             ),
             const SizedBox(height: 4),
             Text(
               label,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                fontFamily: 'IBM Plex Sans',
-                fontSize: 13,
+                fontFamily: AppTypography.fontBody,
+                fontSize: 12.5,
                 fontWeight: FontWeight.w600,
-                color: isPrimary ? Colors.white : const Color(0xFF123332),
+                color: isPrimary ? Colors.white : AppColors.mainFont,
               ),
             ),
           ],
@@ -422,23 +382,23 @@ class _DetailRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 12),
       decoration: BoxDecoration(
         border: hasBorder
-            ? const Border(bottom: BorderSide(color: Color(0xFFEAEAEC)))
+            ? const Border(bottom: BorderSide(color: AppColors.divider))
             : null,
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            width: 96,
+            width: 88,
             child: Text(
               label,
               style: const TextStyle(
-                fontFamily: 'IBM Plex Sans',
+                fontFamily: AppTypography.fontBody,
                 fontSize: 13,
-                color: Color(0xFF5A5F6B),
+                color: AppColors.dark300,
               ),
             ),
           ),
@@ -447,9 +407,10 @@ class _DetailRow extends StatelessWidget {
             child: Text(
               value,
               style: const TextStyle(
-                fontFamily: 'IBM Plex Sans',
+                fontFamily: AppTypography.fontBody,
                 fontSize: 14,
-                color: Color(0xFF123332),
+                fontWeight: FontWeight.w500,
+                color: AppColors.mainFont,
               ),
             ),
           ),

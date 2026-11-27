@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../core/theme/app_colors.dart';
+import '../../core/theme/app_typography.dart';
+import '../../core/widgets/figma_onboarding_widgets.dart';
+import '../../core/widgets/settle_button.dart';
 
 class ReportOutdatedScreen extends StatefulWidget {
   final String taskTitle;
@@ -14,7 +18,7 @@ class ReportOutdatedScreen extends StatefulWidget {
 }
 
 class _ReportOutdatedScreenState extends State<ReportOutdatedScreen> {
-  int _selectedReason = 1;
+  int _selectedReason = 0;
   final TextEditingController _noteController = TextEditingController();
 
   final List<String> _reasons = [
@@ -33,168 +37,105 @@ class _ReportOutdatedScreenState extends State<ReportOutdatedScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F4F5),
+      backgroundColor: AppColors.bg,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.fromLTRB(16, 16, 16, 28),
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 28),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Header
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Expanded(
-                    child: Text(
-                      'Report outdated info',
-                      style: TextStyle(
-                        fontFamily: 'Bricolage Grotesque',
-                        fontSize: 24,
-                        fontWeight: FontWeight.w800,
-                        color: Color(0xFF123332),
-                      ),
-                    ),
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.close, size: 22, color: Color(0xFF123332)),
-                    onPressed: () => context.pop(),
-                    padding: EdgeInsets.zero,
-                    constraints: const BoxConstraints(minWidth: 44, minHeight: 44),
-                  ),
-                ],
+              // Figma Sub-Page Header
+              FigmaSubPageHeader(
+                title: 'Report outdated info',
+                onBack: () => context.pop(),
               ),
-              const SizedBox(height: 6),
+              const SizedBox(height: 16),
+
               Text.rich(
                 TextSpan(
                   children: [
-                    const TextSpan(text: 'About: '),
+                    const TextSpan(
+                      text: 'About: ',
+                      style: TextStyle(color: AppColors.dark300),
+                    ),
                     TextSpan(
                       text: widget.taskTitle,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.mainFont,
+                      ),
                     ),
                   ],
                 ),
                 style: const TextStyle(
-                  fontFamily: 'IBM Plex Sans',
-                  fontSize: 14,
-                  color: Color(0xFF3B4747),
+                  fontFamily: AppTypography.fontBody,
+                  fontSize: 14.5,
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 18),
 
-              // What looks wrong fieldset
-              const Text(
-                'What looks wrong?',
-                style: TextStyle(
-                  fontFamily: 'IBM Plex Sans',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFF123332),
-                ),
-              ),
-              const SizedBox(height: 8),
-              Column(
-                children: List.generate(_reasons.length, (idx) {
-                  final isSelected = idx == _selectedReason;
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
-                    child: InkWell(
-                      onTap: () {
-                        setState(() {
-                          _selectedReason = idx;
-                        });
-                      },
-                      borderRadius: BorderRadius.circular(14),
-                      child: Container(
-                        constraints: const BoxConstraints(minHeight: 50),
-                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-                        decoration: BoxDecoration(
-                          color: isSelected ? const Color(0xFFEAF2F1) : Colors.white,
-                          borderRadius: BorderRadius.circular(14),
-                          border: Border.all(
-                            color: isSelected ? const Color(0xFF123332) : const Color(0xFFDEDEE2),
-                            width: isSelected ? 2 : 1,
-                          ),
-                        ),
-                        child: Row(
-                          children: [
-                            Radio<int>(
-                              value: idx,
-                              groupValue: _selectedReason,
-                              activeColor: const Color(0xFF123332),
-                              onChanged: (val) {
-                                if (val != null) {
-                                  setState(() {
-                                    _selectedReason = val;
-                                  });
-                                }
-                              },
-                            ),
-                            const SizedBox(width: 8),
-                            Expanded(
-                              child: Text(
-                                _reasons[idx],
-                                style: TextStyle(
-                                  fontFamily: 'IBM Plex Sans',
-                                  fontSize: 15,
-                                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
-                                  color: const Color(0xFF123332),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                }),
-              ),
-              const SizedBox(height: 12),
+              const FigmaInputLabel('What looks wrong?'),
+              const SizedBox(height: 10),
+              ...List.generate(_reasons.length, (idx) {
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: FigmaPillOptionTile(
+                    title: _reasons[idx],
+                    isSelected: idx == _selectedReason,
+                    onTap: () {
+                      setState(() {
+                        _selectedReason = idx;
+                      });
+                    },
+                  ),
+                );
+              }),
+              const SizedBox(height: 10),
 
-              // Textarea
-              Row(
-                children: const [
+              const Row(
+                children: [
                   Text(
                     'Tell us more ',
                     style: TextStyle(
-                      fontFamily: 'IBM Plex Sans',
+                      fontFamily: AppTypography.fontBody,
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
-                      color: Color(0xFF123332),
+                      color: AppColors.mainFont,
                     ),
                   ),
                   Text(
                     '(optional)',
                     style: TextStyle(
-                      fontFamily: 'IBM Plex Sans',
+                      fontFamily: AppTypography.fontBody,
                       fontSize: 14,
-                      color: Color(0xFF5A5F6B),
+                      color: AppColors.dark200,
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 6),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: const Color(0xFFC8C8CE)),
+              const SizedBox(height: 8),
+
+              FigmaSurfaceCard(
+                radius: 16,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
                 ),
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                 child: TextField(
                   controller: _noteController,
                   maxLines: 4,
                   style: const TextStyle(
-                    fontFamily: 'IBM Plex Sans',
-                    fontSize: 15,
-                    color: Color(0xFF123332),
+                    fontFamily: AppTypography.fontBody,
+                    fontSize: 14.5,
+                    color: AppColors.mainFont,
                   ),
                   decoration: const InputDecoration(
-                    hintText: "What did you see? Please don't include personal details.",
+                    hintText:
+                        "What did you see? Please don't include personal details.",
                     hintStyle: TextStyle(
-                      fontFamily: 'IBM Plex Sans',
-                      fontSize: 15,
-                      color: Color(0xFF5A5F6B),
+                      fontFamily: AppTypography.fontBody,
+                      fontSize: 14,
+                      color: AppColors.dark200,
                     ),
                     border: InputBorder.none,
                   ),
@@ -202,48 +143,29 @@ class _ReportOutdatedScreenState extends State<ReportOutdatedScreen> {
               ),
               const SizedBox(height: 12),
 
-              // Information text
               const Text(
                 'Our content team checks the official source before changing anything. We\'ll mark the task "under review" meanwhile.',
                 style: TextStyle(
-                  fontFamily: 'IBM Plex Sans',
-                  fontSize: 13,
+                  fontFamily: AppTypography.fontBody,
+                  fontSize: 12.5,
                   height: 1.45,
-                  color: Color(0xFF5A5F6B),
+                  color: AppColors.dark300,
                 ),
               ),
               const SizedBox(height: 24),
 
-              // Send report button
-              SizedBox(
-                height: 54,
-                child: ElevatedButton(
-                  onPressed: () {
-                    context.pop();
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text("Thank you! Report received and under review."),
-                        duration: Duration(seconds: 2),
-                      ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF123332),
-                    foregroundColor: Colors.white,
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14),
+              SettleButton(
+                label: 'Send report',
+                onPressed: () {
+                  context.pop();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content:
+                          Text('Thank you! Report received and under review.'),
+                      duration: Duration(seconds: 2),
                     ),
-                  ),
-                  child: const Text(
-                    'Send report',
-                    style: TextStyle(
-                      fontFamily: 'IBM Plex Sans',
-                      fontSize: 17,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
+                  );
+                },
               ),
             ],
           ),

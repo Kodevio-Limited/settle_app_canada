@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_typography.dart';
+import '../../core/widgets/figma_onboarding_widgets.dart';
 
 class CalendarScreen extends StatelessWidget {
   const CalendarScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Days representation for September 2026: starts on Tuesday (offset 2 empty spaces)
-    // 30 days total
     const greenDotDays = {16, 17, 18, 20};
     const todayDay = 28;
     const selectedDay = 29;
@@ -19,136 +18,59 @@ class CalendarScreen extends StatelessWidget {
       backgroundColor: AppColors.bg,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Header
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Transform.translate(
-                    offset: const Offset(-10, 0),
-                    child: InkWell(
-                      onTap: () {
-                        if (context.canPop()) {
-                          context.pop();
-                        } else {
-                          context.go('/home');
-                        }
-                      },
-                      borderRadius: BorderRadius.circular(22),
-                      child: const SizedBox(
-                        width: 44,
-                        height: 44,
-                        child: Center(
-                          child: Icon(
-                            Icons.arrow_back_ios_new_rounded,
-                            size: 20,
-                            color: Color(0xFF123332),
-                          ),
-                        ),
+              FigmaSubPageHeader(
+                title: 'Reminders',
+                onBack: () {
+                  if (context.canPop()) {
+                    context.pop();
+                  } else {
+                    context.go('/home');
+                  }
+                },
+                trailing: InkWell(
+                  onTap: () => context.push('/reminders/settings'),
+                  borderRadius: BorderRadius.circular(999),
+                  child: Container(
+                    height: 40,
+                    padding: const EdgeInsets.symmetric(horizontal: 14),
+                    decoration: BoxDecoration(
+                      color: AppColors.dark50,
+                      borderRadius: BorderRadius.circular(999),
+                    ),
+                    alignment: Alignment.center,
+                    child: const Text(
+                      'Settings',
+                      style: TextStyle(
+                        fontFamily: AppTypography.fontBody,
+                        fontSize: 13.5,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.mainFont,
                       ),
                     ),
                   ),
-                  InkWell(
-                    onTap: () => context.push('/reminders/settings'),
-                    child: const Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Text(
-                        'Settings',
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xFF123332),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 2),
-
-              Text(
-                'Reminders',
-                style: const TextStyle(
-                  fontFamily: AppTypography.fontHeading,
-                  fontSize: 28,
-                  fontWeight: FontWeight.w800,
-                  color: Color(0xFF123332),
-                  letterSpacing: -0.6,
-                ),
-              ),
-              const SizedBox(height: 12),
-
-              // Segmented Tabs: Upcoming / Calendar (Active)
-              Container(
-                padding: const EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFE6E6E9),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: InkWell(
-                        onTap: () => context.pushReplacement('/reminders'),
-                        borderRadius: BorderRadius.circular(9),
-                        child: Container(
-                          height: 38,
-                          alignment: Alignment.center,
-                          child: const Text(
-                            'Upcoming',
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              color: Color(0xFF3B4747),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        height: 38,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(9),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color(0x14000000),
-                              blurRadius: 2,
-                              offset: Offset(0, 1),
-                            ),
-                          ],
-                        ),
-                        alignment: Alignment.center,
-                        child: const Text(
-                          'Calendar',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                            color: Color(0xFF123332),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
                 ),
               ),
               const SizedBox(height: 16),
 
-              // Calendar Card
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(18),
-                  border: Border.all(color: const Color(0xFFDEDEE2)),
-                ),
+              FigmaSegmentedTabs(
+                leftLabel: 'Upcoming',
+                rightLabel: 'Calendar',
+                isLeftSelected: false,
+                onLeftTap: () => context.pushReplacement('/reminders'),
+                onRightTap: () {},
+              ),
+              const SizedBox(height: 18),
+
+              // Borderless Calendar Card
+              FigmaSurfaceCard(
+                radius: 18,
+                padding: const EdgeInsets.all(14),
                 child: Column(
                   children: [
-                    // Month Navigation Row
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -156,13 +78,13 @@ class CalendarScreen extends StatelessWidget {
                           onTap: () {},
                           borderRadius: BorderRadius.circular(22),
                           child: const SizedBox(
-                            width: 44,
-                            height: 44,
+                            width: 40,
+                            height: 40,
                             child: Center(
                               child: Icon(
                                 Icons.chevron_left_rounded,
-                                size: 24,
-                                color: Color(0xFF123332),
+                                size: 22,
+                                color: AppColors.mainFont,
                               ),
                             ),
                           ),
@@ -170,67 +92,67 @@ class CalendarScreen extends StatelessWidget {
                         const Text(
                           'September 2026',
                           style: TextStyle(
+                            fontFamily: AppTypography.fontHeading,
                             fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                            color: Color(0xFF123332),
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.mainFont,
                           ),
                         ),
                         InkWell(
                           onTap: () {},
                           borderRadius: BorderRadius.circular(22),
                           child: const SizedBox(
-                            width: 44,
-                            height: 44,
+                            width: 40,
+                            height: 40,
                             child: Center(
                               child: Icon(
                                 Icons.chevron_right_rounded,
-                                size: 24,
-                                color: Color(0xFF123332),
+                                size: 22,
+                                color: AppColors.mainFont,
                               ),
                             ),
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 4),
+                    const SizedBox(height: 8),
 
-                    // Day Header labels S M T W T F S
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: ['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day) {
                         return SizedBox(
-                          width: 40,
+                          width: 36,
                           child: Text(
                             day,
                             textAlign: TextAlign.center,
                             style: const TextStyle(
+                              fontFamily: AppTypography.fontBody,
                               fontSize: 12,
                               fontWeight: FontWeight.w600,
-                              color: Color(0xFF5A5F6B),
+                              color: AppColors.dark200,
                             ),
                           ),
                         );
                       }).toList(),
                     ),
-                    const SizedBox(height: 6),
+                    const SizedBox(height: 8),
 
-                    // 7-column Calendar Grid (32 items: 2 offsets + 30 days)
                     GridView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: 32,
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 7,
-                        mainAxisSpacing: 2,
-                        crossAxisSpacing: 2,
+                        mainAxisSpacing: 4,
+                        crossAxisSpacing: 4,
                         childAspectRatio: 1.0,
                       ),
                       itemBuilder: (context, index) {
                         if (index < 2) {
                           return const SizedBox();
                         }
-                        final dayNum = index - 1; // 1 to 30
-
+                        final dayNum = index - 1;
                         final isSelected = dayNum == selectedDay;
                         final isToday = dayNum == todayDay;
                         final hasGreenDot = greenDotDays.contains(dayNum);
@@ -238,9 +160,9 @@ class CalendarScreen extends StatelessWidget {
 
                         return Container(
                           decoration: isSelected
-                              ? BoxDecoration(
-                                  color: const Color(0xFF123332),
-                                  borderRadius: BorderRadius.circular(12),
+                              ? const BoxDecoration(
+                                  color: AppColors.primary,
+                                  shape: BoxShape.circle,
                                 )
                               : null,
                           child: Column(
@@ -249,22 +171,23 @@ class CalendarScreen extends StatelessWidget {
                               Text(
                                 '$dayNum',
                                 style: TextStyle(
-                                  fontSize: 15,
+                                  fontFamily: AppTypography.fontBody,
+                                  fontSize: 14,
                                   fontWeight: (isSelected || isToday)
-                                      ? FontWeight.w700
+                                      ? FontWeight.w600
                                       : FontWeight.w400,
                                   color: isSelected
                                       ? Colors.white
                                       : isToday
-                                          ? const Color(0xFFA82227)
-                                          : const Color(0xFF123332),
+                                          ? AppColors.red
+                                          : AppColors.mainFont,
                                 ),
                               ),
                               const SizedBox(height: 2),
                               if (isSelected)
                                 Container(
-                                  width: 5,
-                                  height: 5,
+                                  width: 4,
+                                  height: 4,
                                   decoration: const BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: Colors.white,
@@ -272,33 +195,33 @@ class CalendarScreen extends StatelessWidget {
                                 )
                               else if (isToday)
                                 Container(
-                                  width: 5,
-                                  height: 5,
+                                  width: 4,
+                                  height: 4,
                                   decoration: const BoxDecoration(
                                     shape: BoxShape.circle,
-                                    color: Color(0xFFCA292E),
+                                    color: AppColors.red,
                                   ),
                                 )
                               else if (hasGreenDot)
                                 Container(
-                                  width: 5,
-                                  height: 5,
+                                  width: 4,
+                                  height: 4,
                                   decoration: const BoxDecoration(
                                     shape: BoxShape.circle,
-                                    color: Color(0xFF2E6B4F),
+                                    color: AppColors.secondary,
                                   ),
                                 )
                               else if (hasPlannedDot)
                                 Container(
-                                  width: 5,
-                                  height: 5,
+                                  width: 4,
+                                  height: 4,
                                   decoration: const BoxDecoration(
                                     shape: BoxShape.circle,
-                                    color: Color(0xFF123332),
+                                    color: AppColors.primary,
                                   ),
                                 )
                               else
-                                const SizedBox(height: 5),
+                                const SizedBox(height: 4),
                             ],
                           ),
                         );
@@ -307,83 +230,78 @@ class CalendarScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 18),
 
-              // Selected Date Event Section
               const Text(
                 'Tuesday, September 29',
                 style: TextStyle(
-                  fontSize: 15,
+                  fontFamily: AppTypography.fontHeading,
+                  fontSize: 16,
                   fontWeight: FontWeight.w600,
-                  color: Color(0xFF123332),
+                  color: AppColors.mainFont,
                 ),
               ),
               const SizedBox(height: 8),
 
-              // Event Card
-              InkWell(
+              FigmaSurfaceCard(
+                radius: 14,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14,
+                  vertical: 14,
+                ),
                 onTap: () => context.push('/task-actions/location-detail'),
-                borderRadius: BorderRadius.circular(14),
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(14),
-                    border: Border.all(color: const Color(0xFFDEDEE2)),
-                  ),
-                  child: IntrinsicHeight(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Container(
-                          width: 4,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF123332),
-                            borderRadius: BorderRadius.circular(2),
-                          ),
+                child: IntrinsicHeight(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Container(
+                        width: 3.5,
+                        decoration: BoxDecoration(
+                          color: AppColors.primary,
+                          borderRadius: BorderRadius.circular(2),
                         ),
-                        const SizedBox(width: 12),
-                        const Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Visit Service Canada · SIN',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w700,
-                                  color: Color(0xFF123332),
-                                ),
+                      ),
+                      const SizedBox(width: 12),
+                      const Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Visit Service Canada · SIN',
+                              style: TextStyle(
+                                fontFamily: AppTypography.fontBody,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.mainFont,
                               ),
-                              SizedBox(height: 2),
-                              Text(
-                                'Layla, Omar · 10:00 am · in iPhone Calendar',
-                                style: TextStyle(
-                                  fontSize: 13,
-                                  color: Color(0xFF5A5F6B),
-                                ),
+                            ),
+                            SizedBox(height: 3),
+                            Text(
+                              'Layla, Omar · 10:00 am · in iPhone Calendar',
+                              style: TextStyle(
+                                fontFamily: AppTypography.fontBody,
+                                fontSize: 13,
+                                color: AppColors.dark200,
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 20),
 
-              // Legend
               Row(
                 children: [
-                  _buildLegendItem(const Color(0xFF2E6B4F), 'Done'),
-                  const SizedBox(width: 14),
-                  _buildLegendItem(const Color(0xFFCA292E), 'Today'),
-                  const SizedBox(width: 14),
-                  _buildLegendItem(const Color(0xFF123332), 'Planned'),
+                  _buildLegendItem(AppColors.secondary, 'Done'),
+                  const SizedBox(width: 16),
+                  _buildLegendItem(AppColors.red, 'Today'),
+                  const SizedBox(width: 16),
+                  _buildLegendItem(AppColors.primary, 'Planned'),
                 ],
               ),
-              const SizedBox(height: 16),
             ],
           ),
         ),
@@ -407,8 +325,9 @@ class CalendarScreen extends StatelessWidget {
         Text(
           label,
           style: const TextStyle(
+            fontFamily: AppTypography.fontBody,
             fontSize: 12,
-            color: Color(0xFF5A5F6B),
+            color: AppColors.dark300,
           ),
         ),
       ],

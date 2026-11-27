@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_typography.dart';
+import '../../core/widgets/settle_button.dart';
 import 'onboarding_provider.dart';
 
 class PlanReadyScreen extends ConsumerWidget {
@@ -17,176 +19,117 @@ class PlanReadyScreen extends ConsumerWidget {
         .name;
 
     return Scaffold(
-      backgroundColor: const Color(0xFF123332), // Dark teal canonical background
+      backgroundColor: AppColors.bg,
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 24.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 24),
-              // Red checkmark badge (64x64, radius 32, #CA292E)
-              Container(
-                width: 64,
-                height: 64,
-                decoration: const BoxDecoration(
-                  color: Color(0xFFCA292E),
-                  shape: BoxShape.circle,
-                ),
-                alignment: Alignment.center,
-                child: const Icon(
-                  Icons.check,
-                  color: Colors.white,
-                  size: 34,
-                ),
-              ),
-              const SizedBox(height: 18),
-              // Main title
-              Text(
-                'Your plan is ready, $primaryName',
-                style: const TextStyle(
-                  fontFamily: AppTypography.fontHeading,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 34,
-                  height: 1.05,
-                  letterSpacing: -0.8,
-                  color: Colors.white,
-                ),
-              ),
-              const SizedBox(height: 10),
-              // Subtitle
-              Text(
-                'Built from what you told us: arrived in ${state.arrivalMonth}, settling in ${state.city}, ${state.members.length} people, and you care most about paperwork, a home and school.',
-                style: const TextStyle(
-                  fontFamily: AppTypography.fontBody,
-                  fontSize: 15,
-                  height: 1.5,
-                  color: Color(0xFFCFE3E1),
-                ),
-              ),
-              const SizedBox(height: 20),
-              // 3 Stat Cards Grid
-              Row(
-                children: [
-                  _statCard('10', 'stages'),
-                  const SizedBox(width: 8),
-                  _statCard('40', 'tasks'),
-                  const SizedBox(width: 8),
-                  _statCard('${state.members.length}', 'people'),
-                ],
-              ),
-              const SizedBox(height: 20),
-              // White Card: Start with these three
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(18),
-                ),
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 20.0),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text(
-                      'Start with these three',
-                      style: TextStyle(
-                        fontFamily: AppTypography.fontBody,
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.primary,
+                    const SizedBox(height: 12),
+                    // Large scalloped green checkmark badge matching Figma Plan Ready
+                    SvgPicture.asset(
+                      'assets/images/plan_ready_badge.svg',
+                      width: 196,
+                      height: 196,
+                      fit: BoxFit.contain,
+                    ),
+                    const SizedBox(height: 24),
+                    Text(
+                      'Your plan is ready, $primaryName',
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontFamily: AppTypography.fontHeading,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 31,
+                        height: 1.25,
+                        color: AppColors.mainFont,
                       ),
                     ),
-                    const SizedBox(height: 14),
-                    _taskRow(
-                      number: '1',
-                      title: 'Apply for your SIN',
-                      subtitle: 'Layla, Omar, Yasmin · Paperwork',
+                    const SizedBox(height: 12),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Text(
+                        'Built from what you told us: arrived in ${state.arrivalMonth}, settling in ${state.city}, ${state.members.length} people, and you care most about paperwork, a home and school.',
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontFamily: AppTypography.fontHeading,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 15,
+                          height: 1.45,
+                          color: AppColors.dark300,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    // White card: Start with these three
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(18),
+                      decoration: BoxDecoration(
+                        color: AppColors.white500,
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Start with these three',
+                            style: TextStyle(
+                              fontFamily: AppTypography.fontBody,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.primary,
+                            ),
+                          ),
+                          const SizedBox(height: 14),
+                          _taskRow(
+                            number: '1',
+                            title: 'Apply for your SIN',
+                            subtitle: 'Layla, Omar, Yasmin · Paperwork',
+                          ),
+                          const SizedBox(height: 16),
+                          _taskRow(
+                            number: '2',
+                            title: 'Apply for Ontario health cards',
+                            subtitle: 'Everyone · Paperwork',
+                          ),
+                          const SizedBox(height: 16),
+                          _taskRow(
+                            number: '3',
+                            title: 'Register Sami & Nour for school',
+                            subtitle: 'Sami, Nour · Schools',
+                          ),
+                        ],
+                      ),
                     ),
                     const SizedBox(height: 12),
-                    _taskRow(
-                      number: '2',
-                      title: 'Apply for Ontario health cards',
-                      subtitle: 'Everyone · Paperwork',
-                    ),
-                    const SizedBox(height: 12),
-                    _taskRow(
-                      number: '3',
-                      title: 'Register Sami & Nour for school',
-                      subtitle: 'Sami, Nour · Schools',
-                    ),
                   ],
                 ),
               ),
-              const SizedBox(height: 32),
-              // Footer Button: White button
-              InkWell(
-                onTap: () => context.go('/home'),
-                borderRadius: BorderRadius.circular(14),
-                child: Container(
-                  width: double.infinity,
-                  height: 54,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(14),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(18, 8, 18, 16),
+              child: Column(
+                children: [
+                  SettleButton(
+                    label: 'Go to my plan',
+                    onPressed: () => context.go('/home'),
                   ),
-                  child: const Text(
-                    'Go to my plan',
+                  const SizedBox(height: 8),
+                  const Text(
+                    'Change any answer later — your plan updates with it.',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: AppTypography.fontBody,
-                      fontSize: 17,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.primary,
+                      fontSize: 12.5,
+                      color: AppColors.dark300,
                     ),
                   ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              const Center(
-                child: Text(
-                  'Change any answer later — your plan updates with it.',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontFamily: AppTypography.fontBody,
-                    fontSize: 13,
-                    color: Color(0xFFCFE3E1),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _statCard(String count, String label) {
-    return Expanded(
-      child: Container(
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          color: const Color(0xFF346767),
-          borderRadius: BorderRadius.circular(14),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              count,
-              style: const TextStyle(
-                fontFamily: AppTypography.fontHeading,
-                fontWeight: FontWeight.w800,
-                fontSize: 26,
-                color: Colors.white,
-              ),
-            ),
-            Text(
-              label,
-              style: const TextStyle(
-                fontFamily: AppTypography.fontBody,
-                fontSize: 13,
-                color: Color(0xFFCFE3E1),
+                ],
               ),
             ),
           ],
@@ -204,10 +147,11 @@ class PlanReadyScreen extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          width: 24,
-          height: 24,
+          width: 27,
+          height: 27,
+          margin: const EdgeInsets.only(top: 2),
           decoration: const BoxDecoration(
-            color: Color(0xFFE2ECEB),
+            color: AppColors.primary,
             shape: BoxShape.circle,
           ),
           alignment: Alignment.center,
@@ -215,9 +159,9 @@ class PlanReadyScreen extends ConsumerWidget {
             number,
             style: const TextStyle(
               fontFamily: AppTypography.fontBody,
-              fontSize: 13,
+              fontSize: 11.5,
               fontWeight: FontWeight.w600,
-              color: AppColors.primary,
+              color: Colors.white,
             ),
           ),
         ),
@@ -229,19 +173,20 @@ class PlanReadyScreen extends ConsumerWidget {
               Text(
                 title,
                 style: const TextStyle(
-                  fontFamily: AppTypography.fontBody,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.primary,
+                  fontFamily: AppTypography.fontHeading,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                  height: 1.3,
+                  color: AppColors.mainFont,
                 ),
               ),
-              const SizedBox(height: 2),
+              const SizedBox(height: 3),
               Text(
                 subtitle,
                 style: const TextStyle(
                   fontFamily: AppTypography.fontBody,
-                  fontSize: 13,
-                  color: Color(0xFF5A5F6B),
+                  fontSize: 12,
+                  color: AppColors.dark300,
                 ),
               ),
             ],

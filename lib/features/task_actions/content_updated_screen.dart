@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../core/theme/app_colors.dart';
+import '../../core/theme/app_typography.dart';
+import '../../core/widgets/figma_onboarding_widgets.dart';
+import '../../core/widgets/settle_button.dart';
 
 class ContentUpdatedScreen extends StatelessWidget {
   const ContentUpdatedScreen({super.key});
@@ -7,18 +11,16 @@ class ContentUpdatedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F4F5),
+      backgroundColor: AppColors.bg,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.fromLTRB(16, 16, 16, 28),
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 28),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Close button
               Align(
                 alignment: Alignment.centerLeft,
-                child: BackButton(
-                  color: const Color(0xFF123332),
+                child: FigmaCircleBackButton(
                   onPressed: () {
                     if (context.canPop()) {
                       context.pop();
@@ -28,127 +30,133 @@ class ContentUpdatedScreen extends StatelessWidget {
                   },
                 ),
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 16),
 
-              // Title block
               const Text(
                 'UPDATE · VERIFIED [DATE]',
                 style: TextStyle(
-                  fontFamily: 'IBM Plex Sans',
-                  fontSize: 12,
+                  fontFamily: AppTypography.fontBody,
+                  fontSize: 11.5,
                   fontWeight: FontWeight.w600,
                   letterSpacing: 0.6,
-                  color: Color(0xFFA82227),
+                  color: AppColors.red,
                 ),
               ),
               const SizedBox(height: 6),
               const Text(
                 "A step you're working on changed",
                 style: TextStyle(
-                  fontFamily: 'Bricolage Grotesque',
+                  fontFamily: AppTypography.fontHeading,
                   fontSize: 28,
-                  fontWeight: FontWeight.w800,
+                  fontWeight: FontWeight.w500,
                   letterSpacing: -0.6,
-                  height: 1.1,
-                  color: Color(0xFF123332),
+                  height: 1.12,
+                  color: AppColors.mainFont,
                 ),
               ),
-              const SizedBox(height: 6),
+              const SizedBox(height: 8),
               const Text(
-                "Service Canada updated its page for Apply for your SIN. We checked the change and updated your task.",
+                'Service Canada updated its page for Apply for your SIN. We checked the change and updated your task.',
                 style: TextStyle(
-                  fontFamily: 'IBM Plex Sans',
-                  fontSize: 15,
+                  fontFamily: AppTypography.fontBody,
+                  fontSize: 14.5,
                   height: 1.45,
-                  color: Color(0xFF3B4747),
+                  color: AppColors.dark300,
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 20),
 
-              // What changed card
-              Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: const Color(0xFFDEDEE2)),
+              const Text(
+                'What changed',
+                style: TextStyle(
+                  fontFamily: AppTypography.fontHeading,
+                  fontSize: 17,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.mainFont,
                 ),
+              ),
+              const SizedBox(height: 10),
+
+              // What changed white borderless card
+              FigmaSurfaceCard(
+                radius: 16,
+                padding: const EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'What changed',
-                      style: TextStyle(
-                        fontFamily: 'IBM Plex Sans',
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xFF123332),
-                      ),
-                    ),
-                    const SizedBox(height: 10),
                     Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFF4E0DD),
-                            borderRadius: BorderRadius.circular(6),
+                          width: 68,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 5,
                           ),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFFAD2CF),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          alignment: Alignment.center,
                           child: const Text(
                             'Before',
                             style: TextStyle(
-                              fontFamily: 'IBM Plex Sans',
+                              fontFamily: AppTypography.fontBody,
                               fontSize: 12,
                               fontWeight: FontWeight.w600,
-                              color: Color(0xFF8A2418),
+                              color: Color(0xFFD93025),
                             ),
                           ),
                         ),
-                        const SizedBox(width: 10),
+                        const SizedBox(width: 12),
                         const Expanded(
                           child: Text(
                             '[Previous wording from the official page]',
                             style: TextStyle(
-                              fontFamily: 'IBM Plex Sans',
-                              fontSize: 14,
-                              height: 1.45,
-                              color: Color(0xFF5A5F6B),
+                              fontFamily: AppTypography.fontBody,
+                              fontSize: 13.5,
+                              height: 1.4,
+                              color: AppColors.dark200,
                               decoration: TextDecoration.lineThrough,
                             ),
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 12),
                     Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFE3EFE8),
-                            borderRadius: BorderRadius.circular(6),
+                          width: 68,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 5,
                           ),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFCCF6D8),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          alignment: Alignment.center,
                           child: const Text(
                             'Now',
                             style: TextStyle(
-                              fontFamily: 'IBM Plex Sans',
+                              fontFamily: AppTypography.fontBody,
                               fontSize: 12,
                               fontWeight: FontWeight.w600,
-                              color: Color(0xFF1F4A36),
+                              color: Color(0xFF1F6E3D),
                             ),
                           ),
                         ),
-                        const SizedBox(width: 10),
+                        const SizedBox(width: 12),
                         const Expanded(
                           child: Text(
                             '[Updated wording from the official page]',
                             style: TextStyle(
-                              fontFamily: 'IBM Plex Sans',
-                              fontSize: 14,
-                              height: 1.45,
-                              color: Color(0xFF123332),
+                              fontFamily: AppTypography.fontBody,
+                              fontSize: 13.5,
+                              height: 1.4,
+                              color: AppColors.mainFont,
                             ),
                           ),
                         ),
@@ -159,76 +167,51 @@ class ContentUpdatedScreen extends StatelessWidget {
               ),
               const SizedBox(height: 14),
 
-              // What this means for you
-              Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFE2ECEB),
-                  borderRadius: BorderRadius.circular(16),
-                ),
+              // What this means for you banner
+              const FigmaNoticeBanner(
+                padding: EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     Text(
                       'What this means for you',
                       style: TextStyle(
-                        fontFamily: 'IBM Plex Sans',
+                        fontFamily: AppTypography.fontBody,
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
-                        color: Color(0xFF123332),
+                        color: AppColors.mainFont,
                       ),
                     ),
                     SizedBox(height: 4),
                     Text(
                       'One item was added to your "What to bring" list. Your earlier ticks are kept.',
                       style: TextStyle(
-                        fontFamily: 'IBM Plex Sans',
-                        fontSize: 14,
+                        fontFamily: AppTypography.fontBody,
+                        fontSize: 13.5,
                         height: 1.45,
-                        color: Color(0xFF123332),
+                        color: AppColors.dark300,
                       ),
                     ),
                   ],
                 ),
               ),
+              const SizedBox(height: 28),
 
-              const SizedBox(height: 24),
-
-              // Bottom Actions
-              SizedBox(
-                height: 54,
-                child: ElevatedButton(
-                  onPressed: () => context.push('/task-sin'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF123332),
-                    foregroundColor: Colors.white,
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14),
-                    ),
-                  ),
-                  child: const Text(
-                    'Review the task',
-                    style: TextStyle(
-                      fontFamily: 'IBM Plex Sans',
-                      fontSize: 17,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
+              SettleButton(
+                label: 'Review the task',
+                onPressed: () => context.push('/task-sin'),
               ),
-              const SizedBox(height: 6),
-              Align(
-                alignment: Alignment.center,
+              const SizedBox(height: 8),
+              Center(
                 child: TextButton(
                   onPressed: () => context.push('/notification-settings'),
                   child: const Text(
                     'Change update alerts',
                     style: TextStyle(
-                      fontFamily: 'IBM Plex Sans',
-                      fontSize: 15,
+                      fontFamily: AppTypography.fontBody,
+                      fontSize: 14.5,
                       fontWeight: FontWeight.w500,
-                      color: Color(0xFF123332),
+                      color: AppColors.primary,
                     ),
                   ),
                 ),

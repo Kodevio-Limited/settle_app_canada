@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../core/theme/app_colors.dart';
+import '../../core/theme/app_typography.dart';
+import '../../core/widgets/figma_onboarding_widgets.dart';
 
 class NearbyScreen extends StatefulWidget {
   final String taskTitle;
@@ -25,86 +28,72 @@ class _NearbyScreenState extends State<NearbyScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F4F5),
+      backgroundColor: AppColors.bg,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(16, 16, 16, 20),
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Header
-              Row(
-                children: [
-                  BackButton(
-                    color: const Color(0xFF123332),
-                    onPressed: () {
-                      if (context.canPop()) {
-                        context.pop();
-                      } else {
-                        context.go('/home');
-                      }
-                    },
-                  ),
-                  const SizedBox(width: 6),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Near you',
-                          style: TextStyle(
-                            fontFamily: 'Bricolage Grotesque',
-                            fontSize: 24,
-                            fontWeight: FontWeight.w800,
-                            color: Color(0xFF123332),
-                          ),
-                        ),
-                        Text(
-                          'For: ${widget.taskTitle}',
-                          style: const TextStyle(
-                            fontFamily: 'IBM Plex Sans',
-                            fontSize: 13,
-                            color: Color(0xFF5A5F6B),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+              // Figma Sub-Page Header
+              FigmaSubPageHeader(
+                title: 'Near you',
+                onBack: () {
+                  if (context.canPop()) {
+                    context.pop();
+                  } else {
+                    context.go('/home');
+                  }
+                },
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 4),
+              Text(
+                'For: ${widget.taskTitle}',
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontFamily: AppTypography.fontBody,
+                  fontSize: 13,
+                  color: AppColors.dark300,
+                ),
+              ),
+              const SizedBox(height: 14),
 
-              // Horizontal Category Filters
+              // Category Filter Pills
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: List.generate(_categories.length, (idx) {
                     final isSelected = idx == _selectedCategoryIndex;
                     return Padding(
-                      padding: const EdgeInsets.only(right: 6.0),
+                      padding: const EdgeInsets.only(right: 8),
                       child: InkWell(
                         onTap: () {
                           setState(() {
                             _selectedCategoryIndex = idx;
                           });
                         },
-                        borderRadius: BorderRadius.circular(18),
+                        borderRadius: BorderRadius.circular(999),
                         child: Container(
-                          height: 36,
-                          padding: const EdgeInsets.symmetric(horizontal: 14),
+                          height: 38,
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
                           decoration: BoxDecoration(
-                            color: isSelected ? const Color(0xFF123332) : Colors.white,
-                            borderRadius: BorderRadius.circular(18),
-                            border: isSelected ? null : Border.all(color: const Color(0xFFC8C8CE)),
+                            color: isSelected
+                                ? AppColors.primary
+                                : AppColors.dark50,
+                            borderRadius: BorderRadius.circular(999),
                           ),
                           alignment: Alignment.center,
                           child: Text(
                             _categories[idx],
                             style: TextStyle(
-                              fontFamily: 'IBM Plex Sans',
-                              fontSize: 14,
-                              fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-                              color: isSelected ? Colors.white : const Color(0xFF123332),
+                              fontFamily: AppTypography.fontBody,
+                              fontSize: 13.5,
+                              fontWeight: isSelected
+                                  ? FontWeight.w600
+                                  : FontWeight.w500,
+                              color: isSelected
+                                  ? Colors.white
+                                  : AppColors.dark300,
                             ),
                           ),
                         ),
@@ -113,128 +102,84 @@ class _NearbyScreenState extends State<NearbyScreen> {
                   }),
                 ),
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 14),
 
-              // Interactive Map Preview
+              // Map Preview Card
               ClipRRect(
                 borderRadius: BorderRadius.circular(16),
-                child: Container(
-                  height: 230,
-                  color: const Color(0xFFE9E9EC),
+                child: SizedBox(
+                  height: 210,
                   child: Stack(
+                    fit: StackFit.expand,
                     children: [
-                      // Water
-                      Positioned(
-                        right: 0,
-                        top: 0,
-                        bottom: 0,
-                        width: 96,
-                        child: Container(color: const Color(0xFFCFE0EA)),
-                      ),
-                      // Parks
-                      Positioned(
-                        left: 24,
-                        bottom: 36,
-                        width: 84,
-                        height: 54,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFD9E6D2),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
+                      Image.asset(
+                        'assets/images/map_preview.png',
+                        fit: BoxFit.cover,
+                        errorBuilder: (_, __, ___) => Container(
+                          color: const Color(0xFFE9E9EC),
                         ),
                       ),
-                      Positioned(
-                        left: 170,
-                        top: 10,
-                        width: 60,
-                        height: 36,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFD9E6D2),
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                        ),
-                      ),
-                      // Road Grid
-                      Positioned(
-                        left: 0,
-                        right: 0,
-                        top: 88,
-                        height: 8,
-                        child: Container(color: Colors.white),
-                      ),
-                      Positioned(
-                        left: 0,
-                        right: 62,
-                        top: 176,
-                        height: 8,
-                        child: Container(color: Colors.white),
-                      ),
-                      Positioned(
-                        left: 118,
-                        top: 0,
-                        bottom: 0,
-                        width: 8,
-                        child: Container(color: Colors.white),
-                      ),
-                      Positioned(
-                        left: 214,
-                        top: 0,
-                        bottom: 0,
-                        width: 8,
-                        child: Container(color: Colors.white),
-                      ),
-                      // User Location Dot
                       Positioned(
                         left: 144,
-                        top: 110,
+                        top: 102,
                         child: Container(
-                          width: 32,
-                          height: 32,
+                          width: 28,
+                          height: 28,
                           decoration: BoxDecoration(
-                            color: const Color(0xFF2F6FB5).withValues(alpha: 0.15),
+                            color: const Color(0xFF2F6FB5)
+                                .withValues(alpha: 0.2),
                             shape: BoxShape.circle,
                           ),
                           child: Center(
                             child: Container(
-                              width: 14,
-                              height: 14,
+                              width: 13,
+                              height: 13,
                               decoration: BoxDecoration(
                                 color: const Color(0xFF2F6FB5),
                                 shape: BoxShape.circle,
-                                border: Border.all(color: Colors.white, width: 3),
+                                border: Border.all(
+                                  color: Colors.white,
+                                  width: 2.5,
+                                ),
                               ),
                             ),
                           ),
                         ),
                       ),
-                      // Pins
                       Positioned(
                         left: 214,
-                        top: 52,
+                        top: 48,
                         child: _buildMapPin('1'),
                       ),
                       Positioned(
                         left: 66,
-                        top: 104,
+                        top: 98,
                         child: _buildMapPin('2'),
                       ),
                       Positioned(
                         left: 250,
-                        top: 150,
+                        top: 140,
                         child: _buildMapPin('3'),
                       ),
-                      // Attribution
-                      const Positioned(
-                        right: 12,
+                      Positioned(
+                        right: 10,
                         bottom: 8,
-                        child: Text(
-                          'Apple Maps',
-                          style: TextStyle(
-                            fontFamily: 'IBM Plex Sans',
-                            fontSize: 10,
-                            color: Color(0xFF5A5F6B),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 3,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.white.withValues(alpha: 0.85),
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: const Text(
+                            'Apple Maps',
+                            style: TextStyle(
+                              fontFamily: AppTypography.fontBody,
+                              fontSize: 10,
+                              color: AppColors.dark300,
+                            ),
                           ),
                         ),
                       ),
@@ -242,7 +187,7 @@ class _NearbyScreenState extends State<NearbyScreen> {
                   ),
                 ),
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 14),
 
               // Location Cards List
               Expanded(
@@ -256,7 +201,7 @@ class _NearbyScreenState extends State<NearbyScreen> {
                       tag: 'Step-free entrance · verified [DATE]',
                       onDetailsTap: () => context.push('/location-detail'),
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 12),
                     _buildLocationCard(
                       context,
                       num: '2',
@@ -267,15 +212,17 @@ class _NearbyScreenState extends State<NearbyScreen> {
                   ],
                 ),
               ),
+              const SizedBox(height: 8),
 
               // Privacy Footnote
               Text.rich(
                 TextSpan(
-                  text: 'Using approximate location while the app is open. Not stored. ',
+                  text:
+                      'Using approximate location while the app is open. Not stored. ',
                   style: const TextStyle(
-                    fontFamily: 'IBM Plex Sans',
+                    fontFamily: AppTypography.fontBody,
                     fontSize: 12,
-                    color: Color(0xFF5A5F6B),
+                    color: AppColors.dark300,
                   ),
                   children: [
                     WidgetSpan(
@@ -286,9 +233,10 @@ class _NearbyScreenState extends State<NearbyScreen> {
                         child: const Text(
                           'Change',
                           style: TextStyle(
-                            fontFamily: 'IBM Plex Sans',
+                            fontFamily: AppTypography.fontBody,
                             fontSize: 12,
-                            color: Color(0xFF123332),
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.primary,
                             decoration: TextDecoration.underline,
                           ),
                         ),
@@ -313,15 +261,15 @@ class _NearbyScreenState extends State<NearbyScreen> {
           width: 26,
           height: 26,
           decoration: const BoxDecoration(
-            color: Color(0xFF123332),
+            color: AppColors.primary,
             shape: BoxShape.circle,
           ),
           child: Center(
             child: Text(
               num,
               style: const TextStyle(
-                fontFamily: 'IBM Plex Sans',
-                fontSize: 13,
+                fontFamily: AppTypography.fontBody,
+                fontSize: 12.5,
                 fontWeight: FontWeight.w600,
                 color: Colors.white,
               ),
@@ -330,7 +278,7 @@ class _NearbyScreenState extends State<NearbyScreen> {
         ),
         CustomPaint(
           size: const Size(8, 6),
-          painter: _TrianglePainter(color: const Color(0xFF123332)),
+          painter: _TrianglePainter(color: AppColors.primary),
         ),
       ],
     );
@@ -344,16 +292,10 @@ class _NearbyScreenState extends State<NearbyScreen> {
     String? tag,
     required VoidCallback onDetailsTap,
   }) {
-    return InkWell(
+    return FigmaSurfaceCard(
+      radius: 16,
+      padding: const EdgeInsets.all(16),
       onTap: onDetailsTap,
-      borderRadius: BorderRadius.circular(16),
-      child: Container(
-        padding: const EdgeInsets.all(14),
-        decoration: BoxDecoration(
-          color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFDEDEE2)),
-      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -361,18 +303,18 @@ class _NearbyScreenState extends State<NearbyScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                width: 28,
-                height: 28,
+                width: 32,
+                height: 32,
                 decoration: const BoxDecoration(
-                  color: Color(0xFF123332),
+                  color: AppColors.secondary,
                   shape: BoxShape.circle,
                 ),
                 child: Center(
                   child: Text(
                     num,
                     style: const TextStyle(
-                      fontFamily: 'IBM Plex Sans',
-                      fontSize: 13,
+                      fontFamily: AppTypography.fontBody,
+                      fontSize: 13.5,
                       fontWeight: FontWeight.w600,
                       color: Colors.white,
                     ),
@@ -387,31 +329,31 @@ class _NearbyScreenState extends State<NearbyScreen> {
                     Text(
                       title,
                       style: const TextStyle(
-                        fontFamily: 'IBM Plex Sans',
-                        fontSize: 16,
+                        fontFamily: AppTypography.fontBody,
+                        fontSize: 15.5,
                         fontWeight: FontWeight.w600,
-                        color: Color(0xFF123332),
+                        color: AppColors.mainFont,
                       ),
                     ),
-                    const SizedBox(height: 2),
-                    Text.rich(
+                    const SizedBox(height: 3),
+                    const Text.rich(
                       TextSpan(
-                        children: const [
+                        children: [
                           TextSpan(text: '2.1 km · '),
                           TextSpan(
                             text: 'Open now',
                             style: TextStyle(
-                              color: Color(0xFF2E6B4F),
+                              color: AppColors.secondary,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                           TextSpan(text: ' · closes [TIME]'),
                         ],
                       ),
-                      style: const TextStyle(
-                        fontFamily: 'IBM Plex Sans',
+                      style: TextStyle(
+                        fontFamily: AppTypography.fontBody,
                         fontSize: 13,
-                        color: Color(0xFF3B4747),
+                        color: AppColors.dark300,
                       ),
                     ),
                     if (tag != null) ...[
@@ -419,9 +361,9 @@ class _NearbyScreenState extends State<NearbyScreen> {
                       Text(
                         tag,
                         style: const TextStyle(
-                          fontFamily: 'IBM Plex Sans',
-                          fontSize: 13,
-                          color: Color(0xFF5A5F6B),
+                          fontFamily: AppTypography.fontBody,
+                          fontSize: 12.5,
+                          color: AppColors.dark200,
                         ),
                       ),
                     ],
@@ -430,29 +372,32 @@ class _NearbyScreenState extends State<NearbyScreen> {
               ),
             ],
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 14),
           Row(
             children: [
               Expanded(
+                flex: 4,
                 child: InkWell(
                   onTap: () {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Opening directions in maps...')),
+                      const SnackBar(
+                        content: Text('Opening directions in maps...'),
+                      ),
                     );
                   },
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(30),
                   child: Container(
                     height: 44,
                     decoration: BoxDecoration(
-                      color: const Color(0xFF123332),
-                      borderRadius: BorderRadius.circular(12),
+                      color: AppColors.primary,
+                      borderRadius: BorderRadius.circular(30),
                     ),
                     alignment: Alignment.center,
                     child: const Text(
                       'Directions',
                       style: TextStyle(
-                        fontFamily: 'IBM Plex Sans',
-                        fontSize: 15,
+                        fontFamily: AppTypography.fontBody,
+                        fontSize: 14,
                         fontWeight: FontWeight.w600,
                         color: Colors.white,
                       ),
@@ -461,53 +406,70 @@ class _NearbyScreenState extends State<NearbyScreen> {
                 ),
               ),
               const SizedBox(width: 8),
-              InkWell(
-                onTap: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Calling (905) 555-0199...')),
-                  );
-                },
-                borderRadius: BorderRadius.circular(12),
-                child: Container(
-                  height: 44,
-                  padding: const EdgeInsets.symmetric(horizontal: 14),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: const Color(0xFFC8C8CE)),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  alignment: Alignment.center,
-                  child: const Text(
-                    'Call',
-                    style: TextStyle(
-                      fontFamily: 'IBM Plex Sans',
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF123332),
+              Expanded(
+                flex: 3,
+                child: InkWell(
+                  onTap: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Calling (905) 555-0199...'),
+                      ),
+                    );
+                  },
+                  borderRadius: BorderRadius.circular(30),
+                  child: Container(
+                    height: 44,
+                    decoration: BoxDecoration(
+                      color: AppColors.dark50,
+                      border: Border.all(color: AppColors.dark100),
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    alignment: Alignment.center,
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.phone_outlined,
+                          size: 15,
+                          color: AppColors.mainFont,
+                        ),
+                        SizedBox(width: 4),
+                        Text(
+                          'Call',
+                          style: TextStyle(
+                            fontFamily: AppTypography.fontBody,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.mainFont,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
               ),
               const SizedBox(width: 8),
-              InkWell(
-                onTap: onDetailsTap,
-                borderRadius: BorderRadius.circular(12),
-                child: Container(
-                  height: 44,
-                  padding: const EdgeInsets.symmetric(horizontal: 14),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: const Color(0xFFC8C8CE)),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  alignment: Alignment.center,
-                  child: const Text(
-                    'Details',
-                    style: TextStyle(
-                      fontFamily: 'IBM Plex Sans',
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF123332),
+              Expanded(
+                flex: 3,
+                child: InkWell(
+                  onTap: onDetailsTap,
+                  borderRadius: BorderRadius.circular(30),
+                  child: Container(
+                    height: 44,
+                    decoration: BoxDecoration(
+                      color: AppColors.dark50,
+                      border: Border.all(color: AppColors.dark100),
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    alignment: Alignment.center,
+                    child: const Text(
+                      'Details',
+                      style: TextStyle(
+                        fontFamily: AppTypography.fontBody,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.mainFont,
+                      ),
                     ),
                   ),
                 ),
@@ -516,9 +478,8 @@ class _NearbyScreenState extends State<NearbyScreen> {
           ),
         ],
       ),
-    ),
-  );
-}
+    );
+  }
 }
 
 class _TrianglePainter extends CustomPainter {

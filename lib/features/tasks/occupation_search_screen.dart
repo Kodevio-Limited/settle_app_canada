@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../core/theme/app_colors.dart';
+import '../../core/theme/app_typography.dart';
+import '../../core/widgets/figma_onboarding_widgets.dart';
 
 class OccupationSearchScreen extends StatefulWidget {
   const OccupationSearchScreen({super.key});
@@ -21,161 +24,136 @@ class _OccupationSearchScreenState extends State<OccupationSearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F4F5),
+      backgroundColor: AppColors.bg,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Back Button
-              Align(
-                alignment: Alignment.centerLeft,
-                child: BackButton(
-                  color: const Color(0xFF123332),
-                  onPressed: () {
-                    if (context.canPop()) {
-                      context.pop();
-                    } else {
-                      context.go('/stage-work');
-                    }
-                  },
-                ),
-              ),
-              const SizedBox(height: 8),
-
-              // Title block
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
-                    'WORK & CREDENTIALS · ONTARIO',
-                    style: TextStyle(
-                      fontFamily: 'IBM Plex Sans',
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 0.6,
-                      color: Color(0xFFA82227),
-                    ),
+              // Top bar
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  FigmaCircleBackButton(
+                    onPressed: () {
+                      if (context.canPop()) {
+                        context.pop();
+                      } else {
+                        context.go('/stage-work');
+                      }
+                    },
                   ),
-                  SizedBox(height: 6),
-                  Text(
-                    'Does your job need a licence here?',
-                    style: TextStyle(
-                      fontFamily: 'Bricolage Grotesque',
-                      fontSize: 28,
-                      fontWeight: FontWeight.w800,
-                      letterSpacing: -0.6,
-                      height: 1.1,
-                      color: Color(0xFF123332),
+                  FigmaCircleActionButton(
+                    icon: const Icon(
+                      Icons.error_outline_rounded,
+                      size: 21,
+                      color: AppColors.mainFont,
                     ),
-                  ),
-                  SizedBox(height: 6),
-                  Text(
-                    'Some jobs need a licence or certificate from a regulator before you can work in them — or use their title.',
-                    style: TextStyle(
-                      fontFamily: 'IBM Plex Sans',
-                      fontSize: 14,
-                      height: 1.45,
-                      color: Color(0xFF3B4747),
-                    ),
+                    tooltip: 'Report outdated info',
+                    onPressed: () => context.push('/report-outdated'),
                   ),
                 ],
               ),
-              const SizedBox(height: 14),
+              const SizedBox(height: 16),
 
-              // Search bar
-              Container(
-                height: 48,
-                padding: const EdgeInsets.symmetric(horizontal: 14),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(14),
-                  border: Border.all(color: const Color(0xFFC8C8CE)),
-                ),
-                child: Row(
-                  children: [
-                    const Icon(Icons.search, size: 20, color: Color(0xFF5A5F6B)),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: TextField(
-                        controller: _searchController,
-                        onChanged: (val) {
-                          setState(() {
-                            _searchQuery = val.toLowerCase().trim();
-                          });
-                        },
-                        decoration: const InputDecoration(
-                          hintText: 'Search your job, e.g. nurse, electrician',
-                          hintStyle: TextStyle(
-                            fontFamily: 'IBM Plex Sans',
-                            fontSize: 15,
-                            color: Color(0xFF5A5F6B),
-                          ),
-                          border: InputBorder.none,
-                          isDense: true,
-                        ),
-                        style: const TextStyle(
-                          fontFamily: 'IBM Plex Sans',
-                          fontSize: 15,
-                          color: Color(0xFF123332),
-                        ),
-                      ),
-                    ),
-                  ],
+              // Title block
+              const Text(
+                'WORK & CREDENTIALS · ONTARIO',
+                style: TextStyle(
+                  fontFamily: AppTypography.fontBody,
+                  fontSize: 11.5,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 0.6,
+                  color: AppColors.red,
                 ),
               ),
-              const SizedBox(height: 14),
+              const SizedBox(height: 6),
+              const Text(
+                'Does your job need a licence here?',
+                style: TextStyle(
+                  fontFamily: AppTypography.fontHeading,
+                  fontSize: 28,
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: -0.6,
+                  height: 1.12,
+                  color: AppColors.mainFont,
+                ),
+              ),
+              const SizedBox(height: 6),
+              const Text(
+                'Some jobs need a licence or certificate from a regulator before you can work in them — or use their title.',
+                style: TextStyle(
+                  fontFamily: AppTypography.fontBody,
+                  fontSize: 14,
+                  height: 1.45,
+                  color: AppColors.dark300,
+                ),
+              ),
+              const SizedBox(height: 16),
 
-              // Omar's profession card
-              if (_searchQuery.isEmpty || 'civil engineer'.contains(_searchQuery) || 'omar'.contains(_searchQuery)) ...[
+              // Full-pill Search bar
+              FigmaSearchBar(
+                controller: _searchController,
+                hintText: 'Search your job, e.g. nurse, electrician',
+                onChanged: (val) {
+                  setState(() {
+                    _searchQuery = val.toLowerCase().trim();
+                  });
+                },
+                onClear: () {
+                  _searchController.clear();
+                  setState(() {
+                    _searchQuery = '';
+                  });
+                },
+              ),
+              const SizedBox(height: 16),
+
+              // Omar's profession featured gradient card
+              if (_searchQuery.isEmpty ||
+                  'civil engineer'.contains(_searchQuery) ||
+                  'omar'.contains(_searchQuery)) ...[
                 InkWell(
                   onTap: () => context.push('/occupation-pathway'),
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(18),
                   child: Container(
-                    padding: const EdgeInsets.all(14),
+                    padding: const EdgeInsets.all(18),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF123332),
-                      borderRadius: BorderRadius.circular(16),
+                      gradient: kFigmaHeroGradient,
+                      borderRadius: BorderRadius.circular(18),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          "Omar's profession",
-                          style: TextStyle(
-                            fontFamily: 'IBM Plex Sans',
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
-                            color: Color(0xFFCFE3E1),
-                          ),
-                        ),
-                        const SizedBox(height: 6),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             const Text(
-                              'Civil engineer',
+                              "Omar's profession",
                               style: TextStyle(
-                                fontFamily: 'IBM Plex Sans',
-                                fontSize: 17,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
+                                fontFamily: AppTypography.fontBody,
+                                fontSize: 12.5,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xFFD5E6E5),
                               ),
                             ),
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 4,
+                              ),
                               decoration: BoxDecoration(
-                                color: const Color(0xFFF7E4E5),
-                                borderRadius: BorderRadius.circular(6),
+                                color: Colors.white.withValues(alpha: 0.18),
+                                borderRadius: BorderRadius.circular(999),
                               ),
                               child: const Text(
                                 'Licence needed',
                                 style: TextStyle(
-                                  fontFamily: 'IBM Plex Sans',
-                                  fontSize: 12,
+                                  fontFamily: AppTypography.fontBody,
+                                  fontSize: 11.5,
                                   fontWeight: FontWeight.w600,
-                                  color: Color(0xFF7A1A1E),
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
@@ -183,18 +161,28 @@ class _OccupationSearchScreenState extends State<OccupationSearchScreen> {
                         ),
                         const SizedBox(height: 6),
                         const Text(
-                          'P.Eng. licence · Professional Engineers Ontario',
+                          'Civil engineer',
                           style: TextStyle(
-                            fontFamily: 'IBM Plex Sans',
-                            fontSize: 14,
-                            color: Color(0xFFCFE3E1),
+                            fontFamily: AppTypography.fontHeading,
+                            fontSize: 22,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
                           ),
                         ),
-                        const SizedBox(height: 8),
+                        const SizedBox(height: 4),
+                        const Text(
+                          'P.Eng. licence · Professional Engineers Ontario',
+                          style: TextStyle(
+                            fontFamily: AppTypography.fontBody,
+                            fontSize: 13.5,
+                            color: Color(0xFFD5E6E5),
+                          ),
+                        ),
+                        const SizedBox(height: 12),
                         const Text(
                           'See the full pathway →',
                           style: TextStyle(
-                            fontFamily: 'IBM Plex Sans',
+                            fontFamily: AppTypography.fontBody,
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
                             color: Colors.white,
@@ -204,63 +192,89 @@ class _OccupationSearchScreenState extends State<OccupationSearchScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 18),
               ],
 
-              // Health section
               _buildCategorySection(
                 title: 'HEALTH',
                 jobs: const [
-                  _JobItem('Registered nurse', 'RN registration · College of Nurses of Ontario'),
+                  _JobItem(
+                    'Registered nurse',
+                    'RN registration · College of Nurses of Ontario',
+                  ),
                   _JobItem('Physician', 'Certificate of registration · CPSO'),
-                  _JobItem('Pharmacist', 'Registration · Ontario College of Pharmacists'),
-                  _JobItem('Dentist', 'Registration · Royal College of Dental Surgeons of Ontario'),
+                  _JobItem(
+                    'Pharmacist',
+                    'Registration · Ontario College of Pharmacists',
+                  ),
+                  _JobItem(
+                    'Dentist',
+                    'Registration · Royal College of Dental Surgeons of Ontario',
+                  ),
                 ],
               ),
               const SizedBox(height: 14),
 
-              // Education section
               _buildCategorySection(
                 title: 'EDUCATION, CARE & SOCIAL WORK',
                 jobs: const [
-                  _JobItem('Teacher (K–12)', 'Certificate of Qualification · Ontario College of Teachers'),
-                  _JobItem('Early childhood educator', 'RECE registration · College of ECE'),
-                  _JobItem('Social worker', 'Registration · College of Social Workers and Social Service Workers'),
+                  _JobItem(
+                    'Teacher (K–12)',
+                    'Certificate of Qualification · Ontario College of Teachers',
+                  ),
+                  _JobItem(
+                    'Early childhood educator',
+                    'RECE registration · College of ECE',
+                  ),
+                  _JobItem(
+                    'Social worker',
+                    'Registration · College of Social Workers and Social Service Workers',
+                  ),
                 ],
               ),
               const SizedBox(height: 14),
 
-              // Law & Finance
               _buildCategorySection(
                 title: 'LAW & FINANCE',
                 jobs: const [
-                  _JobItem('Lawyer', 'NCA assessment, then licence · Law Society of Ontario'),
-                  _JobItem('Public accountant', 'CPA designation + public accounting licence · CPA Ontario'),
+                  _JobItem(
+                    'Lawyer',
+                    'NCA assessment, then licence · Law Society of Ontario',
+                  ),
+                  _JobItem(
+                    'Public accountant',
+                    'CPA designation + public accounting licence · CPA Ontario',
+                  ),
                 ],
               ),
               const SizedBox(height: 14),
 
-              // Skilled trades
               _buildCategorySection(
                 title: 'SKILLED TRADES',
                 jobs: const [
-                  _JobItem('Electrician (construction & maintenance)', 'Certificate of Qualification · Skilled Trades Ontario'),
-                  _JobItem('Plumber', 'Certificate of Qualification · Skilled Trades Ontario'),
+                  _JobItem(
+                    'Electrician (construction & maintenance)',
+                    'Certificate of Qualification · Skilled Trades Ontario',
+                  ),
+                  _JobItem(
+                    'Plumber',
+                    'Certificate of Qualification · Skilled Trades Ontario',
+                  ),
                 ],
               ),
-              const SizedBox(height: 14),
+              const SizedBox(height: 16),
 
               // Not regulated callout
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFE3EFE8),
-                  borderRadius: BorderRadius.circular(14),
-                ),
+              const FigmaNoticeBanner(
+                padding: EdgeInsets.symmetric(horizontal: 14, vertical: 14),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Icon(Icons.check, size: 20, color: Color(0xFF2E6B4F)),
+                  children: [
+                    Icon(
+                      Icons.check_circle_outline_rounded,
+                      size: 20,
+                      color: AppColors.secondary,
+                    ),
                     SizedBox(width: 10),
                     Expanded(
                       child: Text.rich(
@@ -268,18 +282,19 @@ class _OccupationSearchScreenState extends State<OccupationSearchScreen> {
                           children: [
                             TextSpan(
                               text: 'Not regulated? ',
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                              style: TextStyle(fontWeight: FontWeight.w600),
                             ),
                             TextSpan(
-                              text: 'Most jobs — like software developer, marketing or sales — need no licence. You can apply right away.',
+                              text:
+                                  'Most jobs — like software developer, marketing or sales — need no licence. You can apply right away.',
                             ),
                           ],
                         ),
                         style: TextStyle(
-                          fontFamily: 'IBM Plex Sans',
-                          fontSize: 13,
+                          fontFamily: AppTypography.fontBody,
+                          fontSize: 13.5,
                           height: 1.45,
-                          color: Color(0xFF1F4A36),
+                          color: AppColors.primary,
                         ),
                       ),
                     ),
@@ -290,18 +305,20 @@ class _OccupationSearchScreenState extends State<OccupationSearchScreen> {
 
               // Footnote
               const Text(
-                'Showing common jobs. The full list of 45 is below. Source: Ontario\'s Office of the Fairness Commissioner and each regulator · verified [DATE].',
+                "Showing common jobs. The full list of 45 is below. Source: Ontario's Office of the Fairness Commissioner and each regulator · verified [DATE].",
                 style: TextStyle(
-                  fontFamily: 'IBM Plex Sans',
+                  fontFamily: AppTypography.fontBody,
                   fontSize: 12,
                   height: 1.45,
-                  color: Color(0xFF5A5F6B),
+                  color: AppColors.dark300,
                 ),
               ),
               const SizedBox(height: 12),
 
-              // See all 45 regulated jobs button
-              InkWell(
+              // See all 45 regulated jobs card
+              FigmaSurfaceCard(
+                radius: 16,
+                padding: const EdgeInsets.all(14),
                 onTap: () {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
@@ -310,46 +327,49 @@ class _OccupationSearchScreenState extends State<OccupationSearchScreen> {
                     ),
                   );
                 },
-                borderRadius: BorderRadius.circular(16),
-                child: Container(
-                  padding: const EdgeInsets.all(14),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFE2ECEB),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Row(
-                    children: const [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'See all 45 regulated jobs',
-                              style: TextStyle(
-                                fontFamily: 'IBM Plex Sans',
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xFF123332),
-                              ),
+                child: const Row(
+                  children: [
+                    FigmaIconTile(
+                      icon: Icons.work_outline_rounded,
+                      iconColor: AppColors.primary,
+                      backgroundColor: AppColors.dark50,
+                      size: 42,
+                    ),
+                    SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'See all 45 regulated jobs',
+                            style: TextStyle(
+                              fontFamily: AppTypography.fontBody,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.mainFont,
                             ),
-                            SizedBox(height: 2),
-                            Text(
-                              'Health, law, business, science and trades',
-                              style: TextStyle(
-                                fontFamily: 'IBM Plex Sans',
-                                fontSize: 13,
-                                color: Color(0xFF3B4747),
-                              ),
+                          ),
+                          SizedBox(height: 2),
+                          Text(
+                            'Health, law, business, science and trades',
+                            style: TextStyle(
+                              fontFamily: AppTypography.fontBody,
+                              fontSize: 13,
+                              color: AppColors.dark300,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                      Icon(Icons.chevron_right, size: 20, color: Color(0xFF7A7A83)),
-                    ],
-                  ),
+                    ),
+                    Icon(
+                      Icons.chevron_right_rounded,
+                      size: 20,
+                      color: AppColors.dark200,
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 16),
             ],
           ),
         ),
@@ -363,7 +383,13 @@ class _OccupationSearchScreenState extends State<OccupationSearchScreen> {
   }) {
     final filtered = _searchQuery.isEmpty
         ? jobs
-        : jobs.where((j) => j.title.toLowerCase().contains(_searchQuery) || j.sub.toLowerCase().contains(_searchQuery)).toList();
+        : jobs
+            .where(
+              (j) =>
+                  j.title.toLowerCase().contains(_searchQuery) ||
+                  j.sub.toLowerCase().contains(_searchQuery),
+            )
+            .toList();
 
     if (filtered.isEmpty) return const SizedBox.shrink();
 
@@ -371,33 +397,33 @@ class _OccupationSearchScreenState extends State<OccupationSearchScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 2, bottom: 6),
+          padding: const EdgeInsets.only(left: 2, bottom: 8),
           child: Text(
             title,
             style: const TextStyle(
-              fontFamily: 'IBM Plex Sans',
-              fontSize: 13,
+              fontFamily: AppTypography.fontBody,
+              fontSize: 12,
               fontWeight: FontWeight.w600,
-              letterSpacing: 0.5,
-              color: Color(0xFF5A5F6B),
+              letterSpacing: 0.6,
+              color: AppColors.dark300,
             ),
           ),
         ),
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: const Color(0xFFDEDEE2)),
-          ),
-          padding: const EdgeInsets.symmetric(horizontal: 14),
+        FigmaSurfaceCard(
+          radius: 16,
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             children: List.generate(filtered.length, (idx) {
               final job = filtered[idx];
               final isLast = idx == filtered.length - 1;
               return Container(
-                padding: const EdgeInsets.symmetric(vertical: 10),
+                padding: const EdgeInsets.symmetric(vertical: 12),
                 decoration: BoxDecoration(
-                  border: isLast ? null : const Border(bottom: BorderSide(color: Color(0xFFEAEAEC))),
+                  border: isLast
+                      ? null
+                      : const Border(
+                          bottom: BorderSide(color: AppColors.divider),
+                        ),
                 ),
                 child: Row(
                   children: [
@@ -408,19 +434,19 @@ class _OccupationSearchScreenState extends State<OccupationSearchScreen> {
                           Text(
                             job.title,
                             style: const TextStyle(
-                              fontFamily: 'IBM Plex Sans',
+                              fontFamily: AppTypography.fontBody,
                               fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF123332),
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.mainFont,
                             ),
                           ),
                           const SizedBox(height: 2),
                           Text(
                             job.sub,
                             style: const TextStyle(
-                              fontFamily: 'IBM Plex Sans',
+                              fontFamily: AppTypography.fontBody,
                               fontSize: 13,
-                              color: Color(0xFF3B4747),
+                              color: AppColors.dark300,
                             ),
                           ),
                         ],

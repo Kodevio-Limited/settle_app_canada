@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_typography.dart';
+import '../../core/widgets/figma_onboarding_widgets.dart';
 import '../../core/widgets/settle_button.dart';
 import 'auth_provider.dart';
 
@@ -34,7 +35,13 @@ class _VerifyEmailScreenState extends ConsumerState<VerifyEmailScreen> {
       }
       return TextEditingController();
     });
-    _focusNodes = List.generate(6, (_) => FocusNode());
+    _focusNodes = List.generate(6, (i) {
+      final node = FocusNode();
+      node.addListener(() {
+        if (mounted) setState(() {});
+      });
+      return node;
+    });
     _startTimer();
   }
 
@@ -95,7 +102,6 @@ class _VerifyEmailScreenState extends ConsumerState<VerifyEmailScreen> {
     await Future.delayed(const Duration(milliseconds: 300));
     if (!mounted) return;
 
-    // In debug mode or normal simulation, any 6-digit code is accepted
     ref.read(authProvider.notifier).verifyAndSignIn();
     setState(() {
       _isLoading = false;
@@ -110,72 +116,64 @@ class _VerifyEmailScreenState extends ConsumerState<VerifyEmailScreen> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        backgroundColor: AppColors.bg,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: BackButton(
-            color: AppColors.primary,
-            onPressed: () {
-              if (context.canPop()) {
-                context.pop();
-              } else {
-                context.go('/sign-up');
-              }
-            },
-          ),
-        ),
+        backgroundColor: AppColors.white600,
         body: SafeArea(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 14.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                FigmaAuthHeader(
+                  onBack: () {
+                    if (context.canPop()) {
+                      context.pop();
+                    } else {
+                      context.go('/sign-up');
+                    }
+                  },
+                ),
+                const SizedBox(height: 28),
                 const Text(
                   'Check your email',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     fontFamily: AppTypography.fontHeading,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 30,
-                    letterSpacing: -0.6,
-                    color: AppColors.primary,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                RichText(
-                  text: TextSpan(
-                    style: const TextStyle(
-                      fontFamily: AppTypography.fontBody,
-                      fontSize: 16,
-                      height: 1.45,
-                      color: Color(0xFF3B4747),
-                    ),
-                    children: [
-                      const TextSpan(text: 'We sent a 6-digit code to '),
-                      TextSpan(
-                        text: email,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.primary,
-                        ),
-                      ),
-                      const TextSpan(text: '. It expires in 10 minutes.'),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 22),
-                // Fieldset: Verification code
-                const Text(
-                  'Verification code',
-                  style: TextStyle(
-                    fontFamily: AppTypography.fontBody,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.primary,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 33,
+                    height: 1.3,
+                    color: AppColors.mainFont,
                   ),
                 ),
                 const SizedBox(height: 10),
-                // 6-digit code boxes grid
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      style: const TextStyle(
+                        fontFamily: AppTypography.fontHeading,
+                        fontSize: 15,
+                        height: 1.45,
+                        color: Color(0xFF888888),
+                      ),
+                      children: [
+                        const TextSpan(text: 'We sent a 6-digit code to '),
+                        TextSpan(
+                          text: email,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.primary,
+                          ),
+                        ),
+                        const TextSpan(text: '. It expires in 10 minutes.'),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 36),
+                const FigmaInputLabel('Verification code'),
+                const SizedBox(height: 10),
+                // 6-digit OTP boxes matching Figma Verify OTP Screen
                 Row(
                   children: List.generate(6, (index) {
                     final hasText = _codeControllers[index].text.isNotEmpty;
@@ -184,24 +182,24 @@ class _VerifyEmailScreenState extends ConsumerState<VerifyEmailScreen> {
                       child: Padding(
                         padding: EdgeInsets.only(right: index < 5 ? 8.0 : 0.0),
                         child: Container(
-                          height: 58,
+                          height: 60,
                           decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(12),
+                            color: AppColors.dark50,
+                            borderRadius: BorderRadius.circular(16),
                             border: Border.all(
                               color: _errorText != null
                                   ? AppColors.error
                                   : (isFocused || hasText)
                                       ? AppColors.primary
-                                      : const Color(0xFFC8C8CE),
-                              width: (isFocused || hasText) ? 2.0 : 1.0,
+                                      : Colors.transparent,
+                              width: 2.0,
                             ),
                           ),
                           alignment: Alignment.center,
-                          child: RawKeyboardListener(
-                            focusNode: FocusNode(),
-                            onKey: (event) {
-                              if (event is RawKeyDownEvent &&
+                          child: KeyboardListener(
+                            focusNode: FocusNode(skipTraversal: true),
+                            onKeyEvent: (event) {
+                              if (event is KeyDownEvent &&
                                   event.logicalKey == LogicalKeyboardKey.backspace &&
                                   _codeControllers[index].text.isEmpty &&
                                   index > 0) {
@@ -215,15 +213,22 @@ class _VerifyEmailScreenState extends ConsumerState<VerifyEmailScreen> {
                               textAlign: TextAlign.center,
                               textAlignVertical: TextAlignVertical.center,
                               maxLength: 1,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontFamily: AppTypography.fontBody,
-                                fontSize: 24,
+                                fontSize: 20,
                                 fontWeight: FontWeight.w600,
-                                color: AppColors.primary,
+                                color: hasText ? AppColors.primary : const Color(0xFF888888),
                                 height: 1.0,
                               ),
                               decoration: const InputDecoration(
                                 isDense: true,
+                                hintText: '0',
+                                hintStyle: TextStyle(
+                                  fontFamily: AppTypography.fontBody,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500,
+                                  color: Color(0xFF888888),
+                                ),
                                 contentPadding: EdgeInsets.zero,
                                 counterText: '',
                                 border: InputBorder.none,
@@ -252,7 +257,7 @@ class _VerifyEmailScreenState extends ConsumerState<VerifyEmailScreen> {
                   }),
                 ),
                 if (_errorText != null) ...[
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 10),
                   Text(
                     _errorText!,
                     style: const TextStyle(
@@ -263,31 +268,34 @@ class _VerifyEmailScreenState extends ConsumerState<VerifyEmailScreen> {
                     ),
                   ),
                 ],
-                const SizedBox(height: 10),
-                if (_secondsRemaining > 0)
-                  Text(
-                    "Didn't get it? You can resend in 0:${_secondsRemaining.toString().padLeft(2, '0')}.",
-                    style: const TextStyle(
-                      fontFamily: AppTypography.fontBody,
-                      fontSize: 14,
-                      color: Color(0xFF5A5F6B),
-                    ),
-                  )
-                else
-                  InkWell(
-                    onTap: _startTimer,
-                    child: const Text(
-                      "Didn't get it? Resend code.",
-                      style: TextStyle(
-                        fontFamily: AppTypography.fontBody,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.primary,
-                        decoration: TextDecoration.underline,
-                      ),
-                    ),
-                  ),
-                const SizedBox(height: 36),
+                const SizedBox(height: 14),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: _secondsRemaining > 0
+                      ? Text(
+                          "Didn't get it? You can resend in 0:${_secondsRemaining.toString().padLeft(2, '0')}.",
+                          textAlign: TextAlign.right,
+                          style: const TextStyle(
+                            fontFamily: AppTypography.fontBody,
+                            fontSize: 12.5,
+                            color: AppColors.dark300,
+                          ),
+                        )
+                      : InkWell(
+                          onTap: _startTimer,
+                          child: const Text(
+                            "Didn't get it? Resend code.",
+                            style: TextStyle(
+                              fontFamily: AppTypography.fontBody,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.primary,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        ),
+                ),
+                const SizedBox(height: 40),
                 SettleButton(
                   label: _isLoading ? 'Verifying...' : 'Verify',
                   onPressed: _isLoading ? null : _handleVerify,
@@ -299,7 +307,7 @@ class _VerifyEmailScreenState extends ConsumerState<VerifyEmailScreen> {
                     child: const Text(
                       'Use a different email',
                       style: TextStyle(
-                        fontFamily: AppTypography.fontBody,
+                        fontFamily: AppTypography.fontHeading,
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
                         color: AppColors.primary,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_typography.dart';
+import '../../core/widgets/figma_onboarding_widgets.dart';
 
 class CommunityGroupsScreen extends StatefulWidget {
   const CommunityGroupsScreen({super.key});
@@ -28,104 +29,73 @@ class _CommunityGroupsScreenState extends State<CommunityGroupsScreen> {
       backgroundColor: AppColors.bg,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Header
-              Row(
-                children: [
-                  Transform.translate(
-                    offset: const Offset(-10, 0),
-                    child: InkWell(
-                      onTap: () {
-                        if (context.canPop()) {
-                          context.pop();
-                        } else {
-                          context.go('/stage-community');
-                        }
-                      },
-                      borderRadius: BorderRadius.circular(22),
-                      child: const SizedBox(
-                        width: 44,
-                        height: 44,
-                        child: Center(
-                          child: Icon(
-                            Icons.arrow_back_ios_new_rounded,
-                            size: 20,
-                            color: Color(0xFF123332),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const Text(
-                    'Groups near you',
-                    style: TextStyle(
-                      fontFamily: AppTypography.fontHeading,
-                      fontSize: 26,
-                      fontWeight: FontWeight.w800,
-                      color: Color(0xFF123332),
-                    ),
-                  ),
-                ],
+              FigmaSubPageHeader(
+                title: 'Groups near you',
+                onBack: () {
+                  if (context.canPop()) {
+                    context.pop();
+                  } else {
+                    context.go('/stage-community');
+                  }
+                },
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 16),
 
-              // Filter Chips
+              // Borderless Pill Filter Chips
               Wrap(
-                spacing: 6,
-                runSpacing: 6,
+                spacing: 8,
+                runSpacing: 8,
                 children: _filters.map((filter) {
                   final isSelected = _selectedFilter == filter;
                   return InkWell(
                     onTap: () => setState(() => _selectedFilter = filter),
-                    borderRadius: BorderRadius.circular(18),
+                    borderRadius: BorderRadius.circular(999),
                     child: Container(
-                      height: 36,
-                      padding: const EdgeInsets.symmetric(horizontal: 14),
+                      height: 38,
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
                       decoration: BoxDecoration(
-                        color: isSelected ? const Color(0xFF123332) : Colors.white,
-                        borderRadius: BorderRadius.circular(18),
-                        border: isSelected
-                            ? null
-                            : Border.all(color: const Color(0xFFC8C8CE)),
+                        color:
+                            isSelected ? AppColors.primary : AppColors.dark50,
+                        borderRadius: BorderRadius.circular(999),
                       ),
                       alignment: Alignment.center,
                       child: Text(
                         filter,
                         style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-                          color: isSelected ? Colors.white : const Color(0xFF123332),
+                          fontFamily: AppTypography.fontBody,
+                          fontSize: 13.5,
+                          fontWeight: FontWeight.w500,
+                          color: isSelected ? Colors.white : AppColors.dark300,
                         ),
                       ),
                     ),
                   );
                 }).toList(),
               ),
-              const SizedBox(height: 14),
+              const SizedBox(height: 16),
 
-              // Warning / Notice Banner
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFF7E4E5),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: const Row(
+              // Warning Notice Banner
+              const FigmaNoticeBanner(
+                isWarmAlert: true,
+                padding: EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Icon(
                       Icons.info_outline_rounded,
                       size: 18,
-                      color: Color(0xFFA82227),
+                      color: AppColors.red,
                     ),
                     SizedBox(width: 10),
                     Expanded(
                       child: Text(
                         "Shared by community organizations and 211 — not Settle's verified guidance.",
                         style: TextStyle(
+                          fontFamily: AppTypography.fontBody,
                           fontSize: 13,
                           height: 1.45,
                           color: Color(0xFF5C1518),
@@ -135,10 +105,10 @@ class _CommunityGroupsScreenState extends State<CommunityGroupsScreen> {
                   ],
                 ),
               ),
-              const SizedBox(height: 14),
+              const SizedBox(height: 16),
 
-              // Group 1: Language
-              if (_selectedFilter == 'All' || _selectedFilter == 'Language') ...[
+              if (_selectedFilter == 'All' ||
+                  _selectedFilter == 'Language') ...[
                 _buildGroupCard(
                   category: 'Language',
                   title: 'English conversation circle',
@@ -148,18 +118,19 @@ class _CommunityGroupsScreenState extends State<CommunityGroupsScreen> {
                 const SizedBox(height: 12),
               ],
 
-              // Group 2: Women / Parents
-              if (_selectedFilter == 'All' || _selectedFilter == 'Women' || _selectedFilter == 'Parents') ...[
+              if (_selectedFilter == 'All' ||
+                  _selectedFilter == 'Women' ||
+                  _selectedFilter == 'Parents') ...[
                 _buildGroupCard(
-                  category: "Women · Parents",
+                  category: 'Women · Parents',
                   title: "Newcomer women's circle",
-                  details: '[Settlement agency] · [day and time] · childcare available',
+                  details:
+                      '[Settlement agency] · [day and time] · childcare available',
                   onTap: () => context.push('/location-detail'),
                 ),
                 const SizedBox(height: 12),
               ],
 
-              // Group 3: Youth
               if (_selectedFilter == 'All' || _selectedFilter == 'Youth') ...[
                 _buildGroupCard(
                   category: 'Youth',
@@ -182,52 +153,54 @@ class _CommunityGroupsScreenState extends State<CommunityGroupsScreen> {
     required String details,
     required VoidCallback onTap,
   }) {
-    return Container(
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFDEDEE2)),
-      ),
+    return FigmaSurfaceCard(
+      radius: 16,
+      padding: const EdgeInsets.all(16),
+      onTap: onTap,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             category,
             style: const TextStyle(
+              fontFamily: AppTypography.fontBody,
               fontSize: 12,
               fontWeight: FontWeight.w600,
-              color: Color(0xFF123332),
+              color: AppColors.secondary,
             ),
           ),
           const SizedBox(height: 4),
           Text(
             title,
             style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
-              color: Color(0xFF123332),
+              fontFamily: AppTypography.fontHeading,
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              color: AppColors.mainFont,
             ),
           ),
           const SizedBox(height: 4),
           Text(
             details,
             style: const TextStyle(
+              fontFamily: AppTypography.fontBody,
               fontSize: 13,
-              color: Color(0xFF5A5F6B),
+              color: AppColors.dark300,
             ),
           ),
-          const SizedBox(height: 6),
+          const SizedBox(height: 10),
           InkWell(
             onTap: onTap,
             child: const Padding(
-              padding: EdgeInsets.symmetric(vertical: 6),
+              padding: EdgeInsets.symmetric(vertical: 4),
               child: Text(
                 'Details & directions',
                 style: TextStyle(
+                  fontFamily: AppTypography.fontBody,
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
-                  color: Color(0xFF123332),
+                  color: AppColors.primary,
+                  decoration: TextDecoration.underline,
                 ),
               ),
             ),

@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_typography.dart';
+import '../../core/widgets/figma_onboarding_widgets.dart';
 import '../../core/widgets/settle_button.dart';
 import 'auth_provider.dart';
 
@@ -25,9 +26,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
     super.initState();
     _emailController.addListener(() {
       if (_errorMessage != null) {
-        setState(() {
-          _errorMessage = null;
-        });
+        setState(() => _errorMessage = null);
       } else {
         setState(() {});
       }
@@ -79,135 +78,53 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        backgroundColor: AppColors.bg,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: BackButton(
-            color: AppColors.primary,
-            onPressed: () {
-              if (context.canPop()) {
-                context.pop();
-              } else {
-                context.go('/');
-              }
-            },
-          ),
-        ),
+        backgroundColor: AppColors.white600,
         body: SafeArea(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 14.0),
             child: Form(
               key: _formKey,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const Text(
-                    'Create your account',
-                    style: TextStyle(
-                      fontFamily: AppTypography.fontHeading,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 30,
-                      letterSpacing: -0.6,
-                      color: AppColors.primary,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  const Text(
-                    'Save your household plan and get reminders. You can also look around first without an account.',
-                    style: TextStyle(
-                      fontFamily: AppTypography.fontBody,
-                      fontSize: 16,
-                      height: 1.45,
-                      color: Color(0xFF3B4747),
-                    ),
+                  FigmaAuthHeader(
+                    onBack: () {
+                      if (context.canPop()) {
+                        context.pop();
+                      } else {
+                        context.go('/');
+                      }
+                    },
                   ),
                   const SizedBox(height: 18),
-                  // Social Auth Buttons matching SignUp.dc.html
-                  InkWell(
-                    onTap: _isLoading
-                        ? null
-                        : () {
-                            ref.read(authProvider.notifier).setEmail('apple.user@example.com');
-                            context.push('/consent');
-                          },
-                    borderRadius: BorderRadius.circular(12),
-                    child: Container(
-                      height: 52,
-                      decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      alignment: Alignment.center,
-                      child: const Text(
-                        'Continue with Apple',
-                        style: TextStyle(
-                          fontFamily: AppTypography.fontBody,
-                          fontSize: 17,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                        ),
-                      ),
+                  const Text(
+                    'Create your account',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: AppTypography.fontHeading,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 33,
+                      height: 1.3,
+                      color: AppColors.mainFont,
                     ),
                   ),
                   const SizedBox(height: 10),
-                  InkWell(
-                    onTap: _isLoading
-                        ? null
-                        : () {
-                            ref.read(authProvider.notifier).setEmail('google.user@example.com');
-                            context.push('/consent');
-                          },
-                    borderRadius: BorderRadius.circular(12),
-                    child: Container(
-                      height: 52,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: const Color(0xFFC8C8CE)),
-                      ),
-                      alignment: Alignment.center,
-                      child: const Text(
-                        'Continue with Google',
-                        style: TextStyle(
-                          fontFamily: AppTypography.fontBody,
-                          fontSize: 17,
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.primary,
-                        ),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 12),
+                    child: Text(
+                      'Save your household plan and get reminders. You can also look around first without an account.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: AppTypography.fontHeading,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 15,
+                        height: 1.4,
+                        color: Color(0xFF888888),
                       ),
                     ),
                   ),
-                  const SizedBox(height: 18),
-                  // Divider
-                  const Row(
-                    children: [
-                      Expanded(child: Divider(color: Color(0xFFD6D6DB), height: 1)),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 12.0),
-                        child: Text(
-                          'or with your email',
-                          style: TextStyle(
-                            fontFamily: AppTypography.fontBody,
-                            fontSize: 14,
-                            color: Color(0xFF5A5F6B),
-                          ),
-                        ),
-                      ),
-                      Expanded(child: Divider(color: Color(0xFFD6D6DB), height: 1)),
-                    ],
-                  ),
-                  const SizedBox(height: 18),
-                  // Email input
-                  const Text(
-                    'Email',
-                    style: TextStyle(
-                      fontFamily: AppTypography.fontBody,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.primary,
-                    ),
-                  ),
+                  const SizedBox(height: 28),
+                  const FigmaInputLabel('Email'),
                   const SizedBox(height: 8),
                   TextFormField(
                     controller: _emailController,
@@ -218,40 +135,86 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                     style: const TextStyle(
                       fontFamily: AppTypography.fontBody,
                       fontSize: 16,
-                      color: AppColors.primary,
+                      color: AppColors.mainFont,
                     ),
-                    decoration: InputDecoration(
+                    decoration: figmaPillInputDecoration(
                       hintText: 'you@example.com',
                       errorText: _errorMessage,
-                      filled: true,
-                      fillColor: Colors.white,
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: const BorderSide(color: Color(0xFFC8C8CE)),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: const BorderSide(color: Color(0xFFC8C8CE)),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: const BorderSide(color: AppColors.primary, width: 2),
+                      radius: 61,
+                      prefixIcon: const Padding(
+                        padding: EdgeInsets.only(left: 16, right: 8),
+                        child: Icon(
+                          Icons.mail_outline_rounded,
+                          size: 22,
+                          color: AppColors.dark200,
+                        ),
                       ),
                     ),
                   ),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 18),
                   SettleButton(
                     label: _isLoading ? 'Sending...' : 'Send me a code',
                     onPressed: _isLoading ? null : _handleSendCode,
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 24),
+                  const Row(
+                    children: [
+                      Expanded(child: Divider(color: Color(0xFFD6D6DB), height: 1)),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 12.0),
+                        child: Text(
+                          'or with your email',
+                          style: TextStyle(
+                            fontFamily: AppTypography.fontBody,
+                            fontSize: 13,
+                            color: AppColors.dark300,
+                          ),
+                        ),
+                      ),
+                      Expanded(child: Divider(color: Color(0xFFD6D6DB), height: 1)),
+                    ],
+                  ),
+                  const SizedBox(height: 18),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: FigmaSocialPillButton(
+                          label: 'Continue with Google',
+                          svgAssetPath: 'assets/icons/google_logo.svg',
+                          onTap: _isLoading
+                              ? null
+                              : () {
+                                  ref
+                                      .read(authProvider.notifier)
+                                      .setEmail('google.user@example.com');
+                                  context.push('/consent');
+                                },
+                        ),
+                      ),
+                      const SizedBox(width: 14),
+                      Expanded(
+                        child: FigmaSocialPillButton(
+                          label: 'Continue with Apple',
+                          svgAssetPath: 'assets/icons/apple_logo.svg',
+                          onTap: _isLoading
+                              ? null
+                              : () {
+                                  ref
+                                      .read(authProvider.notifier)
+                                      .setEmail('apple.user@example.com');
+                                  context.push('/consent');
+                                },
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 22),
                   // Privacy Guarantee Card
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFE2ECEB),
-                      borderRadius: BorderRadius.circular(14),
+                      color: AppColors.softTeal,
+                      borderRadius: BorderRadius.circular(18),
                     ),
                     child: const Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -263,7 +226,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                             'We will never ask you to upload documents or type in passport, UCI, SIN or application numbers.',
                             style: TextStyle(
                               fontFamily: AppTypography.fontBody,
-                              fontSize: 14,
+                              fontSize: 13.5,
                               height: 1.45,
                               color: AppColors.primary,
                             ),
@@ -272,16 +235,16 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 28),
+                  const SizedBox(height: 20),
                   // Footer Terms & Privacy Policy links
                   Center(
                     child: Text.rich(
                       TextSpan(
                         style: const TextStyle(
-                          fontFamily: AppTypography.fontBody,
+                          fontFamily: AppTypography.fontHeading,
                           fontSize: 13,
                           height: 1.45,
-                          color: Color(0xFF5A5F6B),
+                          color: AppColors.mainFont,
                         ),
                         children: [
                           const TextSpan(text: 'By continuing you agree to the '),

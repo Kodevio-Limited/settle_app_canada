@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_typography.dart';
+import '../../core/widgets/figma_onboarding_widgets.dart';
 
 class NotificationSettingsScreen extends StatefulWidget {
   const NotificationSettingsScreen({super.key});
 
   @override
-  State<NotificationSettingsScreen> createState() => _NotificationSettingsScreenState();
+  State<NotificationSettingsScreen> createState() =>
+      _NotificationSettingsScreenState();
 }
 
-class _NotificationSettingsScreenState extends State<NotificationSettingsScreen> {
+class _NotificationSettingsScreenState
+    extends State<NotificationSettingsScreen> {
   bool _plannedTasks = true;
   bool _deadlines = true;
   bool _stepChanges = true;
@@ -28,70 +31,38 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
       backgroundColor: AppColors.bg,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Header
-              Row(
-                children: [
-                  Transform.translate(
-                    offset: const Offset(-10, 0),
-                    child: InkWell(
-                      onTap: () {
-                        if (context.canPop()) {
-                          context.pop();
-                        } else {
-                          context.go('/settings');
-                        }
-                      },
-                      borderRadius: BorderRadius.circular(22),
-                      child: const SizedBox(
-                        width: 44,
-                        height: 44,
-                        child: Center(
-                          child: Icon(
-                            Icons.arrow_back_ios_new_rounded,
-                            size: 20,
-                            color: Color(0xFF123332),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Text(
-                    'Reminders & alerts',
-                    style: const TextStyle(
-                      fontFamily: AppTypography.fontHeading,
-                      fontSize: 24,
-                      fontWeight: FontWeight.w800,
-                      color: Color(0xFF123332),
-                    ),
-                  ),
-                ],
+              FigmaSubPageHeader(
+                title: 'Reminders & alerts',
+                onBack: () {
+                  if (context.canPop()) {
+                    context.pop();
+                  } else {
+                    context.go('/settings');
+                  }
+                },
               ),
-              const SizedBox(height: 14),
+              const SizedBox(height: 18),
 
-              // Section 1: REMIND ME ABOUT
               const Padding(
-                padding: EdgeInsets.only(left: 4, bottom: 6),
+                padding: EdgeInsets.only(left: 4, bottom: 8),
                 child: Text(
                   'REMIND ME ABOUT',
                   style: TextStyle(
-                    fontSize: 13,
+                    fontFamily: AppTypography.fontBody,
+                    fontSize: 12,
                     fontWeight: FontWeight.w600,
-                    letterSpacing: 0.5,
-                    color: Color(0xFF5A5F6B),
+                    letterSpacing: 0.6,
+                    color: AppColors.dark300,
                   ),
                 ),
               ),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: const Color(0xFFDEDEE2)),
-                ),
-                padding: const EdgeInsets.symmetric(horizontal: 14),
+              FigmaSurfaceCard(
+                radius: 16,
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Column(
                   children: [
                     _buildSwitchRow(
@@ -122,34 +93,31 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
                   ],
                 ),
               ),
-              const SizedBox(height: 18),
+              const SizedBox(height: 20),
 
-              // Section 2: HOW
               const Padding(
-                padding: EdgeInsets.only(left: 4, bottom: 6),
+                padding: EdgeInsets.only(left: 4, bottom: 8),
                 child: Text(
                   'HOW',
                   style: TextStyle(
-                    fontSize: 13,
+                    fontFamily: AppTypography.fontBody,
+                    fontSize: 12,
                     fontWeight: FontWeight.w600,
-                    letterSpacing: 0.5,
-                    color: Color(0xFF5A5F6B),
+                    letterSpacing: 0.6,
+                    color: AppColors.dark300,
                   ),
                 ),
               ),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: const Color(0xFFDEDEE2)),
-                ),
-                padding: const EdgeInsets.symmetric(horizontal: 14),
+              FigmaSurfaceCard(
+                radius: 16,
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Column(
                   children: [
                     _buildSwitchRow(
                       title: 'iPhone notifications',
                       value: _iphoneNotifications,
-                      onChanged: (v) => setState(() => _iphoneNotifications = v),
+                      onChanged: (v) =>
+                          setState(() => _iphoneNotifications = v),
                       showBorder: true,
                     ),
                     _buildSwitchRow(
@@ -169,40 +137,37 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
                   ],
                 ),
               ),
-              const SizedBox(height: 18),
+              const SizedBox(height: 20),
 
-              // Section 3: QUIET HOURS
               const Padding(
-                padding: EdgeInsets.only(left: 4, bottom: 6),
+                padding: EdgeInsets.only(left: 4, bottom: 8),
                 child: Text(
                   'QUIET HOURS',
                   style: TextStyle(
-                    fontSize: 13,
+                    fontFamily: AppTypography.fontBody,
+                    fontSize: 12,
                     fontWeight: FontWeight.w600,
-                    letterSpacing: 0.5,
-                    color: Color(0xFF5A5F6B),
+                    letterSpacing: 0.6,
+                    color: AppColors.dark300,
                   ),
                 ),
               ),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: const Color(0xFFDEDEE2)),
-                ),
-                padding: const EdgeInsets.symmetric(horizontal: 14),
+              FigmaSurfaceCard(
+                radius: 16,
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      padding: const EdgeInsets.symmetric(vertical: 10),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const Text(
                             'From',
                             style: TextStyle(
+                              fontFamily: AppTypography.fontBody,
                               fontSize: 15,
-                              color: Color(0xFF123332),
+                              color: AppColors.mainFont,
                             ),
                           ),
                           InkWell(
@@ -215,20 +180,23 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
                                 setState(() => _quietFrom = picked);
                               }
                             },
+                            borderRadius: BorderRadius.circular(10),
                             child: Container(
-                              height: 40,
-                              padding: const EdgeInsets.symmetric(horizontal: 12),
+                              height: 38,
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 14),
                               decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: AppColors.dark50,
                                 borderRadius: BorderRadius.circular(10),
-                                border: Border.all(color: const Color(0xFFC8C8CE)),
                               ),
                               alignment: Alignment.center,
                               child: Text(
                                 '${_quietFrom.hour.toString().padLeft(2, '0')}:${_quietFrom.minute.toString().padLeft(2, '0')}',
                                 style: const TextStyle(
-                                  fontSize: 15,
-                                  color: Color(0xFF123332),
+                                  fontFamily: AppTypography.fontBody,
+                                  fontSize: 14.5,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColors.primary,
                                 ),
                               ),
                             ),
@@ -236,17 +204,18 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
                         ],
                       ),
                     ),
-                    const Divider(height: 1, color: Color(0xFFEAEAEC)),
+                    const Divider(height: 1, color: AppColors.divider),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      padding: const EdgeInsets.symmetric(vertical: 10),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const Text(
                             'Until',
                             style: TextStyle(
+                              fontFamily: AppTypography.fontBody,
                               fontSize: 15,
-                              color: Color(0xFF123332),
+                              color: AppColors.mainFont,
                             ),
                           ),
                           InkWell(
@@ -259,20 +228,23 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
                                 setState(() => _quietUntil = picked);
                               }
                             },
+                            borderRadius: BorderRadius.circular(10),
                             child: Container(
-                              height: 40,
-                              padding: const EdgeInsets.symmetric(horizontal: 12),
+                              height: 38,
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 14),
                               decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: AppColors.dark50,
                                 borderRadius: BorderRadius.circular(10),
-                                border: Border.all(color: const Color(0xFFC8C8CE)),
                               ),
                               alignment: Alignment.center,
                               child: Text(
                                 '${_quietUntil.hour.toString().padLeft(2, '0')}:${_quietUntil.minute.toString().padLeft(2, '0')}',
                                 style: const TextStyle(
-                                  fontSize: 15,
-                                  color: Color(0xFF123332),
+                                  fontFamily: AppTypography.fontBody,
+                                  fontSize: 14.5,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColors.primary,
                                 ),
                               ),
                             ),
@@ -285,16 +257,15 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
               ),
               const SizedBox(height: 14),
 
-              // Footer Note
               const Text(
                 'Messages are only about your plan. No marketing, ever.',
                 style: TextStyle(
+                  fontFamily: AppTypography.fontBody,
                   fontSize: 12,
                   height: 1.45,
-                  color: Color(0xFF5A5F6B),
+                  color: AppColors.dark300,
                 ),
               ),
-              const SizedBox(height: 20),
             ],
           ),
         ),
@@ -314,7 +285,7 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
       padding: const EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
         border: showBorder
-            ? const Border(bottom: BorderSide(color: Color(0xFFEAEAEC)))
+            ? const Border(bottom: BorderSide(color: AppColors.divider))
             : null,
       ),
       child: Row(
@@ -327,8 +298,9 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
                 Text(
                   title,
                   style: TextStyle(
-                    fontSize: 15,
-                    color: enabled ? const Color(0xFF123332) : const Color(0xFF8A8A93),
+                    fontFamily: AppTypography.fontBody,
+                    fontSize: 14.5,
+                    color: enabled ? AppColors.mainFont : AppColors.dark200,
                   ),
                 ),
                 if (subtitle != null) ...[
@@ -336,8 +308,9 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
                   Text(
                     subtitle,
                     style: const TextStyle(
+                      fontFamily: AppTypography.fontBody,
                       fontSize: 12,
-                      color: Color(0xFF5A5F6B),
+                      color: AppColors.dark300,
                     ),
                   ),
                 ],
@@ -346,10 +319,10 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
           ),
           Switch(
             value: value,
-            activeColor: const Color(0xFF2E6B4F),
-            activeTrackColor: const Color(0xFF2E6B4F).withValues(alpha: 0.5),
+            activeColor: Colors.white,
+            activeTrackColor: AppColors.secondary,
             inactiveThumbColor: Colors.white,
-            inactiveTrackColor: const Color(0xFF8A8A93),
+            inactiveTrackColor: AppColors.dark100,
             onChanged: enabled ? onChanged : null,
           ),
         ],

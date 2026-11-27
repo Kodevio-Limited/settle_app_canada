@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/theme/app_colors.dart';
+import '../../core/theme/app_typography.dart';
+import '../../core/widgets/figma_onboarding_widgets.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -30,49 +32,22 @@ class _SearchScreenState extends State<SearchScreen> {
       backgroundColor: AppColors.bg,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Search Bar row
+              // Full-pill Search Bar + Cancel
               Row(
                 children: [
                   Expanded(
-                    child: Container(
-                      height: 48,
-                      padding: const EdgeInsets.symmetric(horizontal: 14),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(14),
-                        border: Border.all(
-                          color: const Color(0xFF123332),
-                          width: 2,
-                        ),
-                      ),
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.search_rounded,
-                            size: 20,
-                            color: Color(0xFF5A5F6B),
-                          ),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: TextField(
-                              controller: _controller,
-                              style: const TextStyle(
-                                fontSize: 16,
-                                color: Color(0xFF123332),
-                              ),
-                              decoration: const InputDecoration(
-                                border: InputBorder.none,
-                                isDense: true,
-                                contentPadding: EdgeInsets.zero,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                    child: FigmaSearchBar(
+                      controller: _controller,
+                      hintText: 'Search tasks, offices, or guides',
+                      onChanged: (_) => setState(() {}),
+                      onClear: () {
+                        _controller.clear();
+                        setState(() {});
+                      },
                     ),
                   ),
                   const SizedBox(width: 10),
@@ -84,23 +59,27 @@ class _SearchScreenState extends State<SearchScreen> {
                         context.go('/journey');
                       }
                     },
+                    borderRadius: BorderRadius.circular(12),
                     child: const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 6,
+                        vertical: 10,
+                      ),
                       child: Text(
                         'Cancel',
                         style: TextStyle(
+                          fontFamily: AppTypography.fontBody,
                           fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xFF123332),
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.primary,
                         ),
                       ),
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 20),
 
-              // Section 1: YOUR TASKS
               _buildSectionHeader('Your tasks'),
               const SizedBox(height: 8),
               _buildSearchResultCard(
@@ -114,20 +93,18 @@ class _SearchScreenState extends State<SearchScreen> {
                 subtitle: 'Health care · needs your health cards',
                 onTap: () => context.push('/tasks/doctor'),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 18),
 
-              // Section 2: PLACES
               _buildSectionHeader('Places'),
               const SizedBox(height: 8),
               _buildSearchResultCard(
-                leadingIcon: Icons.location_on_outlined,
+                leadingIcon: Icons.location_on_rounded,
                 title: 'ServiceOntario · [location]',
                 subtitle: '2.6 km · Open now',
                 onTap: () => context.push('/task-actions/location-detail'),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 18),
 
-              // Section 3: HELP & GUIDES
               _buildSectionHeader('Help & guides'),
               const SizedBox(height: 8),
               _buildSearchResultCard(
@@ -135,21 +112,21 @@ class _SearchScreenState extends State<SearchScreen> {
                 subtitle: 'Insurance · general information',
                 onTap: () => context.push('/stages/stage-insurance'),
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 28),
 
-              // Privacy statement
               const Center(
                 child: Text(
                   "Searches run on Settle's servers in Canada and aren't linked to your profile.",
                   textAlign: TextAlign.center,
                   style: TextStyle(
+                    fontFamily: AppTypography.fontBody,
                     fontSize: 12,
                     height: 1.45,
-                    color: Color(0xFF5A5F6B),
+                    color: AppColors.dark300,
                   ),
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 12),
             ],
           ),
         ),
@@ -161,10 +138,11 @@ class _SearchScreenState extends State<SearchScreen> {
     return Text(
       title.toUpperCase(),
       style: const TextStyle(
-        fontSize: 13,
+        fontFamily: AppTypography.fontBody,
+        fontSize: 12,
         fontWeight: FontWeight.w600,
-        letterSpacing: 0.5,
-        color: Color(0xFF5A5F6B),
+        letterSpacing: 0.6,
+        color: AppColors.dark300,
       ),
     );
   }
@@ -175,51 +153,52 @@ class _SearchScreenState extends State<SearchScreen> {
     required String subtitle,
     required VoidCallback onTap,
   }) {
-    return InkWell(
+    return FigmaSurfaceCard(
+      radius: 16,
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
       onTap: onTap,
-      borderRadius: BorderRadius.circular(14),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: const Color(0xFFDEDEE2)),
-        ),
-        child: Row(
-          children: [
-            if (leadingIcon != null) ...[
-              Icon(
-                leadingIcon,
-                size: 20,
-                color: const Color(0xFF123332),
-              ),
-              const SizedBox(width: 12),
-            ],
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xFF123332),
-                    ),
-                  ),
-                  const SizedBox(height: 2),
-                  Text(
-                    subtitle,
-                    style: const TextStyle(
-                      fontSize: 13,
-                      color: Color(0xFF5A5F6B),
-                    ),
-                  ),
-                ],
-              ),
+      child: Row(
+        children: [
+          if (leadingIcon != null) ...[
+            FigmaIconTile(
+              icon: leadingIcon,
+              iconColor: AppColors.primary,
+              backgroundColor: AppColors.dark50,
+              size: 40,
             ),
+            const SizedBox(width: 12),
           ],
-        ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontFamily: AppTypography.fontBody,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.mainFont,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  subtitle,
+                  style: const TextStyle(
+                    fontFamily: AppTypography.fontBody,
+                    fontSize: 13,
+                    color: AppColors.dark300,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Icon(
+            Icons.chevron_right_rounded,
+            size: 20,
+            color: AppColors.dark200,
+          ),
+        ],
       ),
     );
   }

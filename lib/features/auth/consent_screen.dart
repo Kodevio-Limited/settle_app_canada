@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_typography.dart';
+import '../../core/widgets/figma_onboarding_widgets.dart';
 import '../../core/widgets/settle_button.dart';
 import 'auth_provider.dart';
 
@@ -23,44 +24,42 @@ class _ConsentScreenState extends ConsumerState<ConsentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.bg,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: BackButton(
-          color: AppColors.primary,
-          onPressed: () => context.pop(),
-        ),
-      ),
+      backgroundColor: AppColors.white600,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 14.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              Align(
+                alignment: Alignment.topLeft,
+                child: FigmaCircleBackButton(onPressed: () => context.pop()),
+              ),
+              const SizedBox(height: 12),
               const Text(
-                'Your privacy, in plain\nwords',
+                'Your privacy, in plain words',
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: AppTypography.fontHeading,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 28,
-                  height: 1.15,
-                  letterSpacing: -0.6,
-                  color: AppColors.primary,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 31,
+                  height: 1.25,
+                  color: AppColors.mainFont,
                 ),
               ),
-              const SizedBox(height: 6),
+              const SizedBox(height: 10),
               const Text(
                 'You decide what to share. You can change any of this later in Settings.',
+                textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontFamily: AppTypography.fontBody,
-                  fontSize: 14,
+                  fontFamily: AppTypography.fontHeading,
+                  fontSize: 15,
                   height: 1.45,
-                  color: Color(0xFF3B4747),
+                  color: AppColors.dark300,
                 ),
               ),
-              const SizedBox(height: 18),
-              // Section 1: Needed to make your plan (interactive toggles)
+              const SizedBox(height: 22),
+              // Section 1: Needed to make your plan
               _cardSection(
                 title: 'NEEDED TO MAKE YOUR PLAN',
                 children: [
@@ -109,13 +108,13 @@ class _ConsentScreenState extends ConsumerState<ConsentScreen> {
                 ],
               ),
               const SizedBox(height: 16),
-              // Section 3: We never collect (pink card)
+              // Section 3: We never collect
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF7E4E5), // alertSurface
-                  borderRadius: BorderRadius.circular(16),
+                  color: AppColors.alertSurface,
+                  borderRadius: BorderRadius.circular(18),
                 ),
                 child: const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -134,7 +133,7 @@ class _ConsentScreenState extends ConsumerState<ConsentScreen> {
                       'Document uploads or photos of ID · passport, UCI, SIN or file numbers · exact birthdates · medical records',
                       style: TextStyle(
                         fontFamily: AppTypography.fontBody,
-                        fontSize: 13,
+                        fontSize: 13.5,
                         height: 1.45,
                         color: Color(0xFF5C1518),
                       ),
@@ -152,7 +151,7 @@ class _ConsentScreenState extends ConsumerState<ConsentScreen> {
                   context.push('/notif-permission');
                 },
               ),
-              const SizedBox(height: 14),
+              const SizedBox(height: 12),
               Center(
                 child: TextButton(
                   onPressed: () => context.push('/privacy-policy'),
@@ -180,11 +179,10 @@ class _ConsentScreenState extends ConsumerState<ConsentScreen> {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: AppColors.white50,
+        color: AppColors.white500,
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: const Color(0xFFDEDEE2)),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -195,7 +193,7 @@ class _ConsentScreenState extends ConsumerState<ConsentScreen> {
               fontSize: 11,
               fontWeight: FontWeight.w700,
               letterSpacing: 0.5,
-              color: Color(0xFF5A5F6B),
+              color: AppColors.dark300,
             ),
           ),
           const SizedBox(height: 8),
@@ -225,10 +223,11 @@ class _ConsentScreenState extends ConsumerState<ConsentScreen> {
                     fontFamily: AppTypography.fontBody,
                     fontSize: 14,
                     height: 1.35,
-                    color: Color(0xFF2D2F33),
+                    color: AppColors.mainFont,
                   ),
                 ),
               ),
+              const SizedBox(width: 12),
               GestureDetector(
                 onTap: enabled && onChanged != null ? () => onChanged(!value) : null,
                 child: AnimatedContainer(
@@ -238,7 +237,7 @@ class _ConsentScreenState extends ConsumerState<ConsentScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 3),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    color: value ? const Color(0xFF346767) : const Color(0xFFB5B5B5),
+                    color: value ? AppColors.secondary : AppColors.white700,
                   ),
                   child: Align(
                     alignment: value ? Alignment.centerRight : Alignment.centerLeft,
@@ -247,7 +246,7 @@ class _ConsentScreenState extends ConsumerState<ConsentScreen> {
                       height: 24,
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Colors.white,
+                        color: AppColors.white500,
                       ),
                     ),
                   ),
@@ -260,7 +259,7 @@ class _ConsentScreenState extends ConsumerState<ConsentScreen> {
           const Divider(
             height: 1,
             thickness: 1,
-            color: Color(0xFFEAEAEC),
+            color: AppColors.divider,
           ),
       ],
     );

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_typography.dart';
+import '../../core/widgets/figma_onboarding_widgets.dart';
+import '../../core/widgets/settle_button.dart';
 
 class MemberAdultScreen extends StatelessWidget {
   const MemberAdultScreen({super.key});
@@ -12,104 +14,82 @@ class MemberAdultScreen extends StatelessWidget {
       backgroundColor: AppColors.bg,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               // Header
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Transform.translate(
-                    offset: const Offset(-10, 0),
-                    child: InkWell(
-                      onTap: () {
-                        if (context.canPop()) {
-                          context.pop();
-                        } else {
-                          context.go('/family');
-                        }
-                      },
-                      borderRadius: BorderRadius.circular(22),
-                      child: const SizedBox(
-                        width: 44,
-                        height: 44,
-                        child: Center(
-                          child: Icon(
-                            Icons.arrow_back_ios_new_rounded,
-                            size: 20,
-                            color: Color(0xFF123332),
-                          ),
-                        ),
-                      ),
-                    ),
+                  FigmaCircleBackButton(
+                    onPressed: () {
+                      if (context.canPop()) {
+                        context.pop();
+                      } else {
+                        context.go('/family');
+                      }
+                    },
                   ),
-                  InkWell(
-                    onTap: () => context.push('/onboarding/add-adult'),
-                    child: const Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Text(
-                        'Edit',
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xFF123332),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 4),
-
-              // Avatar & Profile Info
-              Row(
-                children: [
                   Container(
-                    width: 60,
-                    height: 60,
+                    width: 80,
+                    height: 80,
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Color(0xFF2E6B4F),
+                      color: AppColors.dark50,
                     ),
-                    alignment: Alignment.center,
-                    child: const Text(
-                      'O',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                        fontWeight: FontWeight.w600,
+                    clipBehavior: Clip.antiAlias,
+                    child: Image.asset(
+                      'assets/images/avatar_omar.png',
+                      fit: BoxFit.cover,
+                      errorBuilder: (_, __, ___) => const Center(
+                        child: Text(
+                          'O',
+                          style: TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.primary,
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                  const SizedBox(width: 14),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text(
-                          'Omar',
-                          style: TextStyle(
-                            fontFamily: AppTypography.fontHeading,
-                            fontSize: 28,
-                            fontWeight: FontWeight.w800,
-                            color: Color(0xFF123332),
-                          ),
-                        ),
-                        SizedBox(height: 2),
-                        Text(
-                          'Partner · looking for work · drives',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Color(0xFF5A5F6B),
-                          ),
-                        ),
-                      ],
+                  FigmaCircleActionButton(
+                    icon: const Icon(
+                      Icons.edit_outlined,
+                      size: 20,
+                      color: AppColors.mainFont,
                     ),
+                    tooltip: 'Edit',
+                    onPressed: () => context.push('/onboarding/add-adult'),
                   ),
                 ],
               ),
-              const SizedBox(height: 14),
+              const SizedBox(height: 10),
+
+              // Profile Info
+              const Text(
+                'Omar',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: AppTypography.fontHeading,
+                  fontSize: 28,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.mainFont,
+                ),
+              ),
+              const SizedBox(height: 4),
+              const Text(
+                'Partner · looking for work · drives',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: AppTypography.fontBody,
+                  fontSize: 13.5,
+                  color: AppColors.dark300,
+                ),
+              ),
+              const SizedBox(height: 18),
 
               // Progress bar
               Column(
@@ -118,8 +98,9 @@ class MemberAdultScreen extends StatelessWidget {
                   const Text(
                     '2 of 10 tasks done',
                     style: TextStyle(
+                      fontFamily: AppTypography.fontBody,
                       fontSize: 13,
-                      color: Color(0xFF5A5F6B),
+                      color: AppColors.dark300,
                     ),
                   ),
                   const SizedBox(height: 6),
@@ -127,114 +108,89 @@ class MemberAdultScreen extends StatelessWidget {
                     height: 6,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(3),
-                      color: const Color(0xFFDEDEE2),
+                      borderRadius: BorderRadius.circular(999),
+                      color: AppColors.dark50,
                     ),
                     child: FractionallySizedBox(
                       alignment: Alignment.centerLeft,
-                      widthFactor: 0.20,
+                      widthFactor: 0.25,
                       child: Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(3),
-                          color: const Color(0xFF2E6B4F),
+                          borderRadius: BorderRadius.circular(999),
+                          color: AppColors.primary,
                         ),
                       ),
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 18),
 
-              // Tasks Card
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(18),
-                  border: Border.all(color: const Color(0xFFDEDEE2)),
+              // Borderless Tasks Card
+              FigmaSurfaceCard(
+                radius: 16,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 4,
                 ),
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                 child: Column(
                   children: [
                     _buildTaskItem(
                       category: 'Paperwork · Next',
                       title: 'Apply for your SIN',
+                      isDone: true,
                       isLast: false,
                       onTap: () => context.push('/tasks/sin'),
                     ),
                     _buildTaskItem(
                       category: 'Car & driving',
                       title: 'Exchange or start your licence',
+                      isDone: true,
                       isLast: false,
                       onTap: () => context.push('/tasks/licence'),
                     ),
                     _buildTaskItem(
                       category: 'Work',
                       title: 'Connect with employment services',
+                      isDone: false,
                       isLast: false,
                       onTap: () => context.push('/tasks/work'),
                     ),
                     _buildTaskItem(
                       category: 'Work · licence',
                       title: 'Get licensed as an engineer (P.Eng.)',
+                      isDone: false,
                       isLast: true,
                       onTap: () => context.push('/occupations/pathway'),
                     ),
                   ],
                 ),
               ),
-              const SizedBox(height: 14),
+              const SizedBox(height: 16),
 
-              // Invite card
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFE2ECEB),
-                  borderRadius: BorderRadius.circular(16),
-                ),
+              // Invite notice banner
+              const FigmaNoticeBanner(
+                padding: EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       'Invite Omar to his own account',
                       style: TextStyle(
+                        fontFamily: AppTypography.fontBody,
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
-                        color: Color(0xFF123332),
+                        color: AppColors.mainFont,
                       ),
                     ),
-                    const SizedBox(height: 6),
-                    const Text(
+                    SizedBox(height: 6),
+                    Text(
                       "Optional. He'll see his own tasks and the household's shared ones. Neither of you sees the other's check-ins or private notes.",
                       style: TextStyle(
+                        fontFamily: AppTypography.fontBody,
                         fontSize: 13,
                         height: 1.45,
-                        color: Color(0xFF123332),
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    InkWell(
-                      onTap: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Invite link copied to clipboard')),
-                        );
-                      },
-                      borderRadius: BorderRadius.circular(12),
-                      child: Container(
-                        height: 46,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF123332),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        alignment: Alignment.center,
-                        child: const Text(
-                          'Send an invite link',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 15,
-                          ),
-                        ),
+                        color: AppColors.dark300,
                       ),
                     ),
                   ],
@@ -242,23 +198,22 @@ class MemberAdultScreen extends StatelessWidget {
               ),
               const SizedBox(height: 24),
 
-              // Remove member link
-              Align(
-                alignment: Alignment.centerRight,
-                child: InkWell(
-                  onTap: () => context.push('/family/remove-member?name=Omar'),
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                    child: Text(
-                      'Remove Omar from household',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xFFA3261C),
-                      ),
+              // Action Buttons
+              SettleButton(
+                label: 'Send an invite link',
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Invite link copied to clipboard'),
                     ),
-                  ),
-                ),
+                  );
+                },
+              ),
+              const SizedBox(height: 10),
+              FigmaDangerButton(
+                label: 'Remove Omar from household',
+                onPressed: () =>
+                    context.push('/family/remove-member?name=Omar'),
               ),
             ],
           ),
@@ -270,30 +225,37 @@ class MemberAdultScreen extends StatelessWidget {
   Widget _buildTaskItem({
     required String category,
     required String title,
+    required bool isDone,
     required bool isLast,
     required VoidCallback onTap,
   }) {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12),
+        padding: const EdgeInsets.symmetric(vertical: 14),
         decoration: BoxDecoration(
           border: isLast
               ? null
               : const Border(
-                  bottom: BorderSide(color: Color(0xFFEAEAEC)),
+                  bottom: BorderSide(color: AppColors.divider),
                 ),
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              width: 24,
-              height: 24,
+              width: 26,
+              height: 26,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                border: Border.all(color: const Color(0xFFABABB3), width: 2),
+                color: isDone ? AppColors.secondary : Colors.transparent,
+                border: isDone
+                    ? null
+                    : Border.all(color: AppColors.dark100, width: 1.5),
               ),
+              child: isDone
+                  ? const Icon(Icons.check, size: 15, color: Colors.white)
+                  : null,
             ),
             const SizedBox(width: 12),
             Expanded(
@@ -303,23 +265,45 @@ class MemberAdultScreen extends StatelessWidget {
                   Text(
                     category.toUpperCase(),
                     style: const TextStyle(
-                      fontSize: 11,
+                      fontFamily: AppTypography.fontBody,
+                      fontSize: 10.5,
                       fontWeight: FontWeight.w600,
                       letterSpacing: 0.5,
-                      color: Color(0xFFA82227),
+                      color: AppColors.red,
                     ),
                   ),
                   const SizedBox(height: 2),
                   Text(
                     title,
                     style: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xFF123332),
+                      fontFamily: AppTypography.fontBody,
+                      fontSize: 14.5,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.mainFont,
                     ),
                   ),
                 ],
               ),
+            ),
+            const Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'View',
+                  style: TextStyle(
+                    fontFamily: AppTypography.fontBody,
+                    fontSize: 12.5,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.primary,
+                  ),
+                ),
+                SizedBox(width: 2),
+                Icon(
+                  Icons.chevron_right_rounded,
+                  size: 16,
+                  color: AppColors.primary,
+                ),
+              ],
             ),
           ],
         ),

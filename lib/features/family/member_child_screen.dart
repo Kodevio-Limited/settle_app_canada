@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_typography.dart';
+import '../../core/widgets/figma_onboarding_widgets.dart';
 
 class MemberChildScreen extends StatelessWidget {
   const MemberChildScreen({super.key});
@@ -12,62 +13,27 @@ class MemberChildScreen extends StatelessWidget {
       backgroundColor: AppColors.bg,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               // Header
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Transform.translate(
-                    offset: const Offset(-10, 0),
-                    child: InkWell(
-                      onTap: () {
-                        if (context.canPop()) {
-                          context.pop();
-                        } else {
-                          context.go('/family');
-                        }
-                      },
-                      borderRadius: BorderRadius.circular(22),
-                      child: const SizedBox(
-                        width: 44,
-                        height: 44,
-                        child: Center(
-                          child: Icon(
-                            Icons.arrow_back_ios_new_rounded,
-                            size: 20,
-                            color: Color(0xFF123332),
-                          ),
-                        ),
-                      ),
-                    ),
+                  FigmaCircleBackButton(
+                    onPressed: () {
+                      if (context.canPop()) {
+                        context.pop();
+                      } else {
+                        context.go('/family');
+                      }
+                    },
                   ),
-                  InkWell(
-                    onTap: () => context.push('/onboarding/add-child'),
-                    child: const Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Text(
-                        'Edit',
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xFF123332),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 4),
-
-              // Avatar & Profile Info
-              Row(
-                children: [
                   Container(
-                    width: 60,
-                    height: 60,
+                    width: 72,
+                    height: 72,
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: Color(0xFF6B4C8A),
@@ -77,53 +43,58 @@ class MemberChildScreen extends StatelessWidget {
                       'N',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 24,
+                        fontSize: 28,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),
-                  const SizedBox(width: 14),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text(
-                          'Nour',
-                          style: TextStyle(
-                            fontFamily: AppTypography.fontHeading,
-                            fontSize: 28,
-                            fontWeight: FontWeight.w800,
-                            color: Color(0xFF123332),
-                          ),
-                        ),
-                        SizedBox(height: 2),
-                        Text(
-                          '12–14 · Secondary school · English support: yes',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Color(0xFF5A5F6B),
-                          ),
-                        ),
-                      ],
+                  FigmaCircleActionButton(
+                    icon: const Icon(
+                      Icons.edit_outlined,
+                      size: 20,
+                      color: AppColors.mainFont,
                     ),
+                    tooltip: 'Edit',
+                    onPressed: () => context.push('/onboarding/add-child'),
                   ),
                 ],
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 10),
+
+              const Text(
+                'Nour',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: AppTypography.fontHeading,
+                  fontSize: 28,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.mainFont,
+                ),
+              ),
+              const SizedBox(height: 4),
+              const Text(
+                '12–14 · Secondary school · English support: yes',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: AppTypography.fontBody,
+                  fontSize: 13.5,
+                  color: AppColors.dark300,
+                ),
+              ),
+              const SizedBox(height: 18),
 
               // Tasks Card
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(18),
-                  border: Border.all(color: const Color(0xFFDEDEE2)),
+              FigmaSurfaceCard(
+                radius: 16,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 4,
                 ),
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                 child: Column(
                   children: [
                     _buildTaskItem(
                       category: 'Schools · Next',
-                      categoryColor: const Color(0xFF123332),
+                      categoryColor: AppColors.primary,
                       title: 'Register with your school board',
                       subtitle: 'Peel District or Dufferin-Peel Catholic',
                       isLast: false,
@@ -131,7 +102,7 @@ class MemberChildScreen extends StatelessWidget {
                     ),
                     _buildTaskItem(
                       category: 'Schools',
-                      categoryColor: const Color(0xFF123332),
+                      categoryColor: AppColors.primary,
                       title: 'Check school immunization records',
                       subtitle: 'Peel Public Health · records you already have',
                       isLast: false,
@@ -139,7 +110,7 @@ class MemberChildScreen extends StatelessWidget {
                     ),
                     _buildTaskItem(
                       category: 'Schools',
-                      categoryColor: const Color(0xFF123332),
+                      categoryColor: AppColors.primary,
                       title: 'English language support assessment',
                       subtitle: 'Arranged by the school board',
                       isLast: false,
@@ -147,7 +118,7 @@ class MemberChildScreen extends StatelessWidget {
                     ),
                     _buildTaskItem(
                       category: 'Paperwork · shared',
-                      categoryColor: const Color(0xFFA82227),
+                      categoryColor: AppColors.red,
                       title: 'Ontario health card',
                       subtitle: 'Done together with the family',
                       isLast: true,
@@ -159,132 +130,112 @@ class MemberChildScreen extends StatelessWidget {
               const SizedBox(height: 14),
 
               // Nearby link card
-              InkWell(
+              FigmaSurfaceCard(
+                radius: 16,
+                padding: const EdgeInsets.all(14),
                 onTap: () => context.push('/task-actions/nearby'),
-                borderRadius: BorderRadius.circular(16),
-                child: Container(
-                  padding: const EdgeInsets.all(14),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFE2ECEB),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Row(
-                    children: const [
-                      Icon(
-                        Icons.location_on_outlined,
-                        size: 24,
-                        color: Color(0xFF123332),
-                      ),
-                      SizedBox(width: 12),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Newcomer school registration near you',
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w700,
-                                color: Color(0xFF123332),
-                              ),
+                child: const Row(
+                  children: [
+                    FigmaIconTile(
+                      icon: Icons.location_on_rounded,
+                      iconColor: AppColors.primary,
+                      backgroundColor: AppColors.dark50,
+                      size: 42,
+                    ),
+                    SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Newcomer school registration near you',
+                            style: TextStyle(
+                              fontFamily: AppTypography.fontBody,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.mainFont,
                             ),
-                            SizedBox(height: 2),
-                            Text(
-                              'School board offices · 3.4 km',
-                              style: TextStyle(
-                                fontSize: 13,
-                                color: Color(0xFF3B4747),
-                              ),
+                          ),
+                          SizedBox(height: 2),
+                          Text(
+                            'School board offices · 3.4 km',
+                            style: TextStyle(
+                              fontFamily: AppTypography.fontBody,
+                              fontSize: 13,
+                              color: AppColors.dark300,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                      Icon(
-                        Icons.chevron_right_rounded,
-                        size: 20,
-                        color: Color(0xFF123332),
-                      ),
-                    ],
-                  ),
+                    ),
+                    Icon(
+                      Icons.chevron_right_rounded,
+                      size: 20,
+                      color: AppColors.dark200,
+                    ),
+                  ],
                 ),
               ),
               const SizedBox(height: 10),
 
               // Conversation Guide link card
-              InkWell(
+              FigmaSurfaceCard(
+                radius: 16,
+                padding: const EdgeInsets.all(14),
+                color: const Color(0xFFEBD4D6),
                 onTap: () {},
-                borderRadius: BorderRadius.circular(16),
-                child: Container(
-                  padding: const EdgeInsets.all(14),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFF7E4E5),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: const Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Talking with Nour about the move',
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w700,
-                                color: Color(0xFF123332),
-                              ),
+                child: const Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Talking with Nour about the move',
+                            style: TextStyle(
+                              fontFamily: AppTypography.fontBody,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.mainFont,
                             ),
-                            SizedBox(height: 2),
-                            Text(
-                              'A short conversation guide for parents of teens',
-                              style: TextStyle(
-                                fontSize: 13,
-                                color: Color(0xFF5C1518),
-                              ),
+                          ),
+                          SizedBox(height: 2),
+                          Text(
+                            'A short conversation guide for parents of teens',
+                            style: TextStyle(
+                              fontFamily: AppTypography.fontBody,
+                              fontSize: 13,
+                              color: Color(0xFF5C1518),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                      Icon(
-                        Icons.chevron_right_rounded,
-                        size: 20,
-                        color: Color(0xFFA82227),
-                      ),
-                    ],
-                  ),
+                    ),
+                    Icon(
+                      Icons.chevron_right_rounded,
+                      size: 20,
+                      color: AppColors.red,
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 18),
 
-              // Footer row
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Expanded(
-                    child: Text(
-                      'Stored: nickname and age range only.',
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Color(0xFF5A5F6B),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  InkWell(
-                    onTap: () => context.push('/family/remove-member?name=Nour'),
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10),
-                      child: Text(
-                        'Remove Nour',
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: Color(0xFFA3261C),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+              const Text(
+                'Stored: nickname and age range only.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: AppTypography.fontBody,
+                  fontSize: 12,
+                  color: AppColors.dark300,
+                ),
+              ),
+              const SizedBox(height: 14),
+
+              FigmaDangerButton(
+                label: 'Remove Nour',
+                onPressed: () =>
+                    context.push('/family/remove-member?name=Nour'),
               ),
             ],
           ),
@@ -304,12 +255,12 @@ class MemberChildScreen extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12),
+        padding: const EdgeInsets.symmetric(vertical: 14),
         decoration: BoxDecoration(
           border: isLast
               ? null
               : const Border(
-                  bottom: BorderSide(color: Color(0xFFEAEAEC)),
+                  bottom: BorderSide(color: AppColors.divider),
                 ),
         ),
         child: Row(
@@ -322,7 +273,7 @@ class MemberChildScreen extends StatelessWidget {
                 height: 24,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(color: const Color(0xFFABABB3), width: 2),
+                  border: Border.all(color: AppColors.dark100, width: 1.5),
                 ),
               ),
             ),
@@ -334,7 +285,8 @@ class MemberChildScreen extends StatelessWidget {
                   Text(
                     category.toUpperCase(),
                     style: TextStyle(
-                      fontSize: 11,
+                      fontFamily: AppTypography.fontBody,
+                      fontSize: 10.5,
                       fontWeight: FontWeight.w600,
                       letterSpacing: 0.5,
                       color: categoryColor,
@@ -344,17 +296,19 @@ class MemberChildScreen extends StatelessWidget {
                   Text(
                     title,
                     style: const TextStyle(
+                      fontFamily: AppTypography.fontBody,
                       fontSize: 15,
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xFF123332),
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.mainFont,
                     ),
                   ),
                   const SizedBox(height: 2),
                   Text(
                     subtitle,
                     style: const TextStyle(
+                      fontFamily: AppTypography.fontBody,
                       fontSize: 13,
-                      color: Color(0xFF5A5F6B),
+                      color: AppColors.dark300,
                     ),
                   ),
                 ],

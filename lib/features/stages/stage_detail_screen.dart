@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../core/router/navigation_helpers.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_typography.dart';
+import '../../core/widgets/figma_onboarding_widgets.dart';
 import 'models/stage_data.dart';
 
 class StageDetailScreen extends StatelessWidget {
@@ -20,19 +21,13 @@ class StageDetailScreen extends StatelessWidget {
 </svg>''';
 
   static const String _lockSvg = '''
-<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#5A5F6B" stroke-width="2.4" stroke-linecap="round">
+<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#686868" stroke-width="2.4" stroke-linecap="round">
   <rect x="5" y="11" width="14" height="10" rx="2"></rect>
   <path d="M8 11V8a4 4 0 0 1 8 0v3"></path>
 </svg>''';
 
-  static const String _pinSvg = '''
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#123332" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"></path>
-  <circle cx="12" cy="9.5" r="2.5"></circle>
-</svg>''';
-
   static const String _infoSvg = '''
-<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#A82227" stroke-width="1.8" stroke-linecap="round">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8E1C21" stroke-width="1.8" stroke-linecap="round">
   <circle cx="12" cy="12" r="9"></circle>
   <path d="M12 11v5M12 8h.01"></path>
 </svg>''';
@@ -51,121 +46,116 @@ class StageDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final stage = _findStage(stageId) ?? allStagesData[0];
 
-    // Determine tag color
-    Color tagColor = const Color(0xFFA82227);
+    Color tagColor = AppColors.red;
     if (stage.tag.contains('Done')) {
-      tagColor = const Color(0xFF2E6B4F);
-    } else if (stage.tag.contains('In progress')) {
-      tagColor = const Color(0xFFA82227);
+      tagColor = AppColors.dark300;
     }
 
     return Scaffold(
       backgroundColor: AppColors.bg,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: BackButton(
-          color: AppColors.primary,
-          onPressed: () {
-            if (context.canPop()) {
-              context.pop();
-            } else if (stage.id == '4b') {
-              context.go('/stages/4');
-            } else {
-              context.go('/journey');
-            }
-          },
-        ),
-      ),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              // Figma Sub-Page Header
+              FigmaSubPageHeader(
+                title: stage.title,
+                onBack: () {
+                  if (context.canPop()) {
+                    context.pop();
+                  } else if (stage.id == '4b') {
+                    context.go('/stages/4');
+                  } else {
+                    context.go('/journey');
+                  }
+                },
+              ),
+              const SizedBox(height: 16),
 
-              // Stage Tag
+              // Stage Tag + Description
               Text(
                 stage.tag.toUpperCase(),
                 style: TextStyle(
                   fontFamily: AppTypography.fontBody,
-                  fontSize: 12,
+                  fontSize: 11.5,
                   fontWeight: FontWeight.w600,
                   letterSpacing: 0.6,
                   color: tagColor,
                 ),
               ),
               const SizedBox(height: 4),
-
-              // Title
-              Text(
-                stage.title,
-                style: const TextStyle(
-                  fontFamily: AppTypography.fontHeading,
-                  fontSize: 30,
-                  fontWeight: FontWeight.w800,
-                  letterSpacing: -0.6,
-                  color: AppColors.primary,
-                ),
-              ),
-              const SizedBox(height: 4),
-
-              // Description
               Text(
                 stage.desc,
                 style: const TextStyle(
                   fontFamily: AppTypography.fontBody,
                   fontSize: 14,
                   height: 1.45,
-                  color: Color(0xFF3B4747),
+                  color: AppColors.dark300,
                 ),
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 14),
 
-              // Stage 4 stream switch
-              if (stage.id == '4') ...[
+              // Stage 4 / 4b stream switch
+              if (stage.id == '4' || stage.id == '4b') ...[
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
-                      Container(
-                        height: 36,
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        decoration: BoxDecoration(
-                          color: AppColors.primary,
-                          borderRadius: BorderRadius.circular(18),
-                        ),
-                        alignment: Alignment.center,
-                        child: const Text(
-                          'School · Sami, Nour',
-                          style: TextStyle(
-                            fontFamily: AppTypography.fontBody,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white,
+                      InkWell(
+                        onTap: stage.id == '4b'
+                            ? () => context.go('/stages/4')
+                            : null,
+                        borderRadius: BorderRadius.circular(999),
+                        child: Container(
+                          height: 40,
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          decoration: BoxDecoration(
+                            color: stage.id == '4'
+                                ? AppColors.primary
+                                : AppColors.dark50,
+                            borderRadius: BorderRadius.circular(999),
+                          ),
+                          alignment: Alignment.center,
+                          child: Text(
+                            'School · Sami, Nour',
+                            style: TextStyle(
+                              fontFamily: AppTypography.fontBody,
+                              fontSize: 13.5,
+                              fontWeight: FontWeight.w600,
+                              color: stage.id == '4'
+                                  ? Colors.white
+                                  : AppColors.dark300,
+                            ),
                           ),
                         ),
                       ),
-                      const SizedBox(width: 6),
+                      const SizedBox(width: 8),
                       InkWell(
-                        onTap: () => context.pushSafe('/stages/4b'),
-                        borderRadius: BorderRadius.circular(18),
+                        onTap: stage.id == '4'
+                            ? () => context.pushSafe('/stages/4b')
+                            : null,
+                        borderRadius: BorderRadius.circular(999),
                         child: Container(
-                          height: 36,
-                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          height: 40,
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
                           decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(18),
-                            border: Border.all(color: const Color(0xFFC8C8CE)),
+                            color: stage.id == '4b'
+                                ? AppColors.primary
+                                : AppColors.dark50,
+                            borderRadius: BorderRadius.circular(999),
                           ),
                           alignment: Alignment.center,
-                          child: const Text(
+                          child: Text(
                             'University · Yasmin',
                             style: TextStyle(
                               fontFamily: AppTypography.fontBody,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              color: AppColors.primary,
+                              fontSize: 13.5,
+                              fontWeight: FontWeight.w600,
+                              color: stage.id == '4b'
+                                  ? Colors.white
+                                  : AppColors.dark300,
                             ),
                           ),
                         ),
@@ -173,17 +163,13 @@ class StageDetailScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 14),
               ],
 
-              // Task List Container
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(color: const Color(0xFFDEDEE2)),
-                  borderRadius: BorderRadius.circular(18),
-                ),
-                padding: const EdgeInsets.symmetric(horizontal: 14),
+              // Borderless Figma White Task List Container
+              FigmaSurfaceCard(
+                radius: 16,
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Column(
                   children: List.generate(stage.tasks.length, (index) {
                     final task = stage.tasks[index];
@@ -202,7 +188,7 @@ class StageDetailScreen extends StatelessWidget {
               // Stage Specific Bottom Sections
               ..._buildStageBottomWidgets(context, stage.id),
 
-              const SizedBox(height: 24),
+              const SizedBox(height: 12),
             ],
           ),
         ),
@@ -219,10 +205,10 @@ class StageDetailScreen extends StatelessWidget {
     Widget badgeWidget;
     if (task.isDone) {
       badgeWidget = Container(
-        width: 24,
-        height: 24,
+        width: 28,
+        height: 28,
         decoration: const BoxDecoration(
-          color: Color(0xFF2E6B4F),
+          color: AppColors.dark300,
           shape: BoxShape.circle,
         ),
         child: Center(
@@ -231,10 +217,10 @@ class StageDetailScreen extends StatelessWidget {
       );
     } else if (task.isLocked) {
       badgeWidget = Container(
-        width: 24,
-        height: 24,
+        width: 28,
+        height: 28,
         decoration: const BoxDecoration(
-          color: Color(0xFFEAEAEC),
+          color: AppColors.dark50,
           shape: BoxShape.circle,
         ),
         child: Center(
@@ -244,30 +230,31 @@ class StageDetailScreen extends StatelessWidget {
     } else {
       final label = task.badge.isNotEmpty ? task.badge : '$defaultNumber';
       badgeWidget = Container(
-        width: 24,
-        height: 24,
-        decoration: const BoxDecoration(
-          color: Color(0xFFE2ECEB),
+        width: 28,
+        height: 28,
+        decoration: BoxDecoration(
+          color: AppColors.white500,
           shape: BoxShape.circle,
+          border: Border.all(color: AppColors.dark100, width: 1.5),
         ),
         alignment: Alignment.center,
         child: Text(
           label,
           style: const TextStyle(
             fontFamily: AppTypography.fontBody,
-            fontSize: 13,
+            fontSize: 12.5,
             fontWeight: FontWeight.w600,
-            color: AppColors.primary,
+            color: AppColors.dark300,
           ),
         ),
       );
     }
 
-    Color subtitleColor = const Color(0xFF5A5F6B);
+    Color subtitleColor = AppColors.dark300;
     if (task.isDone) {
-      subtitleColor = const Color(0xFF2E6B4F);
+      subtitleColor = AppColors.dark300;
     } else if (task.sub.contains('SIN first') || task.sub.contains('Needs')) {
-      subtitleColor = const Color(0xFFA82227);
+      subtitleColor = AppColors.red;
     }
 
     return InkWell(
@@ -418,49 +405,44 @@ class StageDetailScreen extends StatelessWidget {
             onTap: () {},
           ),
           const SizedBox(height: 10),
-          InkWell(
+          FigmaSurfaceCard(
+            radius: 16,
+            padding: const EdgeInsets.all(14),
+            color: const Color(0xFFEBD4D6),
             onTap: () => context.pushSafe('/stages/4b'),
-            borderRadius: BorderRadius.circular(16),
-            child: Container(
-              padding: const EdgeInsets.all(14),
-              decoration: BoxDecoration(
-                color: const Color(0xFFF7E4E5),
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: const Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Yasmin's university & college stream",
-                          style: TextStyle(
-                            fontFamily: AppTypography.fontBody,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.primary,
-                          ),
+            child: const Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Yasmin's university & college stream",
+                        style: TextStyle(
+                          fontFamily: AppTypography.fontBody,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.mainFont,
                         ),
-                        SizedBox(height: 2),
-                        Text(
-                          '6 steps · applying, tuition, OSAP',
-                          style: TextStyle(
-                            fontFamily: AppTypography.fontBody,
-                            fontSize: 13,
-                            color: Color(0xFF5C1518),
-                          ),
+                      ),
+                      SizedBox(height: 2),
+                      Text(
+                        '6 steps · applying, tuition, OSAP',
+                        style: TextStyle(
+                          fontFamily: AppTypography.fontBody,
+                          fontSize: 13,
+                          color: Color(0xFF5C1518),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  Icon(
-                    Icons.chevron_right,
-                    size: 20,
-                    color: Color(0xFFA82227),
-                  ),
-                ],
-              ),
+                ),
+                Icon(
+                  Icons.chevron_right_rounded,
+                  size: 20,
+                  color: AppColors.red,
+                ),
+              ],
             ),
           ),
         ];
@@ -505,13 +487,9 @@ class StageDetailScreen extends StatelessWidget {
 
       case '6':
         return [
-          Container(
-            padding: const EdgeInsets.all(14),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border.all(color: const Color(0xFFDEDEE2)),
-              borderRadius: BorderRadius.circular(16),
-            ),
+          FigmaSurfaceCard(
+            radius: 16,
+            padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -521,7 +499,7 @@ class StageDetailScreen extends StatelessWidget {
                     fontFamily: AppTypography.fontBody,
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
-                    color: AppColors.primary,
+                    color: AppColors.mainFont,
                   ),
                 ),
                 const SizedBox(height: 4),
@@ -531,10 +509,10 @@ class StageDetailScreen extends StatelessWidget {
                     fontFamily: AppTypography.fontBody,
                     fontSize: 13,
                     height: 1.45,
-                    color: Color(0xFF3B4747),
+                    color: AppColors.dark300,
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 12),
                 _buildSimpleLink("Check a broker's licence (RIBO) ↗"),
                 const SizedBox(height: 6),
                 _buildSimpleLink("Check an agent's licence (FSRA) ↗"),
@@ -548,20 +526,16 @@ class StageDetailScreen extends StatelessWidget {
               fontFamily: AppTypography.fontBody,
               fontSize: 12,
               height: 1.45,
-              color: Color(0xFF5A5F6B),
+              color: AppColors.dark300,
             ),
           ),
         ];
 
       case '7':
         return [
-          Container(
-            padding: const EdgeInsets.all(14),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border.all(color: const Color(0xFFDEDEE2)),
-              borderRadius: BorderRadius.circular(16),
-            ),
+          FigmaSurfaceCard(
+            radius: 16,
+            padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -571,13 +545,13 @@ class StageDetailScreen extends StatelessWidget {
                     fontFamily: AppTypography.fontBody,
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
-                    color: AppColors.primary,
+                    color: AppColors.mainFont,
                   ),
                 ),
                 const SizedBox(height: 8),
                 _buildClinicRow('Walk-in clinics', '· 3 within 3 km', AppColors.primary),
                 _buildClinicRow('Health811', '· call 811 to talk to a nurse, 24/7', AppColors.primary),
-                _buildClinicRow('Emergency', '· call 911', const Color(0xFF8E1C21)),
+                _buildClinicRow('Emergency', '· call 911', AppColors.red),
               ],
             ),
           ),
@@ -588,7 +562,7 @@ class StageDetailScreen extends StatelessWidget {
               fontFamily: AppTypography.fontBody,
               fontSize: 12,
               height: 1.45,
-              color: Color(0xFF5A5F6B),
+              color: AppColors.dark300,
             ),
           ),
         ];
@@ -596,10 +570,10 @@ class StageDetailScreen extends StatelessWidget {
       case '8':
         return [
           Container(
-            padding: const EdgeInsets.all(14),
+            padding: const EdgeInsets.all(18),
             decoration: BoxDecoration(
-              color: AppColors.primary,
-              borderRadius: BorderRadius.circular(16),
+              gradient: kFigmaHeroGradient,
+              borderRadius: BorderRadius.circular(18),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -607,8 +581,8 @@ class StageDetailScreen extends StatelessWidget {
                 const Text(
                   'First-year budget planner',
                   style: TextStyle(
-                    fontFamily: AppTypography.fontBody,
-                    fontSize: 15,
+                    fontFamily: AppTypography.fontHeading,
+                    fontSize: 18,
                     fontWeight: FontWeight.w600,
                     color: Colors.white,
                   ),
@@ -620,17 +594,17 @@ class StageDetailScreen extends StatelessWidget {
                     fontFamily: AppTypography.fontBody,
                     fontSize: 13,
                     height: 1.45,
-                    color: Color(0xFFCFE3E1),
+                    color: Color(0xFFD5E6E5),
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 12),
                 Row(
                   children: [
                     Expanded(
                       child: Container(
-                        padding: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF346767),
+                          color: Colors.white.withValues(alpha: 0.14),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: const Column(
@@ -641,7 +615,7 @@ class StageDetailScreen extends StatelessWidget {
                               style: TextStyle(
                                 fontFamily: AppTypography.fontBody,
                                 fontSize: 12,
-                                color: Color(0xFFCFE3E1),
+                                color: Color(0xFFD5E6E5),
                               ),
                             ),
                             SizedBox(height: 2),
@@ -658,12 +632,12 @@ class StageDetailScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(width: 8),
+                    const SizedBox(width: 10),
                     Expanded(
                       child: Container(
-                        padding: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF346767),
+                          color: Colors.white.withValues(alpha: 0.14),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: const Column(
@@ -674,7 +648,7 @@ class StageDetailScreen extends StatelessWidget {
                               style: TextStyle(
                                 fontFamily: AppTypography.fontBody,
                                 fontSize: 12,
-                                color: Color(0xFFCFE3E1),
+                                color: Color(0xFFD5E6E5),
                               ),
                             ),
                             SizedBox(height: 2),
@@ -693,16 +667,16 @@ class StageDetailScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 12),
                 InkWell(
                   onTap: () {},
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(30),
                   child: Container(
-                    height: 44,
+                    height: 46,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(30),
                     ),
                     child: const Text(
                       'Open the planner',
@@ -728,50 +702,46 @@ class StageDetailScreen extends StatelessWidget {
 
       case '9':
         return [
-          InkWell(
+          FigmaSurfaceCard(
+            radius: 16,
+            padding: const EdgeInsets.all(14),
             onTap: () => context.push('/occupation-search'),
-            borderRadius: BorderRadius.circular(16),
-            child: Container(
-              padding: const EdgeInsets.all(14),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(
-                  color: AppColors.primary,
-                  style: BorderStyle.solid,
-                  width: 1,
+            child: const Row(
+              children: [
+                FigmaIconTile(
+                  icon: Icons.work_outline_rounded,
+                  iconColor: AppColors.primary,
+                  backgroundColor: AppColors.dark50,
+                  size: 42,
                 ),
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: const Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Does Layla's job need a licence?",
-                          style: TextStyle(
-                            fontFamily: AppTypography.fontBody,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.primary,
-                          ),
+                SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Does Layla's job need a licence?",
+                        style: TextStyle(
+                          fontFamily: AppTypography.fontBody,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.mainFont,
                         ),
-                        SizedBox(height: 2),
-                        Text(
-                          'Search any occupation for its licence or certificate',
-                          style: TextStyle(
-                            fontFamily: AppTypography.fontBody,
-                            fontSize: 13,
-                            color: Color(0xFF5A5F6B),
-                          ),
+                      ),
+                      SizedBox(height: 2),
+                      Text(
+                        'Search any occupation for its licence or certificate',
+                        style: TextStyle(
+                          fontFamily: AppTypography.fontBody,
+                          fontSize: 13,
+                          color: AppColors.dark300,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  Icon(Icons.add, size: 20, color: AppColors.primary),
-                ],
-              ),
+                ),
+                Icon(Icons.add_rounded, size: 22, color: AppColors.primary),
+              ],
             ),
           ),
           const SizedBox(height: 10),
@@ -781,13 +751,9 @@ class StageDetailScreen extends StatelessWidget {
             onTap: () {},
           ),
           const SizedBox(height: 10),
-          Container(
-            padding: const EdgeInsets.all(14),
-            decoration: BoxDecoration(
-              color: const Color(0xFFF7E4E5),
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: const Column(
+          const FigmaNoticeBanner(
+            isWarmAlert: true,
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
@@ -795,8 +761,8 @@ class StageDetailScreen extends StatelessWidget {
                   style: TextStyle(
                     fontFamily: AppTypography.fontBody,
                     fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.primary,
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xFF5C1518),
                   ),
                 ),
                 SizedBox(height: 2),
@@ -818,28 +784,24 @@ class StageDetailScreen extends StatelessWidget {
               fontFamily: AppTypography.fontBody,
               fontSize: 12,
               height: 1.45,
-              color: Color(0xFF5A5F6B),
+              color: AppColors.dark300,
             ),
           ),
         ];
 
       case '10':
         return [
-          Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: const Color(0xFFF7E4E5),
-              borderRadius: BorderRadius.circular(18),
-            ),
-            child: const Column(
+          const FigmaNoticeBanner(
+            isWarmAlert: true,
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   'Belonging takes time',
                   style: TextStyle(
                     fontFamily: AppTypography.fontHeading,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w800,
+                    fontSize: 19,
+                    fontWeight: FontWeight.w600,
                     color: Color(0xFF5C1518),
                   ),
                 ),
@@ -860,7 +822,7 @@ class StageDetailScreen extends StatelessWidget {
                     fontFamily: AppTypography.fontBody,
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
-                    color: Color(0xFF8E1C21),
+                    color: AppColors.red,
                   ),
                 ),
               ],
@@ -880,23 +842,20 @@ class StageDetailScreen extends StatelessWidget {
   }
 
   Widget _buildInfoBanner(String text) {
-    return Container(
+    return FigmaNoticeBanner(
+      isWarmAlert: true,
       padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: const Color(0xFFF7E4E5),
-        borderRadius: BorderRadius.circular(16),
-      ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SvgPicture.string(_infoSvg, width: 22, height: 22),
+          SvgPicture.string(_infoSvg, width: 20, height: 20),
           const SizedBox(width: 12),
           Expanded(
             child: Text(
               text,
               style: const TextStyle(
                 fontFamily: AppTypography.fontBody,
-                fontSize: 14,
+                fontSize: 13.5,
                 height: 1.45,
                 color: Color(0xFF5C1518),
               ),
@@ -912,51 +871,50 @@ class StageDetailScreen extends StatelessWidget {
     required String subtitle,
     required VoidCallback onTap,
   }) {
-    return InkWell(
+    return FigmaSurfaceCard(
+      radius: 16,
+      padding: const EdgeInsets.all(14),
       onTap: onTap,
-      borderRadius: BorderRadius.circular(16),
-      child: Container(
-        padding: const EdgeInsets.all(14),
-        decoration: BoxDecoration(
-          color: const Color(0xFFE2ECEB),
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Row(
-          children: [
-            SvgPicture.string(_pinSvg, width: 24, height: 24),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontFamily: AppTypography.fontBody,
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.primary,
-                    ),
+      child: Row(
+        children: [
+          const FigmaIconTile(
+            icon: Icons.location_on_rounded,
+            iconColor: AppColors.primary,
+            backgroundColor: AppColors.dark50,
+            size: 42,
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontFamily: AppTypography.fontBody,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.mainFont,
                   ),
-                  const SizedBox(height: 2),
-                  Text(
-                    subtitle,
-                    style: const TextStyle(
-                      fontFamily: AppTypography.fontBody,
-                      fontSize: 13,
-                      color: Color(0xFF3B4747),
-                    ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  subtitle,
+                  style: const TextStyle(
+                    fontFamily: AppTypography.fontBody,
+                    fontSize: 13,
+                    color: AppColors.dark300,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            const Icon(
-              Icons.chevron_right,
-              size: 20,
-              color: AppColors.primary,
-            ),
-          ],
-        ),
+          ),
+          const Icon(
+            Icons.chevron_right_rounded,
+            size: 20,
+            color: Color(0xFF989898),
+          ),
+        ],
       ),
     );
   }
