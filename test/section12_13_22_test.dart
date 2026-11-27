@@ -3,11 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 
-import '../lib/core/router/s12_s13_s22_routes.dart';
-import '../lib/features/partners/legal_help_screen.dart';
-import '../lib/features/pathways/all_professions_screen.dart';
-import '../lib/features/pathways/pathway_data.dart';
-import '../lib/features/provinces/province_variant_data.dart';
+import 'package:settle_app/core/router/s12_s13_s22_routes.dart';
+import 'package:settle_app/features/partners/legal_help_screen.dart';
+import 'package:settle_app/features/pathways/all_professions_screen.dart';
+import 'package:settle_app/features/pathways/pathway_data.dart';
+import 'package:settle_app/features/provinces/province_variant_data.dart';
 
 Widget _wrapRouter(String initialLocation) {
   final router = GoRouter(

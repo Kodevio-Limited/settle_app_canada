@@ -9,3 +9,4 @@ FRONT END, ALL 7 RULES CHECKED ON EVERY SCREEN:
  R6 Feel: consistent transitions, pressed states, smooth lists and sheets, no jank, sensible haptics, safe areas, keyboard-aware layouts, text scale to 200%, 48 dp targets, semantic labels, RTL and Arabic where the HTML has them.
  R7 Privacy: no document uploads or ID numbers, no analytics before consent, no personal data in logs, crisis numbers bundled offline.
 NAVIGATION: every CSV row with from_section = the section and kind=navigate: the button exists, has the HTML label and opens to_file's route. kind=system_action does the real platform action. Rows with html_quirk_correct_target go to that target (the HTML is wrong). Tab bar only where shows_bottom_tab_bar=1. Back never dead-ends. State-driven screens (state_driven=1) appear from real app state, not only from the gallery. Each section ships test/fixtures/nav_sNN.json and a test that fails on any missing button or wrong destination.
+

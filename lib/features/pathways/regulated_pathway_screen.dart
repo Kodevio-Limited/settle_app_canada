@@ -33,8 +33,9 @@ class _RegulatedPathwayScreenState extends State<RegulatedPathwayScreen> {
               children: [
                 FigmaSubPageHeader(onBack: () => context.canPop() ? context.pop() : context.go("/home"), title: 'Licensing pathway'),
                 const SizedBox(height: 24),
-                FigmaNoticeBanner(child: Text('No pathway found for ${widget.routePath}.'),
+                FigmaNoticeBanner(
                   isWarmAlert: true,
+                  child: Text('No pathway found for ${widget.routePath}.'),
                 ),
               ],
             ),

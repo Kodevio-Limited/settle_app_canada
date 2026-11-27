@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:settle_app/core/widgets/figma_onboarding_widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:settle_app/core/router/app_router.dart';
@@ -160,7 +161,7 @@ void main() {
     expect(find.text('TODAY'), findsOneWidget);
 
     // Back from Upcoming returns directly to Home
-    final backFinder = find.byIcon(Icons.arrow_back_ios_new_rounded);
+    final backFinder = find.byType(FigmaCircleBackButton);
     await tester.tap(backFinder);
     await tester.pumpAndSettle();
     expect(find.text('Good morning, Layla'), findsOneWidget);

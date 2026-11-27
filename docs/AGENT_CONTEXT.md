@@ -24,3 +24,4 @@
 - Analyze: `dart analyze lib/features/<folder>`
 - Test: `flutter test test/section<N>_test.dart test/nav_s<NN>_test.dart --reporter compact`
 - Extract fixtures: `python3 tool/extract_section.py --section s08`
+

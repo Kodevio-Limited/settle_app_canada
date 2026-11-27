@@ -27,8 +27,9 @@ class ProvinceVariantScreen extends StatelessWidget {
               children: [
                 FigmaSubPageHeader(onBack: () => context.canPop() ? context.pop() : context.go("/home"), title: 'Province guide'),
                 const SizedBox(height: 24),
-                FigmaNoticeBanner(child: Text('No province guide found for $routePath.'),
+                FigmaNoticeBanner(
                   isWarmAlert: true,
+                  child: Text('No province guide found for $routePath.'),
                 ),
               ],
             ),
@@ -69,8 +70,9 @@ class ProvinceVariantScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            FigmaNoticeBanner(child: Text(data.noticeText),
+            FigmaNoticeBanner(
               isWarmAlert: data.isWarmAlert,
+              child: Text(data.noticeText),
             ),
             const SizedBox(height: 16),
             ...data.items.map(
