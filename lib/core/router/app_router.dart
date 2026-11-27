@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 's12_s13_s22_routes.dart';
 import 'generated_routes.dart';
+import '../../features/explore/explore_screen.dart';
 import '../../features/auth/main_welcome_screen.dart';
 import '../../features/auth/sign_up_screen.dart';
 import '../../features/auth/sign_in_screen.dart';
@@ -675,10 +676,7 @@ GoRouter createRouter({String initialLocation = '/'}) {
               GoRoute(
                 path: '/explore',
                 name: 'explore',
-                builder: (context, state) => Scaffold(
-                  appBar: AppBar(title: const Text('Explore')),
-                  body: const Center(child: Text('Explore (Phase 8)')),
-                ),
+                builder: (context, state) => const ExploreScreen(),
               ),
             ],
           ),
