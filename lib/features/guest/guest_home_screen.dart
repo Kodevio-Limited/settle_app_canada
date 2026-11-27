@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
 import '../../core/router/navigation_helpers.dart';
+import '../../core/theme/app_colors.dart';
+import '../../core/theme/app_typography.dart';
+import '../../core/widgets/figma_onboarding_widgets.dart';
 
 class GuestHomeScreen extends StatelessWidget {
   const GuestHomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    const primaryDark = Color(0xFF123332);
-    const borderCard = Color(0xFFDEDEE2);
-    const crisisRed = Color(0xFF8E1C21);
-
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F4F5),
+      backgroundColor: AppColors.bg,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(16, 20, 16, 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Top Brand and Sign In
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -27,82 +26,71 @@ class GuestHomeScreen extends StatelessWidget {
                     'assets/images/settle_logo.png',
                     width: 110,
                     height: 50,
-                    errorBuilder: (context, error, stackTrace) => const Text(
+                    errorBuilder: (context, error, stackTrace) => Text(
                       'settle\nCANADA',
-                      style: TextStyle(
-                        fontFamily: 'Bricolage Grotesque',
+                      style: AppTypography.body2Bold.copyWith(
+                        fontFamily: AppTypography.fontHeading,
                         fontWeight: FontWeight.w800,
                         fontSize: 18,
                         height: 1.1,
-                        color: primaryDark,
+                        color: AppColors.primary,
                       ),
                     ),
                   ),
                   TextButton(
                     onPressed: () => context.push('/sign-in'),
-                    child: const Text(
+                    child: Text(
                       'Sign in',
-                      style: TextStyle(
-                        fontFamily: 'IBM Plex Sans',
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                        color: primaryDark,
+                      style: AppTypography.body2Bold.copyWith(
+                        color: AppColors.primary,
                       ),
                     ),
                   ),
                 ],
               ),
               const SizedBox(height: 14),
-
-              // Exploring Callout Card
               Container(
                 decoration: BoxDecoration(
-                  color: primaryDark,
+                  color: AppColors.primary,
                   borderRadius: BorderRadius.circular(18),
                 ),
                 padding: const EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       "You're exploring",
-                      style: TextStyle(
-                        fontFamily: 'IBM Plex Sans',
+                      style: AppTypography.body2Bold.copyWith(
                         fontSize: 17,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: AppColors.white50,
                       ),
                     ),
                     const SizedBox(height: 10),
-                    const Text(
+                    Text(
                       'Read the general steps for Ontario. Create a free account to get a plan for your family, checklists and reminders.',
-                      style: TextStyle(
-                        fontFamily: 'IBM Plex Sans',
-                        fontSize: 14,
+                      style: AppTypography.body2.copyWith(
                         height: 1.45,
-                        color: Color(0xFFCFE3E1),
+                        color: AppColors.softTeal,
                       ),
                     ),
                     const SizedBox(height: 16),
                     SizedBox(
                       width: double.infinity,
-                      height: 46,
+                      height: 48,
                       child: ElevatedButton(
                         onPressed: () => context.push('/sign-up'),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
-                          foregroundColor: primaryDark,
+                          backgroundColor: AppColors.white50,
+                          foregroundColor: AppColors.primary,
                           elevation: 0,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(24),
                           ),
                         ),
-                        child: const Text(
+                        child: Text(
                           'Create my plan',
-                          style: TextStyle(
-                            fontFamily: 'IBM Plex Sans',
-                            fontWeight: FontWeight.w600,
-                            fontSize: 15,
+                          style: AppTypography.body2Bold.copyWith(
+                            color: AppColors.primary,
                           ),
                         ),
                       ),
@@ -111,27 +99,15 @@ class GuestHomeScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-
-              // Title
-              const Text(
+              Text(
                 'Settling in Ontario, step by step',
-                style: TextStyle(
-                  fontFamily: 'Bricolage Grotesque',
-                  fontWeight: FontWeight.w800,
-                  fontSize: 22,
-                  letterSpacing: -0.4,
-                  color: primaryDark,
+                style: AppTypography.h5.copyWith(
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.primary,
                 ),
               ),
               const SizedBox(height: 12),
-
-              // Stages list card
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(18),
-                  border: Border.all(color: borderCard),
-                ),
+              FigmaSurfaceCard(
                 padding: const EdgeInsets.symmetric(horizontal: 14),
                 child: Column(
                   children: [
@@ -146,27 +122,13 @@ class GuestHomeScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
-
-              // Crisis link
-              InkWell(
+              FigmaSurfaceCard(
                 onTap: () => context.push('/crisis'),
-                borderRadius: BorderRadius.circular(14),
-                child: Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(14),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(14),
-                    border: Border.all(color: borderCard),
-                  ),
-                  child: const Text(
-                    'Need help now? Crisis & support lines',
-                    style: TextStyle(
-                      fontFamily: 'IBM Plex Sans',
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      color: crisisRed,
-                    ),
+                padding: const EdgeInsets.all(14),
+                child: Text(
+                  'Need help now? Crisis & support lines',
+                  style: AppTypography.body2Bold.copyWith(
+                    color: AppColors.red,
                   ),
                 ),
               ),
@@ -187,29 +149,28 @@ class GuestHomeScreen extends StatelessWidget {
     return InkWell(
       onTap: () => context.pushSafe(route),
       child: Container(
-        constraints: const BoxConstraints(minHeight: 46),
+        constraints: const BoxConstraints(minHeight: 48),
         padding: const EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(
           border: showBorder
-              ? const Border(bottom: BorderSide(color: Color(0xFFEAEAEC)))
+              ? const Border(bottom: BorderSide(color: AppColors.divider))
               : null,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              label,
-              style: TextStyle(
-                fontFamily: 'IBM Plex Sans',
-                fontSize: 15,
-                fontWeight: isBold ? FontWeight.w600 : FontWeight.w400,
-                color: const Color(0xFF123332),
+            Expanded(
+              child: Text(
+                label,
+                style: (isBold ? AppTypography.body2Bold : AppTypography.body2).copyWith(
+                  color: AppColors.primary,
+                ),
               ),
             ),
             const Icon(
               Icons.chevron_right_rounded,
               size: 20,
-              color: Color(0xFF7A7A83),
+              color: AppColors.dark200,
             ),
           ],
         ),

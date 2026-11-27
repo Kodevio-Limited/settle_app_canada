@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../core/theme/app_colors.dart';
+import '../../core/theme/app_typography.dart';
+import '../../core/widgets/settle_button.dart';
+
 class DeletedScreen extends StatelessWidget {
   const DeletedScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    const primaryDark = Color(0xFF123332);
-    const textMuted = Color(0xFF3B4747);
-    const iconCircleBg = Color(0xFFE2ECEB);
-    const textSubtle = Color(0xFF5A5F6B);
-
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F4F5),
+      backgroundColor: AppColors.bg,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(24, 60, 24, 32),
@@ -23,36 +22,30 @@ class DeletedScreen extends StatelessWidget {
                 width: 72,
                 height: 72,
                 decoration: const BoxDecoration(
-                  color: iconCircleBg,
+                  color: AppColors.softTeal,
                   shape: BoxShape.circle,
                 ),
                 alignment: Alignment.center,
                 child: const Icon(
                   Icons.check,
                   size: 36,
-                  color: primaryDark,
+                  color: AppColors.primary,
                 ),
               ),
               const SizedBox(height: 20),
-              const Text(
+              Text(
                 'Your account has been deleted',
-                style: TextStyle(
-                  fontFamily: 'Bricolage Grotesque',
-                  fontWeight: FontWeight.w800,
-                  fontSize: 32,
-                  height: 1.1,
-                  letterSpacing: -0.7,
-                  color: primaryDark,
+                style: AppTypography.h4.copyWith(
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.primary,
                 ),
               ),
               const SizedBox(height: 16),
-              const Text(
-                'Thank you for letting us walk with you through your first steps in Canada. We\'ve emailed you a confirmation.',
-                style: TextStyle(
-                  fontFamily: 'IBM Plex Sans',
-                  fontSize: 16,
+              Text(
+                "Thank you for letting us walk with you through your first steps in Canada. We've emailed you a confirmation.",
+                style: AppTypography.body2.copyWith(
                   height: 1.5,
-                  color: textMuted,
+                  color: AppColors.dark300,
                 ),
               ),
               const SizedBox(height: 16),
@@ -61,45 +54,24 @@ class DeletedScreen extends StatelessWidget {
                 child: Text(
                   'بالتوفيق في رحلتك',
                   textDirection: TextDirection.rtl,
-                  style: TextStyle(
-                    fontFamily: 'IBM Plex Sans Arabic',
+                  style: AppTypography.body2.copyWith(
+                    fontFamily: AppTypography.fontArabic,
                     fontSize: 18,
-                    color: textMuted,
+                    color: AppColors.dark300,
                   ),
                 ),
               ),
               const Spacer(),
-              SizedBox(
-                width: double.infinity,
-                height: 54,
-                child: ElevatedButton(
-                  onPressed: () => context.go('/'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: primaryDark,
-                    foregroundColor: Colors.white,
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14),
-                    ),
-                  ),
-                  child: const Text(
-                    'Done',
-                    style: TextStyle(
-                      fontFamily: 'IBM Plex Sans',
-                      fontWeight: FontWeight.w600,
-                      fontSize: 17,
-                    ),
-                  ),
-                ),
+              SettleButton(
+                label: 'Done',
+                onPressed: () => context.go('/'),
               ),
               const SizedBox(height: 8),
-              const Center(
+              Center(
                 child: Text(
                   'You can start fresh with a new account anytime.',
-                  style: TextStyle(
-                    fontFamily: 'IBM Plex Sans',
-                    fontSize: 13,
-                    color: textSubtle,
+                  style: AppTypography.caption1.copyWith(
+                    color: AppColors.dark200,
                   ),
                 ),
               ),
