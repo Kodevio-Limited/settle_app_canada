@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 's12_s13_s22_routes.dart';
 import '../../features/auth/main_welcome_screen.dart';
 import '../../features/auth/sign_up_screen.dart';
 import '../../features/auth/sign_in_screen.dart';
@@ -709,6 +710,7 @@ GoRouter createRouter({String initialLocation = '/'}) {
           ),
         ],
       ),
+      ...s12S13S22Routes,
       ...pendingS10Routes,
     ],
   );
