@@ -36,7 +36,7 @@ class TextExtractor(HTMLParser):
 
 
 def extract_section(section: str):
-    sec_upper = section.upper()
+    sec_num = str(int(section.lstrip("sS")))
     out_dir = ROOT / "test" / "fixtures" / section.lower()
     out_dir.mkdir(parents=True, exist_ok=True)
 
@@ -44,14 +44,14 @@ def extract_section(section: str):
     if CSV_EDGES.exists():
         with open(CSV_EDGES, newline="", encoding="utf-8") as f:
             for row in csv.DictReader(f):
-                if row.get("from_section", "").upper() == sec_upper:
+                if row.get("from_section", "").strip() == sec_num:
                     edges.append(row)
 
     screens = []
     if CSV_SCREENS.exists():
         with open(CSV_SCREENS, newline="", encoding="utf-8") as f:
             for row in csv.DictReader(f):
-                if row.get("section", "").upper() == sec_upper:
+                if row.get("section", "").strip() == sec_num:
                     screens.append(row)
 
     strings_by_file = {}
@@ -74,3 +74,4 @@ if __name__ == "__main__":
     ap.add_argument("--section", required=True, help="e.g. s08")
     args = ap.parse_args()
     extract_section(args.section)
+

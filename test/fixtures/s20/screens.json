@@ -1,1 +1,98 @@
-[]
+[
+  {
+    "number": "20.1",
+    "file": "Explore.dc.html",
+    "title": "20.1 Explore (tab)",
+    "section": "20",
+    "shows_bottom_tab_bar": "1",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "20.2",
+    "file": "ExploreFreePasses.dc.html",
+    "title": "20.2 Explore \u00b7 Free passes",
+    "section": "20",
+    "shows_bottom_tab_bar": "1",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "20.3",
+    "file": "ExploreCanoo.dc.html",
+    "title": "20.3 Explore \u00b7 Canoo free year",
+    "section": "20",
+    "shows_bottom_tab_bar": "1",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "20.4",
+    "file": "ExplorePlaces.dc.html",
+    "title": "20.4 Explore \u00b7 Places list",
+    "section": "20",
+    "shows_bottom_tab_bar": "1",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "20.5",
+    "file": "ExplorePlace.dc.html",
+    "title": "20.5 Explore \u00b7 Place detail",
+    "section": "20",
+    "shows_bottom_tab_bar": "1",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "20.6",
+    "file": "ExploreEvents.dc.html",
+    "title": "20.6 Explore \u00b7 Events",
+    "section": "20",
+    "shows_bottom_tab_bar": "1",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "20.7",
+    "file": "ExploreOffers.dc.html",
+    "title": "20.7 Explore \u00b7 Offers",
+    "section": "20",
+    "shows_bottom_tab_bar": "1",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "20.8",
+    "file": "OfferDetail.dc.html",
+    "title": "20.8 Explore \u00b7 Offer / coupon",
+    "section": "20",
+    "shows_bottom_tab_bar": "1",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "20.9",
+    "file": "ExploreSaved.dc.html",
+    "title": "20.9 Explore \u00b7 Saved",
+    "section": "20",
+    "shows_bottom_tab_bar": "1",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "20.10",
+    "file": "ExploreFilters.dc.html",
+    "title": "20.10 Explore \u00b7 Filters sheet",
+    "section": "20",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "20.11",
+    "file": "ExploreWinter.dc.html",
+    "title": "20.11 Explore \u00b7 First winter",
+    "section": "20",
+    "shows_bottom_tab_bar": "1",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "20.12",
+    "file": "ExploreCity.dc.html",
+    "title": "20.12 Explore \u00b7 Choose city (location off)",
+    "section": "20",
+    "shows_bottom_tab_bar": "1",
+    "state_driven_no_incoming_link": "0"
+  }
+]

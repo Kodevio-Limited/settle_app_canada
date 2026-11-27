@@ -1,0 +1,274 @@
+[
+  {
+    "number": "22.0",
+    "file": "AllProfessions.dc.html",
+    "title": "22.0 Work \u00b7 All regulated jobs (index)",
+    "section": "22",
+    "shows_bottom_tab_bar": "1",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "22.1",
+    "file": "PathwayDentalHygienist.dc.html",
+    "title": "22.1 Pathway \u00b7 Dental hygienist",
+    "section": "22",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "22.2",
+    "file": "PathwayPhysio.dc.html",
+    "title": "22.2 Pathway \u00b7 Physiotherapist",
+    "section": "22",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "22.3",
+    "file": "PathwayOT.dc.html",
+    "title": "22.3 Pathway \u00b7 Occupational therapist",
+    "section": "22",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "22.4",
+    "file": "PathwayMLT.dc.html",
+    "title": "22.4 Pathway \u00b7 Medical laboratory technologist",
+    "section": "22",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "22.5",
+    "file": "PathwayMRT.dc.html",
+    "title": "22.5 Pathway \u00b7 Medical radiation technologist",
+    "section": "22",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "22.6",
+    "file": "PathwayRT.dc.html",
+    "title": "22.6 Pathway \u00b7 Respiratory therapist",
+    "section": "22",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "22.7",
+    "file": "PathwayMidwife.dc.html",
+    "title": "22.7 Pathway \u00b7 Midwife",
+    "section": "22",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "22.8",
+    "file": "PathwayDietitian.dc.html",
+    "title": "22.8 Pathway \u00b7 Dietitian",
+    "section": "22",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "22.9",
+    "file": "PathwayPsychologist.dc.html",
+    "title": "22.9 Pathway \u00b7 Psychologist",
+    "section": "22",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "22.10",
+    "file": "PathwayPsychotherapist.dc.html",
+    "title": "22.10 Pathway \u00b7 Psychotherapist",
+    "section": "22",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "22.11",
+    "file": "PathwayOptometrist.dc.html",
+    "title": "22.11 Pathway \u00b7 Optometrist",
+    "section": "22",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "22.12",
+    "file": "PathwayOptician.dc.html",
+    "title": "22.12 Pathway \u00b7 Optician",
+    "section": "22",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "22.13",
+    "file": "PathwayChiropractor.dc.html",
+    "title": "22.13 Pathway \u00b7 Chiropractor",
+    "section": "22",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "22.14",
+    "file": "PathwayMassage.dc.html",
+    "title": "22.14 Pathway \u00b7 Massage therapist",
+    "section": "22",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "22.15",
+    "file": "PathwayKinesiologist.dc.html",
+    "title": "22.15 Pathway \u00b7 Kinesiologist",
+    "section": "22",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "22.16",
+    "file": "PathwayAudiologistSLP.dc.html",
+    "title": "22.16 Pathway \u00b7 Audiologist or speech-language pathologist",
+    "section": "22",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "22.17",
+    "file": "PathwayDenturist.dc.html",
+    "title": "22.17 Pathway \u00b7 Denturist",
+    "section": "22",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "22.18",
+    "file": "PathwayParalegal.dc.html",
+    "title": "22.18 Pathway \u00b7 Paralegal",
+    "section": "22",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "22.19",
+    "file": "PathwayArchitect.dc.html",
+    "title": "22.19 Pathway \u00b7 Architect",
+    "section": "22",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "22.20",
+    "file": "PathwayVet.dc.html",
+    "title": "22.20 Pathway \u00b7 Veterinarian",
+    "section": "22",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "22.21",
+    "file": "PathwaySurveyor.dc.html",
+    "title": "22.21 Pathway \u00b7 Land surveyor",
+    "section": "22",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "22.22",
+    "file": "PathwayGeoscientist.dc.html",
+    "title": "22.22 Pathway \u00b7 Geoscientist",
+    "section": "22",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "22.23",
+    "file": "PathwayRealEstate.dc.html",
+    "title": "22.23 Pathway \u00b7 Real estate agent",
+    "section": "22",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "22.24",
+    "file": "PathwayInsurance.dc.html",
+    "title": "22.24 Pathway \u00b7 Life insurance agent",
+    "section": "22",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "22.25",
+    "file": "PathwayMortgage.dc.html",
+    "title": "22.25 Pathway \u00b7 Mortgage agent",
+    "section": "22",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "22.26",
+    "file": "PathwayRefrigeration.dc.html",
+    "title": "22.26 Pathway \u00b7 Refrigeration and air conditioning mechanic",
+    "section": "22",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "22.27",
+    "file": "PathwaySheetMetal.dc.html",
+    "title": "22.27 Pathway \u00b7 Sheet metal worker",
+    "section": "22",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "22.28",
+    "file": "PathwaySteamfitter.dc.html",
+    "title": "22.28 Pathway \u00b7 Steamfitter",
+    "section": "22",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "22.29",
+    "file": "PathwayAutoTech.dc.html",
+    "title": "22.29 Pathway \u00b7 Automotive service technician",
+    "section": "22",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "22.30",
+    "file": "PathwayAutoBody.dc.html",
+    "title": "22.30 Pathway \u00b7 Auto body and collision repairer",
+    "section": "22",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "22.31",
+    "file": "PathwayTruckCoach.dc.html",
+    "title": "22.31 Pathway \u00b7 Truck and coach technician",
+    "section": "22",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "22.32",
+    "file": "PathwayHairstylist.dc.html",
+    "title": "22.32 Pathway \u00b7 Hairstylist",
+    "section": "22",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "22.33",
+    "file": "PathwayCrane.dc.html",
+    "title": "22.33 Pathway \u00b7 Mobile crane operator (hoisting engineer)",
+    "section": "22",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  }
+]

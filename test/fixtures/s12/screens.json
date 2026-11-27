@@ -1,0 +1,58 @@
+[
+  {
+    "number": "12.1",
+    "file": "VarBCHealth.dc.html",
+    "title": "12.1 BC \u00b7 MSP wait period",
+    "section": "12",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "1"
+  },
+  {
+    "number": "12.2",
+    "file": "VarBCHealthGap.dc.html",
+    "title": "12.2 BC \u00b7 Cover the wait",
+    "section": "12",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "12.3",
+    "file": "VarBCICBC.dc.html",
+    "title": "12.3 BC \u00b7 ICBC licence + insurance",
+    "section": "12",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "1"
+  },
+  {
+    "number": "12.4",
+    "file": "VarQCHealth.dc.html",
+    "title": "12.4 QC \u00b7 RAMQ (children exempt)",
+    "section": "12",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "1"
+  },
+  {
+    "number": "12.5",
+    "file": "VarQCLease.dc.html",
+    "title": "12.5 QC \u00b7 Lease & no deposit",
+    "section": "12",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "1"
+  },
+  {
+    "number": "12.6",
+    "file": "VarQCSchool.dc.html",
+    "title": "12.6 QC \u00b7 French-language school",
+    "section": "12",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "1"
+  },
+  {
+    "number": "12.7",
+    "file": "VarMBNotEligible.dc.html",
+    "title": "12.7 MB \u00b7 Not covered for your status",
+    "section": "12",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "1"
+  }
+]

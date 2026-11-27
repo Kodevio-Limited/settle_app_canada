@@ -1,0 +1,26 @@
+[
+  {
+    "number": "13.1",
+    "file": "PartnerDetail.dc.html",
+    "title": "13.1 Partner detail (sponsored)",
+    "section": "13",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "13.2",
+    "file": "HowPartners.dc.html",
+    "title": "13.2 How we choose partners",
+    "section": "13",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  },
+  {
+    "number": "13.3",
+    "file": "LegalHelp.dc.html",
+    "title": "13.3 Legal help (free + licensed)",
+    "section": "13",
+    "shows_bottom_tab_bar": "0",
+    "state_driven_no_incoming_link": "0"
+  }
+]
