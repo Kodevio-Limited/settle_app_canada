@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 's12_s13_s22_routes.dart';
 import 'generated_routes.dart';
+import 'explore_routes.dart';
 import '../widgets/content_screen.dart';
 import '../../features/explore/explore_screen.dart';
 import '../../features/auth/main_welcome_screen.dart';
@@ -720,27 +720,8 @@ GoRouter createRouter({String initialLocation = '/'}) {
       ),
       ...s12S13S22Routes,
       ...generatedContentRoutes,
+      ...exploreFeatureRoutes,
       ...pendingS10Routes,
-      GoRoute(
-        path: '/explore/:id',
-        name: 'exploreItemDetail',
-        builder: (context, state) {
-          final id = state.pathParameters['id'] ?? 'detail';
-          final title = id
-              .split('-')
-              .map((w) => w.isEmpty ? '' : '${w[0].toUpperCase()}${w.substring(1)}')
-              .join(' ');
-          return ContentScreen(
-            title: title,
-            routePath: '/explore/$id',
-            lines: [
-              title,
-              'Free or low-cost newcomer activity and local guide.',
-              'Check hours, transit directions, and family-friendly details before you go.',
-            ],
-          );
-        },
-      ),
     ],
   );
 }
