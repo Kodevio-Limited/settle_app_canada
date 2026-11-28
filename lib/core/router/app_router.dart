@@ -3,7 +3,6 @@ import 's12_s13_s22_routes.dart';
 import 'generated_routes.dart';
 import 'explore_routes.dart';
 import '../widgets/content_screen.dart';
-import '../../features/explore/explore_screen.dart';
 import '../../features/auth/main_welcome_screen.dart';
 import '../../features/auth/sign_up_screen.dart';
 import '../../features/auth/sign_in_screen.dart';
@@ -681,13 +680,7 @@ GoRouter createRouter({String initialLocation = '/'}) {
 
           // Branch 2: Explore
           StatefulShellBranch(
-            routes: [
-              GoRoute(
-                path: '/explore',
-                name: 'explore',
-                builder: (context, state) => const ExploreScreen(),
-              ),
-            ],
+            routes: exploreBranchRoutes,
           ),
 
           // Branch 3: Help
@@ -720,7 +713,6 @@ GoRouter createRouter({String initialLocation = '/'}) {
       ),
       ...s12S13S22Routes,
       ...generatedContentRoutes,
-      ...exploreFeatureRoutes,
       ...pendingS10Routes,
     ],
   );
