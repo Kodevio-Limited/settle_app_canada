@@ -17,6 +17,7 @@ class ExploreDetailTemplateScreen extends ConsumerWidget {
   final String title;
   final String subtitle;
   final List<String> details;
+  final List<({String label, String route})> links;
   final ExploreKind kind;
   final String? promoCode;
   final bool isSponsored;
@@ -27,6 +28,7 @@ class ExploreDetailTemplateScreen extends ConsumerWidget {
     required this.title,
     required this.subtitle,
     this.details = const [],
+    this.links = const [],
     required this.kind,
     this.promoCode,
     this.isSponsored = false,
@@ -51,6 +53,32 @@ class ExploreDetailTemplateScreen extends ConsumerWidget {
                 onPressed: () => context.push('/explore-saved'),
               ),
             ),
+            if (links.isNotEmpty) ...[
+              const SizedBox(height: 12),
+              ...links.map(
+                (link) => Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: FigmaSurfaceCard(
+                    onTap: () => context.push(link.route),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            link.label,
+                            style: AppTypography.body1.copyWith(
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.mainFont,
+                            ),
+                          ),
+                        ),
+                        const Icon(Icons.chevron_right_rounded, color: AppColors.dark200),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
             const SizedBox(height: 16),
             if (isSponsored)
               const Padding(
@@ -87,6 +115,32 @@ class ExploreDetailTemplateScreen extends ConsumerWidget {
                 ],
               ),
             ),
+            if (links.isNotEmpty) ...[
+              const SizedBox(height: 12),
+              ...links.map(
+                (link) => Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: FigmaSurfaceCard(
+                    onTap: () => context.push(link.route),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            link.label,
+                            style: AppTypography.body1.copyWith(
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.mainFont,
+                            ),
+                          ),
+                        ),
+                        const Icon(Icons.chevron_right_rounded, color: AppColors.dark200),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
             const SizedBox(height: 16),
             if (promoCode != null) ...[
               FigmaSoftOutlineButton(
