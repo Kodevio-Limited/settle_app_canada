@@ -41,7 +41,7 @@ void main() {
         child: const MaterialApp(home: ExploreCityScreen()),
       ),
     );
-    await tester.tap(find.text('Toronto'));
+    await tester.tap(find.text('Toronto, ON'));
     await tester.pump();
     expect(container.read(exploreCityProvider), 'Toronto');
   });
