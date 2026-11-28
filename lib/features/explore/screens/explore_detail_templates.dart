@@ -16,6 +16,7 @@ class ExploreDetailTemplateScreen extends ConsumerWidget {
   final String id;
   final String title;
   final String subtitle;
+  final List<String> details;
   final ExploreKind kind;
   final String? promoCode;
   final bool isSponsored;
@@ -25,6 +26,7 @@ class ExploreDetailTemplateScreen extends ConsumerWidget {
     required this.id,
     required this.title,
     required this.subtitle,
+    this.details = const [],
     required this.kind,
     this.promoCode,
     this.isSponsored = false,
@@ -65,6 +67,18 @@ class ExploreDetailTemplateScreen extends ConsumerWidget {
                     subtitle,
                     style: AppTypography.body1.copyWith(color: AppColors.mainFont),
                   ),
+                  if (details.isNotEmpty) ...[
+                    const SizedBox(height: 12),
+                    ...details.map(
+                      (line) => Padding(
+                        padding: const EdgeInsets.only(bottom: 8),
+                        child: Text(
+                          line,
+                          style: AppTypography.body2.copyWith(color: AppColors.dark300),
+                        ),
+                      ),
+                    ),
+                  ],
                   const SizedBox(height: 10),
                   Text(
                     'Showing details for $city',
