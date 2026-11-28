@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 's12_s13_s22_routes.dart';
 import 'generated_routes.dart';
+import '../widgets/content_screen.dart';
 import '../../features/explore/explore_screen.dart';
 import '../../features/auth/main_welcome_screen.dart';
 import '../../features/auth/sign_up_screen.dart';
@@ -181,9 +182,17 @@ GoRouter createRouter({String initialLocation = '/'}) {
       GoRoute(
         path: '/privacy-policy',
         name: 'privacyPolicy',
-        builder: (context, state) => Scaffold(
-          appBar: AppBar(title: const Text('Privacy Policy')),
-          body: const Center(child: Text('Full Privacy Policy (Phase 12)')),
+        builder: (context, state) => const ContentScreen(
+          title: 'Privacy Policy',
+          routePath: '/privacy-policy',
+          lines: [
+            'Your privacy comes first at Settle.',
+            'We never ask for or store government ID numbers, SINs, passports, or uploaded documents.',
+            'Your onboarding answers, checklist progress, and reminders are stored privately on your device.',
+            'Location (optional) is used only to show nearby settlement offices, clinics, and schools.',
+            'Notifications (optional) are used only for deadline reminders you choose.',
+            'You can export or permanently delete your data anytime from Settings → Privacy & Data.',
+          ],
         ),
       ),
       GoRoute(
