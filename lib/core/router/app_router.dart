@@ -721,6 +721,26 @@ GoRouter createRouter({String initialLocation = '/'}) {
       ...s12S13S22Routes,
       ...generatedContentRoutes,
       ...pendingS10Routes,
+      GoRoute(
+        path: '/explore/:id',
+        name: 'exploreItemDetail',
+        builder: (context, state) {
+          final id = state.pathParameters['id'] ?? 'detail';
+          final title = id
+              .split('-')
+              .map((w) => w.isEmpty ? '' : '${w[0].toUpperCase()}${w.substring(1)}')
+              .join(' ');
+          return ContentScreen(
+            title: title,
+            routePath: '/explore/$id',
+            lines: [
+              title,
+              'Free or low-cost newcomer activity and local guide.',
+              'Check hours, transit directions, and family-friendly details before you go.',
+            ],
+          );
+        },
+      ),
     ],
   );
 }
